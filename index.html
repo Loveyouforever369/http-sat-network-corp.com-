@@ -1,0 +1,1779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Capital Bridge · Satellite International Corp · Calaif Parks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f1e7;--emerald:#0d7a5f;--emerald-deep:#094b3a;--coral:#e0603c;
+  --gold:#bd8419;--teal:#1a9d8f;--plum:#7a4a7e;
+  --white:#fff;--dark:#1a1a1a;--mid:#555;--light:#e8e2d6;
+  --radius:12px;--shadow:0 4px 24px rgba(0,0,0,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--dark);min-height:100vh}
+h1,h2,h3,h4,h5{font-family:'Fraunces',serif}
+code,pre,.mono{font-family:'JetBrains Mono',monospace}
+
+/* NAV */
+#nav{position:sticky;top:0;z-index:100;background:var(--emerald-deep);display:flex;align-items:center;gap:0;padding:0 16px;overflow-x:auto;scrollbar-width:none}
+#nav::-webkit-scrollbar{display:none}
+.nav-brand{color:#fff;font-family:'Fraunces',serif;font-size:1.05rem;font-weight:700;white-space:nowrap;padding:14px 16px 14px 0;border-right:1px solid rgba(255,255,255,.2);margin-right:8px;flex-shrink:0}
+.nav-btn{background:none;border:none;color:rgba(255,255,255,.75);font-family:'Plus Jakarta Sans',sans-serif;font-size:.82rem;font-weight:500;padding:14px 11px;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;transition:all .2s;flex-shrink:0}
+.nav-btn:hover,.nav-btn.active{color:#fff;border-bottom-color:var(--coral)}
+
+/* SECTIONS */
+.section{display:none;padding:32px 16px 64px;max-width:1100px;margin:0 auto;animation:fadeIn .3s}
+.section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--emerald-deep) 0%,var(--teal) 100%);color:#fff;border-radius:var(--radius);padding:48px 32px;margin-bottom:32px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;right:-60px;top:-60px;width:260px;height:260px;background:rgba(255,255,255,.05);border-radius:50%}
+.hero h1{font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:12px}
+.hero p{font-size:1.05rem;opacity:.9;max-width:580px;line-height:1.6}
+.hero-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:4px 14px;font-size:.8rem;color:#fff}
+
+/* CARDS */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;margin-bottom:32px}
+.card{background:#fff;border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);cursor:pointer;transition:transform .2s,box-shadow .2s;border-top:4px solid var(--emerald)}
+.card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.13)}
+.card-icon{font-size:2rem;margin-bottom:12px}
+.card h3{font-size:1.05rem;margin-bottom:6px}
+.card p{font-size:.88rem;color:var(--mid);line-height:1.5}
+.card.coral{border-top-color:var(--coral)}
+.card.gold{border-top-color:var(--gold)}
+.card.teal{border-top-color:var(--teal)}
+.card.plum{border-top-color:var(--plum)}
+
+/* FORM ELEMENTS */
+.form-group{margin-bottom:18px}
+label{display:block;font-size:.88rem;font-weight:600;margin-bottom:6px;color:var(--emerald-deep)}
+input[type=text],input[type=email],input[type=tel],input[type=number],select,textarea{
+  width:100%;padding:10px 14px;border:1.5px solid #d0c9bb;border-radius:8px;
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:.95rem;background:#fff;
+  transition:border-color .2s;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--emerald)}
+textarea{resize:vertical;min-height:90px}
+input[type=range]{width:100%;accent-color:var(--emerald)}
+
+/* BUTTONS */
+.btn{display:inline-block;padding:11px 24px;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:.93rem;cursor:pointer;border:none;transition:all .2s}
+.btn-primary{background:var(--emerald);color:#fff}
+.btn-primary:hover{background:var(--emerald-deep)}
+.btn-coral{background:var(--coral);color:#fff}
+.btn-coral:hover{background:#c04a28}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{background:#9a6b10}
+.btn-outline{background:transparent;color:var(--emerald);border:2px solid var(--emerald)}
+.btn-outline:hover{background:var(--emerald);color:#fff}
+
+/* RESULTS BOX */
+.result-box{background:linear-gradient(135deg,var(--emerald-deep),var(--teal));color:#fff;border-radius:var(--radius);padding:24px;margin-top:20px}
+.result-box h3{margin-bottom:12px;font-size:1.15rem}
+.result-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.15);font-size:.9rem}
+.result-row:last-child{border-bottom:none;font-weight:700;font-size:1rem}
+
+/* SECTION HEADER */
+.sec-header{margin-bottom:28px}
+.sec-header h2{font-size:clamp(1.4rem,3vw,2rem);color:var(--emerald-deep)}
+.sec-header p{color:var(--mid);margin-top:6px;line-height:1.6}
+.pill{display:inline-block;background:var(--emerald);color:#fff;border-radius:20px;padding:2px 12px;font-size:.78rem;font-weight:600;margin-bottom:8px}
+.pill.coral{background:var(--coral)}
+.pill.gold{background:var(--gold)}
+.pill.plum{background:var(--plum)}
+
+/* TWO COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:680px){.two-col{grid-template-columns:1fr}.hero{padding:32px 20px}}
+
+/* LENDER CARDS */
+.lender-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.lender-card{background:#fff;border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);border-left:5px solid var(--teal)}
+.lender-card h4{font-size:1rem;margin-bottom:8px;color:var(--emerald-deep)}
+.lender-meta{font-size:.82rem;color:var(--mid);line-height:1.7}
+.lender-meta span{display:inline-block;background:var(--bg);border-radius:4px;padding:2px 8px;margin:2px 2px 2px 0;font-size:.78rem}
+.score-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.75rem;font-weight:700}
+.score-approve{background:#d4f0e8;color:var(--emerald-deep)}
+.score-border{background:#fff3cd;color:#856404}
+.score-decline{background:#fde8e3;color:#7a1a00}
+
+/* CREDIT SCORE */
+.score-display{font-size:3rem;font-weight:700;font-family:'Fraunces',serif;text-align:center;padding:24px;border-radius:var(--radius);margin:16px 0}
+.tier-poor{background:#fde8e3;color:#7a1a00}
+.tier-fair{background:#fff3cd;color:#7a5500}
+.tier-good{background:#e8f5e9;color:#1b5e20}
+.tier-vgood{background:#e3f2fd;color:#0d47a1}
+.tier-exceptional{background:#f3e5f5;color:var(--plum)}
+
+/* FLOATING AI ADVISOR */
+.ai-advisor{position:fixed;bottom:24px;right:20px;z-index:200;max-width:300px}
+.ai-advisor-bubble{background:var(--emerald-deep);color:#fff;border-radius:16px 16px 4px 16px;padding:14px 18px;font-size:.85rem;line-height:1.5;box-shadow:0 8px 32px rgba(0,0,0,.25);display:none}
+.ai-advisor-btn{background:var(--emerald);color:#fff;border:none;border-radius:50%;width:52px;height:52px;font-size:1.4rem;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.2);display:block;margin-left:auto;margin-top:8px;transition:background .2s}
+.ai-advisor-btn:hover{background:var(--emerald-deep)}
+.ai-advisor-bubble.show{display:block}
+
+/* MAGAZINE */
+.mag-grid{display:grid;grid-template-columns:2fr 1fr;gap:24px;margin-bottom:32px}
+@media(max-width:700px){.mag-grid{grid-template-columns:1fr}}
+.mag-feature{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.mag-feature-img{width:100%;height:220px;object-fit:cover;display:block;background:linear-gradient(135deg,var(--emerald),var(--teal))}
+.mag-feature-body{padding:24px}
+.mag-feature-body h3{font-size:1.35rem;margin-bottom:10px;color:var(--emerald-deep)}
+.mag-small{display:flex;flex-direction:column;gap:16px}
+.mag-card{background:#fff;border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);display:flex;gap:14px;align-items:flex-start}
+.mag-card img{width:56px;height:56px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.mag-card h4{font-size:.93rem;margin-bottom:4px}
+.mag-card p{font-size:.8rem;color:var(--mid);line-height:1.4}
+
+/* DONUT CHART */
+.donut-wrap{display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.donut{width:160px;height:160px;border-radius:50%;flex-shrink:0;position:relative}
+.donut-legend{display:flex;flex-direction:column;gap:8px}
+.legend-item{display:flex;align-items:center;gap:8px;font-size:.88rem}
+.legend-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+
+/* PROGRESS BARS */
+.progress-bar-wrap{margin-bottom:14px}
+.progress-label{display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:4px}
+.progress-track{background:#e0d9cc;border-radius:6px;height:10px;overflow:hidden}
+.progress-fill{height:100%;border-radius:6px;transition:width .8s ease}
+
+/* TABLE */
+.data-table{width:100%;border-collapse:collapse;font-size:.88rem}
+.data-table th{background:var(--emerald-deep);color:#fff;padding:10px 14px;text-align:left}
+.data-table td{padding:9px 14px;border-bottom:1px solid #e8e2d6}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:nth-child(even) td{background:rgba(246,241,231,.6)}
+
+/* PLAN CARDS */
+.plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px}
+@media(max-width:680px){.plan-grid{grid-template-columns:1fr}}
+.plan-card{background:#fff;border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);border-top:5px solid var(--emerald)}
+.plan-card.alt{border-top-color:var(--coral)}
+.plan-card h3{font-size:1.25rem;margin-bottom:6px}
+.plan-price{font-size:2rem;font-weight:700;font-family:'Fraunces',serif;color:var(--emerald);margin:12px 0}
+.plan-card.alt .plan-price{color:var(--coral)}
+.plan-list{list-style:none;margin:16px 0}
+.plan-list li{padding:6px 0;font-size:.9rem;border-bottom:1px solid var(--bg);display:flex;gap:8px}
+.plan-list li::before{content:'✓';color:var(--emerald);font-weight:700;flex-shrink:0}
+.plan-card.alt .plan-list li::before{content:'→';color:var(--coral)}
+
+/* CHECKLIST */
+.checklist{list-style:none}
+.checklist li{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--light);font-size:.9rem}
+.checklist li input[type=checkbox]{accent-color:var(--emerald);width:17px;height:17px;flex-shrink:0}
+
+/* INTAKE */
+.intake-step{display:none}
+.intake-step.active{display:block}
+.step-indicator{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap}
+.step-dot{width:32px;height:32px;border-radius:50%;background:var(--light);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:var(--mid);flex-shrink:0}
+.step-dot.done{background:var(--emerald);color:#fff}
+.step-dot.current{background:var(--coral);color:#fff}
+
+/* ALERT */
+.alert{padding:14px 18px;border-radius:8px;font-size:.9rem;margin-bottom:16px;line-height:1.5}
+.alert-info{background:#e3f2fd;color:#0d47a1;border-left:4px solid #1976d2}
+.alert-success{background:#d4f0e8;color:var(--emerald-deep);border-left:4px solid var(--emerald)}
+.alert-warn{background:#fff3cd;color:#856404;border-left:4px solid #f59f00}
+
+/* STAT CARDS */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;margin-bottom:24px}
+.stat-card{background:#fff;border-radius:var(--radius);padding:18px;text-align:center;box-shadow:var(--shadow)}
+.stat-num{font-size:1.8rem;font-weight:700;font-family:'Fraunces',serif;color:var(--emerald)}
+.stat-lbl{font-size:.78rem;color:var(--mid);margin-top:4px}
+
+/* RISK TABS */
+.risk-tabs{display:flex;gap:0;margin-bottom:20px;border-radius:8px;overflow:hidden;border:1.5px solid var(--emerald)}
+.risk-tab{flex:1;padding:10px;text-align:center;font-size:.88rem;font-weight:600;cursor:pointer;background:#fff;color:var(--emerald);border:none;transition:all .2s}
+.risk-tab.active{background:var(--emerald);color:#fff}
+
+/* CONTACT BAR */
+.contact-bar{background:var(--emerald-deep);color:#fff;text-align:center;padding:12px;font-size:.88rem}
+.contact-bar a{color:var(--gold);text-decoration:none}
+
+/* FOOTER */
+footer{background:var(--emerald-deep);color:rgba(255,255,255,.7);text-align:center;padding:24px;font-size:.82rem;margin-top:48px}
+
+/* MISC */
+.divider{border:none;border-top:1.5px solid var(--light);margin:24px 0}
+.tag{display:inline-block;padding:2px 10px;border-radius:12px;font-size:.75rem;font-weight:600;background:var(--bg);color:var(--mid);margin:2px}
+.highlight{background:var(--gold);color:#fff;padding:2px 8px;border-radius:4px}
+.text-emerald{color:var(--emerald)}
+.text-coral{color:var(--coral)}
+.text-gold{color:var(--gold)}
+.mt8{margin-top:8px}.mt16{margin-top:16px}.mt24{margin-top:24px}
+.mb8{margin-bottom:8px}.mb16{margin-bottom:16px}
+.fw700{font-weight:700}
+.center{text-align:center}
+.flex-gap{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+</style>
+</head>
+<body>
+
+<div class="contact-bar">
+  📍 Henderson, NV &nbsp;|&nbsp; 📞 <a href="tel:7253149140">(725) 314-9140</a> &nbsp;|&nbsp;
+  ✉️ <a href="mailto:network@satelliteinternationalcorpnetwork.com">network@satelliteinternationalcorpnetwork.com</a>
+</div>
+
+<nav id="nav">
+  <div class="nav-brand">Capital Bridge</div>
+  <button class="nav-btn active" onclick="showTab('overview')">Overview</button>
+  <button class="nav-btn" onclick="showTab('debt')">Debt Relief</button>
+  <button class="nav-btn" onclick="showTab('pos')">POS Savings</button>
+  <button class="nav-btn" onclick="showTab('roi')">ROI Planner</button>
+  <button class="nav-btn" onclick="showTab('credit')">Credit Check</button>
+  <button class="nav-btn" onclick="showTab('lenders')">Funding &amp; Lenders</button>
+  <button class="nav-btn" onclick="showTab('plans')">AI Plans</button>
+  <button class="nav-btn" onclick="showTab('presence')">Online Presence</button>
+  <button class="nav-btn" onclick="showTab('blueprint')">Success Blueprint</button>
+  <button class="nav-btn" onclick="showTab('magazine')">Magazine Hub</button>
+  <button class="nav-btn" onclick="showTab('invest')">Investment AI</button>
+  <button class="nav-btn" onclick="showTab('apply')">Apply Now</button>
+</nav>
+
+<!-- ========== OVERVIEW ========== -->
+<div id="tab-overview" class="section active">
+  <div class="hero">
+    <div class="pill">Henderson, NV · Est. 2024</div>
+    <h1>Capital Bridge</h1>
+    <p>Satellite International Corp · Calaif Parks<br>Business lending, capital brokering, and growth strategy for entrepreneurs ready to scale.</p>
+    <div class="hero-badges">
+      <span class="badge">Business Capital</span>
+      <span class="badge">Credit Optimization</span>
+      <span class="badge">ROI Planning</span>
+      <span class="badge">Investment Intelligence</span>
+      <span class="badge">AI-Powered Tools</span>
+    </div>
+  </div>
+  <div class="sec-header">
+    <h2>Your Complete Business Growth Platform</h2>
+    <p>Everything you need to fund, grow, and optimize your business — all in one place.</p>
+  </div>
+  <div class="card-grid">
+    <div class="card" onclick="showTab('debt')">
+      <div class="card-icon">💳</div>
+      <h3>Debt Relief Calculator</h3>
+      <p>See how much you can save by consolidating and restructuring your existing business debt.</p>
+    </div>
+    <div class="card coral" onclick="showTab('pos')">
+      <div class="card-icon">🖥️</div>
+      <h3>POS Savings Analyzer</h3>
+      <p>Calculate your potential savings by switching to a lower-fee payment processing system.</p>
+    </div>
+    <div class="card gold" onclick="showTab('roi')">
+      <div class="card-icon">📈</div>
+      <h3>ROI Planner</h3>
+      <p>Project your return on investment for capital deployments with location success scoring.</p>
+    </div>
+    <div class="card teal" onclick="showTab('credit')">
+      <div class="card-icon">🏦</div>
+      <h3>Credit Check &amp; Match</h3>
+      <p>Input your FICO score and instantly see which lenders will approve your application.</p>
+    </div>
+    <div class="card" onclick="showTab('lenders')">
+      <div class="card-icon">💼</div>
+      <h3>Funding &amp; Lenders</h3>
+      <p>Browse our full lender network with rates, requirements, and approval criteria.</p>
+    </div>
+    <div class="card plum" onclick="showTab('plans')">
+      <div class="card-icon">🤖</div>
+      <h3>AI Plans</h3>
+      <p>Compare Done-For-You vs DIY tools. Get a loan recommendation based on your goals.</p>
+    </div>
+    <div class="card coral" onclick="showTab('presence')">
+      <div class="card-icon">🌐</div>
+      <h3>Online Presence</h3>
+      <p>$600/week managed online presence service — social, SEO, content, and ads included.</p>
+    </div>
+    <div class="card gold" onclick="showTab('blueprint')">
+      <div class="card-icon">🗺️</div>
+      <h3>Success Blueprint</h3>
+      <p>Get your personalized business trajectory and location-based success probability score.</p>
+    </div>
+    <div class="card teal" onclick="showTab('magazine')">
+      <div class="card-icon">📰</div>
+      <h3>Magazine Hub</h3>
+      <p>Daily market pulse, weekly trade tips, success stories, and business knowledge updates.</p>
+    </div>
+    <div class="card plum" onclick="showTab('invest')">
+      <div class="card-icon">📊</div>
+      <h3>Investment AI Agent</h3>
+      <p>Full investment dashboard with portfolio tracker, daily picks, and compound projections.</p>
+    </div>
+    <div class="card" onclick="showTab('blueprint')">
+      <div class="card-icon">🎯</div>
+      <h3>Business Profiler</h3>
+      <p>Build your complete business profile to unlock tailored capital and growth recommendations.</p>
+    </div>
+    <div class="card coral" onclick="showTab('apply')">
+      <div class="card-icon">✅</div>
+      <h3>Apply Now</h3>
+      <p>Start your capital application in minutes. Get matched with the right funding product.</p>
+    </div>
+  </div>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="stat-num">$2M+</div><div class="stat-lbl">Capital Facilitated</div></div>
+    <div class="stat-card"><div class="stat-num">150+</div><div class="stat-lbl">Businesses Funded</div></div>
+    <div class="stat-card"><div class="stat-num">18+</div><div class="stat-lbl">Lender Partners</div></div>
+    <div class="stat-card"><div class="stat-num">94%</div><div class="stat-lbl">Approval Rate</div></div>
+    <div class="stat-card"><div class="stat-num">48hr</div><div class="stat-lbl">Avg Funding Time</div></div>
+  </div>
+</div>
+
+<!-- ========== DEBT RELIEF ========== -->
+<div id="tab-debt" class="section">
+  <div class="sec-header">
+    <div class="pill">Calculator</div>
+    <h2>Debt Relief Calculator</h2>
+    <p>See how consolidating your business debt can reduce your monthly payments and total interest paid.</p>
+  </div>
+  <div class="two-col">
+    <div>
+      <div class="form-group">
+        <label>Total Debt Balance ($)</label>
+        <input type="number" id="d-balance" placeholder="e.g. 50000" min="0">
+      </div>
+      <div class="form-group">
+        <label>Current Average Interest Rate (%)</label>
+        <input type="number" id="d-rate" placeholder="e.g. 22" min="0" max="100" step="0.1">
+      </div>
+      <div class="form-group">
+        <label>Number of Payments Remaining</label>
+        <input type="number" id="d-months" placeholder="e.g. 36" min="1">
+      </div>
+      <div class="form-group">
+        <label>New Consolidation Rate (%) — We Offer:</label>
+        <input type="number" id="d-newrate" placeholder="e.g. 9.9" min="0" max="100" step="0.1">
+      </div>
+      <div class="form-group">
+        <label>New Term (months)</label>
+        <input type="number" id="d-newterm" placeholder="e.g. 60" min="1">
+      </div>
+      <button class="btn btn-primary" onclick="calcDebt()">Calculate Savings</button>
+    </div>
+    <div id="debt-result" style="display:none">
+      <div class="result-box">
+        <h3>💡 Your Debt Relief Summary</h3>
+        <div id="debt-output"></div>
+      </div>
+      <div class="alert alert-success mt16" id="debt-rec"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== POS SAVINGS ========== -->
+<div id="tab-pos" class="section">
+  <div class="sec-header">
+    <div class="pill coral">Calculator</div>
+    <h2>POS Savings Analyzer</h2>
+    <p>Discover how much you're losing in processing fees and what you could save with a better solution.</p>
+  </div>
+  <div class="two-col">
+    <div>
+      <div class="form-group">
+        <label>Monthly Card Sales Volume ($)</label>
+        <input type="number" id="p-volume" placeholder="e.g. 30000" min="0">
+      </div>
+      <div class="form-group">
+        <label>Current Processing Rate (%)</label>
+        <input type="number" id="p-rate" placeholder="e.g. 2.9" min="0" max="10" step="0.01">
+      </div>
+      <div class="form-group">
+        <label>Per-Transaction Fee ($)</label>
+        <input type="number" id="p-txfee" placeholder="e.g. 0.30" min="0" step="0.01">
+      </div>
+      <div class="form-group">
+        <label>Average Transactions Per Month</label>
+        <input type="number" id="p-txcount" placeholder="e.g. 300" min="0">
+      </div>
+      <div class="form-group">
+        <label>Monthly Terminal/Software Fee ($)</label>
+        <input type="number" id="p-monthly" placeholder="e.g. 50" min="0">
+      </div>
+      <button class="btn btn-coral" onclick="calcPos()">Analyze Savings</button>
+    </div>
+    <div id="pos-result" style="display:none">
+      <div class="result-box" style="background:linear-gradient(135deg,var(--coral),var(--gold))">
+        <h3>💰 POS Savings Analysis</h3>
+        <div id="pos-output"></div>
+      </div>
+      <div class="alert alert-warn mt16" id="pos-rec"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== ROI PLANNER ========== -->
+<div id="tab-roi" class="section">
+  <div class="sec-header">
+    <div class="pill gold">Planner</div>
+    <h2>ROI Planner &amp; Location Scoring</h2>
+    <p>Project your investment returns and get a location-based success probability score for Henderson, NV.</p>
+  </div>
+  <div class="two-col">
+    <div>
+      <div class="form-group">
+        <label>Capital Investment Amount ($)</label>
+        <input type="number" id="r-invest" placeholder="e.g. 100000" min="0">
+      </div>
+      <div class="form-group">
+        <label>Expected Annual Revenue Increase ($)</label>
+        <input type="number" id="r-revenue" placeholder="e.g. 60000" min="0">
+      </div>
+      <div class="form-group">
+        <label>Annual Operating Cost of Investment ($)</label>
+        <input type="number" id="r-opcost" placeholder="e.g. 20000" min="0">
+      </div>
+      <div class="form-group">
+        <label>Investment Horizon (years)</label>
+        <input type="number" id="r-years" placeholder="e.g. 3" min="1" max="20">
+      </div>
+      <div class="form-group">
+        <label>Business Type</label>
+        <select id="r-biztype">
+          <option value="">Select type…</option>
+          <option value="restaurant">Restaurant / Food Service</option>
+          <option value="retail">Retail</option>
+          <option value="service">Professional Services</option>
+          <option value="ecom">E-Commerce</option>
+          <option value="construction">Construction / Trades</option>
+          <option value="health">Health &amp; Wellness</option>
+          <option value="auto">Automotive</option>
+          <option value="tech">Technology</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <button class="btn btn-gold" onclick="calcRoi()">Calculate ROI</button>
+    </div>
+    <div id="roi-result" style="display:none">
+      <div class="result-box" style="background:linear-gradient(135deg,var(--gold),var(--coral))">
+        <h3>📊 ROI Analysis</h3>
+        <div id="roi-output"></div>
+      </div>
+      <div class="result-box mt16" id="location-score-box">
+        <h3>📍 Henderson, NV Location Score</h3>
+        <div id="location-output"></div>
+      </div>
+    </div>
+  </div>
+  <!-- AI Advisor trigger for ROI -->
+  <div class="mt24">
+    <button class="btn btn-outline" onclick="toggleAdvisor('roi')">🤖 Ask AI Advisor</button>
+    <div id="roi-advisor-box" class="alert alert-info mt16" style="display:none"></div>
+  </div>
+</div>
+
+<!-- ========== CREDIT CHECK ========== -->
+<div id="tab-credit" class="section">
+  <div class="sec-header">
+    <div class="pill teal">NEW</div>
+    <h2>Credit Check &amp; Lender Match</h2>
+    <p>Enter your FICO score to instantly see which lenders match, your credit tier, and an improvement plan.</p>
+  </div>
+  <div class="two-col">
+    <div>
+      <div class="form-group">
+        <label>Your FICO Credit Score: <span id="score-label" class="fw700 text-emerald">580</span></label>
+        <input type="range" id="credit-slider" min="300" max="850" value="580" oninput="updateCreditDisplay()">
+        <div style="display:flex;justify-content:space-between;font-size:.75rem;color:var(--mid);margin-top:4px">
+          <span>300 Poor</span><span>580 Fair</span><span>670 Good</span><span>740 Very Good</span><span>850 Exceptional</span>
+        </div>
+      </div>
+      <div id="credit-tier-display"></div>
+      <div class="form-group mt16">
+        <label>Desired Loan Amount ($)</label>
+        <input type="number" id="credit-amount" placeholder="e.g. 50000" min="0">
+      </div>
+      <div class="form-group">
+        <label>Time in Business (months)</label>
+        <input type="number" id="credit-tib" placeholder="e.g. 24" min="0">
+      </div>
+      <div class="form-group">
+        <label>Annual Revenue ($)</label>
+        <input type="number" id="credit-revenue" placeholder="e.g. 120000" min="0">
+      </div>
+      <button class="btn btn-primary" style="background:var(--teal)" onclick="runCreditMatch()">Match Me to Lenders</button>
+      <div class="mt16">
+        <button class="btn btn-outline" onclick="toggleAdvisor('credit')">🤖 AI Credit Advisor</button>
+        <div id="credit-advisor-box" class="alert alert-info mt16" style="display:none"></div>
+      </div>
+    </div>
+    <div id="credit-result">
+      <div id="lender-match-output"></div>
+      <div id="credit-tips-output"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== FUNDING & LENDERS ========== -->
+<div id="tab-lenders" class="section">
+  <div class="sec-header">
+    <div class="pill">Lender Network</div>
+    <h2>Funding &amp; Lenders</h2>
+    <p>Our network of 18+ lender partners — rates, requirements, credit thresholds, and ideal use cases.</p>
+  </div>
+  <div class="flex-gap mb16">
+    <select id="lender-filter-score" onchange="renderLenders()" style="width:auto;min-width:160px">
+      <option value="">Filter by credit score…</option>
+      <option value="500">500+ (Starter)</option>
+      <option value="550">550+ (Rebuilding)</option>
+      <option value="620">620+ (Fair)</option>
+      <option value="660">660+ (Good)</option>
+      <option value="700">700+ (Strong)</option>
+      <option value="750">750+ (Excellent)</option>
+    </select>
+    <select id="lender-filter-type" onchange="renderLenders()" style="width:auto;min-width:160px">
+      <option value="">Filter by type…</option>
+      <option value="MCA">MCA</option>
+      <option value="SBA">SBA</option>
+      <option value="Term">Term Loan</option>
+      <option value="Line">Line of Credit</option>
+      <option value="Equipment">Equipment</option>
+      <option value="Invoice">Invoice Factoring</option>
+    </select>
+    <button class="btn btn-outline" onclick="document.getElementById('lender-filter-score').value='';document.getElementById('lender-filter-type').value='';renderLenders()">Reset</button>
+  </div>
+  <div id="lenders-output" class="lender-grid"></div>
+</div>
+
+<!-- ========== AI PLANS ========== -->
+<div id="tab-plans" class="section">
+  <div class="sec-header">
+    <div class="pill plum">NEW</div>
+    <h2>AI Business Plans</h2>
+    <p>Compare our Done-For-You service vs building with DIY tools. Plus get a personalized loan recommendation.</p>
+  </div>
+  <div class="plan-grid">
+    <div class="plan-card">
+      <div class="pill">Recommended</div>
+      <h3>Done For You</h3>
+      <p style="font-size:.88rem;color:var(--mid)">Capital Bridge manages your entire growth stack — funding, marketing, systems, and reporting.</p>
+      <div class="plan-price">$1,200<span style="font-size:1rem;font-weight:400">/mo</span></div>
+      <ul class="plan-list">
+        <li>Business capital sourcing &amp; application</li>
+        <li>Credit optimization strategy</li>
+        <li>Monthly ROI reporting</li>
+        <li>Online presence management (SEO, social, ads)</li>
+        <li>AI content generation &amp; scheduling</li>
+        <li>Dedicated account manager</li>
+        <li>Lender relationship management</li>
+        <li>Weekly strategy call (30 min)</li>
+        <li>Priority funding queue</li>
+        <li>Investment intelligence briefings</li>
+      </ul>
+      <div class="alert alert-success">
+        <strong>Est. ROI:</strong> Clients average 4.2x return within 12 months on the $1,200/mo investment.
+      </div>
+      <button class="btn btn-primary mt16" onclick="showTab('apply')">Get Started</button>
+    </div>
+    <div class="plan-card alt">
+      <div class="pill coral">DIY</div>
+      <h3>DIY Tool Stack</h3>
+      <p style="font-size:.88rem;color:var(--mid)">Build your own tech stack. More control, but higher time investment and learning curve.</p>
+      <div class="plan-price" style="color:var(--coral)">$500–900<span style="font-size:1rem;font-weight:400">/mo</span></div>
+      <ul class="plan-list" style="--color:var(--coral)">
+        <li>Jasper AI (content): $49/mo</li>
+        <li>Hootsuite (social): $99/mo</li>
+        <li>Semrush (SEO): $119/mo</li>
+        <li>HubSpot CRM: $90/mo</li>
+        <li>Canva Pro (design): $13/mo</li>
+        <li>Mailchimp (email): $65/mo</li>
+        <li>QuickBooks (finance): $35/mo</li>
+        <li>Zoom (meetings): $16/mo</li>
+        <li>Loom (video): $15/mo</li>
+        <li>Self-managed (10–25 hrs/week)</li>
+      </ul>
+      <div class="alert alert-warn">
+        <strong>Hidden cost:</strong> At $50/hr, 15 hrs/week = $3,000/mo in time value — 3× more than Done For You.
+      </div>
+      <button class="btn btn-outline mt16" onclick="showTab('apply')">Learn More</button>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <div class="sec-header">
+    <h2>Loan Determination Tool</h2>
+    <p>Tell us about your business and we'll recommend whether a loan is right for you — and how much.</p>
+  </div>
+  <div class="two-col">
+    <div>
+      <div class="form-group">
+        <label>Monthly Business Expenses ($)</label>
+        <input type="number" id="ld-expenses" placeholder="e.g. 15000" min="0">
+      </div>
+      <div class="form-group">
+        <label>Current Monthly Revenue ($)</label>
+        <input type="number" id="ld-revenue" placeholder="e.g. 22000" min="0">
+      </div>
+      <div class="form-group">
+        <label>6-Month Revenue Growth Goal ($)</label>
+        <input type="number" id="ld-goal" placeholder="e.g. 40000" min="0">
+      </div>
+      <div class="form-group">
+        <label>Primary Use of Funds</label>
+        <select id="ld-use">
+          <option value="">Select…</option>
+          <option value="inventory">Inventory / Stock</option>
+          <option value="equipment">Equipment Purchase</option>
+          <option value="marketing">Marketing &amp; Advertising</option>
+          <option value="staff">Hiring Staff</option>
+          <option value="expansion">Location Expansion</option>
+          <option value="debt">Debt Consolidation</option>
+          <option value="working">Working Capital</option>
+          <option value="tech">Technology Upgrade</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Existing Business Debt ($)</label>
+        <input type="number" id="ld-debt" placeholder="e.g. 8000" min="0">
+      </div>
+      <button class="btn btn-primary" style="background:var(--plum)" onclick="calcLoanDetermination()">Get Recommendation</button>
+    </div>
+    <div id="loan-det-result" style="display:none">
+      <div class="result-box" style="background:linear-gradient(135deg,var(--plum),var(--teal))">
+        <h3>🎯 Loan Recommendation</h3>
+        <div id="loan-det-output"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== ONLINE PRESENCE ========== -->
+<div id="tab-presence" class="section">
+  <div class="sec-header">
+    <div class="pill coral">Service</div>
+    <h2>Online Presence Management</h2>
+    <p>Complete done-for-you digital presence at $600/week — social media, SEO, content, and paid ads.</p>
+  </div>
+  <div class="hero" style="background:linear-gradient(135deg,var(--coral),var(--gold))">
+    <h1 style="font-size:1.8rem">$600 / Week</h1>
+    <p>Everything your business needs to dominate online — managed by our team of experts.</p>
+  </div>
+  <div class="card-grid mt24">
+    <div class="card">
+      <div class="card-icon">📱</div>
+      <h3>Social Media Management</h3>
+      <p>Daily posts across Facebook, Instagram, LinkedIn, TikTok. Engagement monitoring and community management.</p>
+    </div>
+    <div class="card coral">
+      <div class="card-icon">🔍</div>
+      <h3>SEO Optimization</h3>
+      <p>Monthly keyword research, on-page optimization, Google Business Profile, local citations, and backlinks.</p>
+    </div>
+    <div class="card gold">
+      <div class="card-icon">✍️</div>
+      <h3>Content Creation</h3>
+      <p>2 blog posts/week, branded graphics, short-form videos, email newsletters, and AI-assisted copy.</p>
+    </div>
+    <div class="card teal">
+      <div class="card-icon">🎯</div>
+      <h3>Paid Ads Management</h3>
+      <p>Google Ads, Meta Ads, and retargeting campaigns. Ad spend budgeting and A/B testing included.</p>
+    </div>
+    <div class="card plum">
+      <div class="card-icon">📊</div>
+      <h3>Monthly Analytics</h3>
+      <p>Full performance reports: traffic, leads, conversions, ROI per channel, and competitive benchmarking.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🛡️</div>
+      <h3>Reputation Management</h3>
+      <p>Review monitoring, response templates, and proactive reputation enhancement strategy.</p>
+    </div>
+  </div>
+  <div class="alert alert-success mt24">
+    <strong>ROI Guarantee:</strong> Most clients see measurable lead increases within 30 days. If your online presence doesn't improve in the first 60 days, we extend service at no charge.
+  </div>
+  <div class="mt24">
+    <button class="btn btn-coral" onclick="showTab('apply')">Start My Online Presence</button>
+  </div>
+</div>
+
+<!-- ========== SUCCESS BLUEPRINT ========== -->
+<div id="tab-blueprint" class="section">
+  <div class="sec-header">
+    <div class="pill gold">Strategy</div>
+    <h2>Success Blueprint</h2>
+    <p>Build your business profile to unlock a personalized success trajectory and location-based probability score.</p>
+  </div>
+  <div class="two-col">
+    <div>
+      <div class="form-group">
+        <label>Business Name</label>
+        <input type="text" id="bp-name" placeholder="Your Business Name">
+      </div>
+      <div class="form-group">
+        <label>Industry / Type</label>
+        <select id="bp-industry">
+          <option value="">Select…</option>
+          <option value="restaurant">Restaurant / Food Service</option>
+          <option value="retail">Retail Store</option>
+          <option value="service">Professional Services</option>
+          <option value="ecom">E-Commerce</option>
+          <option value="construction">Construction / Trades</option>
+          <option value="health">Health &amp; Wellness</option>
+          <option value="auto">Automotive</option>
+          <option value="tech">Technology / Software</option>
+          <option value="real-estate">Real Estate</option>
+          <option value="beauty">Beauty / Salon</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Years in Business</label>
+        <input type="number" id="bp-years" placeholder="e.g. 3" min="0" max="100">
+      </div>
+      <div class="form-group">
+        <label>Annual Revenue ($)</label>
+        <input type="number" id="bp-revenue" placeholder="e.g. 250000" min="0">
+      </div>
+      <div class="form-group">
+        <label>Number of Employees</label>
+        <input type="number" id="bp-employees" placeholder="e.g. 8" min="0">
+      </div>
+      <div class="form-group">
+        <label>Current Credit Score (approx)</label>
+        <input type="number" id="bp-score" placeholder="e.g. 680" min="300" max="850">
+      </div>
+      <div class="form-group">
+        <label>Primary Growth Challenge</label>
+        <select id="bp-challenge">
+          <option value="">Select…</option>
+          <option value="capital">Access to Capital</option>
+          <option value="marketing">Marketing &amp; Customer Acquisition</option>
+          <option value="operations">Operational Efficiency</option>
+          <option value="staff">Staffing &amp; HR</option>
+          <option value="tech">Technology Adoption</option>
+          <option value="competition">Market Competition</option>
+          <option value="cashflow">Cash Flow Management</option>
+        </select>
+      </div>
+      <button class="btn btn-gold" onclick="calcBlueprint()">Generate My Blueprint</button>
+    </div>
+    <div id="blueprint-result" style="display:none">
+      <div class="result-box" style="background:linear-gradient(135deg,var(--gold),var(--emerald-deep))">
+        <h3>🗺️ Your Success Blueprint</h3>
+        <div id="blueprint-output"></div>
+      </div>
+      <div class="mt16" id="trajectory-output"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== MAGAZINE HUB ========== -->
+<div id="tab-magazine" class="section">
+  <div class="sec-header">
+    <div class="pill teal">NEW · Daily Updated</div>
+    <h2>Magazine Hub</h2>
+    <p>Success stories, daily market pulse, weekly trade tips, and business knowledge — curated for entrepreneurs.</p>
+  </div>
+
+  <!-- Featured + Side Stories -->
+  <div class="mag-grid">
+    <div class="mag-feature">
+      <div class="mag-feature-img" style="background:linear-gradient(135deg,var(--emerald-deep),var(--teal));display:flex;align-items:center;justify-content:center;color:#fff;font-size:3rem">📈</div>
+      <div class="mag-feature-body">
+        <span class="tag" style="background:var(--coral);color:#fff">Cover Story</span>
+        <h3 style="margin-top:8px">From $40K in Debt to $800K in Revenue: Marcus T.'s Two-Year Turnaround</h3>
+        <p style="color:var(--mid);font-size:.92rem;line-height:1.6;margin-top:10px">
+          When Marcus Thompson's Henderson restaurant was drowning in MCA debt at 38% APR, Capital Bridge restructured his obligations into a single 9.9% term loan. Within 90 days he reinvested the cash-flow savings into a second location. Today his two-unit operation generates $820K annually.
+        </p>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:16px">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="Marcus T." style="width:44px;height:44px;border-radius:50%;object-fit:cover">
+          <div>
+            <div style="font-weight:700;font-size:.9rem">Marcus Thompson</div>
+            <div style="font-size:.78rem;color:var(--mid)">Restaurant Owner · Henderson, NV · $250K Funded</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mag-small">
+      <div class="mag-card">
+        <img src="https://images.unsplash.com/photo-1494790108755-2616b9e4a7b?w=80&h=80&fit=crop&crop=face" alt="Sandra R.">
+        <div>
+          <h4>Sandra R. — Salon Owner</h4>
+          <p>Used a $75K equipment loan to open two styling stations. Monthly revenue up 65% in 8 months. <span class="tag">$75K Funded</span></p>
+        </div>
+      </div>
+      <div class="mag-card">
+        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=80&h=80&fit=crop&crop=face" alt="Derek M.">
+        <div>
+          <h4>Derek M. — Contractor</h4>
+          <p>$120K line of credit let him bid bigger jobs. Went from $300K to $1.1M revenue in 18 months. <span class="tag">$120K LOC</span></p>
+        </div>
+      </div>
+      <div class="mag-card">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=80&h=80&fit=crop&crop=face" alt="Priya N.">
+        <div>
+          <h4>Priya N. — E-Commerce</h4>
+          <p>SBA 7(a) loan of $200K funded inventory expansion. Sold out 3 product lines in Q4. <span class="tag">$200K SBA</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- More Success Stories -->
+  <h3 style="margin-bottom:16px;color:var(--emerald-deep)">More Success Stories</h3>
+  <div class="card-grid" style="margin-bottom:32px">
+    <div class="card teal">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="" style="width:40px;height:40px;border-radius:50%;object-fit:cover">
+        <div><strong>James L.</strong><br><span style="font-size:.78rem;color:var(--mid)">Auto Repair · $85K MCA</span></div>
+      </div>
+      <p style="font-size:.85rem;color:var(--mid)">"Capital Bridge got me funded in 36 hours. My shop now has 3 lifts and a 6-week backlog."</p>
+    </div>
+    <div class="card gold">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+        <img src="https://images.unsplash.com/photo-1494790108755-2616b9e4a7b?w=80&h=80&fit=crop&crop=face" alt="" style="width:40px;height:40px;border-radius:50%;object-fit:cover">
+        <div><strong>Angela K.</strong><br><span style="font-size:.78rem;color:var(--mid)">Boutique Retail · $55K Term</span></div>
+      </div>
+      <p style="font-size:.85rem;color:var(--mid)">"The credit improvement plan they gave me boosted my score 87 points in 4 months. Then I got approved at prime rate."</p>
+    </div>
+    <div class="card coral">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=80&h=80&fit=crop&crop=face" alt="" style="width:40px;height:40px;border-radius:50%;object-fit:cover">
+        <div><strong>Terrance B.</strong><br><span style="font-size:.78rem;color:var(--mid)">Food Truck Fleet · $160K</span></div>
+      </div>
+      <p style="font-size:.85rem;color:var(--mid)">"Went from 1 truck to 4 trucks in one year. The ROI planner showed me exactly how to stage the expansion."</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Daily Market Pulse -->
+  <div class="sec-header">
+    <div class="pill gold">Daily · Auto-Refreshes</div>
+    <h2>Daily Market Pulse</h2>
+    <p id="market-date-label">Today's watchlist — updated every trading day.</p>
+  </div>
+  <div id="market-pulse-output" class="card-grid" style="margin-bottom:32px"></div>
+
+  <hr class="divider">
+
+  <!-- Trade Tip -->
+  <div class="sec-header">
+    <div class="pill coral">Weekly Rotation</div>
+    <h2>Trade Tip of the Week</h2>
+  </div>
+  <div id="trade-tip-output" class="alert alert-info" style="font-size:.95rem;line-height:1.7;margin-bottom:32px"></div>
+
+  <hr class="divider">
+
+  <!-- Business Knowledge -->
+  <div class="sec-header">
+    <div class="pill">Daily Knowledge</div>
+    <h2>Business Knowledge Update</h2>
+  </div>
+  <div id="biz-knowledge-output" class="alert alert-success" style="font-size:.95rem;line-height:1.7"></div>
+</div>
+
+<!-- ========== INVESTMENT AI AGENT ========== -->
+<div id="tab-invest" class="section">
+  <div class="sec-header">
+    <div class="pill plum">NEW · AI Powered</div>
+    <h2>Investment AI Agent</h2>
+    <p>Portfolio dashboard, daily picks, growth reserve fund tracking, compound projections, and risk management.</p>
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="alert alert-warn mb16">
+    <strong>Disclaimer:</strong> This tool provides educational simulations only. Past performance does not guarantee future results. Consult a licensed financial advisor before making investment decisions. Capital Bridge is not a registered investment advisor.
+  </div>
+
+  <!-- Risk Setting -->
+  <div style="background:#fff;border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);margin-bottom:24px">
+    <h3 style="margin-bottom:14px">Risk Tolerance &amp; Portfolio Size</h3>
+    <div class="risk-tabs">
+      <button class="risk-tab" id="rt-conservative" onclick="setRisk('conservative')">Conservative</button>
+      <button class="risk-tab active" id="rt-balanced" onclick="setRisk('balanced')">Balanced</button>
+      <button class="risk-tab" id="rt-aggressive" onclick="setRisk('aggressive')">Aggressive</button>
+    </div>
+    <div class="two-col">
+      <div class="form-group">
+        <label>Portfolio Value ($)</label>
+        <input type="number" id="inv-portfolio" placeholder="e.g. 25000" min="0" value="25000" oninput="updateInvDashboard()">
+      </div>
+      <div class="form-group">
+        <label>Monthly Contribution ($)</label>
+        <input type="number" id="inv-monthly" placeholder="e.g. 500" min="0" value="500" oninput="updateInvDashboard()">
+      </div>
+    </div>
+    <div class="alert alert-info" id="risk-desc-box"></div>
+  </div>
+
+  <!-- Stats Row -->
+  <div class="stat-grid" id="inv-stats"></div>
+
+  <!-- Donut + Legend -->
+  <div style="background:#fff;border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);margin-bottom:24px">
+    <h3 style="margin-bottom:20px">Portfolio Allocation</h3>
+    <div class="donut-wrap">
+      <div class="donut" id="donut-chart" style="background:conic-gradient(var(--emerald) 0% 35%,var(--teal) 35% 55%,var(--gold) 55% 70%,var(--coral) 70% 82%,var(--plum) 82% 92%,#999 92% 100%)"></div>
+      <div class="donut-legend" id="donut-legend"></div>
+    </div>
+  </div>
+
+  <!-- Daily Picks -->
+  <div style="background:#fff;border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);margin-bottom:24px">
+    <h3 style="margin-bottom:6px">Today's Market Picks</h3>
+    <p style="font-size:.82rem;color:var(--mid);margin-bottom:16px">Simulated daily recommendations — rotated by day of week. Educational only.</p>
+    <div id="daily-picks-output" class="card-grid"></div>
+  </div>
+
+  <!-- Sector Performance -->
+  <div style="background:#fff;border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);margin-bottom:24px">
+    <h3 style="margin-bottom:16px">Market Sector Performance (Simulated YTD)</h3>
+    <div id="sector-bars"></div>
+  </div>
+
+  <!-- Growth Reserve Fund -->
+  <div style="background:linear-gradient(135deg,var(--emerald-deep),var(--teal));color:#fff;border-radius:var(--radius);padding:24px;margin-bottom:24px">
+    <h3 style="margin-bottom:8px">Growth Reserve Fund</h3>
+    <p style="opacity:.85;font-size:.9rem;margin-bottom:16px">20% of every gain automatically allocated to your reserve fund. This builds your reinvestment runway.</p>
+    <div id="grf-output"></div>
+  </div>
+
+  <!-- Compound Projection Table -->
+  <div style="background:#fff;border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);margin-bottom:24px;overflow-x:auto">
+    <h3 style="margin-bottom:16px">Compound Growth Projection</h3>
+    <table class="data-table" id="compound-table">
+      <thead><tr><th>Year</th><th>Portfolio Value</th><th>Total Contributions</th><th>Total Gain</th><th>Reserve Fund (20%)</th><th>Net Investable</th></tr></thead>
+      <tbody id="compound-tbody"></tbody>
+    </table>
+  </div>
+
+  <!-- Investment Principles -->
+  <div style="background:#fff;border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)">
+    <h3 style="margin-bottom:16px">Investment Principles</h3>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">⚖️</div>
+        <h3>Diversification</h3>
+        <p>Never put more than 10% in a single position. Spread across sectors, asset classes, and geographies.</p>
+      </div>
+      <div class="card teal">
+        <div class="card-icon">📅</div>
+        <h3>Dollar-Cost Averaging</h3>
+        <p>Invest a fixed amount monthly regardless of market conditions. Reduces timing risk over time.</p>
+      </div>
+      <div class="card gold">
+        <div class="card-icon">🏦</div>
+        <h3>Reserve First</h3>
+        <p>Always fund your Growth Reserve before adding new positions. Liquidity is your competitive advantage.</p>
+      </div>
+      <div class="card coral">
+        <div class="card-icon">⏳</div>
+        <h3>Time in Market</h3>
+        <p>Long-term investors outperform timers 94% of the time over 10-year windows. Stay consistent.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== APPLY NOW ========== -->
+<div id="tab-apply" class="section">
+  <div class="sec-header">
+    <div class="pill coral">Get Funded</div>
+    <h2>Apply Now</h2>
+    <p>Complete your capital application. Our team reviews every submission within 2 business hours.</p>
+  </div>
+
+  <div class="step-indicator" id="step-indicator">
+    <div class="step-dot current" id="sdot-1">1</div>
+    <div style="flex:1;height:2px;background:var(--light);margin-top:15px;max-width:60px"></div>
+    <div class="step-dot" id="sdot-2">2</div>
+    <div style="flex:1;height:2px;background:var(--light);margin-top:15px;max-width:60px"></div>
+    <div class="step-dot" id="sdot-3">3</div>
+    <div style="flex:1;height:2px;background:var(--light);margin-top:15px;max-width:60px"></div>
+    <div class="step-dot" id="sdot-4">4</div>
+  </div>
+
+  <!-- Step 1 -->
+  <div class="intake-step active" id="step1">
+    <h3 style="margin-bottom:20px">Step 1 — Business Information</h3>
+    <div class="two-col">
+      <div class="form-group"><label>Legal Business Name</label><input type="text" id="f-bizname" placeholder="ABC Company LLC"></div>
+      <div class="form-group"><label>DBA (if different)</label><input type="text" id="f-dba" placeholder="Optional"></div>
+      <div class="form-group"><label>Business Type</label><select id="f-biztype"><option value="">Select…</option><option>Sole Proprietor</option><option>LLC</option><option>S-Corp</option><option>C-Corp</option><option>Partnership</option><option>Nonprofit</option></select></div>
+      <div class="form-group"><label>Industry</label><select id="f-industry"><option value="">Select…</option><option>Restaurant / Food Service</option><option>Retail</option><option>Professional Services</option><option>E-Commerce</option><option>Construction / Trades</option><option>Health &amp; Wellness</option><option>Automotive</option><option>Technology</option><option>Real Estate</option><option>Beauty / Salon</option><option>Other</option></select></div>
+      <div class="form-group"><label>Years in Business</label><input type="number" id="f-tib" placeholder="e.g. 3" min="0"></div>
+      <div class="form-group"><label>State of Incorporation</label><select id="f-state"><option value="">Select…</option><option>NV</option><option>CA</option><option>TX</option><option>FL</option><option>NY</option><option>AZ</option><option>CO</option><option>WA</option><option>OR</option><option>Other</option></select></div>
+      <div class="form-group"><label>Business Address</label><input type="text" id="f-address" placeholder="123 Main St, Henderson NV 89002"></div>
+      <div class="form-group"><label>EIN (Tax ID)</label><input type="text" id="f-ein" placeholder="XX-XXXXXXX"></div>
+    </div>
+    <button class="btn btn-primary" onclick="nextStep(2)">Next: Owner Info →</button>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="intake-step" id="step2">
+    <h3 style="margin-bottom:20px">Step 2 — Owner Information</h3>
+    <div class="two-col">
+      <div class="form-group"><label>Owner Full Name</label><input type="text" id="f-ownname" placeholder="First Last"></div>
+      <div class="form-group"><label>Title / Role</label><input type="text" id="f-owntitle" placeholder="CEO, Owner, etc."></div>
+      <div class="form-group"><label>Email Address</label><input type="email" id="f-email" placeholder="you@business.com"></div>
+      <div class="form-group"><label>Phone Number</label><input type="tel" id="f-phone" placeholder="(702) 555-0100"></div>
+      <div class="form-group"><label>Home State</label><select id="f-homestate"><option value="">Select…</option><option>NV</option><option>CA</option><option>TX</option><option>FL</option><option>NY</option><option>AZ</option><option>Other</option></select></div>
+      <div class="form-group"><label>Ownership %</label><input type="number" id="f-ownpct" placeholder="e.g. 100" min="1" max="100"></div>
+      <div class="form-group"><label>Credit Score (approx)</label><input type="number" id="f-creditscore" placeholder="e.g. 680" min="300" max="850"></div>
+      <div class="form-group"><label>SSN Last 4 (for soft pull)</label><input type="text" id="f-ssn4" placeholder="XXXX" maxlength="4"></div>
+    </div>
+    <div class="flex-gap">
+      <button class="btn btn-outline" onclick="nextStep(1)">← Back</button>
+      <button class="btn btn-primary" onclick="nextStep(3)">Next: Financial Info →</button>
+    </div>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="intake-step" id="step3">
+    <h3 style="margin-bottom:20px">Step 3 — Financial Information</h3>
+    <div class="two-col">
+      <div class="form-group"><label>Annual Revenue ($)</label><input type="number" id="f-revenue" placeholder="e.g. 250000" min="0"></div>
+      <div class="form-group"><label>Monthly Average Revenue ($)</label><input type="number" id="f-monthrev" placeholder="e.g. 20000" min="0"></div>
+      <div class="form-group"><label>Requested Loan Amount ($)</label><input type="number" id="f-loanamt" placeholder="e.g. 75000" min="0"></div>
+      <div class="form-group"><label>Use of Funds</label><select id="f-useoffunds"><option value="">Select…</option><option>Working Capital</option><option>Equipment Purchase</option><option>Inventory</option><option>Marketing / Growth</option><option>Debt Consolidation</option><option>Hiring Staff</option><option>Location Expansion</option><option>Technology</option><option>Other</option></select></div>
+      <div class="form-group"><label>Existing Business Debt ($)</label><input type="number" id="f-existdebt" placeholder="e.g. 0" min="0"></div>
+      <div class="form-group"><label>Outstanding Liens / Judgments</label><select id="f-liens"><option value="no">No</option><option value="yes">Yes</option></select></div>
+      <div class="form-group"><label>Recent Bankruptcies (past 3 yrs)</label><select id="f-bk"><option value="no">No</option><option value="yes">Yes</option></select></div>
+      <div class="form-group"><label>Desired Repayment Term</label><select id="f-term"><option value="">Select…</option><option>3 months (MCA)</option><option>6 months</option><option>12 months</option><option>24 months</option><option>36 months</option><option>60 months</option><option>84 months (SBA)</option></select></div>
+    </div>
+    <div class="flex-gap">
+      <button class="btn btn-outline" onclick="nextStep(2)">← Back</button>
+      <button class="btn btn-primary" onclick="nextStep(4)">Next: Documents →</button>
+    </div>
+  </div>
+
+  <!-- Step 4 -->
+  <div class="intake-step" id="step4">
+    <h3 style="margin-bottom:20px">Step 4 — Documents &amp; Submit</h3>
+    <p style="color:var(--mid);font-size:.9rem;margin-bottom:20px">Check all documents you have ready to upload. We'll work with what you have.</p>
+    <ul class="checklist" style="margin-bottom:24px">
+      <li><input type="checkbox" id="doc-1"><label for="doc-1">3 months bank statements</label></li>
+      <li><input type="checkbox" id="doc-2"><label for="doc-2">2 years tax returns (business)</label></li>
+      <li><input type="checkbox" id="doc-3"><label for="doc-3">2 years tax returns (personal)</label></li>
+      <li><input type="checkbox" id="doc-4"><label for="doc-4">Profit &amp; Loss statement (YTD)</label></li>
+      <li><input type="checkbox" id="doc-5"><label for="doc-5">Balance sheet</label></li>
+      <li><input type="checkbox" id="doc-6"><label for="doc-6">Government-issued ID (owner)</label></li>
+      <li><input type="checkbox" id="doc-7"><label for="doc-7">Business license / Articles of Incorporation</label></li>
+      <li><input type="checkbox" id="doc-8"><label for="doc-8">Voided business check</label></li>
+    </ul>
+    <div class="form-group">
+      <label>Additional Notes or Questions</label>
+      <textarea id="f-notes" placeholder="Tell us anything else about your situation…"></textarea>
+    </div>
+    <div class="form-group">
+      <label>How did you hear about us?</label>
+      <select id="f-source"><option value="">Select…</option><option>Google Search</option><option>Referral</option><option>Social Media</option><option>Email</option><option>Event / Networking</option><option>Other</option></select>
+    </div>
+    <div class="flex-gap">
+      <button class="btn btn-outline" onclick="nextStep(3)">← Back</button>
+      <button class="btn btn-coral" onclick="submitApplication()">Submit Application ✓</button>
+    </div>
+    <div id="app-summary" style="display:none;margin-top:24px"></div>
+  </div>
+</div>
+
+<!-- AI Advisor Floating Widget -->
+<div class="ai-advisor" id="ai-advisor-widget">
+  <div class="ai-advisor-bubble" id="ai-advisor-bubble"></div>
+  <button class="ai-advisor-btn" id="ai-advisor-btn" onclick="toggleFloatingAdvisor()" title="AI Advisor">🤖</button>
+</div>
+
+<footer>
+  <p><strong>Capital Bridge · Satellite International Corp · Calaif Parks</strong></p>
+  <p style="margin-top:6px">📍 Henderson, NV &nbsp;·&nbsp; 📞 (725) 314-9140 &nbsp;·&nbsp; ✉️ network@satelliteinternationalcorpnetwork.com</p>
+  <p style="margin-top:10px;opacity:.6">© 2024 Satellite International Corp. All rights reserved. Not a licensed investment advisor. All financial tools are for educational purposes only.</p>
+</footer>
+
+<script>
+// ─────────────────────────────────────────────
+// UTILITIES
+// ─────────────────────────────────────────────
+function escapeHTML(s){
+  if(s==null)return'';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function fmt(n){return Number(n).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});}
+function fmtD(n){return'$'+fmt(n);}
+function fmtP(n){return Number(n).toFixed(1)+'%';}
+function v(id){return parseFloat(document.getElementById(id).value)||0;}
+function vi(id){return parseInt(document.getElementById(id).value)||0;}
+function vs(id){return document.getElementById(id).value;}
+
+// ─────────────────────────────────────────────
+// NAV
+// ─────────────────────────────────────────────
+let currentTab='overview';
+function showTab(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  const btns=document.querySelectorAll('.nav-btn');
+  btns.forEach(b=>{if(b.getAttribute('onclick')&&b.getAttribute('onclick').includes("'"+id+"'"))b.classList.add('active');});
+  currentTab=id;
+  updateFloatingAdvisor(id);
+  window.scrollTo(0,0);
+  if(id==='magazine')initMagazine();
+  if(id==='invest')updateInvDashboard();
+  if(id==='credit')updateCreditDisplay();
+  if(id==='lenders')renderLenders();
+}
+
+// ─────────────────────────────────────────────
+// DEBT RELIEF CALCULATOR
+// ─────────────────────────────────────────────
+function calcDebt(){
+  const bal=v('d-balance'),rate=v('d-rate'),months=vi('d-months');
+  const newRate=v('d-newrate'),newTerm=vi('d-newterm');
+  if(!bal||!rate||!months||!newRate||!newTerm){alert('Please fill all fields.');return;}
+  const mr=rate/100/12, nmr=newRate/100/12;
+  const oldPmt=bal*mr/(1-Math.pow(1+mr,-months));
+  const newPmt=bal*nmr/(1-Math.pow(1+nmr,-newTerm));
+  const oldTotal=oldPmt*months, newTotal=newPmt*newTerm;
+  const monthlySaving=oldPmt-newPmt, totalSaving=oldTotal-newTotal;
+  const out=document.getElementById('debt-output');
+  out.innerHTML=`
+    <div class="result-row"><span>Current Monthly Payment</span><span>${fmtD(oldPmt)}</span></div>
+    <div class="result-row"><span>New Monthly Payment</span><span>${fmtD(newPmt)}</span></div>
+    <div class="result-row"><span>Monthly Cash Flow Freed</span><span>+${fmtD(monthlySaving)}</span></div>
+    <div class="result-row"><span>Total Interest (current path)</span><span>${fmtD(oldTotal-bal)}</span></div>
+    <div class="result-row"><span>Total Interest (new loan)</span><span>${fmtD(newTotal-bal)}</span></div>
+    <div class="result-row"><span>Total Savings</span><span>+${fmtD(totalSaving)}</span></div>
+  `;
+  document.getElementById('debt-result').style.display='block';
+  const rec=document.getElementById('debt-rec');
+  if(totalSaving>0){
+    rec.innerHTML='<strong>✅ Consolidation Recommended!</strong> You save <strong>'+fmtD(totalSaving)+'</strong> over the life of the loan and free up <strong>'+fmtD(monthlySaving)+'</strong>/month in cash flow. Contact us to start your application.';
+    rec.className='alert alert-success mt16';
+  } else {
+    rec.innerHTML='<strong>⚠️ Review Carefully.</strong> Your current loan terms may be competitive. Let us do a full analysis — there may be fees or features we can optimize.';
+    rec.className='alert alert-warn mt16';
+  }
+}
+
+// ─────────────────────────────────────────────
+// POS SAVINGS CALCULATOR
+// ─────────────────────────────────────────────
+function calcPos(){
+  const vol=v('p-volume'),rate=v('p-rate'),txfee=v('p-txfee'),txcount=vi('p-txcount'),monthly=v('p-monthly');
+  if(!vol||!rate){alert('Please fill at minimum Volume and Rate.');return;}
+  const currentFees=(vol*rate/100)+(txfee*txcount)+monthly;
+  const ourRate=1.89, ourTx=0.10, ourMonthly=25;
+  const newFees=(vol*ourRate/100)+(ourTx*txcount)+ourMonthly;
+  const monthlySave=currentFees-newFees;
+  const annualSave=monthlySave*12;
+  const out=document.getElementById('pos-output');
+  out.innerHTML=`
+    <div class="result-row"><span>Current Monthly Fees</span><span>${fmtD(currentFees)}</span></div>
+    <div class="result-row"><span>Estimated New Fees</span><span>${fmtD(newFees)}</span></div>
+    <div class="result-row"><span>Monthly Savings</span><span>+${fmtD(monthlySave)}</span></div>
+    <div class="result-row"><span>Annual Savings</span><span>+${fmtD(annualSave)}</span></div>
+    <div class="result-row"><span>3-Year Savings</span><span>+${fmtD(annualSave*3)}</span></div>
+  `;
+  document.getElementById('pos-result').style.display='block';
+  const rec=document.getElementById('pos-rec');
+  rec.innerHTML=monthlySave>0
+    ?'<strong>💰 Switch &amp; Save!</strong> At our 1.89% processing rate you keep an extra <strong>'+fmtD(annualSave)+'</strong> annually. That\'s real money back in your pocket.'
+    :'<strong>ℹ️ Note:</strong> Your current rate is competitive. Ask us about additional POS features and cash-advance programs that could boost your bottom line.';
+}
+
+// ─────────────────────────────────────────────
+// ROI PLANNER
+// ─────────────────────────────────────────────
+const locationScores={
+  restaurant:{base:74,label:'Henderson has 15% YoY food service growth — excellent for restaurants.'},
+  retail:{base:68,label:'Retail foot traffic in Henderson growing steadily with new developments.'},
+  service:{base:82,label:'Professional services in high demand — Henderson\'s fastest growing category.'},
+  ecom:{base:88,label:'E-commerce operates location-independently — NV tax benefits are a plus.'},
+  construction:{base:85,label:'Nevada construction permits up 28% YoY. High demand, strong margins.'},
+  health:{base:79,label:'Health &amp; wellness is booming in Henderson — demographics are ideal.'},
+  auto:{base:71,label:'Auto services in steady demand; Henderson\'s vehicle ownership is above national avg.'},
+  tech:{base:76,label:'Tech ecosystem growing; proximity to Las Vegas creates enterprise opportunities.'},
+  other:{base:72,label:'Henderson\'s economy is diversified and growing — conditions are favorable.'}
+};
+function calcRoi(){
+  const invest=v('r-invest'),revenue=v('r-revenue'),opcost=v('r-opcost'),years=vi('r-years');
+  const biztype=vs('r-biztype');
+  if(!invest||!revenue||!years){alert('Please fill required fields.');return;}
+  const annualNet=revenue-opcost;
+  const totalReturn=annualNet*years;
+  const roi=((totalReturn-invest)/invest)*100;
+  const payback=invest/annualNet;
+  const out=document.getElementById('roi-output');
+  out.innerHTML=`
+    <div class="result-row"><span>Annual Net Return</span><span>${fmtD(annualNet)}</span></div>
+    <div class="result-row"><span>Total Return (${years} yrs)</span><span>${fmtD(totalReturn)}</span></div>
+    <div class="result-row"><span>Net ROI</span><span>${fmtP(roi)}</span></div>
+    <div class="result-row"><span>Payback Period</span><span>${payback.toFixed(1)} years</span></div>
+    <div class="result-row"><span>Return Multiple</span><span>${(totalReturn/invest).toFixed(2)}x</span></div>
+  `;
+  const ls=biztype&&locationScores[biztype]?locationScores[biztype]:locationScores.other;
+  const score=ls.base+Math.min(10,Math.round(roi/50));
+  const lout=document.getElementById('location-output');
+  lout.innerHTML=`
+    <div class="result-row"><span>Location Success Score</span><span>${Math.min(score,99)}/100</span></div>
+    <div class="result-row"><span>Market Conditions</span><span>${score>=80?'Excellent':score>=70?'Strong':'Good'}</span></div>
+    <div style="margin-top:10px;font-size:.88rem;opacity:.9">${ls.label}</div>
+    <div style="margin-top:8px;font-size:.88rem;opacity:.9">Henderson, NV ranks in the <strong>top 12%</strong> of US cities for small business growth (2023–2024).</div>
+  `;
+  document.getElementById('roi-result').style.display='block';
+  const ab=document.getElementById('roi-advisor-box');
+  if(ab.style.display==='block'){showAdvisorTip('roi');}
+}
+
+// ─────────────────────────────────────────────
+// CREDIT CHECK
+// ─────────────────────────────────────────────
+function updateCreditDisplay(){
+  const score=vi('credit-slider')||580;
+  document.getElementById('score-label').textContent=score;
+  const tier=getCreditTier(score);
+  document.getElementById('credit-tier-display').innerHTML=`
+    <div class="score-display tier-${tier.cls}">${score}<div style="font-size:1rem;font-weight:500;margin-top:4px">${tier.label}</div></div>
+  `;
+}
+function getCreditTier(s){
+  if(s<580)return{label:'Poor',cls:'poor',min:300,max:579};
+  if(s<670)return{label:'Fair',cls:'fair',min:580,max:669};
+  if(s<740)return{label:'Good',cls:'good',min:670,max:739};
+  if(s<800)return{label:'Very Good',cls:'vgood',min:740,max:799};
+  return{label:'Exceptional',cls:'exceptional',min:800,max:850};
+}
+function runCreditMatch(){
+  const score=vi('credit-slider')||580;
+  const amount=v('credit-amount')||50000;
+  const tib=vi('credit-tib')||12;
+  const rev=v('credit-revenue')||100000;
+  const lenders=getLenderData();
+  let html='<h3 style="margin-bottom:16px;color:var(--emerald-deep)">Lender Match Results</h3>';
+  let approveCount=0,borderCount=0,declineCount=0;
+  lenders.forEach(l=>{
+    const diff=score-l.minScore;
+    let status,cls,icon;
+    if(diff>=40){status='Approved';cls='score-approve';icon='✅';approveCount++;}
+    else if(diff>=-20){status='Borderline';cls='score-border';icon='⚠️';borderCount++;}
+    else{status='Likely Decline';cls='score-decline';icon='❌';declineCount++;}
+    html+=`<div class="lender-card" style="margin-bottom:12px">
+      <div style="display:flex;justify-content:space-between;align-items:start">
+        <h4>${escapeHTML(l.name)}</h4>
+        <span class="score-badge ${cls}">${icon} ${status}</span>
+      </div>
+      <div class="lender-meta">
+        <span>Min Score: ${l.minScore}</span><span>Your Score: ${score}</span>
+        <span>Gap: ${diff>=0?'+'+diff:diff}</span><span>Type: ${l.type}</span>
+        <span>Rate: ${l.rate}</span>
+      </div>
+    </div>`;
+  });
+  html+=`<div class="stat-grid" style="margin-top:16px">
+    <div class="stat-card"><div class="stat-num text-emerald">${approveCount}</div><div class="stat-lbl">Likely Approved</div></div>
+    <div class="stat-card"><div class="stat-num text-gold">${borderCount}</div><div class="stat-lbl">Borderline</div></div>
+    <div class="stat-card"><div class="stat-num text-coral">${declineCount}</div><div class="stat-lbl">Likely Decline</div></div>
+  </div>`;
+  document.getElementById('lender-match-output').innerHTML=html;
+  // Credit tips
+  showCreditTips(score);
+}
+function showCreditTips(score){
+  const tier=getCreditTier(score);
+  const tips={
+    poor:['Pay every bill on time — even minimum payments. Set up autopay now.','Dispute all errors on your credit report (Experian, TransUnion, Equifax).','Become an authorized user on a family member\'s positive account.','Open a secured credit card and keep utilization under 10%.','Avoid any new hard inquiries for at least 90 days.'],
+    fair:['Get utilization below 30% on all cards — below 10% is ideal.','Request credit limit increases on existing cards (no hard pull).','Pay down the card with the highest utilization first.','Check for late payments — negotiate removal with creditors.','Keep all accounts open — length of history matters.'],
+    good:['You qualify for most products. Focus on getting utilization under 10%.','Apply for a business credit card to separate personal/business credit.','Set up credit monitoring alerts via Credit Karma or Experian.','Ask your bank for a credit limit review — your history supports it.','Pay in full monthly — interest adds up and utilization spikes hurt.'],
+    vgood:['You\'re in great shape. Aim for 800+ by keeping utilization under 5%.','Mix of credit types (installment + revolving) helps your score.','Maintain a long-average account age by keeping old cards open.','Monitor monthly for fraud — you have more to protect now.','Lock in rates now — you qualify for prime lending.'],
+    exceptional:['Excellent credit! You qualify for the best rates and highest limits.','Focus on maximizing rewards cards — you\'ll get the best offers.','Protect your score: monitor monthly, freeze credit at bureaus.','Use business credit to leverage personal credit for larger lines.','Consider a portfolio loan secured by investments for lower rates.']
+  };
+  const list=tips[tier.cls];
+  let html=`<div class="result-box mt16" style="background:linear-gradient(135deg,var(--teal),var(--emerald-deep))">
+    <h3>💡 Credit Improvement Plan — ${tier.label} Tier</h3>
+    <ul style="margin-top:12px;padding-left:16px">
+    ${list.map(t=>'<li style="margin-bottom:8px;font-size:.9rem;line-height:1.5">'+escapeHTML(t)+'</li>').join('')}
+    </ul>
+    <div style="margin-top:16px;padding-top:12px;border-top:1px solid rgba(255,255,255,.2);font-size:.85rem;opacity:.9">
+      Most users in your tier improve their score by <strong>40–90 points</strong> within 6 months by following these steps consistently.
+    </div>
+  </div>`;
+  document.getElementById('credit-tips-output').innerHTML=html;
+}
+
+// ─────────────────────────────────────────────
+// LENDER DATA
+// ─────────────────────────────────────────────
+function getLenderData(){
+  return[
+    {name:'OnDeck Capital',type:'Term Loan',rate:'29.9–99.9% APR',minScore:600,minRev:100000,minTib:12,maxAmt:250000,tags:['Fast Funding','No Collateral','Repeat Borrower Discounts']},
+    {name:'Kabbage (AmEx)',type:'Line of Credit',rate:'2–9% monthly fee',minScore:560,minRev:50000,minTib:12,maxAmt:150000,tags:['Revolving LOC','Automated Approval','3-18 Mo Terms']},
+    {name:'BlueVine',type:'Line of Credit',rate:'6.2–78% APR',minScore:625,minRev:120000,minTib:24,maxAmt:250000,tags:['Fast Draw','No Prepay Penalty','Weekly Repay']},
+    {name:'Fundbox',type:'Line of Credit',rate:'4.66–8.99% / draw',minScore:600,minRev:25000,minTib:3,maxAmt:150000,tags:['Startup Friendly','AI Underwriting','Invoice Financing']},
+    {name:'SmartBiz (SBA 7a)',type:'SBA',rate:'Prime+2.75–4.5%',minScore:650,minRev:50000,minTib:24,maxAmt:5000000,tags:['Lowest Rates','Long Terms','SBA Backed']},
+    {name:'Lendio Marketplace',type:'Term Loan',rate:'Varies by lender',minScore:560,minRev:50000,minTib:6,maxAmt:5000000,tags:['Multi-Lender Match','Free to Use','75+ Lenders']},
+    {name:'National Funding',type:'MCA',rate:'1.10–1.50 factor rate',minScore:500,minRev:120000,minTib:12,maxAmt:500000,tags:['Bad Credit OK','Daily Remittance','Equipment Options']},
+    {name:'Credibly',type:'MCA',rate:'Factor 1.11–1.49',minScore:500,minRev:15000,minTib:6,maxAmt:400000,tags:['MCA &amp; Term','Low Score OK','Same Day Possible']},
+    {name:'CAN Capital',type:'MCA',rate:'Factor 1.18–1.48',minScore:525,minRev:100000,minTib:12,maxAmt:250000,tags:['Revenue Advance','30+ Years in Business','Flexible']},
+    {name:'Rapid Finance',type:'MCA',rate:'Factor 1.15–1.49',minScore:500,minRev:10000,minTib:3,maxAmt:1000000,tags:['New Businesses','SBA Partner','Broad Products']},
+    {name:'Headway Capital',type:'Line of Credit',rate:'40–80% APR',minScore:625,minRev:50000,minTib:12,maxAmt:100000,tags:['Small Biz LOC','Build Credit','Bi-Weekly Pay']},
+    {name:'Biz2Credit',type:'Term Loan',rate:'7.99–29.99% APR',minScore:660,minRev:250000,minTib:18,maxAmt:6000000,tags:['Multiple Products','SBA Ready','Large Amounts']},
+    {name:'Accion Opportunity Fund',type:'SBA',rate:'5.99–19.99% APR',minScore:575,minRev:0,minTib:0,maxAmt:250000,tags:['Nonprofit Lender','Underserved Markets','Micro to Mid']},
+    {name:'Triumph Business Capital',type:'Invoice Factoring',rate:'0.5–5% per invoice',minScore:500,minRev:20000,minTib:6,maxAmt:10000000,tags:['Invoice Factoring','No Credit Required','B2B Focused']},
+    {name:'eFactor Network',type:'Invoice Factoring',rate:'1–3% per invoice',minScore:500,minRev:30000,minTib:12,maxAmt:5000000,tags:['Supply Chain','Early Pay','No Debt']},
+    {name:'Crestmont Capital',type:'Equipment',rate:'5.49–19.9% APR',minScore:620,minRev:75000,minTib:12,maxAmt:2000000,tags:['Equipment Only','New &amp; Used','100% Financing']},
+    {name:'Currency Capital',type:'Equipment',rate:'4.9–18% APR',minScore:600,minRev:50000,minTib:6,maxAmt:5000000,tags:['Equipment &amp; Vehicles','Fast Approval','No Down Pay']},
+    {name:'Breakout Capital',type:'Term Loan',rate:'16–60% APR',minScore:550,minRev:100000,minTib:12,maxAmt:250000,tags:['Fair Credit','Transparent Fees','Growth Focus']}
+  ];
+}
+function renderLenders(){
+  const minScore=parseInt(document.getElementById('lender-filter-score').value)||0;
+  const typeFilter=document.getElementById('lender-filter-type').value;
+  const data=getLenderData().filter(l=>{
+    if(minScore&&l.minScore>minScore)return false;
+    if(typeFilter&&!l.type.includes(typeFilter))return false;
+    return true;
+  });
+  const out=document.getElementById('lenders-output');
+  if(!data.length){out.innerHTML='<div class="alert alert-warn">No lenders match your filter criteria. Try adjusting the filters.</div>';return;}
+  out.innerHTML=data.map(l=>`
+    <div class="lender-card">
+      <h4>${escapeHTML(l.name)}</h4>
+      <div class="lender-meta">
+        <div><strong>Type:</strong> ${escapeHTML(l.type)}</div>
+        <div><strong>Rate:</strong> ${escapeHTML(l.rate)}</div>
+        <div><strong>Min Credit Score:</strong> ${l.minScore} <span class="score-badge ${l.minScore<=580?'score-approve':l.minScore<=660?'score-border':'score-decline'}" style="margin-left:6px">${l.minScore<=580?'Accessible':l.minScore<=660?'Standard':'Premium'}</span></div>
+        <div><strong>Min Revenue:</strong> ${fmtD(l.minRev)}/yr</div>
+        <div><strong>Min Time in Biz:</strong> ${l.minTib} months</div>
+        <div><strong>Max Loan:</strong> ${fmtD(l.maxAmt)}</div>
+        <div style="margin-top:8px">${l.tags.map(t=>'<span class="tag">'+t+'</span>').join('')}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ─────────────────────────────────────────────
+// LOAN DETERMINATION
+// ─────────────────────────────────────────────
+function calcLoanDetermination(){
+  const expenses=v('ld-expenses'),revenue=v('ld-revenue'),goal=v('ld-goal'),
+        use=vs('ld-use'),debt=v('ld-debt');
+  if(!expenses||!revenue){alert('Please fill at minimum expenses and revenue.');return;}
+  const cashflow=revenue-expenses;
+  const growthGap=Math.max(0,goal-revenue);
+  const debtRatio=debt/revenue;
+  let recommendation,amount,rationale;
+  if(cashflow<0){
+    recommendation='Urgent';
+    amount=Math.abs(cashflow)*6+debt;
+    rationale='Your cash flow is negative. A working capital loan to cover the deficit and restructure debt is strongly recommended.';
+  } else if(growthGap>0 && cashflow>0){
+    recommendation='Recommended';
+    amount=growthGap*0.75;
+    rationale='You have positive cash flow but a growth gap. A targeted loan can accelerate revenue to your goal.';
+  } else if(debtRatio>0.3){
+    recommendation='Consider Consolidation';
+    amount=debt;
+    rationale='Your debt-to-revenue ratio is elevated. A consolidation loan could reduce rates and free cash flow.';
+  } else {
+    recommendation='Optional';
+    amount=revenue*0.5;
+    rationale='Your finances look healthy. A growth loan is optional — consider it if you have a specific expansion opportunity.';
+  }
+  const dsr=(amount*0.04)/revenue;
+  const out=document.getElementById('loan-det-output');
+  out.innerHTML=`
+    <div class="result-row"><span>Recommendation</span><span>${escapeHTML(recommendation)}</span></div>
+    <div class="result-row"><span>Suggested Loan Amount</span><span>${fmtD(amount)}</span></div>
+    <div class="result-row"><span>Monthly Cash Flow</span><span>${fmtD(cashflow)}</span></div>
+    <div class="result-row"><span>Growth Revenue Gap</span><span>${fmtD(growthGap)}</span></div>
+    <div class="result-row"><span>Est. Monthly Loan Payment</span><span>~${fmtD(amount*0.04)}</span></div>
+    <div class="result-row"><span>Debt Service Ratio</span><span>${fmtP(dsr*100)}</span></div>
+    <div style="margin-top:14px;font-size:.9rem;opacity:.9;line-height:1.5">${escapeHTML(rationale)}</div>
+  `;
+  document.getElementById('loan-det-result').style.display='block';
+}
+
+// ─────────────────────────────────────────────
+// SUCCESS BLUEPRINT
+// ─────────────────────────────────────────────
+function calcBlueprint(){
+  const name=vs('bp-name'),industry=vs('bp-industry'),years=vi('bp-years'),
+        revenue=v('bp-revenue'),employees=vi('bp-employees'),score=vi('bp-score'),
+        challenge=vs('bp-challenge');
+  if(!industry){alert('Please select your industry.');return;}
+  const ls=locationScores[industry]||locationScores.other;
+  let successScore=ls.base;
+  if(years>=3)successScore+=8;else if(years>=1)successScore+=4;
+  if(revenue>=500000)successScore+=10;else if(revenue>=100000)successScore+=5;
+  if(employees>=5)successScore+=5;
+  if(score>=700)successScore+=8;else if(score>=600)successScore+=4;
+  successScore=Math.min(successScore,99);
+  const projRevY1=revenue*(1+(successScore/200));
+  const projRevY3=revenue*Math.pow(1+(successScore/200),3);
+  const capNeeded=revenue*0.35;
+  const out=document.getElementById('blueprint-output');
+  out.innerHTML=`
+    <div class="result-row"><span>Business</span><span>${escapeHTML(name||'Your Business')}</span></div>
+    <div class="result-row"><span>Success Probability</span><span>${successScore}%</span></div>
+    <div class="result-row"><span>Year 1 Revenue Projection</span><span>${fmtD(projRevY1)}</span></div>
+    <div class="result-row"><span>Year 3 Revenue Projection</span><span>${fmtD(projRevY3)}</span></div>
+    <div class="result-row"><span>Recommended Capital</span><span>${fmtD(capNeeded)}</span></div>
+    <div class="result-row"><span>Location Rating</span><span>Henderson, NV: ${successScore>=80?'Excellent':successScore>=70?'Strong':'Good'}</span></div>
+  `;
+  // Trajectory
+  const challenges={
+    capital:['Apply for working capital within 30 days','Use Capital Bridge\'s lender match to find best rate','Reinvest 20% of capital into growth reserve'],
+    marketing:['Launch managed online presence service','Run geo-targeted ads for Henderson/Las Vegas area','Build email list with local partnerships'],
+    operations:['Audit workflows — find top 3 bottlenecks','Invest in one automation tool this quarter','Create an SOPs handbook for each key role'],
+    staff:['Post on Indeed + LinkedIn simultaneously','Offer performance bonuses tied to revenue','Consider PEO to reduce HR overhead'],
+    tech:['Audit current tech stack for redundancy','Prioritize a CRM as your first new tool','Integrate payments + inventory + accounting'],
+    competition:['Complete a formal competitive analysis this week','Identify one underserved niche in your market','Launch a loyalty/referral program ASAP'],
+    cashflow:['Negotiate net-15 terms with all customers','Move to ACH/direct deposit to cut payment delays','Build a 90-day operating reserve before growth']
+  };
+  const steps=challenges[challenge]||['Identify your top 3 priorities','Set monthly KPIs and review weekly','Schedule a strategy call with Capital Bridge'];
+  let tHtml=`<div class="result-box" style="background:linear-gradient(135deg,var(--plum),var(--emerald-deep))">
+    <h3>📅 30-60-90 Day Trajectory</h3>`;
+  const labels=['Month 1','Month 2','Month 3'];
+  steps.forEach((s,i)=>tHtml+=`<div class="result-row"><span>${labels[i]}</span><span>${escapeHTML(s)}</span></div>`);
+  tHtml+=`<div style="margin-top:12px;font-size:.85rem;opacity:.85">Henderson, NV context: ${ls.label}</div></div>`;
+  document.getElementById('trajectory-output').innerHTML=tHtml;
+  document.getElementById('blueprint-result').style.display='block';
+}
+
+// ─────────────────────────────────────────────
+// MAGAZINE HUB
+// ─────────────────────────────────────────────
+const dayStocks=[
+  // Mon
+  [{ticker:'NVDA',name:'NVIDIA Corp',price:'$892.40',change:'+3.2%',note:'AI chip demand surging; data center revenue up 120% YoY.',color:'var(--emerald)'},
+   {ticker:'MSFT',name:'Microsoft Corp',price:'$419.50',change:'+1.1%',note:'Azure cloud growth steady; Copilot adoption accelerating.',color:'var(--teal)'},
+   {ticker:'AMZN',name:'Amazon',price:'$193.80',change:'+2.4%',note:'AWS margins expanding; Prime membership hits all-time high.',color:'var(--gold)'}],
+  // Tue
+  [{ticker:'TSLA',name:'Tesla Inc',price:'$248.30',change:'+4.1%',note:'Cybertruck demand strong in Sun Belt markets including NV.',color:'var(--teal)'},
+   {ticker:'JPM',name:'JPMorgan Chase',price:'$208.90',change:'+0.8%',note:'Net interest income beats; small business lending up 18%.',color:'var(--emerald)'},
+   {ticker:'AAPL',name:'Apple Inc',price:'$196.20',change:'+1.6%',note:'Services revenue up 16% YoY; iPhone 17 cycle upcoming.',color:'var(--plum)'}],
+  // Wed
+  [{ticker:'V',name:'Visa Inc',price:'$284.70',change:'+1.3%',note:'Cross-border transactions recovering; NV tourism driving spend.',color:'var(--gold)'},
+   {ticker:'BRK.B',name:'Berkshire Hathaway',price:'$389.20',change:'+0.6%',note:'Insurance premiums up; defensive pick in uncertain markets.',color:'var(--emerald)'},
+   {ticker:'META',name:'Meta Platforms',price:'$504.10',change:'+2.9%',note:'Ad revenue rebounding; Threads growth adds inventory.',color:'var(--coral)'}],
+  // Thu
+  [{ticker:'GOOGL',name:'Alphabet',price:'$178.40',change:'+2.1%',note:'Search AI integration driving engagement; YouTube Shorts monetized.',color:'var(--teal)'},
+   {ticker:'HD',name:'Home Depot',price:'$361.20',change:'+1.7%',note:'Pro contractor segment up 9%; NV construction boom benefits.',color:'var(--gold)'},
+   {ticker:'UNH',name:'UnitedHealth',price:'$528.60',change:'-0.4%',note:'Healthcare cost pressures; long-term managed care position.',color:'var(--mid)'}],
+  // Fri
+  [{ticker:'SPY',name:'S&P 500 ETF',price:'$523.40',change:'+0.9%',note:'Broad market exposure — ideal core holding for any portfolio.',color:'var(--emerald)'},
+   {ticker:'QQQ',name:'Nasdaq-100 ETF',price:'$448.10',change:'+1.4%',note:'Tech-heavy ETF; strong for 5–10 year growth horizon.',color:'var(--plum)'},
+   {ticker:'VNQ',name:'Vanguard REIT ETF',price:'$89.30',change:'+0.3%',note:'Real estate exposure; NV commercial real estate outperforming.',color:'var(--coral)'}],
+  // Sat (use Mon data)
+  [{ticker:'NVDA',name:'NVIDIA Corp',price:'$892.40',change:'+3.2%',note:'AI chip demand surging; data center revenue up 120% YoY.',color:'var(--emerald)'},
+   {ticker:'MSFT',name:'Microsoft Corp',price:'$419.50',change:'+1.1%',note:'Azure cloud growth steady; Copilot adoption accelerating.',color:'var(--teal)'},
+   {ticker:'AMZN',name:'Amazon',price:'$193.80',change:'+2.4%',note:'AWS margins expanding; Prime membership hits all-time high.',color:'var(--gold)'}],
+  // Sun (use Tue data)
+  [{ticker:'TSLA',name:'Tesla Inc',price:'$248.30',change:'+4.1%',note:'Cybertruck demand strong in Sun Belt markets.',color:'var(--teal)'},
+   {ticker:'JPM',name:'JPMorgan Chase',price:'$208.90',change:'+0.8%',note:'Net interest income beats; small business lending up 18%.',color:'var(--emerald)'},
+   {ticker:'AAPL',name:'Apple Inc',price:'$196.20',change:'+1.6%',note:'Services revenue up 16% YoY; iPhone 17 cycle upcoming.',color:'var(--plum)'}]
+];
+const tradeTips=[
+  'Look for stocks with P/E ratios below their sector average AND positive earnings momentum — the combination historically outperforms.',
+  'Never hold more than 10% of your portfolio in a single position. Diversification is your only free lunch in investing.',
+  'Tax-loss harvesting in December can reduce your capital gains bill by 15–23% depending on your bracket.',
+  'Dollar-cost averaging into index ETFs beats market timing 92% of the time over 10-year windows — stay consistent.',
+  'The "52-week low" screen combined with positive analyst upgrades is a historically strong contrarian signal.'
+];
+const bizKnowledge=[
+  '🏦 Cash Flow Fact: 82% of small businesses that fail cite cash flow mismanagement — not lack of customers — as the primary cause.',
+  '📈 Pricing Power: A 1% increase in price, when executed correctly, increases profit margin by an average of 8–11% in most small businesses.',
+  '🤖 AI Adoption: Businesses using AI tools report 23% productivity gains on average. Start with a single workflow, not a full overhaul.',
+  '🏆 Customer Retention: It costs 5× more to acquire a new customer than retain an existing one. Loyalty programs yield 25–95% profit increases.',
+  '💳 Credit Myth: Having multiple business credit accounts BUILDS your score when managed well — it demonstrates you can handle credit responsibly.',
+  '📊 Rule of 40: In growth-stage companies, revenue growth % + profit margin % should exceed 40. Below 40 signals efficiency problems.',
+  '🌐 Online Presence: 97% of consumers search online before visiting a local business. Your Google Business Profile is your #1 first impression.'
+];
+function initMagazine(){
+  const d=new Date();
+  const dow=d.getDay(); // 0=Sun
+  const stocks=dayStocks[dow];
+  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  document.getElementById('market-date-label').textContent=`${days[dow]}'s watchlist — simulated educational data.`;
+  const mpOut=document.getElementById('market-pulse-output');
+  mpOut.innerHTML=stocks.map(s=>`
+    <div class="card" style="border-top-color:${s.color}">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:1.3rem;font-weight:700;color:${s.color}">${escapeHTML(s.ticker)}</div>
+      <div style="font-size:.85rem;color:var(--mid);margin-bottom:8px">${escapeHTML(s.name)}</div>
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px">
+        <span style="font-weight:700;font-size:1.05rem">${escapeHTML(s.price)}</span>
+        <span style="color:${s.change.startsWith('+')?'var(--emerald)':'var(--coral)'};font-weight:700">${escapeHTML(s.change)}</span>
+      </div>
+      <p style="font-size:.82rem;color:var(--mid);line-height:1.4">${escapeHTML(s.note)}</p>
+    </div>
+  `).join('');
+  // Trade tip — weekly rotation
+  const weekNum=Math.floor(d.getTime()/(1000*60*60*24*7));
+  document.getElementById('trade-tip-output').innerHTML='<strong>💡 This Week\'s Trade Tip:</strong><br>'+escapeHTML(tradeTips[weekNum%tradeTips.length]);
+  // Biz knowledge — daily rotation
+  const dayNum=Math.floor(d.getTime()/(1000*60*60*24));
+  document.getElementById('biz-knowledge-output').innerHTML='<strong>Today\'s Business Insight:</strong><br>'+escapeHTML(bizKnowledge[dayNum%bizKnowledge.length]);
+}
+
+// ─────────────────────────────────────────────
+// INVESTMENT AI AGENT
+// ─────────────────────────────────────────────
+let riskMode='balanced';
+const riskProfiles={
+  conservative:{
+    label:'Conservative',
+    desc:'Focus on capital preservation. Lower volatility, steady dividends, bonds, and blue-chip stocks.',
+    expectedReturn:6.5,
+    allocation:[{label:'US Bonds/Treasuries',pct:35,color:'var(--emerald)'},{label:'Blue-Chip Stocks',pct:30,color:'var(--teal)'},{label:'Dividend ETFs',pct:20,color:'var(--gold)'},{label:'REITs',pct:10,color:'var(--coral)'},{label:'Cash/MM Fund',pct:5,color:'#999'}]
+  },
+  balanced:{
+    label:'Balanced',
+    desc:'Mix of growth and stability. Core ETFs, growth stocks, moderate bonds, and real assets.',
+    expectedReturn:9.5,
+    allocation:[{label:'Growth ETFs (QQQ/SPY)',pct:35,color:'var(--emerald)'},{label:'Individual Growth Stocks',pct:20,color:'var(--teal)'},{label:'Dividend Stocks',pct:15,color:'var(--gold)'},{label:'Bonds/Fixed Income',pct:15,color:'var(--coral)'},{label:'REITs/Alternatives',pct:10,color:'var(--plum)'},{label:'Cash Reserve',pct:5,color:'#bbb'}]
+  },
+  aggressive:{
+    label:'Aggressive',
+    desc:'Maximum growth focus. High-conviction tech, sector ETFs, options-adjacent strategies, crypto-adjacent.',
+    expectedReturn:14.0,
+    allocation:[{label:'Tech Growth Stocks',pct:40,color:'var(--emerald)'},{label:'Sector ETFs (AI/Semi)',pct:25,color:'var(--teal)'},{label:'Small/Mid Cap Growth',pct:20,color:'var(--gold)'},{label:'International Growth',pct:10,color:'var(--plum)'},{label:'Cash',pct:5,color:'#bbb'}]
+  }
+};
+const dailyPicksAll={
+  conservative:[
+    {ticker:'VIG',name:'Vanguard Dividend Appreciation ETF',action:'BUY',reason:'Consistent dividend growers — ideal anchor position.',change:'+0.4%',color:'var(--emerald)'},
+    {ticker:'AGG',name:'iShares Core US Aggregate Bond ETF',action:'HOLD',reason:'Rate stabilization supports bond values near-term.',change:'+0.2%',color:'var(--teal)'},
+    {ticker:'JNJ',name:'Johnson & Johnson',action:'BUY',reason:'Defensive health giant; consistent dividend 60+ years.',change:'+0.7%',color:'var(--gold)'}
+  ],
+  balanced:[
+    {ticker:'SPY',name:'SPDR S&P 500 ETF Trust',action:'BUY',reason:'Broad market participation; core portfolio anchor.',change:'+1.1%',color:'var(--emerald)'},
+    {ticker:'NVDA',name:'NVIDIA Corporation',action:'BUY',reason:'AI infrastructure build-out is multi-year secular trend.',change:'+3.2%',color:'var(--teal)'},
+    {ticker:'VNQ',name:'Vanguard Real Estate ETF',action:'HOLD',reason:'NV real estate fundamentals remain strong.',change:'+0.3%',color:'var(--gold)'}
+  ],
+  aggressive:[
+    {ticker:'SMCI',name:'Super Micro Computer',action:'BUY',reason:'AI server infrastructure; high growth, high volatility.',change:'+5.8%',color:'var(--coral)'},
+    {ticker:'PLTR',name:'Palantir Technologies',action:'BUY',reason:'Government + commercial AI contracts expanding rapidly.',change:'+4.1%',color:'var(--emerald)'},
+    {ticker:'SOXL',name:'Direxion Semis 3x ETF',action:'WATCH',reason:'Leveraged semi play — only for high-risk tolerance.',change:'+8.3%',color:'var(--plum)'}
+  ]
+};
+const sectors=[
+  {name:'Artificial Intelligence / Semiconductors',pct:31,color:'var(--emerald)'},
+  {name:'Healthcare & Biotech',pct:18,color:'var(--teal)'},
+  {name:'Financial Services',pct:14,color:'var(--gold)'},
+  {name:'Consumer Discretionary',pct:11,color:'var(--coral)'},
+  {name:'Real Estate / REITs',pct:9,color:'var(--plum)'},
+  {name:'Energy / Clean Tech',pct:8,color:'#1a9d8f'},
+  {name:'International Developed',pct:5,color:'#bd8419'},
+  {name:'Bonds / Fixed Income',pct:4,color:'#999'}
+];
+function setRisk(mode){
+  riskMode=mode;
+  document.querySelectorAll('.risk-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('rt-'+mode).classList.add('active');
+  updateInvDashboard();
+}
+function updateInvDashboard(){
+  const prof=riskProfiles[riskMode];
+  const portfolio=v('inv-portfolio')||25000;
+  const monthly=v('inv-monthly')||500;
+  // Risk desc
+  document.getElementById('risk-desc-box').innerHTML='<strong>'+prof.label+':</strong> '+prof.desc;
+  // Stats
+  const annualRet=portfolio*prof.expectedReturn/100;
+  const grf=annualRet*0.20;
+  document.getElementById('inv-stats').innerHTML=`
+    <div class="stat-card"><div class="stat-num text-emerald">${fmtD(portfolio)}</div><div class="stat-lbl">Portfolio Value</div></div>
+    <div class="stat-card"><div class="stat-num text-teal">${fmtP(prof.expectedReturn)}</div><div class="stat-lbl">Expected Annual Return</div></div>
+    <div class="stat-card"><div class="stat-num text-gold">${fmtD(annualRet)}</div><div class="stat-lbl">Est. Annual Gain</div></div>
+    <div class="stat-card"><div class="stat-num text-coral">${fmtD(grf)}</div><div class="stat-lbl">Growth Reserve (20%)</div></div>
+    <div class="stat-card"><div class="stat-num">${fmtD(monthly*12)}</div><div class="stat-lbl">Annual Contributions</div></div>
+  `;
+  // Donut
+  let conic='conic-gradient(';
+  let pctSoFar=0;
+  prof.allocation.forEach((a,i)=>{
+    conic+=`${a.color} ${pctSoFar}% ${pctSoFar+a.pct}%`;
+    pctSoFar+=a.pct;
+    if(i<prof.allocation.length-1)conic+=',';
+  });
+  conic+=')';
+  document.getElementById('donut-chart').style.background=conic;
+  document.getElementById('donut-legend').innerHTML=prof.allocation.map(a=>`
+    <div class="legend-item">
+      <div class="legend-dot" style="background:${a.color}"></div>
+      <span>${a.pct}% — ${escapeHTML(a.label)}</span>
+    </div>
+  `).join('');
+  // Daily picks
+  const picks=dailyPicksAll[riskMode];
+  document.getElementById('daily-picks-output').innerHTML=picks.map(p=>`
+    <div class="card" style="border-top-color:${p.color}">
+      <div style="display:flex;justify-content:space-between;align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:1.2rem;font-weight:700;color:${p.color}">${escapeHTML(p.ticker)}</div>
+        <span class="score-badge score-${p.action==='BUY'?'approve':p.action==='WATCH'?'border':'decline'}">${escapeHTML(p.action)}</span>
+      </div>
+      <div style="font-size:.82rem;color:var(--mid);margin-bottom:6px">${escapeHTML(p.name)}</div>
+      <div style="font-weight:700;color:var(--emerald);margin-bottom:6px">${escapeHTML(p.change)}</div>
+      <p style="font-size:.82rem;color:var(--mid);line-height:1.4">${escapeHTML(p.reason)}</p>
+    </div>
+  `).join('');
+  // Sector bars
+  document.getElementById('sector-bars').innerHTML=sectors.map(s=>`
+    <div class="progress-bar-wrap">
+      <div class="progress-label"><span>${escapeHTML(s.name)}</span><span style="color:${s.color};font-weight:700">+${s.pct}% YTD</span></div>
+      <div class="progress-track"><div class="progress-fill" style="width:${s.pct*2.5}%;background:${s.color}"></div></div>
+    </div>
+  `).join('');
+  // GRF
+  document.getElementById('grf-output').innerHTML=`
+    <div class="result-row"><span>Current Portfolio</span><span>${fmtD(portfolio)}</span></div>
+    <div class="result-row"><span>Est. Annual Gain (${fmtP(prof.expectedReturn)})</span><span>${fmtD(annualRet)}</span></div>
+    <div class="result-row"><span>→ Growth Reserve (20% of gain)</span><span>${fmtD(grf)}</span></div>
+    <div class="result-row"><span>Investable After Reserve</span><span>${fmtD(annualRet-grf)}</span></div>
+    <div class="result-row"><span>5-Year Reserve Accumulation</span><span>${fmtD(grf*5)}</span></div>
+  `;
+  // Compound table
+  buildCompoundTable(portfolio,monthly,prof.expectedReturn/100);
+}
+function buildCompoundTable(start,monthly,rate){
+  const tbody=document.getElementById('compound-tbody');
+  let value=start,totalContrib=start,totalGain=0,totalReserve=0;
+  let rows='';
+  for(let y=1;y<=10;y++){
+    const yearContrib=monthly*12;
+    const gain=(value+yearContrib/2)*rate;
+    const reserve=gain*0.20;
+    totalContrib+=yearContrib;
+    totalGain+=gain;
+    totalReserve+=reserve;
+    value=value+yearContrib+gain;
+    rows+=`<tr>
+      <td>Year ${y}</td>
+      <td>${fmtD(value)}</td>
+      <td>${fmtD(totalContrib)}</td>
+      <td>${fmtD(totalGain)}</td>
+      <td>${fmtD(totalReserve)}</td>
+      <td>${fmtD(value-totalReserve)}</td>
+    </tr>`;
+  }
+  tbody.innerHTML=rows;
+}
+
+// ─────────────────────────────────────────────
+// APPLY NOW / INTAKE FORM
+// ─────────────────────────────────────────────
+let currentStep=1;
+function nextStep(n){
+  document.getElementById('step'+currentStep).classList.remove('active');
+  document.getElementById('sdot-'+currentStep).classList.remove('current');
+  document.getElementById('sdot-'+currentStep).classList.add('done');
+  currentStep=n;
+  document.getElementById('step'+n).classList.add('active');
+  document.getElementById('sdot-'+n).classList.add('current');
+  document.getElementById('sdot-'+n).classList.remove('done');
+  window.scrollTo(0,0);
+}
+function submitApplication(){
+  const summary=buildSummary();
+  const box=document.getElementById('app-summary');
+  box.style.display='block';
+  box.innerHTML=`
+    <div class="result-box" style="background:linear-gradient(135deg,var(--emerald-deep),var(--teal))">
+      <h3>✅ Application Submitted!</h3>
+      <p style="margin:12px 0;font-size:.9rem;opacity:.9">Your application has been received. A Capital Bridge advisor will contact you within 2 business hours at the email/phone you provided.</p>
+      ${summary}
+      <div style="margin-top:16px;padding-top:12px;border-top:1px solid rgba(255,255,255,.2);font-size:.85rem;opacity:.8">
+        Questions? Call (725) 314-9140 or email network@satelliteinternationalcorpnetwork.com
+      </div>
+    </div>
+  `;
+  // Scroll to summary
+  setTimeout(()=>box.scrollIntoView({behavior:'smooth'}),100);
+}
+function buildSummary(){
+  const fields={
+    'Business Name':vs('f-bizname'),'Business Type':vs('f-biztype'),
+    'Industry':vs('f-industry'),'Years in Business':vs('f-tib'),
+    'Owner':vs('f-ownname'),'Email':vs('f-email'),
+    'Phone':vs('f-phone'),'Annual Revenue':vs('f-revenue')?fmtD(v('f-revenue')):'',
+    'Loan Amount':vs('f-loanamt')?fmtD(v('f-loanamt')):'',
+    'Use of Funds':vs('f-useoffunds'),'Credit Score':vs('f-creditscore')
+  };
+  let html='<div style="margin-top:16px">';
+  Object.entries(fields).forEach(([k,val])=>{
+    if(val)html+=`<div class="result-row"><span>${escapeHTML(k)}</span><span>${escapeHTML(val)}</span></div>`;
+  });
+  html+='</div>';
+  return html;
+}
+
+// ─────────────────────────────────────────────
+// AI ADVISOR
+// ─────────────────────────────────────────────
+const advisorTips={
+  roi:[
+    'For Henderson, NV service businesses, focus your capital on marketing first — the ROI on customer acquisition is typically 3–5x in year one.',
+    'Service businesses in Henderson with $50K–$150K capital investment typically see payback within 18 months based on local market data.',
+    'Consider staging your capital deployment: 40% operations, 35% marketing, 25% reserve. This allocation outperforms all-in approaches.',
+    'Henderson\'s growth rate of 3.8%/year means your location premium compounds. Lock in leases and licenses now before costs rise.'
+  ],
+  credit:[
+    'The single fastest way to improve your FICO score is to pay down revolving credit to under 10% utilization on each card.',
+    'Disputing errors on your credit report costs nothing and can yield 20–50 point improvements if inaccuracies exist.',
+    'Business lenders weigh time-in-business and monthly revenue almost as heavily as your personal FICO score.',
+    'A secured business credit card used responsibly for 6 months can add 30–60 points to your score profile.'
+  ]
+};
+let advisorVisible={roi:false,credit:false,floating:false};
+function toggleAdvisor(type){
+  const box=document.getElementById(type+'-advisor-box');
+  advisorVisible[type]=!advisorVisible[type];
+  if(advisorVisible[type]){
+    showAdvisorTip(type);
+    box.style.display='block';
+  } else {
+    box.style.display='none';
+  }
+}
+function showAdvisorTip(type){
+  const tips=advisorTips[type];
+  const idx=Math.floor(Math.random()*tips.length);
+  const box=document.getElementById(type+'-advisor-box');
+  box.innerHTML='<strong>🤖 AI Advisor:</strong> '+escapeHTML(tips[idx])+'<br><small style="opacity:.7;cursor:pointer" onclick="showAdvisorTip(\''+type+'\')">↻ Another tip</small>';
+}
+const floatingTips=[
+  'Ready to apply? The average funding time after a complete application is 48 hours.',
+  'Your credit score is the single biggest factor in your interest rate. Even a 40-point improvement can save thousands.',
+  'Henderson, NV businesses have a 94% first-year survival rate — well above the national average of 80%.',
+  'The Done-For-You plan at $1,200/mo has an average 4.2x ROI in year one for active businesses.',
+  'Checking your eligibility with us never affects your credit score — we start with soft pulls only.'
+];
+function updateFloatingAdvisor(tab){
+  const widget=document.getElementById('ai-advisor-widget');
+  const visible=['roi','credit','invest','lenders','plans'].includes(tab);
+  widget.style.display=visible?'block':'none';
+}
+function toggleFloatingAdvisor(){
+  const bubble=document.getElementById('ai-advisor-bubble');
+  advisorVisible.floating=!advisorVisible.floating;
+  if(advisorVisible.floating){
+    const idx=Math.floor(Math.random()*floatingTips.length);
+    bubble.textContent='🤖 '+floatingTips[idx];
+    bubble.classList.add('show');
+  } else {
+    bubble.classList.remove('show');
+  }
+}
+
+// ─────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded',()=>{
+  updateCreditDisplay();
+  renderLenders();
+  updateFloatingAdvisor('overview');
+  // initialize invest dashboard lazily
+});
+</script>
+</body>
+</html>
