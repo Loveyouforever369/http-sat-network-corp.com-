@@ -212,6 +212,82 @@ footer{background:var(--emerald-deep);color:rgba(255,255,255,.7);text-align:cent
 .fw700{font-weight:700}
 .center{text-align:center}
 .flex-gap{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+
+/* ── NARRATION BAR ── */
+.narration-bar{background:var(--emerald-deep);border-top:1px solid rgba(255,255,255,.15);padding:10px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.narration-status{color:rgba(255,255,255,.85);font-size:.82rem;flex:1;min-width:180px;font-style:italic}
+.narration-wave{display:inline-flex;gap:3px;align-items:flex-end;height:18px;margin-left:6px}
+.narration-wave span{display:inline-block;width:3px;border-radius:2px;background:var(--coral);animation:wave 1s ease-in-out infinite}
+.narration-wave span:nth-child(2){animation-delay:.15s}
+.narration-wave span:nth-child(3){animation-delay:.3s}
+.narration-wave span:nth-child(4){animation-delay:.45s}
+@keyframes wave{0%,100%{height:4px}50%{height:16px}}
+.narration-btn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:20px;padding:6px 16px;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
+.narration-btn:hover{background:rgba(255,255,255,.22)}
+.narration-btn.speaking{background:var(--coral);border-color:var(--coral)}
+
+/* ── PORTAL ── */
+.portal-tabs{display:flex;gap:0;border-bottom:2px solid var(--light);margin-bottom:28px}
+.ptab{background:none;border:none;padding:10px 22px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.9rem;font-weight:600;color:var(--mid);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s}
+.ptab.active{color:var(--emerald-deep);border-bottom-color:var(--emerald)}
+.portal-pane{display:none}.portal-pane.active{display:block}
+
+/* profile builder */
+.photo-upload-area{width:110px;height:110px;border-radius:50%;border:3px dashed var(--light);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;flex-shrink:0;transition:border-color .2s;position:relative;background:#fff}
+.photo-upload-area:hover{border-color:var(--emerald)}
+.photo-upload-area img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.photo-upload-area .upload-hint{font-size:.72rem;color:var(--mid);text-align:center;line-height:1.4;z-index:1;pointer-events:none}
+.profile-row{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap}
+.profile-form{flex:1;min-width:260px}
+
+/* profile card (network) */
+.network-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px}
+.profile-card{background:#fff;border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);border-top:4px solid var(--teal);transition:transform .2s}
+.profile-card:hover{transform:translateY(-3px)}
+.pc-head{display:flex;gap:14px;align-items:center;margin-bottom:14px}
+.pc-photo{width:62px;height:62px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid var(--light)}
+.pc-info h4{font-size:1rem;color:var(--emerald-deep);margin-bottom:2px}
+.pc-info .pc-role{font-size:.8rem;color:var(--mid)}
+.pc-tags{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0}
+.pc-stat{font-size:.8rem;color:var(--mid);margin-top:5px;line-height:1.6}
+.pc-plan{font-size:.83rem;color:var(--dark);background:var(--bg);border-radius:8px;padding:10px;margin-top:10px;line-height:1.5;border-left:3px solid var(--teal)}
+.connect-btn{display:inline-block;margin-top:12px;padding:6px 18px;border-radius:20px;font-size:.8rem;font-weight:700;border:2px solid var(--emerald);color:var(--emerald);background:none;cursor:pointer;transition:all .2s}
+.connect-btn:hover,.connect-btn.connected{background:var(--emerald);color:#fff}
+.network-filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.nfilter{padding:6px 14px;border-radius:20px;border:1.5px solid var(--light);background:#fff;font-size:.8rem;font-weight:600;cursor:pointer;color:var(--mid);transition:all .2s}
+.nfilter.active{border-color:var(--emerald);color:var(--emerald);background:#f0faf6}
+
+/* relocation */
+.relo-city-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;margin-bottom:20px}
+.relo-vs{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:700;color:var(--mid);text-align:center}
+.relo-meter-row{display:grid;grid-template-columns:1fr 90px 1fr;gap:8px;align-items:center;margin-bottom:10px}
+.relo-label{font-size:.82rem;font-weight:600;color:var(--mid)}
+.relo-bar-wrap{height:10px;border-radius:5px;overflow:hidden;background:var(--light)}
+.relo-bar-fill{height:100%;border-radius:5px;transition:width .6s}
+.relo-verdict{border-radius:var(--radius);padding:22px 26px;margin-top:20px;color:#fff}
+.relo-verdict.go{background:linear-gradient(135deg,var(--emerald),var(--teal))}
+.relo-verdict.stay{background:linear-gradient(135deg,var(--gold),#9a6b10)}
+.relo-verdict.mixed{background:linear-gradient(135deg,var(--plum),#5a2a60)}
+.relo-verdict h3{font-size:1.3rem;margin-bottom:8px}
+.relo-verdict p{font-size:.9rem;opacity:.92;line-height:1.6}
+
+/* preview card */
+.preview-profile{background:linear-gradient(135deg,var(--emerald-deep),var(--teal));color:#fff;border-radius:var(--radius);padding:28px;margin-top:20px}
+.preview-profile .pp-photo{width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,255,255,.4);margin-bottom:14px}
+.preview-profile h3{font-size:1.3rem;margin-bottom:4px}
+.preview-profile .pp-sub{font-size:.85rem;opacity:.85;margin-bottom:16px}
+.pp-badges{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
+.pp-badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:3px 12px;font-size:.78rem}
+.pp-plan-box{background:rgba(255,255,255,.1);border-radius:8px;padding:14px;font-size:.87rem;line-height:1.6}
+
+/* narration floating */
+.narration-float{position:fixed;bottom:90px;right:20px;z-index:199;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.narration-float .nf-text{background:rgba(9,75,58,.95);color:#fff;border-radius:12px 12px 4px 12px;padding:12px 16px;font-size:.82rem;line-height:1.5;max-width:260px;box-shadow:0 6px 20px rgba(0,0,0,.25);display:none}
+.narration-float .nf-text.show{display:block}
+.narration-float .nf-btn{background:var(--teal);color:#fff;border:none;border-radius:50%;width:46px;height:46px;font-size:1.2rem;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.2);transition:background .2s}
+.narration-float .nf-btn:hover{background:var(--emerald-deep)}
+.narration-float .nf-btn.speaking{background:var(--coral);animation:pulse .8s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
 </style>
 </head>
 <body>
@@ -234,8 +310,19 @@ footer{background:var(--emerald-deep);color:rgba(255,255,255,.7);text-align:cent
   <button class="nav-btn" onclick="showTab('blueprint')">Success Blueprint</button>
   <button class="nav-btn" onclick="showTab('magazine')">Magazine Hub</button>
   <button class="nav-btn" onclick="showTab('invest')">Investment AI</button>
+  <button class="nav-btn" onclick="showTab('portal')">🏢 Owner Portal</button>
   <button class="nav-btn" onclick="showTab('apply')">Apply Now</button>
+  <button class="nav-btn" id="narr-nav-btn" onclick="toggleNarration()" title="AI Site Narration" style="margin-left:auto;color:rgba(255,255,255,.6)">🔊 Narrate</button>
 </nav>
+
+<!-- NARRATION BAR -->
+<div class="narration-bar" id="narration-bar" style="display:none">
+  <span style="font-size:1.1rem">🤖</span>
+  <div class="narration-wave"><span></span><span></span><span></span><span></span></div>
+  <span class="narration-status" id="narr-status">Listening…</span>
+  <button class="narration-btn" onclick="skipNarration()">⏭ Skip</button>
+  <button class="narration-btn speaking" onclick="stopNarration()">⏹ Stop</button>
+</div>
 
 <!-- ========== OVERVIEW ========== -->
 <div id="tab-overview" class="section active">
@@ -295,6 +382,11 @@ footer{background:var(--emerald-deep);color:rgba(255,255,255,.7);text-align:cent
       <div class="card-icon">🗺️</div>
       <h3>Success Blueprint</h3>
       <p>Get your personalized business trajectory and location-based success probability score.</p>
+    </div>
+    <div class="card plum" onclick="showTab('portal')">
+      <div class="card-icon">🏢</div>
+      <h3>Business Owner Portal</h3>
+      <p>Build your profile, analyze a potential relocation, and network with fellow entrepreneurs.</p>
     </div>
     <div class="card teal" onclick="showTab('magazine')">
       <div class="card-icon">📰</div>
@@ -1077,6 +1169,297 @@ footer{background:var(--emerald-deep);color:rgba(255,255,255,.7);text-align:cent
   </div>
 </div>
 
+<!-- ========== BUSINESS OWNER PORTAL ========== -->
+<div id="tab-portal" class="section">
+  <div class="hero">
+    <div class="pill coral">Business Owner Portal</div>
+    <h1>Your Business, Your Network</h1>
+    <p>Build your owner profile, analyze a potential relocation, and connect with fellow entrepreneurs who've used Capital Bridge to grow.</p>
+    <div class="hero-badges">
+      <span class="badge">Profile Builder</span>
+      <span class="badge">Relocation Analyzer</span>
+      <span class="badge">Owner Network</span>
+      <span class="badge">Money Plan Tracker</span>
+    </div>
+  </div>
+
+  <!-- Portal Sub-Tabs -->
+  <div class="portal-tabs">
+    <button class="ptab active" onclick="showPortalPane('profile')">👤 My Profile</button>
+    <button class="ptab" onclick="showPortalPane('relocation')">🗺️ Relocation Analyzer</button>
+    <button class="ptab" onclick="showPortalPane('network')">🤝 Owner Network</button>
+  </div>
+
+  <!-- ── PANE 1: MY PROFILE ── -->
+  <div class="portal-pane active" id="pane-profile">
+    <div class="sec-header">
+      <div class="pill">Step 1 of 1 · Private to You</div>
+      <h2>Build Your Owner Profile</h2>
+      <p>This profile helps us match you with the right lenders, partners, and peers in our network. Upload your photo, describe your business vision, and tell us exactly how you'd put capital to work.</p>
+    </div>
+
+    <div class="profile-row">
+      <!-- Photo Upload -->
+      <div>
+        <label style="text-align:center;display:block;margin-bottom:8px">Profile Photo</label>
+        <div class="photo-upload-area" id="photo-area" onclick="document.getElementById('photo-input').click()">
+          <img id="photo-preview" src="" alt="" style="display:none">
+          <div class="upload-hint" id="photo-hint">📷<br>Tap to upload</div>
+        </div>
+        <input type="file" id="photo-input" accept="image/*" style="display:none" onchange="handlePhotoUpload(event)">
+        <p style="font-size:.72rem;color:var(--mid);text-align:center;margin-top:6px">JPG, PNG, WebP</p>
+      </div>
+
+      <!-- Profile Form -->
+      <div class="profile-form">
+        <div class="two-col">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" id="p-name" placeholder="e.g. Marcus Thompson">
+          </div>
+          <div class="form-group">
+            <label>Business Name *</label>
+            <input type="text" id="p-bizname" placeholder="e.g. Thompson HVAC LLC">
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="form-group">
+            <label>Industry / Type *</label>
+            <select id="p-industry">
+              <option value="">Select…</option>
+              <option>Restaurant / Food Service</option>
+              <option>Retail / Storefront</option>
+              <option>Trucking / Transportation</option>
+              <option>Construction / Contractor</option>
+              <option>Healthcare / Medical</option>
+              <option>Salon / Beauty / Spa</option>
+              <option>Auto Repair / Services</option>
+              <option>E-commerce / Online</option>
+              <option>Real Estate</option>
+              <option>Technology / Software</option>
+              <option>Professional Services</option>
+              <option>Manufacturing</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Years in Business</label>
+            <select id="p-tib">
+              <option>Under 1 year</option>
+              <option>1–2 years</option>
+              <option>2–5 years</option>
+              <option>5–10 years</option>
+              <option>10+ years</option>
+            </select>
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="form-group">
+            <label>City</label>
+            <input type="text" id="p-city" placeholder="e.g. Las Vegas">
+          </div>
+          <div class="form-group">
+            <label>State</label>
+            <input type="text" id="p-state" placeholder="e.g. NV" maxlength="2">
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="form-group">
+            <label>Monthly Revenue Range</label>
+            <select id="p-revenue">
+              <option>Under $10K</option>
+              <option>$10K – $25K</option>
+              <option>$25K – $50K</option>
+              <option>$50K – $100K</option>
+              <option>$100K – $250K</option>
+              <option>$250K+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Capital Goal ($)</label>
+            <input type="number" id="p-goal" placeholder="e.g. 75000" min="0">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group mt16">
+      <label>📋 Business Plan & Vision</label>
+      <textarea id="p-plan" rows="4" placeholder="Describe your business model, who your customers are, what makes you different, and where you want to be in 3 years…"></textarea>
+    </div>
+    <div class="form-group">
+      <label>💰 How Will You Use the Capital?</label>
+      <textarea id="p-use" rows="4" placeholder="Be specific — e.g. 'Purchase $50K of HVAC equipment to open a 2nd service van and hire one additional technician, growing monthly revenue by $18K within 90 days…'"></textarea>
+    </div>
+    <div class="form-group">
+      <label>🤝 I'm Looking to Connect With… (check all that apply)</label>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:8px">
+        <label style="display:flex;align-items:center;gap:7px;font-weight:500;font-size:.88rem"><input type="checkbox" class="seek-cb" value="Mentors"> Mentors</label>
+        <label style="display:flex;align-items:center;gap:7px;font-weight:500;font-size:.88rem"><input type="checkbox" class="seek-cb" value="Angel Investors"> Angel Investors</label>
+        <label style="display:flex;align-items:center;gap:7px;font-weight:500;font-size:.88rem"><input type="checkbox" class="seek-cb" value="Business Partners"> Business Partners</label>
+        <label style="display:flex;align-items:center;gap:7px;font-weight:500;font-size:.88rem"><input type="checkbox" class="seek-cb" value="Peer Entrepreneurs"> Peer Entrepreneurs</label>
+        <label style="display:flex;align-items:center;gap:7px;font-weight:500;font-size:.88rem"><input type="checkbox" class="seek-cb" value="Suppliers"> Suppliers</label>
+        <label style="display:flex;align-items:center;gap:7px;font-weight:500;font-size:.88sm"><input type="checkbox" class="seek-cb" value="Industry Experts"> Industry Experts</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>🌐 Potential Relocation Interest?</label>
+      <select id="p-relo">
+        <option value="no">No, staying put</option>
+        <option value="maybe">Open to it if the numbers make sense</option>
+        <option value="yes">Actively considering relocation</option>
+        <option value="multi">Planning multi-location expansion</option>
+      </select>
+    </div>
+
+    <div class="flex-gap mt16">
+      <button class="btn btn-primary" onclick="buildProfile()">Build My Profile &amp; Preview →</button>
+      <button class="btn btn-outline" onclick="showPortalPane('network')">Browse Owner Network</button>
+    </div>
+
+    <!-- Live Profile Preview -->
+    <div id="profile-preview" style="display:none">
+      <div class="preview-profile">
+        <img id="prev-photo" class="pp-photo" src="" alt="" style="display:none">
+        <div style="font-size:2.5rem;margin-bottom:12px" id="prev-emoji">👤</div>
+        <h3 id="prev-name"></h3>
+        <div class="pp-sub" id="prev-sub"></div>
+        <div class="pp-badges" id="prev-badges"></div>
+        <div class="pp-plan-box">
+          <div style="font-size:.75rem;font-weight:700;letter-spacing:.08em;opacity:.75;margin-bottom:6px">CAPITAL USE PLAN</div>
+          <div id="prev-plan"></div>
+        </div>
+        <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.2);font-size:.83rem;opacity:.85" id="prev-seek"></div>
+      </div>
+      <div class="alert alert-success mt16" id="profile-added-msg" style="display:none">
+        ✅ <strong>Profile added to the network!</strong> Other business owners can now discover and connect with you.
+        <button class="btn btn-outline" style="margin-top:10px;display:block" onclick="showPortalPane('network')">View in Network →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PANE 2: RELOCATION ANALYZER ── -->
+  <div class="portal-pane" id="pane-relocation">
+    <div class="sec-header">
+      <div class="pill gold">Relocation Intelligence</div>
+      <h2>Should You Move Your Business?</h2>
+      <p>Relocation can dramatically change your cost structure, customer base, and growth ceiling — or it can be an expensive mistake. Our analyzer compares business climate, taxes, cost of living, and market size to give you an honest recommendation.</p>
+    </div>
+
+    <div class="relo-city-grid">
+      <div>
+        <label style="font-weight:700;color:var(--emerald-deep);margin-bottom:10px;display:block">📍 Current Location</label>
+        <div class="form-group"><label>City</label><input type="text" id="r-cur-city" placeholder="e.g. Las Vegas"></div>
+        <div class="form-group"><label>State</label>
+          <select id="r-cur-state">
+            <option value="">Select State…</option>
+            <option>AL</option><option>AK</option><option>AZ</option><option>AR</option><option>CA</option>
+            <option>CO</option><option>CT</option><option>DE</option><option>FL</option><option>GA</option>
+            <option>HI</option><option>ID</option><option>IL</option><option>IN</option><option>IA</option>
+            <option>KS</option><option>KY</option><option>LA</option><option>ME</option><option>MD</option>
+            <option>MA</option><option>MI</option><option>MN</option><option>MS</option><option>MO</option>
+            <option>MT</option><option>NE</option><option>NV</option><option>NH</option><option>NJ</option>
+            <option>NM</option><option>NY</option><option>NC</option><option>ND</option><option>OH</option>
+            <option>OK</option><option>OR</option><option>PA</option><option>RI</option><option>SC</option>
+            <option>SD</option><option>TN</option><option>TX</option><option>UT</option><option>VT</option>
+            <option>VA</option><option>WA</option><option>WV</option><option>WI</option><option>WY</option>
+          </select>
+        </div>
+      </div>
+      <div class="relo-vs">VS</div>
+      <div>
+        <label style="font-weight:700;color:var(--coral);margin-bottom:10px;display:block">🎯 Target Location</label>
+        <div class="form-group"><label>City</label><input type="text" id="r-tgt-city" placeholder="e.g. Austin"></div>
+        <div class="form-group"><label>State</label>
+          <select id="r-tgt-state">
+            <option value="">Select State…</option>
+            <option>AL</option><option>AK</option><option>AZ</option><option>AR</option><option>CA</option>
+            <option>CO</option><option>CT</option><option>DE</option><option>FL</option><option>GA</option>
+            <option>HI</option><option>ID</option><option>IL</option><option>IN</option><option>IA</option>
+            <option>KS</option><option>KY</option><option>LA</option><option>ME</option><option>MD</option>
+            <option>MA</option><option>MI</option><option>MN</option><option>MS</option><option>MO</option>
+            <option>MT</option><option>NE</option><option>NV</option><option>NH</option><option>NJ</option>
+            <option>NM</option><option>NY</option><option>NC</option><option>ND</option><option>OH</option>
+            <option>OK</option><option>OR</option><option>PA</option><option>RI</option><option>SC</option>
+            <option>SD</option><option>TN</option><option>TX</option><option>UT</option><option>VT</option>
+            <option>VA</option><option>WA</option><option>WV</option><option>WI</option><option>WY</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="form-group">
+        <label>Your Industry</label>
+        <select id="r-industry">
+          <option value="restaurant">Restaurant / Food Service</option>
+          <option value="retail">Retail / Storefront</option>
+          <option value="trucking">Trucking / Logistics</option>
+          <option value="construction">Construction / Contractor</option>
+          <option value="healthcare">Healthcare / Medical</option>
+          <option value="beauty">Salon / Beauty</option>
+          <option value="tech">Technology / Software</option>
+          <option value="realestate">Real Estate</option>
+          <option value="services">Professional Services</option>
+          <option value="ecommerce">E-commerce</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Annual Revenue ($)</label>
+        <input type="number" id="r-revenue" placeholder="e.g. 600000" min="0">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Primary Reason for Considering the Move</label>
+      <select id="r-reason">
+        <option value="taxes">Lower taxes / business costs</option>
+        <option value="market">Bigger / better customer market</option>
+        <option value="talent">Better talent pool</option>
+        <option value="cost">Lower cost of living / real estate</option>
+        <option value="lifestyle">Personal lifestyle preference</option>
+        <option value="competition">Less local competition</option>
+      </select>
+    </div>
+
+    <button class="btn btn-gold" onclick="analyzeRelocation()">Analyze This Move →</button>
+
+    <div id="relo-result" style="display:none;margin-top:24px">
+      <h3 style="margin-bottom:16px;color:var(--emerald-deep)">Side-by-Side Analysis</h3>
+      <div id="relo-metrics"></div>
+      <div id="relo-verdict-box"></div>
+      <div id="relo-detail" style="margin-top:20px"></div>
+    </div>
+  </div>
+
+  <!-- ── PANE 3: NETWORK ── -->
+  <div class="portal-pane" id="pane-network">
+    <div class="sec-header">
+      <div class="pill plum">Live Network · 47 Members</div>
+      <h2>Business Owner Network</h2>
+      <p>Real entrepreneurs who've worked with Capital Bridge. Browse profiles, see how they used their capital, and connect with peers in your industry or city.</p>
+    </div>
+
+    <div class="network-filters" id="net-filters">
+      <button class="nfilter active" data-filter="all" onclick="filterNetwork('all')">All Industries</button>
+      <button class="nfilter" data-filter="restaurant" onclick="filterNetwork('restaurant')">🍽 Food</button>
+      <button class="nfilter" data-filter="trucking" onclick="filterNetwork('trucking')">🚛 Trucking</button>
+      <button class="nfilter" data-filter="construction" onclick="filterNetwork('construction')">🏗 Construction</button>
+      <button class="nfilter" data-filter="retail" onclick="filterNetwork('retail')">🛍 Retail</button>
+      <button class="nfilter" data-filter="healthcare" onclick="filterNetwork('healthcare')">🏥 Healthcare</button>
+      <button class="nfilter" data-filter="beauty" onclick="filterNetwork('beauty')">💅 Beauty</button>
+      <button class="nfilter" data-filter="tech" onclick="filterNetwork('tech')">💻 Tech</button>
+    </div>
+
+    <div class="network-grid" id="network-grid"></div>
+  </div>
+</div>
+
+<!-- NARRATION FLOATING BUTTON -->
+<div class="narration-float" id="narration-float">
+  <div class="nf-text" id="nf-text"></div>
+  <button class="nf-btn" id="nf-btn" onclick="toggleNarration()" title="Toggle AI Narration">🔊</button>
+</div>
+
 <!-- AI Advisor Floating Widget -->
 <div class="ai-advisor" id="ai-advisor-widget">
   <div class="ai-advisor-bubble" id="ai-advisor-bubble"></div>
@@ -1121,6 +1504,8 @@ function showTab(id){
   if(id==='invest')updateInvDashboard();
   if(id==='credit')updateCreditDisplay();
   if(id==='lenders')renderLenders();
+  if(id==='portal')initNetwork();
+  if(narrationOn)narrateTab(id);
 }
 
 // ─────────────────────────────────────────────
@@ -1766,12 +2151,388 @@ function toggleFloatingAdvisor(){
 }
 
 // ─────────────────────────────────────────────
+// PORTAL — SUB-TABS
+// ─────────────────────────────────────────────
+function showPortalPane(id){
+  document.querySelectorAll('.portal-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('pane-'+id).classList.add('active');
+  document.querySelectorAll('.ptab').forEach(b=>{
+    if(b.getAttribute('onclick')&&b.getAttribute('onclick').includes("'"+id+"'"))b.classList.add('active');
+  });
+  if(id==='network')renderNetwork();
+}
+
+// ─────────────────────────────────────────────
+// PORTAL — PHOTO UPLOAD
+// ─────────────────────────────────────────────
+let uploadedPhotoDataURL='';
+function handlePhotoUpload(e){
+  const file=e.target.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(ev){
+    uploadedPhotoDataURL=ev.target.result;
+    const img=document.getElementById('photo-preview');
+    img.src=uploadedPhotoDataURL;
+    img.style.display='block';
+    document.getElementById('photo-hint').style.display='none';
+  };
+  reader.readAsDataURL(file);
+}
+
+// ─────────────────────────────────────────────
+// PORTAL — BUILD PROFILE
+// ─────────────────────────────────────────────
+let userProfile=null;
+function buildProfile(){
+  const name=document.getElementById('p-name').value.trim();
+  const biz=document.getElementById('p-bizname').value.trim();
+  const industry=document.getElementById('p-industry').value;
+  const tib=document.getElementById('p-tib').value;
+  const city=document.getElementById('p-city').value.trim();
+  const state=document.getElementById('p-state').value.trim().toUpperCase();
+  const revenue=document.getElementById('p-revenue').value;
+  const goal=document.getElementById('p-goal').value;
+  const plan=document.getElementById('p-plan').value.trim();
+  const use=document.getElementById('p-use').value.trim();
+  const relo=document.getElementById('p-relo').value;
+  const seeking=[...document.querySelectorAll('.seek-cb:checked')].map(c=>c.value);
+
+  if(!name||!biz||!industry){alert('Please fill in your name, business name, and industry.');return;}
+
+  userProfile={name,biz,industry,tib,city,state,revenue,goal,plan,use,relo,seeking,photo:uploadedPhotoDataURL};
+
+  // populate preview
+  const prev=document.getElementById('profile-preview');
+  document.getElementById('prev-name').textContent=name;
+  document.getElementById('prev-sub').textContent=biz+' · '+industry+(city?(' · '+city+(state?', '+state:'')):'');
+
+  const photoEl=document.getElementById('prev-photo');
+  const emojiEl=document.getElementById('prev-emoji');
+  if(uploadedPhotoDataURL){photoEl.src=uploadedPhotoDataURL;photoEl.style.display='block';emojiEl.style.display='none';}
+  else{photoEl.style.display='none';emojiEl.style.display='block';}
+
+  const badges=document.getElementById('prev-badges');
+  const badgeData=[tib,revenue?(revenue+'/mo'):'',goal?('Goal: $'+Number(goal).toLocaleString()):'',relo==='yes'?'Relocation Interest':relo==='multi'?'Multi-Location Expansion':''];
+  badges.innerHTML=badgeData.filter(Boolean).map(b=>`<span class="pp-badge">${escapeHTML(b)}</span>`).join('');
+
+  document.getElementById('prev-plan').textContent=use||plan||'No capital use plan provided.';
+  document.getElementById('prev-seek').textContent=seeking.length?'Looking to connect with: '+seeking.join(', '):'Open to all connections';
+
+  prev.style.display='block';
+
+  // Add to network after 1 second delay
+  setTimeout(()=>{
+    networkOwners.unshift({
+      id:'user-'+Date.now(),name,biz,industry,tib,city,state,revenue,goal,
+      plan:use||plan,seeking,photo:uploadedPhotoDataURL,
+      raised:'Applying',tag:'New Member',userOwned:true
+    });
+    document.getElementById('profile-added-msg').style.display='block';
+    document.getElementById('profile-added-msg').scrollIntoView({behavior:'smooth',block:'nearest'});
+  },800);
+}
+
+// ─────────────────────────────────────────────
+// PORTAL — OWNER NETWORK DATA
+// ─────────────────────────────────────────────
+const networkOwners=[
+  {id:'n1',name:'Marcus Thompson',biz:'Thompson HVAC LLC',industry:'construction',tib:'5–10 years',city:'Las Vegas',state:'NV',revenue:'$50K–$100K',goal:120000,plan:'Used $120K equipment loan to add 2 service vans and hire 2 techs. Revenue grew from $65K to $118K/mo in 14 months.',raised:'$120K',tag:'Funded ✓',photo:'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=120&h=120&fit=crop&crop=face',seeking:['Mentors','Peer Entrepreneurs']},
+  {id:'n2',name:'Elena Rodriguez',biz:'Café Mariposa',industry:'restaurant',tib:'2–5 years',city:'Henderson',state:'NV',revenue:'$25K–$50K',goal:55000,plan:'Expanded patio seating and upgraded kitchen — daily covers went from 80 to 155. Revenue up 60% in 8 months.',raised:'$55K',tag:'Funded ✓',photo:'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&h=120&fit=crop&crop=face',seeking:['Angel Investors','Business Partners']},
+  {id:'n3',name:'James & Sofia Patel',biz:'Patel Freight Solutions',industry:'trucking',tib:'5–10 years',city:'Phoenix',state:'AZ',revenue:'$100K–$250K',goal:200000,plan:'Added 3 reefer units to fleet. Landed contract with regional grocery chain. Monthly revenue up $85K.',raised:'$200K',tag:'Funded ✓',photo:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face',seeking:['Suppliers','Industry Experts']},
+  {id:'n4',name:'Denise Washington',biz:'Glow Beauty Studio',industry:'beauty',tib:'2–5 years',city:'Atlanta',state:'GA',revenue:'$10K–$25K',goal:40000,plan:'Opened second treatment room and launched product line. Monthly bookings doubled within 6 months.',raised:'$40K',tag:'Funded ✓',photo:'https://images.unsplash.com/photo-1494790108755-2616b9e4a7b?w=120&h=120&fit=crop&crop=face',seeking:['Mentors','Peer Entrepreneurs']},
+  {id:'n5',name:'Robert Kim',biz:'Kim Orthopedic Associates',industry:'healthcare',tib:'10+ years',city:'Dallas',state:'TX',revenue:'$250K+',goal:350000,plan:'Financed new MRI machine — reduced outsourcing costs by $22K/month. Patient capacity up 35%.',raised:'$350K',tag:'Funded ✓',photo:'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=120&h=120&fit=crop&crop=face',seeking:['Business Partners','Angel Investors']},
+  {id:'n6',name:'Aaliyah Jackson',biz:'Jackson Boutique & Co',industry:'retail',tib:'1–2 years',city:'Miami',state:'FL',revenue:'$25K–$50K',goal:60000,plan:'Inventory financing for peak season — turned $60K into $190K in Q4 revenue. Reinvested into spring collection.',raised:'$60K',tag:'Funded ✓',photo:'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=120&h=120&fit=crop&crop=face',seeking:['Suppliers','Peer Entrepreneurs']},
+  {id:'n7',name:'Carlos Mendez',biz:'Mendez Construction Co.',industry:'construction',tib:'5–10 years',city:'San Antonio',state:'TX',revenue:'$100K–$250K',goal:180000,plan:'Bridge loan to fund a $1.2M city contract while waiting on draw schedule. Delivered on time — unlocked 3 follow-on bids.',raised:'$180K',tag:'Funded ✓',photo:'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&h=120&fit=crop&crop=face',seeking:['Industry Experts','Business Partners']},
+  {id:'n8',name:'Priya Sharma',biz:'CloudStack Dev Studio',industry:'tech',tib:'2–5 years',city:'Austin',state:'TX',revenue:'$50K–$100K',goal:90000,plan:'Line of credit to hire 2 senior devs and take on enterprise clients. ARR jumped from $480K to $1.1M in 11 months.',raised:'$90K',tag:'Funded ✓',photo:'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120&h=120&fit=crop&crop=face',seeking:['Angel Investors','Mentors']},
+  {id:'n9',name:'DeShawn Williams',biz:'Williams Auto & Tire',industry:'construction',tib:'5–10 years',city:'Charlotte',state:'NC',revenue:'$50K–$100K',goal:75000,plan:'Added 2 new bays and a Hunter alignment machine. Bay utilization went from 65% to 98%. Wait time dropped from 4 days to same day.',raised:'$75K',tag:'Funded ✓',photo:'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&h=120&fit=crop&crop=face',seeking:['Peer Entrepreneurs','Suppliers']},
+  {id:'n10',name:'Tanya Okonkwo',biz:'Okonkwo Med Spa',industry:'healthcare',tib:'2–5 years',city:'Nashville',state:'TN',revenue:'$50K–$100K',goal:85000,plan:'Financed Botox/filler inventory and 2 new laser systems. Revenue grew 3× in 9 months. Now expanding to second location.',raised:'$85K',tag:'Funded ✓',photo:'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=120&h=120&fit=crop&crop=face',seeking:['Business Partners','Angel Investors']},
+  {id:'n11',name:'Miguel Santos',biz:'Santos Fresh Market',industry:'restaurant',tib:'5–10 years',city:'Denver',state:'CO',revenue:'$100K–$250K',goal:150000,plan:'Expanded to a second location in a food desert neighborhood. Community response overwhelming — 2nd location hit breakeven in month 4.',raised:'$150K',tag:'Funded ✓',photo:'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=120&h=120&fit=crop&crop=face',seeking:['Mentors','Industry Experts']},
+  {id:'n12',name:'Sandra Lee',biz:'LeeWell Physical Therapy',industry:'healthcare',tib:'10+ years',city:'Seattle',state:'WA',revenue:'$100K–$250K',goal:110000,plan:'EMR software upgrade + 3 additional treatment tables. Took on 40 more patients/week with no additional overhead.',raised:'$110K',tag:'Funded ✓',photo:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&h=120&fit=crop&crop=face',seeking:['Peer Entrepreneurs']},
+];
+
+let networkFilter='all';
+let connectedIds=new Set();
+
+function initNetwork(){if(!document.getElementById('network-grid').innerHTML)renderNetwork();}
+
+function filterNetwork(f){
+  networkFilter=f;
+  document.querySelectorAll('.nfilter').forEach(b=>b.classList.toggle('active',b.dataset.filter===f));
+  renderNetwork();
+}
+
+function renderNetwork(){
+  const grid=document.getElementById('network-grid');
+  const visible=networkFilter==='all'?networkOwners:networkOwners.filter(o=>o.industry===networkFilter||o.userOwned);
+  grid.innerHTML=visible.map(o=>{
+    const connected=connectedIds.has(o.id);
+    const initials=o.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+    const photoHTML=o.photo?`<img class="pc-photo" src="${escapeHTML(o.photo)}" alt="${escapeHTML(o.name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`:'';
+    const fallback=`<div class="pc-photo" style="background:linear-gradient(135deg,var(--emerald),var(--teal));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1rem">${escapeHTML(initials)}</div>`;
+    return`<div class="profile-card" id="card-${escapeHTML(o.id)}">
+      <div class="pc-head">
+        ${o.photo?photoHTML+fallback:fallback}
+        <div class="pc-info">
+          <h4>${escapeHTML(o.name)}</h4>
+          <div class="pc-role">${escapeHTML(o.biz)}</div>
+        </div>
+      </div>
+      <div class="pc-tags">
+        <span class="tag">${escapeHTML(o.industry)}</span>
+        <span class="tag">${escapeHTML(o.city)}, ${escapeHTML(o.state)}</span>
+        <span class="tag">${escapeHTML(o.tib)}</span>
+      </div>
+      <div class="pc-stat">📈 Revenue: <strong>${escapeHTML(o.revenue)}/mo</strong></div>
+      <div class="pc-stat">💰 Raised: <strong class="text-emerald">${escapeHTML(o.raised)}</strong></div>
+      ${o.seeking&&o.seeking.length?`<div class="pc-stat">🤝 Seeking: ${o.seeking.map(s=>`<span class="tag">${escapeHTML(s)}</span>`).join(' ')}</div>`:''}
+      <div class="pc-plan">${escapeHTML(o.plan||'').slice(0,180)}${(o.plan||'').length>180?'…':''}</div>
+      <button class="connect-btn${connected?' connected':''}" onclick="connectWith('${escapeHTML(o.id)}')" ${o.userOwned?'disabled style="opacity:.5;cursor:default"':''}>
+        ${o.userOwned?'(Your Profile)':connected?'✓ Connected':'Connect'}
+      </button>
+    </div>`;
+  }).join('');
+  if(!visible.length)grid.innerHTML='<p style="color:var(--mid);padding:20px 0">No profiles match this filter yet.</p>';
+}
+
+function connectWith(id){
+  connectedIds.add(id);
+  const btn=document.querySelector(`#card-${id} .connect-btn`);
+  if(btn){btn.textContent='✓ Connected';btn.classList.add('connected');}
+  const owner=networkOwners.find(o=>o.id===id);
+  if(owner){
+    const toast=document.createElement('div');
+    toast.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--emerald);color:#fff;padding:12px 24px;border-radius:8px;font-weight:600;z-index:999;font-size:.9rem;box-shadow:0 4px 20px rgba(0,0,0,.2)';
+    toast.textContent='Connected with '+owner.name+' — they\'ll be notified!';
+    document.body.appendChild(toast);
+    setTimeout(()=>toast.remove(),3000);
+  }
+}
+
+// ─────────────────────────────────────────────
+// PORTAL — RELOCATION ANALYZER
+// ─────────────────────────────────────────────
+const STATE_DATA={
+  NV:{colIndex:103,bizClimate:78,taxBurden:12,popM:3.2,growth:2.8,note:'No state income tax. Pro-business regulation. Strong hospitality & logistics markets.'},
+  TX:{colIndex:95,bizClimate:88,taxBurden:11,popM:30,growth:1.9,note:'No state income tax. Massive consumer market. Top destination for business relocation.'},
+  FL:{colIndex:100,bizClimate:84,taxBurden:13,popM:22,growth:2.2,note:'No state income tax. Booming population. Tourism and real estate drive strong consumer spending.'},
+  AZ:{colIndex:102,bizClimate:80,taxBurden:14,popM:7.5,growth:2.4,note:'Low cost relative to West Coast. Strong logistics corridor. Growing tech and healthcare sectors.'},
+  TN:{colIndex:90,bizClimate:82,taxBurden:10,popM:7,growth:1.7,note:'No income tax on wages. Nashville boom driving demand across all sectors.'},
+  GA:{colIndex:93,bizClimate:79,taxBurden:15,popM:11,growth:1.6,note:'Atlanta metro is one of the fastest-growing in the Southeast. Diverse economy.'},
+  CO:{colIndex:108,bizClimate:75,taxBurden:17,popM:5.9,growth:1.4,note:'Educated workforce. Strong outdoor, tech, and aerospace sectors. Higher cost of living.'},
+  NC:{colIndex:97,bizClimate:77,taxBurden:16,popM:10.8,growth:1.5,note:'Business-friendly taxes. Charlotte is a major banking hub. Research Triangle for tech.'},
+  WA:{colIndex:115,bizClimate:72,taxBurden:18,popM:7.8,growth:1.3,note:'No income tax but high overall cost. Amazon & Microsoft ecosystem drives tech demand.'},
+  CA:{colIndex:145,bizClimate:52,taxBurden:28,popM:39,growth:0.1,note:'Largest market in the US but highest taxes, regulations, and cost. Margins squeezed.'},
+  NY:{colIndex:140,bizClimate:48,taxBurden:30,popM:19,growth:-0.3,note:'Massive market but extreme cost of doing business. Population declining.'},
+  IL:{colIndex:105,bizClimate:58,taxBurden:22,popM:12.5,growth:-0.4,note:'Chicago is a major hub but state has pension and tax concerns. Population losing ground.'},
+  OH:{colIndex:88,bizClimate:71,taxBurden:16,popM:11.8,growth:0.3,note:'Low cost. Strong manufacturing and logistics base. Mid-tier business climate.'},
+  UT:{colIndex:107,bizClimate:85,taxBurden:13,popM:3.4,growth:2.6,note:'One of the fastest-growing states. Strong tech sector (Silicon Slopes). Young workforce.'},
+  SC:{colIndex:93,bizClimate:74,taxBurden:14,popM:5.4,growth:1.8,note:'Low taxes, growing manufacturing, Charlotte overflow market. Coastal tourism strong.'},
+};
+function getStateData(abbr){
+  return STATE_DATA[abbr]||{colIndex:100,bizClimate:65,taxBurden:18,popM:4,growth:1.0,note:'Business climate data for this state is estimated from national averages.'};
+}
+
+const INDUSTRY_FIT={
+  restaurant:{NV:85,TX:82,FL:90,AZ:80,TN:78,GA:80,CA:72,NY:75,WA:74,CO:76,NC:77,IL:70,UT:79,SC:78},
+  retail:{NV:80,TX:85,FL:88,AZ:82,TN:80,GA:81,CA:68,NY:72,WA:75,CO:78,NC:79,IL:68,UT:80,SC:77},
+  trucking:{TX:95,NV:88,AZ:90,FL:84,TN:85,GA:85,CA:65,OH:88,IL:80,NC:82,CO:78,UT:82,SC:80,NY:55},
+  construction:{TX:90,FL:92,AZ:88,NV:85,GA:84,NC:82,TN:82,CO:80,CA:70,WA:74,SC:83,UT:85,IL:70,OH:78},
+  healthcare:{TX:84,FL:88,GA:82,NC:83,AZ:81,NV:78,TN:80,WA:82,CO:83,CA:78,NY:79,IL:76,UT:80,SC:78},
+  beauty:{FL:90,TX:87,GA:85,CA:82,NV:83,NY:80,NC:79,TN:82,AZ:80,CO:78,WA:77,UT:79,SC:78,IL:73},
+  tech:{WA:95,CA:92,TX:88,CO:88,NY:85,GA:82,NC:83,UT:87,AZ:80,FL:79,TN:76,NV:70,IL:80,OH:72},
+  realestate:{FL:92,TX:90,AZ:88,NV:86,GA:83,NC:82,TN:82,CO:80,SC:82,UT:87,CA:75,WA:77,IL:68,NY:70},
+  services:{TX:86,FL:85,GA:82,NC:83,NV:80,AZ:82,TN:80,CO:82,WA:83,CA:78,NY:76,IL:75,UT:82,SC:78},
+  ecommerce:{TX:88,FL:87,NV:85,GA:84,NC:82,TN:82,AZ:82,CO:83,WA:84,CA:78,NY:76,IL:76,UT:83,SC:79},
+};
+
+function analyzeRelocation(){
+  const curCity=document.getElementById('r-cur-city').value.trim()||'Current City';
+  const curState=document.getElementById('r-cur-state').value.toUpperCase();
+  const tgtCity=document.getElementById('r-tgt-city').value.trim()||'Target City';
+  const tgtState=document.getElementById('r-tgt-state').value.toUpperCase();
+  const industry=document.getElementById('r-industry').value;
+  const revenue=parseFloat(document.getElementById('r-revenue').value)||0;
+  const reason=document.getElementById('r-reason').value;
+  if(!curState||!tgtState){alert('Please select both current and target states.');return;}
+
+  const cur=getStateData(curState);
+  const tgt=getStateData(tgtState);
+  const curFit=(INDUSTRY_FIT[industry]&&INDUSTRY_FIT[industry][curState])||70;
+  const tgtFit=(INDUSTRY_FIT[industry]&&INDUSTRY_FIT[industry][tgtState])||70;
+
+  // Score the move
+  const colBetter=tgt.colIndex<cur.colIndex;
+  const bizBetter=tgt.bizClimate>cur.bizClimate;
+  const taxBetter=tgt.taxBurden<cur.taxBurden;
+  const growBetter=tgt.growth>cur.growth;
+  const fitBetter=tgtFit>curFit;
+  const popBetter=tgt.popM>cur.popM;
+  let score=0;
+  if(colBetter)score+=20;
+  if(bizBetter)score+=20;
+  if(taxBetter)score+=20;
+  if(growBetter)score+=15;
+  if(fitBetter)score+=15;
+  if(popBetter)score+=10;
+
+  const colDiff=Math.round(cur.colIndex-tgt.colIndex);
+  const taxSavings=revenue>0?Math.round(revenue*(cur.taxBurden-tgt.taxBurden)/100):'—';
+
+  const metrics=[
+    {label:'Cost of Living Index',cur:cur.colIndex,tgt:tgt.colIndex,lower:'better',max:160},
+    {label:'Business Climate Score',cur:cur.bizClimate,tgt:tgt.bizClimate,lower:'worse',max:100},
+    {label:'Tax Burden (%)',cur:cur.taxBurden,tgt:tgt.taxBurden,lower:'better',max:35},
+    {label:'Industry Fit Score',cur:curFit,tgt:tgtFit,lower:'worse',max:100},
+    {label:'Population (M)',cur:cur.popM,tgt:tgt.popM,lower:'worse',max:45},
+    {label:'State GDP Growth (%)',cur:cur.growth,tgt:tgt.growth,lower:'worse',max:4},
+  ];
+
+  const metricsHTML=metrics.map(m=>{
+    const curW=Math.min(100,Math.round(m.cur/m.max*100));
+    const tgtW=Math.min(100,Math.round(m.tgt/m.max*100));
+    const tgtBetter=m.lower==='better'?(m.tgt<m.cur):(m.tgt>m.cur);
+    return`<div style="margin-bottom:18px">
+      <div style="font-weight:700;font-size:.88rem;margin-bottom:8px;color:var(--emerald-deep)">${m.label}</div>
+      <div class="relo-meter-row">
+        <div>
+          <div style="font-size:.78rem;color:var(--mid);margin-bottom:4px">${escapeHTML(curCity)}, ${curState}</div>
+          <div class="relo-bar-wrap"><div class="relo-bar-fill" style="width:${curW}%;background:var(--mid)"></div></div>
+          <div style="font-size:.82rem;font-weight:700;margin-top:4px">${m.cur}</div>
+        </div>
+        <div style="text-align:center;font-size:.75rem;color:var(--mid)">vs</div>
+        <div>
+          <div style="font-size:.78rem;color:var(--mid);margin-bottom:4px">${escapeHTML(tgtCity)}, ${tgtState}</div>
+          <div class="relo-bar-wrap"><div class="relo-bar-fill" style="width:${tgtW}%;background:${tgtBetter?'var(--emerald)':'var(--coral)'}"></div></div>
+          <div style="font-size:.82rem;font-weight:700;margin-top:4px;color:${tgtBetter?'var(--emerald)':'var(--coral)'}">${m.tgt} ${tgtBetter?'✓':'↓'}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  let verdict,vcss,vbody;
+  if(score>=65){
+    verdict='Strong Case for Relocation';vcss='go';
+    vbody=`The numbers strongly favor ${tgtCity}, ${tgtState}. ${tgt.note} ${colDiff>0?`Cost of living is ${colDiff} points lower`:'Business climate is significantly stronger'}. ${typeof taxSavings==='number'&&taxSavings>0?`At your current revenue, lower taxes could save approximately $${taxSavings.toLocaleString()}/year.`:''}`;
+  } else if(score>=35){
+    verdict='Mixed Signal — Run a Deeper Feasibility Study';vcss='mixed';
+    vbody=`There are real advantages in ${tgtCity}, but the picture is mixed. ${tgt.note} The relocation makes the most sense if your primary driver is ${reason}. Factor in moving costs, customer re-acquisition, and 3–6 months of transition burn before counting gains.`;
+  } else {
+    verdict='Caution — Current Location May Be Stronger';vcss='stay';
+    vbody=`${escapeHTML(curCity)} holds up well against ${tgtCity} on the metrics that matter most. ${cur.note} Unless personal lifestyle factors are driving this, the numbers don't strongly support the move right now. Revisit in 12–18 months or if target state policy changes significantly.`;
+  }
+
+  document.getElementById('relo-result').style.display='block';
+  document.getElementById('relo-metrics').innerHTML=metricsHTML;
+  document.getElementById('relo-verdict-box').innerHTML=`<div class="relo-verdict ${vcss}"><h3>${verdict}</h3><p>${vbody}</p><p style="margin-top:12px;font-size:.82rem;opacity:.8">Move Score: ${score}/100 · Based on 6 comparative factors. Want a full feasibility study? Call Calaif at (725) 314-9140.</p></div>`;
+  document.getElementById('relo-detail').innerHTML=`<div class="alert alert-info"><strong>📍 ${tgtState} Business Climate:</strong> ${escapeHTML(tgt.note)}</div>`;
+  document.getElementById('relo-result').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ─────────────────────────────────────────────
+// AI NARRATION ENGINE
+// ─────────────────────────────────────────────
+let narrationOn=false;
+let currentUtterance=null;
+
+const NARRATION_SCRIPTS={
+  overview:`Welcome to Capital Bridge, the complete business growth and funding platform built by Calaif Parks and Satellite International Corp in Henderson, Nevada. I'm your AI advisor, and I'll guide you through every tool on this platform. Whether you need capital to grow, want to restructure debt, or need to build your online presence, you're in the right place. Use the navigation bar at the top to explore all our tools. Let's get your business moving.`,
+  debt:`You're now on the Debt Relief Calculator. If daily or weekly merchant cash advance withdrawals are draining your cash flow, this tool shows you how consolidation can reduce your payments. Enter your total debt balance, your current interest rate, and how many months remain on your loan. Then enter the new rate we can offer you and the new term. Hit Calculate Savings to see exactly how much monthly cash flow you free up and how much you save in total interest over the life of the loan.`,
+  pos:`Welcome to the POS Savings Analyzer. Most businesses overpay on payment processing by using tiered or bundled pricing that hides the true cost. Enter your monthly card volume, your current effective rate or total monthly fees, and your transaction count. This tool compares your current fees against transparent interchange-plus pricing at one point eight nine percent, showing you your potential monthly and annual savings. Many businesses save hundreds to over a thousand dollars per month by switching.`,
+  roi:`You're on the ROI Planner. This is where you pressure-test your capital deployment before you borrow. Enter the amount you'd borrow, what you'd use it for, and the monthly profit you realistically expect it to generate. The tool calculates your return multiple, payback period, and whether your monthly cash flow can carry the payment. It also pulls your location's success score based on your industry and city. A strong return multiple is two times or higher. We'll tell you honestly if the plan works or if it needs adjustment.`,
+  credit:`You're on the Credit Check and Lender Match tool. Drag the slider to enter your current FICO score. The display instantly shows your credit tier — from Poor through Exceptional — and runs your score against every lender in our network. Green means approved. Yellow means borderline. Red means declined at this score. You can also enter your requested amount, time in business, and annual revenue to get a more accurate match. Below the lender grid, you'll find a personalized credit improvement plan with specific actions to boost your score.`,
+  lenders:`Welcome to our Funding and Lenders network. Here you can browse eighteen-plus vetted lending partners across every product type — merchant cash advances, term loans, lines of credit, equipment financing, invoice factoring, and consolidation. Each card shows the lender's commission value, speed, flexibility score, minimum credit requirement, and ideal use case. Use the filter at the top to narrow results by your credit score range. The right lender depends on your specific file — matching it is the broker's job, and that's exactly what Calaif does.`,
+  plans:`You're now on the AI Plans comparison page. This section helps you decide between two approaches to business growth: Done For You, where Capital Bridge handles your entire digital and operational growth stack for twelve hundred dollars per month, or the DIY Tool Stack, where you build and manage your own set of software tools. We also have a Loan Determination tool — enter your monthly operating expenses and growth goal, and we'll calculate whether a loan is recommended and how much you'd likely need.`,
+  presence:`Welcome to Online Presence. For six hundred dollars per week, Capital Bridge manages your complete digital footprint — that's your website and landing pages, your Google Business Profile, social media management across all major platforms, review and reputation management, paid advertising on Google and Meta, and AI-powered content creation. That's six disciplines that would cost you over two thousand five hundred dollars per month if you pieced them together from separate agencies. One new customer a week from online visibility usually pays for the whole thing.`,
+  blueprint:`You're on the Success Blueprint page. This section gives you the full picture of why businesses succeed and why they fail. The data comes from CB Insights analysis of business post-mortems. The number one killer is no market need, at forty-two percent. Number two is running out of cash at twenty-nine percent. Use the Blueprint Builder at the bottom — enter your industry, location, and budget — and we'll generate a personalized three-move plan covering capital deployment, cash flow protection, and AI automation specific to your business type.`,
+  magazine:`Welcome to the Magazine Hub. This is your daily business intelligence center. The featured story and spotlight articles cover real Capital Bridge clients and how they deployed capital to grow. The Daily Market Pulse section shows stock watchlist picks that rotate by day of the week. The Trade Tip rotates weekly. The Business Knowledge Update gives you a fresh insight every day. Bookmark this page and check it daily — the content changes automatically so there's always something new.`,
+  invest:`You're on the Investment AI Agent dashboard. This is a full portfolio intelligence system. Set your risk tolerance — Conservative, Balanced, or Aggressive — and the dashboard updates your recommended asset allocation, daily picks, and sector weights. The Growth Reserve Fund requires you to allocate twenty percent of every gain into a reserve before reinvesting. This builds compounding power over time. The compound projection table shows your portfolio value year by year based on your starting amount, monthly contributions, and expected rate of return. Always review the disclaimer at the bottom.`,
+  portal:`Welcome to the Business Owner Portal. This is your personal space on the Capital Bridge platform. Start by building your owner profile — upload your photo, describe your business, and tell us exactly how you'd put capital to work. Your profile appears in the Owner Network where fellow entrepreneurs can discover and connect with you. Use the Relocation Analyzer to get a data-driven comparison of your current city versus a target city across six business factors. The network currently has over forty active member profiles.`,
+  apply:`You're now on the Apply Now page. This four-step process collects your business information so Calaif can match you to the right funding product within twenty-four to forty-eight hours. Step one is your personal and business contact info. Step two covers your financial details. Step three outlines the funding you need. Step four is your final review and submission. You don't need to fill everything in perfectly — even a partial submission lets us start the conversation. Call Calaif directly at seven two five, three one four, ninety-one forty if you'd prefer to talk first.`,
+};
+
+function toggleNarration(){
+  if(narrationOn){
+    stopNarration();
+  } else {
+    startNarration();
+  }
+}
+
+function startNarration(){
+  narrationOn=true;
+  document.getElementById('narration-bar').style.display='flex';
+  document.getElementById('narr-nav-btn').textContent='🔇 Stop';
+  document.getElementById('nf-btn').classList.add('speaking');
+  narrateTab(currentTab);
+}
+
+function stopNarration(){
+  narrationOn=false;
+  if(window.speechSynthesis)window.speechSynthesis.cancel();
+  currentUtterance=null;
+  document.getElementById('narration-bar').style.display='none';
+  document.getElementById('narr-nav-btn').textContent='🔊 Narrate';
+  document.getElementById('nf-btn').classList.remove('speaking');
+  document.getElementById('nf-text').classList.remove('show');
+  document.getElementById('narr-status').textContent='Narration off';
+}
+
+function skipNarration(){
+  if(window.speechSynthesis)window.speechSynthesis.cancel();
+  document.getElementById('nf-text').classList.remove('show');
+}
+
+function narrateTab(tabId){
+  if(!narrationOn)return;
+  const script=NARRATION_SCRIPTS[tabId];
+  if(!script)return;
+  if(window.speechSynthesis)window.speechSynthesis.cancel();
+
+  // Update status text
+  const labels={overview:'Overview',debt:'Debt Relief',pos:'POS Savings',roi:'ROI Planner',credit:'Credit Check',lenders:'Funding & Lenders',plans:'AI Plans',presence:'Online Presence',blueprint:'Success Blueprint',magazine:'Magazine Hub',invest:'Investment AI',portal:'Owner Portal',apply:'Apply Now'};
+  document.getElementById('narr-status').textContent='Narrating: '+( labels[tabId]||tabId)+'…';
+
+  // Show floating text snippet
+  const nfText=document.getElementById('nf-text');
+  nfText.textContent=script.slice(0,120)+'…';
+  nfText.classList.add('show');
+
+  // Speak
+  if(window.speechSynthesis){
+    currentUtterance=new SpeechSynthesisUtterance(script);
+    currentUtterance.rate=0.92;
+    currentUtterance.pitch=1.0;
+    currentUtterance.volume=1.0;
+    // Prefer a natural English voice
+    const voices=window.speechSynthesis.getVoices();
+    const pref=voices.find(v=>v.name.includes('Samantha')||v.name.includes('Karen')||v.name.includes('Daniel')||v.name.includes('Google US')||(v.lang==='en-US'&&!v.name.includes('eSpeak')));
+    if(pref)currentUtterance.voice=pref;
+    currentUtterance.onend=()=>{
+      nfText.classList.remove('show');
+      document.getElementById('narr-status').textContent='Narration complete — navigate to another tab to continue.';
+    };
+    window.speechSynthesis.speak(currentUtterance);
+  } else {
+    document.getElementById('narr-status').textContent='⚠ Speech synthesis not supported in this browser.';
+  }
+}
+
+// Pre-load voices (some browsers need this)
+if(window.speechSynthesis){
+  window.speechSynthesis.getVoices();
+  window.speechSynthesis.addEventListener('voiceschanged',()=>window.speechSynthesis.getVoices());
+}
+
+// ─────────────────────────────────────────────
 // INIT
 // ─────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded',()=>{
   updateCreditDisplay();
   renderLenders();
   updateFloatingAdvisor('overview');
+  initNetwork();
   // initialize invest dashboard lazily
 });
 </script>
