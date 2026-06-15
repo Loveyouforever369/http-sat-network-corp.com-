@@ -1,8 +1,9 @@
 # PROMETHEUS // OS — Avatar Edition
 
-A cinematic, narrated AI-literacy briefing (42 screens, 7 chapters) — now hosted
-by **your own robotic AI avatar**, with a futuristic heads-up interface and a
-read-along deep-dive transcript on every slide.
+A cinematic, narrated AI-literacy briefing (42 screens, 7 chapters) — hosted by a
+**procedural holographic AI host** (a live wireframe-sphere core, rendered entirely
+in SVG/CSS — no video file), with a futuristic heads-up interface and a read-along
+deep-dive transcript on every slide.
 
 **Open:** `prometheus.html` (single self-contained file — no build, no server needed).
 
@@ -12,8 +13,8 @@ read-along deep-dive transcript on every slide.
 
 | Upgrade | What it does |
 | --- | --- |
-| **Holographic avatar host** | Your robotic-avatar video (`assets/media/avatar.mp4`) is docked on every slide inside a holographic ring with scanlines, an audio-reactive waveform, and a live `● NARRATING` status. It lights up while the narration speaks and settles to standby between slides. |
-| **Cinematic host intro** | On the title screen the avatar takes over full-screen and **introduces the briefing in your own recorded voice** (the avatar clip's own audio), then docks to the corner. |
+| **Procedural AI host core** | A holographic wireframe-sphere entity (rotating meridians, energy core, scan beam, audio-reactive voice ripples) is docked on every slide with a live `● NARRATING` status and equalizer. It pulses to the narration's amplitude and settles to standby between slides. No uploaded video is used. |
+| **Cinematic boot intro** | On the title screen the host core powers up full-screen with a typed boot console (`initializing host core … voice synthesis online …`), then narrates the opening and docks to the corner. |
 | **Futuristic visuals** | An animated FX background (receding perspective grid, drifting particles, vertical data-streams), top telemetry HUD with a live mission clock and chapter readout, corner brackets, scan-sweeps over every diagram, and staggered slide entrances. |
 | **Deep-dive transcript** | Press **D** (or the `≡` button) to slide open the full narration for the current slide as elegant, readable text — the "more vivid explanation," in writing — plus the key on-slide points. |
 | **Voice signature** | The voice modal plays your authentic 48-second voice **signature** (`assets/voice/voice-signature.wav`) — the reference used for cloning. |
@@ -44,8 +45,7 @@ narrator). To hear **your** cloned voice on all 42 screens:
 ## Assets
 
 ```
-prometheus.html                      the presentation (single file)
-assets/media/avatar.mp4              your robotic AI avatar — the on-screen host
+prometheus.html                      the presentation (single file; the AI host is pure SVG/CSS)
 assets/voice/voice-signature.wav     48s compact voice signature (in-page player)
 assets/voice/calaif_voice_sample.wav full 5½-min reference for voice cloning
 ```

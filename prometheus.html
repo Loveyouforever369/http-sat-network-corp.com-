@@ -211,8 +211,8 @@ button{font-family:inherit;cursor:pointer;color:inherit}
 /* ===========================================================
    HOLOGRAPHIC AVATAR NARRATOR
    =========================================================== */
-#avatar{position:fixed;right:clamp(20px,3vw,46px);bottom:104px;z-index:42;
-  width:clamp(150px,15vw,212px);transition:opacity .6s,transform .6s;will-change:transform}
+#avatar{position:fixed;right:clamp(12px,1.6vw,26px);bottom:84px;z-index:42;
+  width:clamp(116px,11.5vw,152px);transition:opacity .6s,transform .6s;will-change:transform}
 #avatar.hide{opacity:0;transform:translateY(30px) scale(.9);pointer-events:none}
 .av-stage{position:relative;width:100%;aspect-ratio:1/1;display:grid;place-items:center}
 .av-rings{position:absolute;inset:-6%;border-radius:50%;pointer-events:none}
@@ -228,7 +228,7 @@ button{font-family:inherit;cursor:pointer;color:inherit}
 .av-orb{position:relative;width:78%;aspect-ratio:1/1;border-radius:50%;overflow:hidden;
   box-shadow:0 0 0 2px rgba(95,231,255,.35),0 0 34px rgba(95,231,255,.28),inset 0 0 28px rgba(4,8,18,.6);
   background:#06101e}
-.av-orb video{width:100%;height:100%;object-fit:cover;transform:scale(1.18);filter:saturate(1.18) contrast(1.06)}
+.av-orb .ai-core,.hi-orb .ai-core{position:absolute;inset:0;width:100%;height:100%;display:block}
 .av-orb::after{content:"";position:absolute;inset:0;pointer-events:none;
   background:
     radial-gradient(circle at 50% 38%,transparent 52%,rgba(4,8,18,.55) 100%),
@@ -279,7 +279,7 @@ button{font-family:inherit;cursor:pointer;color:inherit}
 .hi-stage{position:relative;width:clamp(220px,34vw,360px);aspect-ratio:1/1;display:grid;place-items:center}
 .hi-orb{position:relative;width:74%;aspect-ratio:1/1;border-radius:50%;overflow:hidden;
   box-shadow:0 0 0 2px var(--holo),0 0 70px rgba(95,231,255,.45),inset 0 0 50px rgba(4,8,18,.6);background:#06101e}
-.hi-orb video{width:100%;height:100%;object-fit:cover;transform:scale(1.16);filter:saturate(1.18) contrast(1.05)}
+.hi-orb{background:radial-gradient(circle at 50% 45%,#0a1c33,#040810)}
 .hi-orb::after{content:"";position:absolute;inset:0;pointer-events:none;
   background:repeating-linear-gradient(0deg,rgba(95,231,255,.07) 0 1px,transparent 1px 3px);mix-blend-mode:screen}
 .hi-ring{position:absolute;border-radius:50%;border:1.5px solid transparent}
@@ -347,6 +347,9 @@ button{font-family:inherit;cursor:pointer;color:inherit}
 /* ---- a control button for deep dive ---- */
 #cDeep{position:relative}
 #cDeep.on{color:var(--cyan);border-color:var(--cyan)}
+/* keep the control bar clickable above the deep-dive panel */
+#controls{z-index:51}
+#deep{bottom:68px}
 
 /* nudge controls/stage to clear the top HUD */
 #stage{padding-top:clamp(64px,9vh,96px)!important}
@@ -357,8 +360,51 @@ button{font-family:inherit;cursor:pointer;color:inherit}
   #hud .hud-sub,.hud-clock{display:none}
   #deep{width:100vw}
 }
+/* ===========================================================
+   PROCEDURAL AI HOST CORE — holographic synthetic narrator
+   =========================================================== */
+#avatar{--amp:0}
+#hostIntro{--amp:0}
+.ai-core{position:absolute;inset:0}
+.ai-core-svg{width:100%;height:100%;display:block}
+.cspin,.cspin-rev,.cspin-slow{transform-box:fill-box;transform-origin:center}
+.cspin{animation:cspin 16s linear infinite}
+.cspin-rev{animation:cspin 24s linear infinite reverse}
+.cspin-slow{animation:cspin 46s linear infinite}
+@keyframes cspin{to{transform:rotate(360deg)}}
+.ai-coreglow{transform-box:fill-box;transform-origin:center;transform:scale(calc(.72 + var(--amp,0)*.52));opacity:calc(.5 + var(--amp,0)*.5);transition:transform .09s ease,opacity .09s ease}
+.ai-hot{transform-box:fill-box;transform-origin:center;transform:scale(calc(.85 + var(--amp,0)*.85));transition:transform .08s ease}
+.ai-ripples{opacity:0;transition:opacity .35s}
+#avatar.speaking .ai-ripples,#hostIntro.on .ai-ripples{opacity:1}
+#avatar.speaking .ai-core{filter:drop-shadow(0 0 7px rgba(95,231,255,.35))}
+/* the orb container now frames the core */
+.av-orb{box-shadow:0 0 0 1.5px rgba(95,231,255,.3),0 0 18px rgba(95,231,255,.18),inset 0 0 26px rgba(4,8,18,.7)}
+#avatar.speaking .av-orb{box-shadow:0 0 0 2px var(--holo),0 0 30px rgba(95,231,255,.4),inset 0 0 24px rgba(4,8,18,.5)}
+
+/* host-intro: bigger core + boot console */
+#hostIntro .ai-core{position:absolute;inset:0}
+.hi-orb{box-shadow:0 0 0 2px var(--holo),0 0 80px rgba(95,231,255,.5),inset 0 0 56px rgba(4,8,18,.7)}
+.hi-boot{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.75;color:var(--verify);
+  text-align:left;min-height:104px;width:min(460px,86vw)}
+.hi-boot .bootline{opacity:0;animation:bootIn .42s ease forwards}
+.hi-boot .bootline::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--verify);margin-right:8px;box-shadow:0 0 7px var(--verify);vertical-align:middle}
+@keyframes bootIn{from{opacity:0;transform:translateX(-7px)}to{opacity:.95;transform:none}}
+
+/* ===== pushed visuals across the deck ===== */
+.s-title b{text-shadow:0 0 26px rgba(245,185,66,.45)}
+.s-hero-title b,.hi-name b{text-shadow:0 0 30px rgba(245,185,66,.5)}
+.s-div-num{filter:drop-shadow(0 0 34px rgba(245,185,66,.32))}
+.s-eyebrow .num{text-shadow:0 0 14px rgba(226,87,43,.6)}
+.s-viz::before{content:"";position:absolute;inset:-5% -4%;pointer-events:none;z-index:-1;
+  border:1px solid rgba(95,231,255,.12);border-radius:16px;
+  background:linear-gradient(160deg,rgba(95,231,255,.04),transparent 55%);
+  clip-path:polygon(0 7%,2.5% 0,100% 0,100% 93%,97.5% 100%,0 100%)}
+.s-points li .pm{box-shadow:0 0 12px rgba(245,185,66,.18)}
+#prog{box-shadow:0 0 14px rgba(245,185,66,.7),0 0 4px rgba(95,231,255,.6)}
+
 @media(prefers-reduced-motion:reduce){
-  .scanflow,.s-viz::after,.av-orb .holo-shine,.hi-ring,.av-rings::before,.av-rings::after,.av-ring3{animation:none!important}
+  .scanflow,.s-viz::after,.av-orb .holo-shine,.hi-ring,.av-rings::before,.av-rings::after,.av-ring3,
+  .cspin,.cspin-rev,.cspin-slow{animation:none!important}
 }
 </style>
 </head>
@@ -429,14 +475,14 @@ button{font-family:inherit;cursor:pointer;color:inherit}
     <div class="av-rings"></div>
     <div class="av-core-glow"></div>
     <div class="av-orb">
-      <video id="avVideo" src="assets/media/avatar.mp4" muted loop playsinline preload="auto"></video>
+      <div class="ai-core" id="avCoreMount"></div>
       <div class="holo-shine"></div>
     </div>
   </div>
   <div class="av-meta">
     <span class="av-status" id="avStatus"><span class="ad"></span><span id="avStatusTxt">Standing by</span></span>
     <div class="av-bars" id="avBars"></div>
-    <div class="av-name"><b>CALAIF</b> · AI AVATAR HOST</div>
+    <div class="av-name"><b>PROMETHEUS</b> · AI HOST CORE</div>
   </div>
 </div>
 
@@ -445,12 +491,13 @@ button{font-family:inherit;cursor:pointer;color:inherit}
   <div class="hi-stage">
     <div class="hi-ring c"></div><div class="hi-ring a"></div><div class="hi-ring b"></div>
     <div class="hi-orb">
-      <video id="hiVideo" src="assets/media/avatar.mp4" playsinline preload="auto"></video>
+      <div class="ai-core" id="hiCoreMount"></div>
     </div>
   </div>
-  <div class="hi-kick">// INCOMING TRANSMISSION</div>
-  <div class="hi-name">Calaif <b>·</b> your AI host</div>
-  <div class="hi-role">Robotic Avatar · Live Narration Online</div>
+  <div class="hi-kick" id="hiKick">// BOOTING AI HOST CORE</div>
+  <div class="hi-name">PROMETHEUS <b>·</b> AI Host</div>
+  <div class="hi-role">Synthetic Narrator · Neural Link Online</div>
+  <div class="hi-boot" id="hiBoot"></div>
   <div class="hi-cap" id="hiCap">Establishing neural link…</div>
   <button class="hi-skip" id="hiSkip">Skip intro · begin briefing ›</button>
 </div>
@@ -1367,7 +1414,6 @@ function speakCurrent(){
   if(!narrationOn){if(typeof AV!=='undefined')AV.speak(false);return;}
   const s=SLIDES[cur];if(!s.vo){if(typeof AV!=='undefined')AV.speak(false);return;}
   AV.show();
-  if(cur===0){AV.playSelfIntro();return;}              // title narrated in the avatar's own recorded voice
   if(voiceMode==='mine'&&customAudio[cur]){
     audioEl.src=customAudio[cur];
     AV.attach(audioEl);AV.speak(true);
@@ -1386,7 +1432,7 @@ function speakCurrent(){
 function stopSpeak(){
   if('speechSynthesis'in window)speechSynthesis.cancel();
   try{audioEl.pause();audioEl.currentTime=0;}catch(e){}
-  if(typeof AV!=='undefined'){AV.stopSelf();AV.speak(false);}
+  if(typeof AV!=='undefined')AV.speak(false);
 }
 audioEl.onended=()=>{if(typeof AV!=='undefined')AV.speak(false);if(autoAdvance&&narrationOn&&cur<TOTAL-1)next();};
 let vCache=null;
@@ -1509,11 +1555,46 @@ function afterRender(){
 /* ===========================================================
    HOLOGRAPHIC AVATAR NARRATOR CONTROLLER
    =========================================================== */
+function aiCoreSVG(sfx){
+  const ticks=Array.from({length:24},(_,i)=>{const a=i*15*Math.PI/180,c=Math.cos(a),s=Math.sin(a);const r1=104,r2=(i%2?109:112);return `<line x1="${(120+c*r1).toFixed(1)}" y1="${(120+s*r1).toFixed(1)}" x2="${(120+c*r2).toFixed(1)}" y2="${(120+s*r2).toFixed(1)}" stroke="#5fe7ff" stroke-opacity="${i%2?.18:.34}" stroke-width="1"/>`;}).join('');
+  return `<svg class="ai-core-svg" viewBox="0 0 240 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+   <defs>
+     <radialGradient id="cg${sfx}" cx="50%" cy="44%" r="58%">
+       <stop offset="0" stop-color="#f4feff"/><stop offset=".22" stop-color="#7defff"/>
+       <stop offset=".55" stop-color="#1f6fc4"/><stop offset="1" stop-color="#08152b" stop-opacity="0"/></radialGradient>
+     <filter id="cb${sfx}" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.6"/></filter>
+   </defs>
+   <g class="cspin-slow"><circle cx="120" cy="120" r="110" fill="none" stroke="#5fe7ff" stroke-opacity=".22" stroke-width="1" stroke-dasharray="1.5 13"/></g>
+   <g class="cspin-rev"><circle cx="120" cy="120" r="97" fill="none" stroke="#f5b942" stroke-opacity=".18" stroke-width="1.2" stroke-dasharray="22 13"/></g>
+   <g class="cspin-slow">${ticks}</g>
+   <circle class="ai-coreglow" cx="120" cy="120" r="60" fill="url(#cg${sfx})"/>
+   <g class="cspin" opacity=".92">
+     <circle cx="120" cy="120" r="62" fill="none" stroke="#9ff0ff" stroke-opacity=".5" stroke-width="1"/>
+     <ellipse cx="120" cy="120" rx="62" ry="20" fill="none" stroke="#5fe7ff" stroke-opacity=".34" stroke-width="1"/>
+     <ellipse cx="120" cy="120" rx="62" ry="42" fill="none" stroke="#5fe7ff" stroke-opacity=".24" stroke-width="1"/>
+     <ellipse cx="120" cy="120" ry="62" rx="60" fill="none" stroke="#7defff" stroke-opacity=".46" stroke-width="1"><animate attributeName="rx" values="60;3;60" dur="6s" begin="0s" repeatCount="indefinite"/></ellipse>
+     <ellipse cx="120" cy="120" ry="62" rx="40" fill="none" stroke="#7defff" stroke-opacity=".34" stroke-width="1"><animate attributeName="rx" values="40;0;40;62;40" dur="6s" begin="1.5s" repeatCount="indefinite"/></ellipse>
+     <ellipse cx="120" cy="120" ry="62" rx="20" fill="none" stroke="#7defff" stroke-opacity=".30" stroke-width="1"><animate attributeName="rx" values="20;62;20" dur="6s" begin="3s" repeatCount="indefinite"/></ellipse>
+   </g>
+   <circle class="ai-hot" cx="120" cy="120" r="13" fill="#f4feff" filter="url(#cb${sfx})"/>
+   <circle cx="120" cy="120" r="5" fill="#fff"/>
+   <line class="ai-scan" x1="64" x2="176" y1="120" y2="120" stroke="#eafcff" stroke-width="1.4">
+     <animate attributeName="y1" values="80;160;80" dur="3.4s" repeatCount="indefinite"/>
+     <animate attributeName="y2" values="80;160;80" dur="3.4s" repeatCount="indefinite"/>
+     <animate attributeName="stroke-opacity" values="0;.85;0" dur="3.4s" repeatCount="indefinite"/></line>
+   <g class="ai-ripples">
+     <circle cx="120" cy="120" r="22" fill="none" stroke="#7defff" stroke-width="1.4"><animate attributeName="r" values="22;104" dur="2.4s" repeatCount="indefinite"/><animate attributeName="stroke-opacity" values=".7;0" dur="2.4s" repeatCount="indefinite"/></circle>
+     <circle cx="120" cy="120" r="22" fill="none" stroke="#7defff" stroke-width="1.4"><animate attributeName="r" values="22;104" dur="2.4s" begin="1.2s" repeatCount="indefinite"/><animate attributeName="stroke-opacity" values=".7;0" dur="2.4s" begin="1.2s" repeatCount="indefinite"/></circle>
+   </g></svg>`;
+}
+
 const AV=(function(){
-  const el=$('#avatar'),vid=$('#avVideo'),bars=$('#avBars'),stTxt=$('#avStatusTxt');
-  const NB=18,barEls=[];
+  const el=$('#avatar'),hostEl=$('#hostIntro'),bars=$('#avBars'),stTxt=$('#avStatusTxt');
+  $('#avCoreMount').innerHTML=aiCoreSVG('A');
+  $('#hiCoreMount').innerHTML=aiCoreSVG('H');
+  const NB=20,barEls=[];
   for(let i=0;i<NB;i++){const b=document.createElement('i');bars.appendChild(b);barEls.push(b);}
-  let ac=null,analyser=null,freq=null,raf=null,simMode=false,attached=null,selfPlaying=false;
+  let ac=null,analyser=null,freq=null,raf=null,simMode=false,attached=null;
   const srcMap=new WeakMap();
   function ensureCtx(){
     if(ac)return ac;
@@ -1528,6 +1609,7 @@ const AV=(function(){
     if(!src){try{src=ac.createMediaElementSource(media);src.connect(analyser);analyser.connect(ac.destination);srcMap.set(media,src);}catch(e){src=null;}}
     attached=media;simMode=false;
   }
+  function setAmp(a){el.style.setProperty('--amp',a.toFixed(2));if(hostEl.classList.contains('on'))hostEl.style.setProperty('--amp',a.toFixed(2));}
   function show(){el.classList.remove('hide');}
   function hide(){el.classList.add('hide');}
   function speak(on){
@@ -1539,59 +1621,55 @@ const AV=(function(){
   function startSim(){simMode=true;if(!raf)loop();}
   function loop(){
     if(!el.classList.contains('speaking')){
-      barEls.forEach(b=>b.style.height='14%');raf=null;return;
+      barEls.forEach(b=>b.style.height='14%');setAmp(0.05);raf=null;return;
     }
     raf=requestAnimationFrame(loop);
+    let amp=0;
     if(analyser&&attached&&!attached.paused&&!simMode){
       analyser.getByteFrequencyData(freq);
       const step=Math.max(1,Math.floor(freq.length/NB));
       let sum=0;for(let i=0;i<NB;i++){const v=freq[i*step]/255;sum+=v;barEls[i].style.height=(12+v*86).toFixed(0)+'%';}
-      if(sum<0.4){ // near-silence (e.g. gap) → gentle idle shimmer
-        for(let i=0;i<NB;i++){const b=Math.sin(Date.now()/200+i*.5)*.5+.5;barEls[i].style.height=(14+b*16).toFixed(0)+'%';}
-      }
+      amp=sum/NB;
+      if(sum<0.4){for(let i=0;i<NB;i++){const b=Math.sin(Date.now()/200+i*.5)*.5+.5;barEls[i].style.height=(14+b*16).toFixed(0)+'%';}amp=0.12;}
     }else{
-      for(let i=0;i<NB;i++){const b=Math.sin(Date.now()/110+i*.55)*.5+.5;barEls[i].style.height=(14+b*(0.45+Math.random()*0.55)*72).toFixed(0)+'%';}
+      let sum=0;for(let i=0;i<NB;i++){const b=Math.sin(Date.now()/110+i*.55)*.5+.5,v=b*(0.45+Math.random()*0.55);sum+=v;barEls[i].style.height=(14+v*72).toFixed(0)+'%';}
+      amp=0.35+Math.sin(Date.now()/130)*0.25+Math.random()*0.12;
     }
+    setAmp(Math.max(0,Math.min(1,amp)));
   }
-  function idle(){show();selfPlaying=false;vid.onended=null;vid.muted=true;vid.loop=true;vid.play().catch(()=>{});speak(false);}
-  function playSelfIntro(){
-    show();attach(vid);selfPlaying=true;
-    vid.loop=false;vid.muted=false;try{vid.currentTime=0;}catch(e){}
-    speak(true);
-    vid.onended=()=>{selfPlaying=false;vid.muted=true;vid.loop=true;vid.play().catch(()=>{});speak(false);if(autoAdvance&&narrationOn&&cur<TOTAL-1)next();};
-    vid.play().catch(()=>{speak(true);startSim();});
-  }
-  function stopSelf(){
-    if(!selfPlaying)return;selfPlaying=false;vid.onended=null;
-    vid.muted=true;vid.loop=true;try{vid.currentTime=0;vid.play();}catch(e){}
-  }
-  return {ensureCtx,attach,show,hide,speak,startSim,idle,playSelfIntro,stopSelf,vid};
+  function idle(){show();speak(false);setAmp(0.06);}
+  return {ensureCtx,attach,show,hide,speak,startSim,idle,setAmp};
 })();
 setHudNarr(false);
 $('#avMin').onclick=e=>{e.stopPropagation();$('#avatar').classList.toggle('mini');};
 
 /* ===========================================================
-   HOST INTRO — title-slide avatar takeover (its own recorded voice)
+   HOST INTRO — AI-core boot sequence + spoken title
    =========================================================== */
 function hostIntroPlay(){
-  const ov=$('#hostIntro'),hv=$('#hiVideo'),cap=$('#hiCap');
-  AV.hide();
-  ov.classList.add('on');
-  cap.textContent=SLIDES[0].vo||'';
-  setHudNarr(true);
-  let done=false;
-  function finish(){
-    if(done)return;done=true;
-    try{hv.pause();}catch(e){}
-    ov.classList.add('fade');
-    setTimeout(()=>{ov.classList.remove('on','fade');},850);
-    AV.idle();setHudNarr(false);
+  const ov=$('#hostIntro'),boot=$('#hiBoot'),cap=$('#hiCap'),kick=$('#hiKick');
+  AV.hide();ov.classList.add('on');setHudNarr(true);
+  cap.textContent='';boot.innerHTML='';
+  const lines=['> initializing host core …………… OK','> calibrating neural lattice ……… OK','> voice synthesis engine ………… ONLINE','> loading PROMETHEUS curriculum … 42 modules','> neural link established — handing you to your host'];
+  let li=0;const bt=setInterval(()=>{if(li>=lines.length){clearInterval(bt);return;}const d=document.createElement('div');d.className='bootline';d.textContent=lines[li++];boot.appendChild(d);},340);
+  let done=false,spoke=false;
+  function finish(){if(done)return;done=true;clearInterval(bt);try{speechSynthesis.cancel();}catch(e){}ov.classList.add('fade');setTimeout(()=>{ov.classList.remove('on','fade');ov.style.removeProperty('--amp');},850);AV.idle();setHudNarr(false);}
+  function speakTitle(){
+    if(spoke)return;spoke=true;
+    kick.textContent='// AI HOST ONLINE · NARRATING';
+    cap.textContent=SLIDES[0].vo||'';
+    AV.speak(true);AV.startSim();
+    if('speechSynthesis'in window){
+      try{speechSynthesis.resume();pickVoice();}catch(e){}
+      const u=new SpeechSynthesisUtterance(SLIDES[0].vo);const v=pickVoice();if(v)u.voice=v;u.rate=.96;u.pitch=.9;
+      u.onend=finish;u.onerror=()=>setTimeout(finish,500);
+      try{speechSynthesis.speak(u);}catch(e){}
+      setTimeout(()=>{if(!done&&!speechSynthesis.speaking&&!speechSynthesis.pending)finish();},2600); // no-voice fallback
+    }else setTimeout(finish,4500);
   }
-  hv.muted=false;try{hv.currentTime=0;}catch(e){}
-  hv.onended=finish;
-  hv.play().catch(()=>{setTimeout(finish,2800);});
+  setTimeout(speakTitle,2000);
   $('#hiSkip').onclick=finish;
-  setTimeout(finish,14000); // safety dismiss
+  setTimeout(finish,32000); // safety dismiss
 }
 
 /* ===========================================================
