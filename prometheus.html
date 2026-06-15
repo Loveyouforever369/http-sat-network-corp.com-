@@ -1368,7 +1368,7 @@ close:()=>svg(`
    ===================================================================== */
 const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>[...r.querySelectorAll(s)];
-let cur=0, narrationOn=true, autoAdvance=false, voiceMode='narrator';
+let cur=0, narrationOn=true, autoAdvance=false, voiceMode='narrator', speakGen=0;
 const customAudio={};           // slideIndex -> objectURL (user's voice)
 const audioEl=new Audio();
 const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1420,17 +1420,11 @@ function speakCurrent(){
     audioEl.play().catch(()=>{AV.startSim();});
     return;
   }
-  if(!('speechSynthesis'in window)){AV.speak(true);AV.startSim();return;}
-  const u=new SpeechSynthesisUtterance(s.vo);
-  const v=pickVoice();if(v)u.voice=v;
-  u.rate=.96;u.pitch=.9;u.volume=1;
-  u.onstart=()=>{AV.speak(true);AV.startSim();};
-  u.onend=()=>{AV.speak(false);if(autoAdvance&&narrationOn&&cur<TOTAL-1)next();};
-  u.onerror=()=>{AV.speak(false);};
-  speechSynthesis.speak(u);
+  speakText(s.vo,()=>{if(autoAdvance&&narrationOn&&cur<TOTAL-1)next();});
 }
 function stopSpeak(){
-  if('speechSynthesis'in window)speechSynthesis.cancel();
+  speakGen++;                                  // invalidate any in-flight chunked speech
+  if('speechSynthesis'in window){try{speechSynthesis.cancel();}catch(e){}}
   try{audioEl.pause();audioEl.currentTime=0;}catch(e){}
   if(typeof AV!=='undefined')AV.speak(false);
 }
@@ -1643,6 +1637,29 @@ const AV=(function(){
 setHudNarr(false);
 $('#avMin').onclick=e=>{e.stopPropagation();$('#avatar').classList.toggle('mini');};
 
+/* ---------- robust chunked narration (defeats Chrome's ~15s utterance cutoff) ---------- */
+function speakText(text,onDone){
+  AV.show();
+  if(!('speechSynthesis'in window)){AV.speak(true);AV.startSim();const ms=Math.min(11000,1800+(text||'').length*32);const g=++speakGen;setTimeout(()=>{if(g===speakGen){AV.speak(false);onDone&&onDone();}},ms);return;}
+  const chunks=((text||'').match(/[^.!?]+[.!?]+(\s|$)/g)||[text||'']).map(c=>c.trim()).filter(Boolean);
+  const myGen=++speakGen;
+  let qi=0,started=false;
+  AV.speak(true);AV.startSim();
+  function nxt(){
+    if(myGen!==speakGen)return;                       // superseded by navigation / stop
+    if(qi>=chunks.length){AV.speak(false);onDone&&onDone();return;}
+    const u=new SpeechSynthesisUtterance(chunks[qi++]);
+    const v=pickVoice();if(v)u.voice=v;u.rate=.96;u.pitch=.9;u.volume=1;
+    u.onstart=()=>{started=true;if(myGen===speakGen)AV.speak(true);};
+    u.onend=nxt;u.onerror=nxt;
+    try{speechSynthesis.speak(u);}catch(e){nxt();}
+  }
+  try{speechSynthesis.resume();}catch(e){}
+  nxt();
+  // no-voice fallback (e.g. headless): resolve so the deck still proceeds
+  setTimeout(()=>{if(myGen===speakGen&&!started&&!speechSynthesis.speaking&&!speechSynthesis.pending){AV.speak(false);onDone&&onDone();}},1800);
+}
+
 /* ===========================================================
    HOST INTRO — AI-core boot sequence + spoken title
    =========================================================== */
@@ -1653,19 +1670,12 @@ function hostIntroPlay(){
   const lines=['> initializing host core …………… OK','> calibrating neural lattice ……… OK','> voice synthesis engine ………… ONLINE','> loading PROMETHEUS curriculum … 42 modules','> neural link established — handing you to your host'];
   let li=0;const bt=setInterval(()=>{if(li>=lines.length){clearInterval(bt);return;}const d=document.createElement('div');d.className='bootline';d.textContent=lines[li++];boot.appendChild(d);},340);
   let done=false,spoke=false;
-  function finish(){if(done)return;done=true;clearInterval(bt);try{speechSynthesis.cancel();}catch(e){}ov.classList.add('fade');setTimeout(()=>{ov.classList.remove('on','fade');ov.style.removeProperty('--amp');},850);AV.idle();setHudNarr(false);}
+  function finish(){if(done)return;done=true;clearInterval(bt);speakGen++;try{speechSynthesis.cancel();}catch(e){}ov.classList.add('fade');setTimeout(()=>{ov.classList.remove('on','fade');ov.style.removeProperty('--amp');},850);AV.idle();setHudNarr(false);}
   function speakTitle(){
-    if(spoke)return;spoke=true;
+    if(spoke||done)return;spoke=true;
     kick.textContent='// AI HOST ONLINE · NARRATING';
     cap.textContent=SLIDES[0].vo||'';
-    AV.speak(true);AV.startSim();
-    if('speechSynthesis'in window){
-      try{speechSynthesis.resume();pickVoice();}catch(e){}
-      const u=new SpeechSynthesisUtterance(SLIDES[0].vo);const v=pickVoice();if(v)u.voice=v;u.rate=.96;u.pitch=.9;
-      u.onend=finish;u.onerror=()=>setTimeout(finish,500);
-      try{speechSynthesis.speak(u);}catch(e){}
-      setTimeout(()=>{if(!done&&!speechSynthesis.speaking&&!speechSynthesis.pending)finish();},2600); // no-voice fallback
-    }else setTimeout(finish,4500);
+    speakText(SLIDES[0].vo,finish);
   }
   setTimeout(speakTitle,2000);
   $('#hiSkip').onclick=finish;
