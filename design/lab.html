@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Capital Bridge · Design Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Capital Bridge — Design Lab
+   The all-in-one hub: Story (narrated) · Studio · Learn · Tools ·
+   Demos · Quiz. Self-contained, no external runtime deps — works
+   fully offline / behind a strict egress proxy.
+   ============================================================ */
+:root{
+  --bg:#f6f1e7;--emerald:#0d7a5f;--emerald-deep:#094b3a;--coral:#e0603c;
+  --gold:#bd8419;--teal:#1a9d8f;--plum:#7a4a7e;--white:#fff;--dark:#1a1a1a;
+  --mid:#555;--light:#e8e2d6;--line:#d9d2c4;--radius:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--dark);min-height:100vh}
+h1,h2,h3,h4,.serif{font-family:'Fraunces',Georgia,serif;line-height:1.1}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+a{color:var(--emerald)}
+
+/* NAV */
+#nav{position:sticky;top:0;z-index:100;background:var(--emerald-deep);display:flex;align-items:center;
+  gap:0;padding:0 14px;overflow-x:auto;scrollbar-width:none}
+#nav::-webkit-scrollbar{display:none}
+.brand{color:#fff;font-family:'Fraunces',serif;font-weight:700;font-size:1.05rem;white-space:nowrap;
+  padding:14px 16px 14px 0;border-right:1px solid rgba(255,255,255,.2);margin-right:8px}
+.brand small{display:block;font-family:'Plus Jakarta Sans';font-weight:500;font-size:.62rem;
+  letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.tab{background:none;border:none;color:rgba(255,255,255,.75);font-family:inherit;font-size:.85rem;
+  font-weight:500;padding:16px 13px;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;transition:.2s}
+.tab:hover,.tab.active{color:#fff;border-bottom-color:var(--coral)}
+
+.section{display:none;max-width:1120px;margin:0 auto;padding:34px 18px 80px;animation:fade .3s}
+.section.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* shared */
+.kicker{display:inline-block;background:var(--emerald-deep);color:#fff;font-size:.7rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;padding:6px 14px;border-radius:30px}
+.lead{color:var(--mid);font-size:1.05rem;line-height:1.65;max-width:680px;margin-top:12px}
+.btn{border:none;border-radius:10px;padding:12px 20px;font-family:inherit;font-weight:600;font-size:.9rem;
+  cursor:pointer;transition:transform .12s,filter .15s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--emerald);color:#fff}.btn.primary:hover{filter:brightness(1.08)}
+.btn.ghost{background:var(--light);color:var(--emerald-deep)}.btn.ghost:hover{filter:brightness(.97)}
+.grid{display:grid;gap:20px}
+.cards-3{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.cards-2{grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+
+/* HERO / STORY */
+.hero{position:relative;border-radius:var(--radius);overflow:hidden;padding:56px 40px;color:#fff;
+  background:linear-gradient(130deg,var(--emerald-deep),var(--teal) 65%,var(--gold));margin-bottom:28px}
+.hero::before{content:'';position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;
+  background:rgba(255,255,255,.08);animation:pulse 7s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+.hero h1{font-size:clamp(2.1rem,5.5vw,3.6rem);position:relative}
+.hero p{position:relative;max-width:600px;margin-top:14px;font-size:1.1rem;opacity:.92;line-height:1.6}
+.story-body{max-width:720px;font-size:1.08rem;line-height:1.8;color:#3a3a3a}
+.story-body p{margin-bottom:18px}
+.story-body .em{font-family:'Fraunces',serif;font-size:1.35rem;color:var(--emerald-deep);font-style:italic}
+.narrate-bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:22px 0 30px;
+  padding:14px 18px;background:#fff;border:1px solid var(--line);border-radius:12px}
+.wave{display:inline-flex;gap:3px;align-items:flex-end;height:20px}
+.wave span{width:3px;background:var(--emerald);border-radius:2px;height:6px}
+.narrate-bar.on .wave span{animation:eq .9s ease-in-out infinite}
+.wave span:nth-child(2){animation-delay:.15s}.wave span:nth-child(3){animation-delay:.3s}
+.wave span:nth-child(4){animation-delay:.45s}.wave span:nth-child(5){animation-delay:.6s}
+@keyframes eq{0%,100%{height:6px}50%{height:20px}}
+.muted{color:var(--mid);font-size:.85rem}
+
+/* STUDIO */
+.studio-frame{width:100%;height:760px;border:1px solid var(--line);border-radius:var(--radius);
+  background:#fff;box-shadow:0 10px 30px -16px rgba(9,75,58,.4)}
+
+/* LEARn */
+.mod{background:#fff;border-radius:14px;padding:20px 22px;border-top:4px solid var(--emerald);
+  box-shadow:0 6px 20px -12px rgba(0,0,0,.2)}
+.mod h4{color:var(--emerald-deep);font-size:1.05rem;margin-bottom:6px}
+.mod .n{font-family:'JetBrains Mono';font-size:.72rem;color:var(--gold);font-weight:600}
+.mod p{font-size:.88rem;color:var(--mid);line-height:1.55;margin-top:6px}
+
+/* TOOLS */
+.tcat{margin-bottom:28px}
+.tcat h3{font-size:1.15rem;color:var(--emerald-deep);margin-bottom:4px;display:flex;align-items:center;gap:9px}
+.tcat .ci{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-size:1.1rem;color:#fff}
+.tcat .desc{color:var(--mid);font-size:.85rem;margin-bottom:14px}
+.tools{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.tool{background:#fff;border:1px solid var(--line);border-radius:11px;padding:14px 15px;transition:.18s}
+.tool:hover{transform:translateY(-2px);box-shadow:0 10px 24px -14px rgba(9,75,58,.45);border-color:var(--teal)}
+.tool .tn{font-weight:700;font-size:.95rem;color:var(--dark)}
+.tool .tn .free{font-size:.6rem;background:var(--teal);color:#fff;padding:2px 6px;border-radius:10px;margin-left:6px;vertical-align:middle}
+.tool .tu{font-size:.78rem;color:var(--mid);line-height:1.45;margin:5px 0 8px}
+.tool a{font-size:.76rem;font-weight:600;text-decoration:none}
+
+/* DEMOS */
+.demo{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;margin-bottom:22px}
+.demo h3{color:var(--emerald-deep);margin-bottom:4px}
+.demo .hint{color:var(--mid);font-size:.85rem;margin-bottom:16px}
+.demo label{font-size:.8rem;font-weight:600;color:var(--mid);display:block;margin-bottom:6px}
+input[type=range]{width:100%;accent-color:var(--emerald)}
+input[type=color]{width:54px;height:38px;border:1.5px solid var(--line);border-radius:8px;background:#fff;vertical-align:middle}
+.demo-row{display:flex;gap:24px;flex-wrap:wrap;align-items:center}
+.demo-row > *{flex:1;min-width:200px}
+#depthCard{perspective:900px}
+#depthCard .dc{background:linear-gradient(150deg,var(--emerald),var(--teal));color:#fff;border-radius:14px;
+  padding:26px;transform-style:preserve-3d;transition:transform .15s;box-shadow:0 16px 36px -16px rgba(9,75,58,.6)}
+#depthCard .dc .pop{display:inline-block;transition:transform .15s}
+.contrast-prev{border-radius:10px;padding:22px;text-align:center;font-weight:600;font-size:1.05rem;border:1px solid var(--line)}
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:700}
+.badge.pass{background:#d8f3e9;color:var(--emerald-deep)}.badge.fail{background:#fbe0d8;color:#a3331a}
+.scale-prev div{margin:2px 0;color:var(--dark);font-family:'Fraunces',serif;line-height:1.1}
+
+/* QUIZ */
+.q{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:16px}
+.q .qt{font-weight:700;margin-bottom:12px}
+.opt{display:block;width:100%;text-align:left;background:var(--bg);border:1.5px solid var(--line);
+  border-radius:9px;padding:11px 14px;margin-bottom:8px;cursor:pointer;font-family:inherit;font-size:.9rem;transition:.15s}
+.opt:hover{border-color:var(--teal)}
+.opt.correct{background:#d8f3e9;border-color:var(--emerald)}
+.opt.wrong{background:#fbe0d8;border-color:var(--coral)}
+.opt:disabled{cursor:default}
+.explain{font-size:.82rem;color:var(--mid);margin-top:8px;line-height:1.5;display:none}
+.explain.show{display:block}
+#score{font-family:'Fraunces',serif;font-size:1.5rem;color:var(--emerald-deep);margin-top:10px}
+
+footer{text-align:center;color:var(--mid);font-size:.82rem;padding:30px 18px 50px;border-top:1px solid var(--line)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="brand">Capital Bridge<small>Design Lab</small></div>
+  <button class="tab active" data-t="story">✦ Story</button>
+  <button class="tab" data-t="studio">🎨 Studio</button>
+  <button class="tab" data-t="learn">📚 Learn</button>
+  <button class="tab" data-t="tools">🧰 Tools</button>
+  <button class="tab" data-t="demos">⚡ Demos</button>
+  <button class="tab" data-t="quiz">🧠 Quiz</button>
+</nav>
+
+<!-- ===================== STORY ===================== -->
+<section class="section active" id="s-story">
+  <div class="hero">
+    <h1>The future is designed<br>by everyone.</h1>
+    <p>A motivational note on how AI tore down the wall around great design — and handed you the brush.
+    This is the script our AI avatar narrates.</p>
+  </div>
+
+  <div class="narrate-bar" id="nbar">
+    <button class="btn primary" id="narrate">▶ Narrate this</button>
+    <button class="btn ghost" id="stopnar" style="display:none">⏹ Stop</button>
+    <span class="wave"><span></span><span></span><span></span><span></span><span></span></span>
+    <span class="muted" id="nstatus">Reads aloud in your browser. The rendered avatar version lives in <span class="mono">narration-script.md</span> + <span class="mono">story.md</span>.</span>
+  </div>
+
+  <div class="story-body" id="story">
+    <p>Not long ago, great design lived behind a wall — years of training, expensive software, and a
+    secret language of grids, kerning, and color theory. If you weren't "a designer," the door was closed.</p>
+    <p class="em">That wall is gone.</p>
+    <p>Today, the tools meet you where you are. You bring the idea; the machine handles the craft you
+    haven't learned yet. Pick a color, drag a slider, and depth and light appear — the way a studio
+    would build it, in seconds, not weeks.</p>
+    <p>AI didn't replace the designer. It replaced the <em>barrier</em>. The blank page that used to
+    intimidate now answers back. Skills that once took a decade are a starting point now, not a gate.</p>
+    <p>And here's the part that matters: <strong>taste still wins.</strong> The eye for what's clean,
+    what's clear, what makes someone stop and feel something — that's still yours. The machine hands
+    everyone a brush. What you paint is up to you.</p>
+    <p>So this is the invitation. Not to become a designer <em>someday</em> — to design <em>today</em>.
+    Open the Studio. Make one card. Make it beautiful. Then make it better.</p>
+    <p class="em">The future of design isn't a profession. It's a superpower — and it's in your hands now.</p>
+  </div>
+  <button class="btn primary" data-goto="studio" style="margin-top:18px">Open the Studio →</button>
+</section>
+
+<!-- ===================== STUDIO ===================== -->
+<section class="section" id="s-studio">
+  <span class="kicker">The Tool</span>
+  <h1 style="font-size:2rem;margin:14px 0 6px">Graphic Design Studio</h1>
+  <p class="lead">Type in the boxes, tap a brand color, drag the depth sliders, hover to feel the 3D —
+  then <strong>Copy HTML</strong> or <strong>Download</strong>. No experience needed.</p>
+  <p style="margin:14px 0"><a class="btn ghost" href="studio.html" target="_blank" rel="noopener">↗ Open full-screen</a></p>
+  <iframe class="studio-frame" src="studio.html" title="Graphic Design Studio"></iframe>
+</section>
+
+<!-- ===================== LEARN ===================== -->
+<section class="section" id="s-learn">
+  <span class="kicker">Training</span>
+  <h1 style="font-size:2rem;margin:14px 0 6px">Learn it, step by step</h1>
+  <p class="lead">A plain-language path from zero to confident. Each module is short, with one thing to
+  try in the Studio. Full text in <span class="mono">graphic-design-course.md</span>.</p>
+  <div class="grid cards-3" id="modules" style="margin-top:24px"></div>
+</section>
+
+<!-- ===================== TOOLS ===================== -->
+<section class="section" id="s-tools">
+  <span class="kicker">Studio Toolbox</span>
+  <h1 style="font-size:2rem;margin:14px 0 6px">Every tool a top studio uses</h1>
+  <p class="lead">The professional stack, organized by job — free and paid. Pick the right tool for the
+  task, not the most expensive one.</p>
+  <div id="toolhub" style="margin-top:24px"></div>
+</section>
+
+<!-- ===================== DEMOS ===================== -->
+<section class="section" id="s-demos">
+  <span class="kicker">Play &amp; Learn</span>
+  <h1 style="font-size:2rem;margin:14px 0 6px">Interactive demos</h1>
+  <p class="lead">Three core ideas you can <em>feel</em> by dragging a slider.</p>
+
+  <div class="demo" style="margin-top:24px">
+    <h3>1 · Depth &amp; 3D</h3>
+    <p class="hint">More depth lifts the focal element toward the viewer. Drag and watch the icon pop.</p>
+    <div class="demo-row">
+      <div>
+        <label>Depth / pop: <span id="depthVal" class="mono">40px</span></label>
+        <input type="range" id="depthRange" min="0" max="90" value="40">
+        <label style="margin-top:14px">Tilt: <span id="tiltVal" class="mono">12°</span></label>
+        <input type="range" id="tiltRange" min="0" max="22" value="12">
+      </div>
+      <div id="depthCard"><div class="dc"><span class="pop" id="depthPop" style="font-size:2.4rem">💎</span>
+        <h4 style="font-family:'Fraunces';margin-top:10px">Detailed Card</h4>
+        <p style="opacity:.9;font-size:.9rem">Hover me — depth makes flat feel real.</p></div></div>
+    </div>
+  </div>
+
+  <div class="demo">
+    <h3>2 · Color contrast (accessibility)</h3>
+    <p class="hint">Text must contrast with its background. AA needs ≥ 4.5:1 for body text.</p>
+    <div class="demo-row">
+      <div>
+        <label>Text color &nbsp; <input type="color" id="cFg" value="#094b3a"></label>
+        <label style="margin-top:12px">Background &nbsp; <input type="color" id="cBg" value="#f6f1e7"></label>
+        <div style="margin-top:14px">Ratio: <b id="cRatio" class="mono">—</b> &nbsp; <span id="cBadge" class="badge">—</span></div>
+      </div>
+      <div class="contrast-prev" id="cPrev">The quick brown fox</div>
+    </div>
+  </div>
+
+  <div class="demo">
+    <h3>3 · Type scale</h3>
+    <p class="hint">A consistent ratio between sizes creates rhythm. Try 1.2 (subtle) → 1.5 (dramatic).</p>
+    <label>Ratio: <span id="scaleVal" class="mono">1.25</span></label>
+    <input type="range" id="scaleRange" min="105" max="160" value="125">
+    <div class="scale-prev" id="scalePrev" style="margin-top:14px"></div>
+  </div>
+</section>
+
+<!-- ===================== QUIZ ===================== -->
+<section class="section" id="s-quiz">
+  <span class="kicker">Knowledge Check</span>
+  <h1 style="font-size:2rem;margin:14px 0 6px">Quick quiz</h1>
+  <p class="lead">Five questions from the course. Instant feedback — no pressure.</p>
+  <div id="quiz" style="margin-top:24px"></div>
+  <div id="score"></div>
+</section>
+
+<footer>
+  Capital Bridge · Design Lab — built to be the easiest way to make beautiful, on-brand graphics.<br>
+  Files: <span class="mono">lab.html · studio.html · graphics-showcase.html · graphic-design-course.md · graphic-design-specialist.md · story.md · narration-script.md</span>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var $=function(s,c){return (c||document).querySelector(s);};
+  var $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
+
+  /* ---------- tabs ---------- */
+  function show(t){
+    $$('.tab').forEach(function(b){b.classList.toggle('active',b.dataset.t===t);});
+    $$('.section').forEach(function(s){s.classList.toggle('active',s.id==='s-'+t);});
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  $$('.tab').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.t);});});
+  $$('[data-goto]').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.goto);});});
+
+  /* ---------- narrate (Web Speech API) ---------- */
+  var synth = window.speechSynthesis;
+  var nbtn=$('#narrate'), sbtn=$('#stopnar'), nbar=$('#nbar'), nstat=$('#nstatus');
+  function speak(){
+    if(!synth){nstat.textContent='Speech not supported in this browser — read along below.';return;}
+    synth.cancel();
+    var text=$('#story').innerText;
+    var u=new SpeechSynthesisUtterance(text);
+    u.rate=.98;u.pitch=1;
+    u.onend=u.onerror=stop;
+    nbar.classList.add('on');nbtn.style.display='none';sbtn.style.display='';nstat.textContent='Narrating…';
+    synth.speak(u);
+  }
+  function stop(){if(synth)synth.cancel();nbar.classList.remove('on');nbtn.style.display='';sbtn.style.display='none';
+    nstat.textContent='Reads aloud in your browser. The rendered avatar version lives in narration-script.md.';}
+  nbtn.addEventListener('click',speak);sbtn.addEventListener('click',stop);
+  window.addEventListener('beforeunload',function(){if(synth)synth.cancel();});
+
+  /* ---------- learn modules ---------- */
+  var MODS=[
+    [0,"Orientation","Design is a few rules applied consistently — not talent. Meet the Studio."],
+    [1,"The design system","Reuse fixed tokens: our colors, two fonts, 8px spacing."],
+    [2,"Typography","Two fonts, clear size jumps, short readable lines."],
+    [3,"Color &amp; contrast","60/30/10. Strong text contrast so anyone can read it."],
+    [4,"Layout &amp; hierarchy","Align to a grid; biggest/most-spaced = most important."],
+    [5,"Components","Reusable blocks — the service card is our hero recipe."],
+    [6,"Icons &amp; illustration","One icon per card, consistent style across the set."],
+    [7,"Depth &amp; 3D","Layering, light, perspective, parallax = 'detailed'."],
+    [8,"Motion","Quick, eased, reduced-motion safe."],
+    [9,"Build for real","Make a brand-new card end to end in the Studio."],
+    [10,"Ship it","Copy/Download, then drop it into the live site."],
+    [11,"Learn from references","Study the recipe, not the pixels. Recreate, don't copy."],
+    [12,"Going further","Curated tutorials + the Tools hub to grow."]
+  ];
+  $('#modules').innerHTML = MODS.map(function(m){
+    return '<div class="mod"><div class="n">MODULE '+m[0]+'</div><h4>'+m[1]+'</h4><p>'+m[2]+'</p></div>';
+  }).join('');
+
+  /* ---------- tools hub ---------- */
+  var CATS=[
+    {n:"Raster &amp; Photo",c:"#0d7a5f",i:"🖼️",d:"Pixel editing, retouching, compositing.",t:[
+      ["Adobe Photoshop","Industry-standard raster editor.","https://www.adobe.com/products/photoshop.html"],
+      ["Affinity Photo","One-time-purchase pro alternative.","https://affinity.serif.com"],
+      ["GIMP","Powerful free raster editor.","https://www.gimp.org",1],
+      ["Photopea","Photoshop-like, in the browser.","https://www.photopea.com",1]]},
+    {n:"Vector &amp; Layout",c:"#1a9d8f",i:"✒️",d:"Logos, icons, scalable artwork, UI.",t:[
+      ["Adobe Illustrator","The vector standard.","https://www.adobe.com/products/illustrator.html"],
+      ["Figma","Collaborative UI/vector design.","https://www.figma.com",1],
+      ["Affinity Designer","Pro vector, one-time price.","https://affinity.serif.com"],
+      ["Inkscape","Full-featured free vector.","https://inkscape.org",1]]},
+    {n:"3D",c:"#7a4a7e",i:"🧊",d:"Depth, product shots, 3D type & scenes.",t:[
+      ["Blender","Free, full 3D pipeline.","https://www.blender.org",1],
+      ["Spline","Web-friendly 3D, exports to code.","https://spline.design",1],
+      ["Womp","Easy browser-based 3D.","https://womp.com",1],
+      ["Cinema 4D","Pro motion-graphics 3D.","https://www.maxon.net"]]},
+    {n:"Motion &amp; Video",c:"#e0603c",i:"🎬",d:"Animation, explainers, interactive motion.",t:[
+      ["After Effects","Motion-graphics standard.","https://www.adobe.com/products/aftereffects.html"],
+      ["LottieFiles","Ship tiny JSON animations to web.","https://lottiefiles.com",1],
+      ["Rive","Interactive, stateful animation.","https://rive.app",1],
+      ["DaVinci Resolve","Pro editing & color (free tier).","https://www.blackmagicdesign.com/products/davinciresolve",1]]},
+    {n:"AI Image",c:"#bd8419",i:"✨",d:"Generate & extend visuals from prompts.",t:[
+      ["Adobe Firefly","Commercially-safe generative.","https://firefly.adobe.com"],
+      ["Midjourney","High-aesthetic image generation.","https://www.midjourney.com"],
+      ["Ideogram","Great at text inside images.","https://ideogram.ai",1],
+      ["Leonardo.Ai","Generation + asset workflows.","https://leonardo.ai",1]]},
+    {n:"Color",c:"#094b3a",i:"🎨",d:"Palettes, contrast, harmony.",t:[
+      ["Coolors","Fast palette generator.","https://coolors.co",1],
+      ["Realtime Colors","Preview palettes on real UI.","https://www.realtimecolors.com",1],
+      ["Adobe Color","Harmony rules + extraction.","https://color.adobe.com",1]]},
+    {n:"Type",c:"#1a9d8f",i:"🔤",d:"Fonts and pairings.",t:[
+      ["Google Fonts","Huge free, web-ready library.","https://fonts.google.com",1],
+      ["Fontshare","Quality free pro fonts.","https://www.fontshare.com",1],
+      ["Fontjoy","AI font pairing.","https://fontjoy.com",1]]},
+    {n:"Icons &amp; Illustration",c:"#7a4a7e",i:"🧩",d:"Consistent icon sets & art.",t:[
+      ["Lucide","Clean open-source icons.","https://lucide.dev",1],
+      ["Phosphor","Flexible icon family.","https://phosphoricons.com",1],
+      ["unDraw","Free editable illustrations.","https://undraw.co",1],
+      ["Iconify","100k+ icons, one API.","https://iconify.design",1]]},
+    {n:"Stock &amp; Backgrounds",c:"#0d7a5f",i:"🌄",d:"Photos, gradients, mesh & blob SVGs.",t:[
+      ["Unsplash","Free high-quality photos.","https://unsplash.com",1],
+      ["Pexels","Free photos & video.","https://www.pexels.com",1],
+      ["Haikei","Generate SVG backgrounds.","https://haikei.app",1]]},
+    {n:"Prototype &amp; Handoff",c:"#e0603c",i:"🛠️",d:"Click-through prototypes, dev handoff.",t:[
+      ["Figma","Prototyping + inspect.","https://www.figma.com",1],
+      ["Framer","Design to live site.","https://www.framer.com",1]]}
+  ];
+  $('#toolhub').innerHTML = CATS.map(function(cat){
+    var tools = cat.t.map(function(t){
+      return '<div class="tool"><div class="tn">'+t[0]+(t[3]?'<span class="free">FREE</span>':'')+'</div>'+
+        '<div class="tu">'+t[1]+'</div><a href="'+t[2]+'" target="_blank" rel="noopener">Visit ↗</a></div>';
+    }).join('');
+    return '<div class="tcat"><h3><span class="ci" style="background:'+cat.c+'">'+cat.i+'</span>'+cat.n+'</h3>'+
+      '<div class="desc">'+cat.d+'</div><div class="tools">'+tools+'</div></div>';
+  }).join('');
+
+  /* ---------- demo 1: depth ---------- */
+  var dCard=$('#depthCard .dc'), dPop=$('#depthPop');
+  function depthFX(e){
+    var t=+$('#tiltRange').value, p=+$('#depthRange').value;
+    var rx=0,ry=0;
+    if(e){var r=dCard.getBoundingClientRect();rx=(0.5-(e.clientY-r.top)/r.height)*t;ry=((e.clientX-r.left)/r.width-0.5)*t;}
+    dCard.style.transform='rotateX('+rx.toFixed(1)+'deg) rotateY('+ry.toFixed(1)+'deg)';
+    dPop.style.transform='translateZ('+p+'px)';
+  }
+  $('#depthRange').addEventListener('input',function(){$('#depthVal').textContent=this.value+'px';depthFX();});
+  $('#tiltRange').addEventListener('input',function(){$('#tiltVal').textContent=this.value+'°';depthFX();});
+  dCard.addEventListener('pointermove',depthFX);
+  dCard.addEventListener('pointerleave',function(){depthFX();});
+  depthFX();
+
+  /* ---------- demo 2: contrast ---------- */
+  function hexToRgb(h){h=h.replace('#','');if(h.length===3)h=h.split('').map(function(c){return c+c;}).join('');
+    return [parseInt(h.substr(0,2),16),parseInt(h.substr(2,2),16),parseInt(h.substr(4,2),16)];}
+  function lum(h){var c=hexToRgb(h).map(function(v){v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4);});
+    return 0.2126*c[0]+0.7152*c[1]+0.0722*c[2];}
+  function contrast(){
+    var fg=$('#cFg').value, bg=$('#cBg').value;
+    var L1=lum(fg),L2=lum(bg),hi=Math.max(L1,L2),lo=Math.min(L1,L2);
+    var r=(hi+0.05)/(lo+0.05);
+    $('#cRatio').textContent=r.toFixed(2)+':1';
+    var b=$('#cBadge'); var pass=r>=4.5;
+    b.textContent=pass?'AA pass':(r>=3?'Large text only':'Fail');
+    b.className='badge '+(pass?'pass':'fail');
+    var p=$('#cPrev');p.style.color=fg;p.style.background=bg;
+  }
+  $('#cFg').addEventListener('input',contrast);$('#cBg').addEventListener('input',contrast);contrast();
+
+  /* ---------- demo 3: type scale ---------- */
+  function scale(){
+    var ratio=(+$('#scaleRange').value)/100;
+    $('#scaleVal').textContent=ratio.toFixed(2);
+    var base=16, names=['Caption','Body','H4','H3','H2','H1'], out='';
+    names.forEach(function(n,i){var size=(base*Math.pow(ratio,i)).toFixed(0);
+      out+='<div style="font-size:'+size+'px">'+n+' · '+size+'px</div>';});
+    $('#scalePrev').innerHTML=out;
+  }
+  $('#scaleRange').addEventListener('input',scale);scale();
+
+  /* ---------- quiz ---------- */
+  var QS=[
+    {q:"What's the fastest way to make a graphic feel organized?",
+     o:["Use more colors","Align everything to a shared grid","Add more text","Make it bigger"],a:1,
+     e:"Alignment to a common grid instantly reads as 'intentional.'"},
+    {q:"Roughly how should you split a color palette?",
+     o:["33/33/33","60/30/10 (dominant/support/accent)","All one color","50/50"],a:1,
+     e:"60/30/10 keeps one color dominant with a small, punchy accent."},
+    {q:"For readable body text, the AA contrast ratio is at least…",
+     o:["1.5:1","2:1","4.5:1","10:1"],a:2,
+     e:"WCAG AA requires ≥ 4.5:1 for normal body text."},
+    {q:"What makes a flat card read as 3D / detailed?",
+     o:["Brighter colors","Layering, consistent light, perspective & parallax","More words","A bigger icon"],a:1,
+     e:"Depth cues — not saturation — create the sense of real space."},
+    {q:"When learning from a reference video, you should copy its…",
+     o:["Exact artwork & footage","Recipe: palette, type, spacing, motion","Logo","Voice of the narrator"],a:1,
+     e:"Recreate the system/technique; never lift protected assets or clone a person."}
+  ];
+  var answered=0, correct=0;
+  $('#quiz').innerHTML = QS.map(function(item,qi){
+    var opts=item.o.map(function(opt,oi){return '<button class="opt" data-q="'+qi+'" data-o="'+oi+'">'+opt+'</button>';}).join('');
+    return '<div class="q"><div class="qt">'+(qi+1)+'. '+item.q+'</div>'+opts+'<div class="explain" id="ex'+qi+'">'+item.e+'</div></div>';
+  }).join('');
+  $$('.opt').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var qi=+btn.dataset.q, oi=+btn.dataset.o;
+      var siblings=$$('.opt[data-q="'+qi+'"]');
+      if(siblings[0].disabled) return;
+      siblings.forEach(function(s){s.disabled=true;
+        if(+s.dataset.o===QS[qi].a)s.classList.add('correct');});
+      if(oi!==QS[qi].a) btn.classList.add('wrong'); else correct++;
+      $('#ex'+qi).classList.add('show');
+      answered++;
+      if(answered===QS.length){
+        $('#score').textContent='You scored '+correct+' / '+QS.length+(correct===QS.length?' — flawless. 🎉':'  — try the course modules for the rest.');
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
