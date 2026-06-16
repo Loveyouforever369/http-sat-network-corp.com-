@@ -28,19 +28,28 @@ deep-dive transcript on every slide.
 - **↻** — auto-advance (slides follow the voice)
 - Hover the avatar and tap **▾** to minimize / expand the host
 
-## Narrate every slide in *your* real voice (optional, 3 steps)
+## Narrate every slide in *your* real voice
 
-The deck ships narrating with a built-in host voice (the avatar is the on-screen
-narrator). To hear **your** cloned voice on all 42 screens:
+The deck ships narrating with a built-in host voice. Two ways to make it **your** voice —
+both keep your audio entirely on your device (nothing is uploaded anywhere):
 
-1. **Clone** — In ElevenLabs → *Add Voice → Instant Voice Clone*, upload the full
-   reference `assets/voice/calaif_voice_sample.wav` (the 5½-minute take included here).
-2. **Render** — In the deck, open *Use my voice → Download script*; it exports every
-   slide's narration as a numbered text file. Render each block in your cloned voice
-   and save them `slide-01.mp3`, `slide-02.mp3`, …
-3. **Load** — *Use my voice → Load voice files*, select all the MP3s at once. The deck
-   maps them by number and the avatar then lip-syncs to your own voice. Everything
-   stays in your browser — nothing is uploaded.
+### A. Record it yourself — the Record Studio (no account, works offline)
+1. Open the deck and click the **🎙 button** in the control bar (or press **R**).
+2. Allow your microphone. The studio shows each slide's script — press **● REC**, read it,
+   press **■ STOP**. Use **review / redo** to get it right, then **next ›**.
+3. When you've recorded the slides you want, hit **✓ Done — play the deck in my voice**.
+   The avatar now narrates in your recordings and reacts to your real voice.
+
+Recordings are saved in your browser (IndexedDB) and **survive a refresh**. Use
+**⬇ Save backups** to download them as `slide-01.webm`, `slide-02.webm`, … Best in
+Chrome, Edge, or Firefox; if recording is blocked, open the deck over `http(s)`/localhost
+(a `file://` page can have the mic disabled in some browsers).
+
+### B. AI clone of your voice (ElevenLabs)
+1. In ElevenLabs → *Add Voice → Instant Voice Clone*, upload `assets/voice/calaif_voice_sample.wav`.
+2. *Use my voice → Download script* exports every slide's narration, numbered.
+3. Render each block in your cloned voice as `slide-01.mp3`, `slide-02.mp3`, … and load them
+   via *Use my voice → Load voice files*.
 
 ## Assets
 

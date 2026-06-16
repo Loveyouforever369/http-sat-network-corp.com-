@@ -402,6 +402,48 @@ button{font-family:inherit;cursor:pointer;color:inherit}
 .s-points li .pm{box-shadow:0 0 12px rgba(245,185,66,.18)}
 #prog{box-shadow:0 0 14px rgba(245,185,66,.7),0 0 4px rgba(95,231,255,.6)}
 
+/* ===========================================================
+   RECORD STUDIO — record your own voice, in-browser, offline
+   =========================================================== */
+#rec{position:fixed;inset:0;z-index:115;display:none;flex-direction:column;gap:10px;
+  background:radial-gradient(1100px 760px at 50% 28%,rgba(10,16,30,.98),var(--void) 82%);
+  padding:clamp(16px,3vw,32px)}
+#rec.on{display:flex}
+.rec-head{display:flex;align-items:center;justify-content:space-between;gap:14px;font-family:'JetBrains Mono',monospace;flex:0 0 auto}
+.rec-badge{display:flex;align-items:center;gap:9px;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--ember)}
+.rec-badge .rd{width:9px;height:9px;border-radius:50%;background:var(--faint);transition:all .2s}
+#rec.live .rec-badge .rd{background:var(--ember);box-shadow:0 0 11px var(--ember);animation:vzPulse 1s infinite}
+.rec-prog{font-size:11px;letter-spacing:.12em;color:var(--dim)}
+.rec-prog b{color:var(--gold)}
+.rec-close{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:rgba(15,22,38,.7);color:var(--gold);font-size:15px;flex:0 0 auto}
+.rec-dots{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;flex:0 0 auto;max-height:46px;overflow:auto}
+.rec-dots i{width:9px;height:9px;border-radius:3px;background:var(--line-cool);cursor:pointer;transition:all .18s}
+.rec-dots i.done{background:linear-gradient(135deg,var(--gold),var(--amber))}
+.rec-dots i.cur{outline:2px solid var(--cyan);outline-offset:1px}
+.rec-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:13px;min-height:0}
+.rec-slide{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan)}
+.rec-title{font-family:'Fraunces',serif;font-size:clamp(19px,2.6vw,28px);color:var(--bone);line-height:1.1}
+.rec-title b{color:var(--gold);font-style:italic}
+.rec-script{max-width:62ch;max-height:30vh;overflow-y:auto;font-size:clamp(15px,1.7vw,20px);line-height:1.7;color:var(--text);
+  background:rgba(8,12,22,.55);border:1px solid var(--line-soft);border-radius:14px;padding:18px 22px}
+.rec-meter{display:flex;align-items:flex-end;gap:3px;height:30px}
+.rec-meter i{width:4px;height:10%;background:linear-gradient(180deg,var(--ember),var(--gold));border-radius:2px;transition:height .06s}
+.rec-timer{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--ember);letter-spacing:.1em;min-height:17px}
+.rec-ctrls{display:flex;align-items:center;gap:13px;flex-wrap:wrap;justify-content:center}
+.rec-btn{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--line);border-radius:11px;padding:11px 16px;background:rgba(15,22,38,.7);color:var(--text);transition:all .2s}
+.rec-btn:hover{border-color:var(--gold);color:var(--bone)}
+.rec-btn:disabled{opacity:.38;cursor:not-allowed}
+.rec-rec{width:76px;height:76px;border-radius:50%;border:none;cursor:pointer;
+  background:linear-gradient(135deg,var(--ember),var(--amber));color:#1a0e06;font-family:'JetBrains Mono',monospace;
+  font-size:12px;font-weight:700;letter-spacing:.08em;box-shadow:0 0 30px rgba(226,87,43,.4);transition:transform .15s,box-shadow .2s}
+.rec-rec:hover{transform:scale(1.05)}
+#rec.live .rec-rec{background:linear-gradient(135deg,#ff6b5e,#ff9b3d);box-shadow:0 0 46px rgba(255,107,94,.6)}
+.rec-status{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--verify);min-height:16px;max-width:60ch}
+.rec-foot{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;flex:0 0 auto}
+.rec-foot-actions{display:flex;gap:9px;flex-wrap:wrap}
+@media(max-width:700px){.rec-foot{justify-content:center}}
+
 @media(prefers-reduced-motion:reduce){
   .scanflow,.s-viz::after,.av-orb .holo-shine,.hi-ring,.av-rings::before,.av-rings::after,.av-ring3,
   .cspin,.cspin-rev,.cspin-slow{animation:none!important}
@@ -534,6 +576,7 @@ button{font-family:inherit;cursor:pointer;color:inherit}
       <span class="vk">Voice</span><span class="vmode" id="vmode">Narrator</span>
       <button class="mini-btn" id="openVoice">Use my voice</button>
     </div>
+    <button class="ctrl" id="cRec" aria-label="Record your voice" title="Record your voice (R)">🎙</button>
     <button class="ctrl" id="cDeep" aria-label="Deep dive transcript" title="Deep dive (D)">≡</button>
     <button class="ctrl" id="cAuto" aria-label="Auto-advance" title="Auto-advance">↻</button>
     <button class="ctrl" id="cFull" aria-label="Fullscreen" title="Fullscreen">⛶</button>
@@ -544,7 +587,9 @@ button{font-family:inherit;cursor:pointer;color:inherit}
 <div id="voiceModal" role="dialog" aria-modal="true">
   <div class="vm-pane">
     <h3>Narrate it in <em>your</em> voice</h3>
-    <p class="sub">Your robotic avatar is already on screen as the host. Out of the box it speaks with a built-in narrator voice. To hear every slide in <b>your</b> real voice, clone the voice signature below once, render the lines, and load them here — the avatar then lip-syncs to your own voice across every slide.</p>
+    <p class="sub">The fastest way: <b>record yourself</b> reading each slide, right here in your browser. The studio shows you the script, you press record and read it, and the deck plays every slide back in your own voice. Nothing is uploaded — it stays on your device, even works offline.</p>
+    <button class="btn solid" id="openRec" style="width:100%;margin:2px 0 16px;justify-content:center">🎙 Open the recording studio →</button>
+    <p class="sub" style="font-size:12.5px;margin-bottom:14px">Prefer an AI clone of your voice instead? You can still do that below — clone the signature in ElevenLabs, render the lines, and load the files.</p>
     <div class="sig">
       <div class="sig-top">
         <button class="sig-play" id="sigPlay" aria-label="Play voice signature">▶</button>
@@ -567,6 +612,38 @@ button{font-family:inherit;cursor:pointer;color:inherit}
     </div>
     <input type="file" id="voiceFiles" accept="audio/*" multiple style="display:none">
     <div class="vm-status" id="vmStatus"></div>
+  </div>
+</div>
+
+<!-- ===== RECORD STUDIO ===== -->
+<div id="rec" role="dialog" aria-modal="true" aria-label="Record your narration">
+  <div class="rec-head">
+    <span class="rec-badge"><span class="rd"></span><span id="recBadgeTxt">REC STUDIO · YOUR VOICE</span></span>
+    <span class="rec-prog"><b id="recDone">0</b> / <span id="recTotal">42</span> slides recorded</span>
+    <button class="rec-close" id="recClose" aria-label="Close studio">✕</button>
+  </div>
+  <div class="rec-dots" id="recDots"></div>
+  <div class="rec-body">
+    <div class="rec-slide" id="recSlide">SLIDE 1 / 42</div>
+    <div class="rec-title" id="recTitle">—</div>
+    <div class="rec-script" id="recScript">—</div>
+    <div class="rec-meter" id="recMeter"></div>
+    <div class="rec-timer" id="recTimer">00:00</div>
+    <div class="rec-ctrls">
+      <button class="rec-btn" id="recPrev">‹ prev</button>
+      <button class="rec-btn" id="recReview" disabled>▶ review</button>
+      <button class="rec-rec" id="recToggle">● REC</button>
+      <button class="rec-btn" id="recRedo" disabled>↺ redo</button>
+      <button class="rec-btn" id="recNext">next ›</button>
+    </div>
+    <div class="rec-status" id="recStatus">Allow your microphone, then press REC and read the script aloud.</div>
+  </div>
+  <div class="rec-foot">
+    <div class="rec-foot-actions">
+      <button class="rec-btn" id="recBackup">⬇ Save backups</button>
+      <button class="rec-btn" id="recClear">Clear this slide</button>
+    </div>
+    <button class="btn solid" id="recDoneBtn">✓ Done — play the deck in my voice</button>
   </div>
 </div>
 
@@ -1454,6 +1531,7 @@ $('#cAuto').onclick=()=>{
 };
 $('#cFull').onclick=()=>{if(!document.fullscreenElement)document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();else document.exitFullscreen&&document.exitFullscreen();};
 document.addEventListener('keydown',e=>{
+  if($('#rec')&&$('#rec').classList.contains('on'))return;
   if($('#voiceModal').classList.contains('on')){if(e.key==='Escape')closeVoiceModal();return;}
   if(!$('#begin').classList.contains('gone'))return;
   if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();next();}
@@ -1675,7 +1753,11 @@ function hostIntroPlay(){
     if(spoke||done)return;spoke=true;
     kick.textContent='// AI HOST ONLINE · NARRATING';
     cap.textContent=SLIDES[0].vo||'';
-    speakText(SLIDES[0].vo,finish);
+    if(voiceMode==='mine'&&customAudio[0]){            // play the user's own recording for the opener
+      AV.speak(true);AV.startSim();
+      const a=new Audio(customAudio[0]);a.onended=finish;a.onerror=()=>setTimeout(finish,500);
+      a.play().catch(()=>setTimeout(finish,600));
+    } else speakText(SLIDES[0].vo,finish);
   }
   setTimeout(speakTitle,2000);
   $('#hiSkip').onclick=finish;
@@ -1712,6 +1794,7 @@ $('#deepClose').onclick=()=>toggleDeep(false);
 document.addEventListener('keydown',e=>{
   if(!$('#begin').classList.contains('gone'))return;
   if($('#voiceModal').classList.contains('on'))return;
+  if($('#rec')&&$('#rec').classList.contains('on'))return;
   if(e.key.toLowerCase()==='d'){e.preventDefault();toggleDeep();}
 });
 
@@ -1757,6 +1840,124 @@ const FX=(function(){
   function start(){if(started)return;started=true;size();init();if(!reduce)frame();}
   addEventListener('resize',()=>{if(started){size();init();}});
   return {start};
+})();
+</script>
+
+<!-- ============================================================
+     RECORD STUDIO — capture the narration in your own voice,
+     stored locally (IndexedDB), no network, no upload
+     ============================================================ -->
+<script>
+'use strict';
+(function(){
+  const recordings={};                 // slideIndex -> Blob
+  let recIndex=0, recStream=null, mr=null, recChunks=[], recTimer=null, recSecs=0;
+  let meterRaf=null, meterAC=null, meterAn=null, meterData=null;
+  const panel=$('#rec'); if(!panel) return;
+  const dotsWrap=$('#recDots'), meterWrap=$('#recMeter'), meterBars=[];
+  for(let i=0;i<TOTAL;i++){const d=document.createElement('i');d.title='Slide '+(i+1);d.onclick=()=>recGo(i);dotsWrap.appendChild(d);}
+  for(let i=0;i<26;i++){const b=document.createElement('i');meterWrap.appendChild(b);meterBars.push(b);}
+  $('#recTotal').textContent=TOTAL;
+
+  /* ---- IndexedDB persistence ---- */
+  const IDB={db:null,
+    open(){return new Promise(res=>{let r;try{r=indexedDB.open('prometheus_voice',1);}catch(e){return res(null);}
+      r.onupgradeneeded=e=>{try{e.target.result.createObjectStore('clips');}catch(_){}};
+      r.onsuccess=e=>{IDB.db=e.target.result;res(IDB.db);};r.onerror=()=>res(null);});},
+    put(k,b){if(!IDB.db)return;try{IDB.db.transaction('clips','readwrite').objectStore('clips').put(b,k);}catch(e){}},
+    del(k){if(!IDB.db)return;try{IDB.db.transaction('clips','readwrite').objectStore('clips').delete(k);}catch(e){}},
+    all(){return new Promise(res=>{if(!IDB.db)return res();try{const q=IDB.db.transaction('clips','readonly').objectStore('clips').openCursor();
+      q.onsuccess=e=>{const c=e.target.result;if(c){const i=+c.key;recordings[i]=c.value;try{if(customAudio[i])URL.revokeObjectURL(customAudio[i]);}catch(_){}
+      customAudio[i]=URL.createObjectURL(c.value);c.continue();}else res();};q.onerror=()=>res();}catch(e){res();}});}
+  };
+
+  function setVoiceUI(){const vm=$('#vmode');if(vm&&Object.keys(customAudio).length){vm.textContent='Your voice';vm.style.color='#54d6c4';}}
+  function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
+  function refresh(){
+    $('#recDone').textContent=Object.keys(recordings).length;
+    [...dotsWrap.children].forEach((d,i)=>{d.classList.toggle('done',!!recordings[i]);d.classList.toggle('cur',i===recIndex);});
+    const s=SLIDES[recIndex];
+    $('#recSlide').textContent='SLIDE '+(recIndex+1)+' / '+TOTAL;
+    $('#recTitle').innerHTML=s.title?s.title:(s.kind==='divider'?('Part '+s.divNum+' — '+s.divName):(s.kind==='title'?'Opening':'Closing'));
+    $('#recScript').textContent=s.vo||'(no narration on this slide — you can skip it)';
+    const have=!!recordings[recIndex];
+    $('#recReview').disabled=!have;$('#recRedo').disabled=!have;
+    $('#recStatus').textContent=have?'✓ Recorded. Review it, redo it, or move to the next slide.':'Press ● REC and read the script above aloud.';
+  }
+  function recGo(i){if(mr&&mr.state==='recording')return;recIndex=Math.max(0,Math.min(TOTAL-1,i));refresh();}
+
+  function meterLoop(){meterRaf=requestAnimationFrame(meterLoop);if(!meterAn)return;meterAn.getByteFrequencyData(meterData);
+    const step=Math.max(1,Math.floor(meterData.length/meterBars.length));
+    for(let i=0;i<meterBars.length;i++){const v=meterData[i*step]/255;meterBars[i].style.height=(8+v*92).toFixed(0)+'%';}}
+  function meterStop(){if(meterRaf){cancelAnimationFrame(meterRaf);meterRaf=null;}meterBars.forEach(b=>b.style.height='10%');}
+
+  async function ensureMic(){
+    if(recStream)return true;
+    try{recStream=await navigator.mediaDevices.getUserMedia({audio:true});}
+    catch(e){$('#recStatus').textContent='⚠ Microphone blocked. Click the mic icon in your address bar to allow it (Chrome, Edge or Firefox work best).';return false;}
+    try{meterAC=new (window.AudioContext||window.webkitAudioContext)();const src=meterAC.createMediaStreamSource(recStream);
+      meterAn=meterAC.createAnalyser();meterAn.fftSize=64;meterData=new Uint8Array(meterAn.frequencyBinCount);src.connect(meterAn);}catch(e){}
+    return true;
+  }
+  async function recStart(){
+    if(!(await ensureMic()))return;
+    try{if(meterAC&&meterAC.state==='suspended')meterAC.resume();}catch(e){}
+    recChunks=[];let opt;
+    try{for(const m of ['audio/webm;codecs=opus','audio/webm','audio/mp4']){if(window.MediaRecorder&&MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(m)){opt={mimeType:m};break;}}}catch(e){}
+    try{mr=new MediaRecorder(recStream,opt);}catch(e){try{mr=new MediaRecorder(recStream);}catch(e2){$('#recStatus').textContent='⚠ Recording isn’t supported in this browser — try Chrome.';return;}}
+    mr.ondataavailable=e=>{if(e.data&&e.data.size)recChunks.push(e.data);};
+    mr.onstop=()=>{
+      const blob=new Blob(recChunks,{type:(mr&&mr.mimeType)||'audio/webm'});
+      try{if(customAudio[recIndex])URL.revokeObjectURL(customAudio[recIndex]);}catch(_){}
+      customAudio[recIndex]=URL.createObjectURL(blob);recordings[recIndex]=blob;
+      voiceMode='mine';setVoiceUI();IDB.put(recIndex,blob);
+      panel.classList.remove('live');$('#recToggle').textContent='● REC';$('#recBadgeTxt').textContent='REC STUDIO · YOUR VOICE';
+      clearInterval(recTimer);meterStop();refresh();
+    };
+    try{mr.start();}catch(e){$('#recStatus').textContent='⚠ Could not start recording.';return;}
+    recSecs=0;$('#recTimer').textContent='00:00';recTimer=setInterval(()=>{recSecs++;$('#recTimer').textContent=fmt(recSecs);},1000);
+    panel.classList.add('live');$('#recToggle').textContent='■ STOP';$('#recBadgeTxt').textContent='● RECORDING';
+    $('#recStatus').textContent='Recording… read the script, then press ■ STOP.';meterLoop();
+  }
+  function recStop(){if(mr&&mr.state!=='inactive'){try{mr.stop();}catch(e){}}}
+  function clearOne(){
+    try{if(customAudio[recIndex])URL.revokeObjectURL(customAudio[recIndex]);}catch(_){}
+    delete customAudio[recIndex];delete recordings[recIndex];IDB.del(recIndex);
+    if(!Object.keys(customAudio).length){voiceMode='narrator';const vm=$('#vmode');if(vm){vm.textContent='Narrator';vm.style.color='';}}
+    refresh();
+  }
+
+  $('#recToggle').onclick=()=>{if(mr&&mr.state==='recording')recStop();else recStart();};
+  $('#recReview').onclick=()=>{const u=customAudio[recIndex];if(!u)return;try{stopSpeak();}catch(e){}const a=new Audio(u);a.play().catch(()=>{});};
+  $('#recRedo').onclick=()=>{clearOne();recStart();};
+  $('#recClear').onclick=clearOne;
+  $('#recPrev').onclick=()=>recGo(recIndex-1);
+  $('#recNext').onclick=()=>recGo(recIndex+1);
+  $('#recBackup').onclick=()=>{
+    const keys=Object.keys(recordings).map(Number).sort((a,b)=>a-b);
+    if(!keys.length){$('#recStatus').textContent='Nothing recorded yet to back up.';return;}
+    let i=0;(function nxt(){if(i>=keys.length){toast('Saved '+keys.length+' clips to your downloads');return;}
+      const k=keys[i++],t=recordings[k].type,ext=(t.indexOf('mp4')>=0||t.indexOf('mpeg')>=0)?'m4a':'webm';
+      const a=document.createElement('a');a.href=URL.createObjectURL(recordings[k]);a.download='slide-'+String(k+1).padStart(2,'0')+'.'+ext;
+      document.body.appendChild(a);a.click();a.remove();setTimeout(nxt,500);})();
+  };
+
+  function openRec(){recIndex=Math.min(cur,TOTAL-1);try{stopSpeak();}catch(e){}panel.classList.add('on');refresh();}
+  function closeRec(){recStop();panel.classList.remove('on');}
+  $('#recClose').onclick=closeRec;
+  $('#recDoneBtn').onclick=()=>{closeRec();if(Object.keys(customAudio).length){voiceMode='mine';setVoiceUI();toast('Your voice is live — the deck now narrates in your recordings');goTo(recIndex);}};
+  const cRec=$('#cRec');if(cRec)cRec.onclick=openRec;
+  const openRecBtn=$('#openRec');if(openRecBtn)openRecBtn.onclick=()=>{try{closeVoiceModal();}catch(e){}openRec();};
+
+  document.addEventListener('keydown',e=>{
+    if(panel.classList.contains('on')){if(e.key==='Escape')closeRec();else if(e.code==='Space'&&e.target===document.body){e.preventDefault();$('#recToggle').click();}return;}
+    if(!$('#begin').classList.contains('gone'))return;
+    if($('#voiceModal').classList.contains('on'))return;
+    if(e.key.toLowerCase()==='r'){e.preventDefault();openRec();}
+  });
+
+  /* restore any prior recordings so they survive a refresh */
+  IDB.open().then(()=>IDB.all()).then(()=>{if(Object.keys(customAudio).length){voiceMode='mine';setVoiceUI();}refresh();});
 })();
 </script>
 </body>
