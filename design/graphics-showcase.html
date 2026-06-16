@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Capital Bridge · 3D Graphics System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Capital Bridge — 3D detailed graphics card system
+   Self-contained. No external JS/CDN (works offline / behind a
+   restrictive egress proxy). Pure CSS 3D + a little vanilla JS.
+   Brand tokens lifted from the live site's index.html.
+   ============================================================ */
+:root{
+  --bg:#f6f1e7;--emerald:#0d7a5f;--emerald-deep:#094b3a;--coral:#e0603c;
+  --gold:#bd8419;--teal:#1a9d8f;--plum:#7a4a7e;
+  --white:#fff;--dark:#1a1a1a;--mid:#555;--light:#e8e2d6;
+  --radius:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;color:var(--dark);
+  background:
+    radial-gradient(900px 500px at 12% -8%, rgba(26,157,143,.18), transparent 60%),
+    radial-gradient(800px 600px at 110% 10%, rgba(224,96,60,.14), transparent 55%),
+    var(--bg);
+  min-height:100vh;overflow-x:hidden;
+}
+h1,h2,h3{font-family:'Fraunces',serif;line-height:1.05}
+.mono{font-family:'JetBrains Mono',monospace}
+
+/* ---- floating ambient depth blobs ---- */
+.ambient{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.35;animation:drift 18s ease-in-out infinite}
+.blob.b1{width:340px;height:340px;background:var(--teal);top:-80px;left:-60px}
+.blob.b2{width:300px;height:300px;background:var(--coral);bottom:-90px;right:-40px;animation-delay:-6s}
+.blob.b3{width:260px;height:260px;background:var(--gold);top:40%;left:55%;animation-delay:-11s}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-40px) scale(1.08)}}
+
+.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:56px 20px 90px}
+
+/* ---- header ---- */
+.kicker{display:inline-flex;align-items:center;gap:8px;background:var(--emerald-deep);color:#fff;
+  font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  padding:7px 16px;border-radius:30px}
+.head h1{font-size:clamp(2rem,5vw,3.4rem);margin:18px 0 10px;
+  background:linear-gradient(120deg,var(--emerald-deep),var(--teal) 60%,var(--gold));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.head p{max-width:620px;color:var(--mid);font-size:1.05rem;line-height:1.65}
+
+/* ---- 3D card grid ---- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:30px;margin-top:48px;
+  perspective:1400px}
+.card3d{position:relative;border-radius:var(--radius);transform-style:preserve-3d;cursor:pointer;
+  --mx:50%;--my:50%}
+.card3d-inner{
+  position:relative;border-radius:var(--radius);padding:30px 26px 28px;min-height:280px;
+  background:linear-gradient(160deg, rgba(255,255,255,.96), rgba(255,255,255,.82));
+  border:1px solid rgba(255,255,255,.7);
+  box-shadow:0 18px 40px -18px rgba(9,75,58,.45), 0 2px 6px rgba(0,0,0,.05);
+  transform-style:preserve-3d;
+  transition:transform .18s cubic-bezier(.2,.7,.2,1), box-shadow .25s;
+  overflow:hidden;
+}
+/* cursor-tracking sheen */
+.card3d-inner::before{content:'';position:absolute;inset:0;border-radius:var(--radius);
+  background:radial-gradient(420px circle at var(--mx) var(--my), rgba(255,255,255,.55), transparent 45%);
+  opacity:0;transition:opacity .25s;pointer-events:none;z-index:2}
+.card3d:hover .card3d-inner::before{opacity:1}
+.card3d:hover .card3d-inner{box-shadow:0 36px 70px -24px rgba(9,75,58,.55), 0 3px 10px rgba(0,0,0,.06)}
+/* animated gradient accent bar */
+.card3d-inner::after{content:'';position:absolute;left:0;top:0;height:6px;width:100%;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  background-size:200% 100%;animation:slide 4s linear infinite}
+@keyframes slide{to{background-position:200% 0}}
+
+/* depth layers — each pops toward viewer on hover */
+.layer{transform:translateZ(0);transition:transform .18s cubic-bezier(.2,.7,.2,1)}
+.card3d:hover .ic{transform:translateZ(60px)}
+.card3d:hover .ttl{transform:translateZ(40px)}
+.card3d:hover .desc{transform:translateZ(24px)}
+.card3d:hover .tag{transform:translateZ(70px)}
+
+.ic{width:62px;height:62px;border-radius:16px;display:grid;place-items:center;font-size:1.9rem;
+  background:linear-gradient(150deg,var(--accent),var(--accent2));color:#fff;
+  box-shadow:0 12px 24px -8px var(--accent);margin-bottom:18px}
+.ttl{font-size:1.28rem;margin-bottom:8px;color:var(--emerald-deep)}
+.desc{font-size:.92rem;color:var(--mid);line-height:1.6}
+.tag{position:absolute;top:22px;right:20px;font-size:.66rem;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,#fff);
+  padding:5px 11px;border-radius:20px;border:1px solid color-mix(in srgb,var(--accent) 25%,#fff)}
+.metric{margin-top:18px;display:flex;align-items:baseline;gap:8px}
+.metric b{font-family:'Fraunces',serif;font-size:1.7rem;color:var(--accent)}
+.metric span{font-size:.8rem;color:var(--mid)}
+
+/* per-card accent palettes (brand colors) */
+.c-emerald{--accent:#0d7a5f;--accent2:#1a9d8f}
+.c-coral  {--accent:#e0603c;--accent2:#bd8419}
+.c-gold   {--accent:#bd8419;--accent2:#e0603c}
+.c-teal   {--accent:#1a9d8f;--accent2:#0d7a5f}
+.c-plum   {--accent:#7a4a7e;--accent2:#1a9d8f}
+.c-deep   {--accent:#094b3a;--accent2:#0d7a5f}
+
+.note{margin-top:60px;padding:22px 26px;border-radius:14px;background:rgba(255,255,255,.7);
+  border-left:4px solid var(--emerald);font-size:.9rem;color:var(--mid);line-height:1.6;max-width:760px}
+.note b{color:var(--emerald-deep)}
+
+@media (prefers-reduced-motion: reduce){
+  .blob{animation:none}.card3d-inner,.layer,.card3d-inner::after{transition:none;animation:none}
+}
+</style>
+</head>
+<body>
+<div class="ambient"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+
+<div class="wrap">
+  <header class="head">
+    <span class="kicker">Capital Bridge · Graphics System</span>
+    <h1>Detailed 3D graphics cards</h1>
+    <p>A reusable, brand-matched 3D card system for the Capital Bridge platform — real perspective,
+    pointer-tracked lighting, layered depth, and animated gradient accents. Built in pure CSS + vanilla
+    JS so it runs anywhere, with no external dependencies. Hover a card to see the depth.</p>
+  </header>
+
+  <section class="grid" id="grid">
+    <article class="card3d c-emerald"><div class="card3d-inner">
+      <span class="tag layer">Capital</span>
+      <div class="ic layer">💳</div>
+      <h3 class="ttl layer">Debt Relief</h3>
+      <p class="desc layer">Consolidate and restructure high-interest business debt into a single, lower
+      monthly path — with a clear payoff timeline.</p>
+      <div class="metric layer"><b>−38%</b><span>avg. monthly interest</span></div>
+    </div></article>
+
+    <article class="card3d c-coral"><div class="card3d-inner">
+      <span class="tag layer">Savings</span>
+      <div class="ic layer">🖥️</div>
+      <h3 class="ttl layer">POS Savings</h3>
+      <p class="desc layer">Audit processing fees and route transactions intelligently to cut card-processing
+      costs without changing your checkout.</p>
+      <div class="metric layer"><b>$1.4k</b><span>typical monthly recovery</span></div>
+    </div></article>
+
+    <article class="card3d c-gold"><div class="card3d-inner">
+      <span class="tag layer">Planner</span>
+      <div class="ic layer">📈</div>
+      <h3 class="ttl layer">ROI Planner</h3>
+      <p class="desc layer">Model capital deployment scenarios and see projected return, break-even, and
+      cash-flow impact before you commit.</p>
+      <div class="metric layer"><b>3.2×</b><span>modeled return</span></div>
+    </div></article>
+
+    <article class="card3d c-teal"><div class="card3d-inner">
+      <span class="tag layer">Profile</span>
+      <div class="ic layer">✅</div>
+      <h3 class="ttl layer">Credit Check</h3>
+      <p class="desc layer">Soft-pull your business credit profile and get an optimization roadmap that lifts
+      approval odds across lenders.</p>
+      <div class="metric layer"><b>+72</b><span>avg. score lift potential</span></div>
+    </div></article>
+
+    <article class="card3d c-deep"><div class="card3d-inner">
+      <span class="tag layer">Network</span>
+      <div class="ic layer">🏦</div>
+      <h3 class="ttl layer">Funding &amp; Lenders</h3>
+      <p class="desc layer">Match to a vetted lender network by profile and need — term loans, lines of
+      credit, equipment, and revenue-based capital.</p>
+      <div class="metric layer"><b>40+</b><span>matched lenders</span></div>
+    </div></article>
+
+    <article class="card3d c-plum"><div class="card3d-inner">
+      <span class="tag layer">AI</span>
+      <div class="ic layer">🧠</div>
+      <h3 class="ttl layer">Investment AI</h3>
+      <p class="desc layer">An intelligence layer that surfaces opportunities, flags risk, and turns your
+      numbers into a clear next action.</p>
+      <div class="metric layer"><b>24/7</b><span>monitoring</span></div>
+    </div></article>
+  </section>
+
+  <div class="note">
+    <b>How this fits the build.</b> These cards are the first concrete piece of the graphics system.
+    The accompanying <span class="mono">graphic-design-specialist.md</span> and
+    <span class="mono">graphic-design-course.md</span> document the full process, tools, and curriculum
+    behind them. When the reference video is reachable (or you paste its transcript / screenshots), I'll
+    tune the depth, palette weighting, and motion to match that style precisely — and integrate the
+    finished cards directly into <span class="mono">index.html</span>.
+  </div>
+</div>
+
+<script>
+// Pointer-tracked 3D tilt + lighting. Respects reduced-motion.
+(function(){
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const MAX = 14; // degrees
+  document.querySelectorAll('.card3d').forEach(card=>{
+    const inner = card.querySelector('.card3d-inner');
+    let raf = null;
+    card.addEventListener('pointermove', e=>{
+      const r = card.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width;
+      const py = (e.clientY - r.top) / r.height;
+      card.style.setProperty('--mx', (px*100).toFixed(1)+'%');
+      card.style.setProperty('--my', (py*100).toFixed(1)+'%');
+      if (raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(()=>{
+        const rx = ((0.5 - py) * MAX).toFixed(2);
+        const ry = ((px - 0.5) * MAX).toFixed(2);
+        inner.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+      });
+    });
+    card.addEventListener('pointerleave', ()=>{
+      if (raf) cancelAnimationFrame(raf);
+      inner.style.transform = 'rotateX(0deg) rotateY(0deg)';
+    });
+  });
+})();
+</script>
+</body>
+</html>

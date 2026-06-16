@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Capital Bridge · Graphic Design Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Capital Bridge — Graphic Design Studio (no-code tool)
+   Self-contained. No external runtime dependencies (works behind
+   a strict egress proxy / fully offline). Build a branded 3D card
+   with form fields + sliders, preview live, copy or download code.
+   ============================================================ */
+:root{
+  --bg:#f6f1e7;--emerald:#0d7a5f;--emerald-deep:#094b3a;--coral:#e0603c;
+  --gold:#bd8419;--teal:#1a9d8f;--plum:#7a4a7e;--white:#fff;--dark:#1a1a1a;
+  --mid:#555;--light:#e8e2d6;--line:#d9d2c4;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--dark)}
+h1,h2,h3,.serif{font-family:'Fraunces',Georgia,serif}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+
+header.top{background:var(--emerald-deep);color:#fff;padding:16px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+header.top .brand{font-family:'Fraunces',serif;font-weight:700;font-size:1.15rem}
+header.top .sub{color:rgba(255,255,255,.7);font-size:.82rem}
+header.top .spacer{flex:1}
+header.top .hint{font-size:.78rem;color:rgba(255,255,255,.65);max-width:420px}
+
+.app{display:grid;grid-template-columns:340px 1fr;gap:0;min-height:calc(100vh - 60px)}
+@media (max-width:860px){.app{grid-template-columns:1fr}}
+
+/* ---- control panel ---- */
+.panel{background:#fff;border-right:1px solid var(--line);padding:18px 18px 40px;overflow-y:auto}
+.group{margin-bottom:22px}
+.group > .glabel{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--emerald-deep);margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.group > .glabel::before{content:'';width:14px;height:14px;border-radius:4px;background:var(--emerald)}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:.8rem;font-weight:600;color:var(--mid);margin-bottom:5px}
+.field input[type=text],.field textarea,.field select{
+  width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:8px;
+  font-family:inherit;font-size:.9rem;background:#fff;outline:none;transition:border-color .15s}
+.field textarea{resize:vertical;min-height:60px;line-height:1.5}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--emerald)}
+.row{display:flex;gap:10px}.row > *{flex:1}
+.swatches{display:flex;gap:8px;flex-wrap:wrap}
+.sw{width:30px;height:30px;border-radius:8px;cursor:pointer;border:2px solid transparent;
+  box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.sw.active{border-color:var(--dark);transform:scale(1.08)}
+.range{display:flex;align-items:center;gap:10px}
+.range input[type=range]{flex:1}
+.range output{font-size:.78rem;color:var(--mid);min-width:38px;text-align:right}
+.check{display:flex;align-items:center;gap:9px;font-size:.85rem;color:var(--dark);cursor:pointer;padding:4px 0}
+.check input{width:17px;height:17px;accent-color:var(--emerald)}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.btn{flex:1;min-width:120px;border:none;border-radius:9px;padding:11px 12px;font-family:inherit;
+  font-weight:600;font-size:.85rem;cursor:pointer;transition:transform .12s,filter .15s}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--emerald);color:#fff}
+.btn.primary:hover{filter:brightness(1.07)}
+.btn.ghost{background:var(--light);color:var(--emerald-deep)}
+.btn.ghost:hover{filter:brightness(.97)}
+.tiny{font-size:.74rem;color:var(--mid);line-height:1.5;margin-top:8px}
+
+/* ---- stage / preview ---- */
+.stage-wrap{padding:34px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  background:
+    radial-gradient(700px 400px at 20% 0%, rgba(26,157,143,.16), transparent 60%),
+    radial-gradient(600px 400px at 100% 20%, rgba(224,96,60,.12), transparent 55%),
+    var(--bg)}
+.stage-title{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-bottom:18px}
+#stage{perspective:1400px;width:100%;max-width:360px;margin-bottom:8px}
+
+/* the generated card uses .cbcard scope (matches export exactly) */
+.cbcard{position:relative;border-radius:18px;transform-style:preserve-3d}
+.cbcard .cbinner{position:relative;border-radius:18px;padding:30px 26px 28px;min-height:280px;
+  transform-style:preserve-3d;overflow:hidden;
+  transition:transform .18s cubic-bezier(.2,.7,.2,1),box-shadow .25s;
+  box-shadow:0 18px 40px -18px rgba(9,75,58,.45),0 2px 6px rgba(0,0,0,.05)}
+.cbcard .cbinner::after{content:'';position:absolute;left:0;top:0;height:6px;width:100%;
+  background:linear-gradient(90deg,var(--a),var(--a2));background-size:200% 100%}
+.cbcard.anim .cbinner::after{animation:cbslide 4s linear infinite}
+@keyframes cbslide{to{background-position:200% 0}}
+.cbcard .cbinner::before{content:'';position:absolute;inset:0;border-radius:18px;pointer-events:none;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.55),transparent 45%);
+  opacity:0;transition:opacity .25s;z-index:2}
+.cbcard:hover .cbinner::before{opacity:1}
+.cbsolid .cbinner{background:#fff;border:1px solid var(--line)}
+.cbglass .cbinner{background:linear-gradient(160deg,rgba(255,255,255,.96),rgba(255,255,255,.8));
+  border:1px solid rgba(255,255,255,.7);backdrop-filter:blur(6px)}
+.cblayer{transition:transform .18s cubic-bezier(.2,.7,.2,1)}
+.cbcard:hover .cbic{transform:translateZ(var(--pop,55px))}
+.cbcard:hover .cbttl{transform:translateZ(calc(var(--pop,55px) * .66))}
+.cbcard:hover .cbdesc{transform:translateZ(calc(var(--pop,55px) * .4))}
+.cbcard:hover .cbtag{transform:translateZ(calc(var(--pop,55px) * 1.15))}
+.cbic{width:62px;height:62px;border-radius:16px;display:grid;place-items:center;font-size:1.9rem;
+  background:linear-gradient(150deg,var(--a),var(--a2));color:#fff;
+  box-shadow:0 12px 24px -8px var(--a);margin-bottom:18px}
+.cbttl{font-family:'Fraunces',serif;font-size:1.3rem;margin-bottom:8px;color:var(--emerald-deep)}
+.cbdesc{font-size:.92rem;color:var(--mid);line-height:1.6}
+.cbtag{position:absolute;top:22px;right:20px;font-size:.66rem;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--a);background:color-mix(in srgb,var(--a) 12%,#fff);
+  padding:5px 11px;border-radius:20px;border:1px solid color-mix(in srgb,var(--a) 25%,#fff)}
+.cbmetric{margin-top:18px;display:flex;align-items:baseline;gap:8px}
+.cbmetric b{font-family:'Fraunces',serif;font-size:1.7rem;color:var(--a)}
+.cbmetric span{font-size:.8rem;color:var(--mid)}
+
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--emerald-deep);color:#fff;padding:11px 20px;border-radius:30px;font-size:.85rem;
+  opacity:0;transition:all .25s;pointer-events:none;z-index:50}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+.code-wrap{width:100%;max-width:680px;margin-top:18px}
+.code-wrap summary{cursor:pointer;font-size:.82rem;font-weight:600;color:var(--emerald-deep);
+  padding:8px 0}
+#code{width:100%;min-height:180px;font-family:'JetBrains Mono',monospace;font-size:.72rem;
+  border:1.5px solid var(--line);border-radius:10px;padding:12px;background:#fff;color:#333;resize:vertical}
+
+@media (prefers-reduced-motion:reduce){.cbcard *{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <span class="brand">Capital Bridge</span>
+  <span class="sub">Graphic Design Studio</span>
+  <span class="spacer"></span>
+  <span class="hint">Fill in the fields, drag the sliders, hover the card to see the depth. Then
+  copy or download the code. No design experience needed.</span>
+</header>
+
+<div class="app">
+  <!-- ============ CONTROLS ============ -->
+  <aside class="panel">
+    <div class="group">
+      <div class="glabel">Content</div>
+      <div class="field"><label>Title</label><input type="text" id="f-title" value="Working Capital"></div>
+      <div class="field"><label>Tag (top-right pill)</label><input type="text" id="f-tag" value="Funding"></div>
+      <div class="field"><label>Description</label><textarea id="f-desc">Fast, flexible capital matched to your business — a clear decision in days, not weeks.</textarea></div>
+      <div class="field"><label>Icon (emoji)</label><input type="text" id="f-icon" value="💰" maxlength="4"></div>
+      <div class="row">
+        <div class="field"><label>Metric</label><input type="text" id="f-mval" value="48hr"></div>
+        <div class="field"><label>Metric label</label><input type="text" id="f-mlabel" value="funding decision"></div>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="glabel">Brand accent</div>
+      <div class="field">
+        <div class="swatches" id="swatches"></div>
+        <div class="tiny">Tap a brand color, or fine-tune below.</div>
+      </div>
+      <div class="row">
+        <div class="field"><label>Accent</label><input type="color" id="f-a" value="#0d7a5f" style="width:100%;height:38px;border:1.5px solid var(--line);border-radius:8px;background:#fff"></div>
+        <div class="field"><label>Accent 2</label><input type="color" id="f-a2" value="#1a9d8f" style="width:100%;height:38px;border:1.5px solid var(--line);border-radius:8px;background:#fff"></div>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="glabel">Depth &amp; finish</div>
+      <div class="field"><label>Tilt strength</label>
+        <div class="range"><input type="range" id="f-tilt" min="0" max="22" value="14"><output id="o-tilt">14°</output></div></div>
+      <div class="field"><label>Pop / depth</label>
+        <div class="range"><input type="range" id="f-pop" min="0" max="90" value="55"><output id="o-pop">55px</output></div></div>
+      <label class="check"><input type="checkbox" id="f-glass" checked> Glass surface (vs. solid white)</label>
+      <label class="check"><input type="checkbox" id="f-anim" checked> Animated accent bar</label>
+    </div>
+
+    <div class="group">
+      <div class="glabel">Build</div>
+      <div class="btnrow">
+        <button class="btn ghost" id="b-random">🎲 Randomize</button>
+        <button class="btn ghost" id="b-reset">↺ Reset</button>
+      </div>
+      <div class="btnrow">
+        <button class="btn primary" id="b-copy">📋 Copy HTML</button>
+        <button class="btn primary" id="b-download">⬇ Download</button>
+      </div>
+      <div class="tiny">“Copy HTML” gives a self-contained block you can paste anywhere. Want it in
+      the live site? Send it to me and I’ll drop it into <span class="mono">index.html</span>.</div>
+    </div>
+  </aside>
+
+  <!-- ============ PREVIEW ============ -->
+  <main class="stage-wrap">
+    <div class="stage-title">Live preview · hover to feel the depth</div>
+    <div id="stage"></div>
+    <details class="code-wrap">
+      <summary>View generated code</summary>
+      <textarea id="code" readonly spellcheck="false"></textarea>
+    </details>
+  </main>
+</div>
+
+<div class="toast" id="toast">Copied!</div>
+
+<script>
+(function(){
+  "use strict";
+  var BRAND = [
+    {name:"Emerald", a:"#0d7a5f", a2:"#1a9d8f"},
+    {name:"Coral",   a:"#e0603c", a2:"#bd8419"},
+    {name:"Gold",    a:"#bd8419", a2:"#e0603c"},
+    {name:"Teal",    a:"#1a9d8f", a2:"#0d7a5f"},
+    {name:"Plum",    a:"#7a4a7e", a2:"#1a9d8f"},
+    {name:"Deep",    a:"#094b3a", a2:"#0d7a5f"}
+  ];
+  var SAMPLES = [
+    {title:"Debt Relief", tag:"Capital", icon:"💳", desc:"Consolidate high-interest business debt into one lower monthly path with a clear payoff timeline.", mval:"−38%", mlabel:"avg. interest"},
+    {title:"ROI Planner", tag:"Planner", icon:"📈", desc:"Model capital scenarios and see projected return and break-even before you commit a dollar.", mval:"3.2×", mlabel:"modeled return"},
+    {title:"Credit Check", tag:"Profile", icon:"✅", desc:"Soft-pull your business credit and get a roadmap that lifts approval odds across lenders.", mval:"+72", mlabel:"score lift"},
+    {title:"Investment AI", tag:"AI", icon:"🧠", desc:"An intelligence layer that flags risk and turns your numbers into a clear next action.", mval:"24/7", mlabel:"monitoring"}
+  ];
+  var DEFAULT = {title:"Working Capital",tag:"Funding",icon:"💰",
+    desc:"Fast, flexible capital matched to your business — a clear decision in days, not weeks.",
+    mval:"48hr",mlabel:"funding decision",a:"#0d7a5f",a2:"#1a9d8f",tilt:14,pop:55,glass:true,anim:true};
+
+  var $ = function(id){return document.getElementById(id);};
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+  function read(){
+    return {
+      title:$('f-title').value, tag:$('f-tag').value, icon:$('f-icon').value,
+      desc:$('f-desc').value, mval:$('f-mval').value, mlabel:$('f-mlabel').value,
+      a:$('f-a').value, a2:$('f-a2').value,
+      tilt:+$('f-tilt').value, pop:+$('f-pop').value,
+      glass:$('f-glass').checked, anim:$('f-anim').checked
+    };
+  }
+
+  // Build the self-contained, paste-anywhere block (scoped under .cbcard).
+  function buildExport(s){
+    var css =
+'<style>\n'+
+'.cbcard{position:relative;border-radius:18px;transform-style:preserve-3d;--a:'+s.a+';--a2:'+s.a2+';--pop:'+s.pop+'px}\n'+
+'.cbcard .cbinner{position:relative;border-radius:18px;padding:30px 26px 28px;min-height:280px;transform-style:preserve-3d;overflow:hidden;transition:transform .18s cubic-bezier(.2,.7,.2,1),box-shadow .25s;box-shadow:0 18px 40px -18px rgba(9,75,58,.45),0 2px 6px rgba(0,0,0,.05);'+
+(s.glass?'background:linear-gradient(160deg,rgba(255,255,255,.96),rgba(255,255,255,.8));border:1px solid rgba(255,255,255,.7)':'background:#fff;border:1px solid #d9d2c4')+'}\n'+
+'.cbcard .cbinner::after{content:"";position:absolute;left:0;top:0;height:6px;width:100%;background:linear-gradient(90deg,var(--a),var(--a2));background-size:200% 100%;'+(s.anim?'animation:cbslide 4s linear infinite':'')+'}\n'+
+(s.anim?'@keyframes cbslide{to{background-position:200% 0}}\n':'')+
+'.cbcard:hover .cbic{transform:translateZ(var(--pop))}\n'+
+'.cbcard:hover .cbttl{transform:translateZ(calc(var(--pop) * .66))}\n'+
+'.cbcard:hover .cbtag{transform:translateZ(calc(var(--pop) * 1.15))}\n'+
+'.cbic{width:62px;height:62px;border-radius:16px;display:grid;place-items:center;font-size:1.9rem;background:linear-gradient(150deg,var(--a),var(--a2));color:#fff;box-shadow:0 12px 24px -8px var(--a);margin-bottom:18px;transition:transform .18s}\n'+
+'.cbttl{font-family:"Fraunces",serif;font-size:1.3rem;margin-bottom:8px;color:#094b3a;transition:transform .18s}\n'+
+'.cbdesc{font-size:.92rem;color:#555;line-height:1.6}\n'+
+'.cbtag{position:absolute;top:22px;right:20px;font-size:.66rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--a);background:color-mix(in srgb,var(--a) 12%,#fff);padding:5px 11px;border-radius:20px;border:1px solid color-mix(in srgb,var(--a) 25%,#fff);transition:transform .18s}\n'+
+'.cbmetric{margin-top:18px;display:flex;align-items:baseline;gap:8px}\n'+
+'.cbmetric b{font-family:"Fraunces",serif;font-size:1.7rem;color:var(--a)}\n'+
+'.cbmetric span{font-size:.8rem;color:#555}\n'+
+'</style>';
+    var metric = (s.mval||s.mlabel)?
+      '\n    <div class="cbmetric"><b>'+esc(s.mval)+'</b><span>'+esc(s.mlabel)+'</span></div>':'';
+    var html =
+'<article class="cbcard" data-tilt="'+s.tilt+'">\n'+
+'  <div class="cbinner">\n'+
+'    <span class="cbtag">'+esc(s.tag)+'</span>\n'+
+'    <div class="cbic">'+esc(s.icon)+'</div>\n'+
+'    <h3 class="cbttl">'+esc(s.title)+'</h3>\n'+
+'    <p class="cbdesc">'+esc(s.desc)+'</p>'+metric+'\n'+
+'  </div>\n'+
+'</article>';
+    return css+'\n'+html;
+  }
+
+  // Live preview (uses the page's own .cbcard CSS for smoothness).
+  function renderPreview(s){
+    var cls = 'cbcard '+(s.glass?'cbglass':'cbsolid')+(s.anim?' anim':'');
+    var metric = (s.mval||s.mlabel)?
+      '<div class="cbmetric"><b>'+esc(s.mval)+'</b><span>'+esc(s.mlabel)+'</span></div>':'';
+    $('stage').innerHTML =
+      '<article class="'+cls+'" data-tilt="'+s.tilt+'" style="--a:'+s.a+';--a2:'+s.a2+';--pop:'+s.pop+'px">'+
+        '<div class="cbinner">'+
+          '<span class="cbtag cblayer">'+esc(s.tag)+'</span>'+
+          '<div class="cbic cblayer">'+esc(s.icon)+'</div>'+
+          '<h3 class="cbttl cblayer">'+esc(s.title)+'</h3>'+
+          '<p class="cbdesc cblayer">'+esc(s.desc)+'</p>'+metric+
+        '</div>'+
+      '</article>';
+  }
+
+  function update(){
+    var s = read();
+    $('o-tilt').textContent = s.tilt+'°';
+    $('o-pop').textContent = s.pop+'px';
+    renderPreview(s);
+    $('code').value = buildExport(s);
+    // mark active swatch if it matches a brand pair
+    document.querySelectorAll('.sw').forEach(function(el){
+      el.classList.toggle('active', el.dataset.a===s.a && el.dataset.a2===s.a2);
+    });
+  }
+
+  function setState(s){
+    $('f-title').value=s.title;$('f-tag').value=s.tag;$('f-icon').value=s.icon;$('f-desc').value=s.desc;
+    $('f-mval').value=s.mval;$('f-mlabel').value=s.mlabel;$('f-a').value=s.a;$('f-a2').value=s.a2;
+    $('f-tilt').value=s.tilt;$('f-pop').value=s.pop;$('f-glass').checked=s.glass;$('f-anim').checked=s.anim;
+    update();
+  }
+
+  function toast(msg){var t=$('toast');t.textContent=msg;t.classList.add('show');
+    clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('show');},1600);}
+
+  function copy(text,msg){
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){toast(msg||'Copied!');},fallback);
+    } else { fallback(); }
+    function fallback(){var c=$('code');c.focus();c.select();
+      try{document.execCommand('copy');toast(msg||'Copied!');}catch(e){toast('Press Ctrl/Cmd+C');}}
+  }
+
+  // ---- build swatches ----
+  var sw = $('swatches');
+  BRAND.forEach(function(b){
+    var d=document.createElement('div');d.className='sw';d.title=b.name;
+    d.dataset.a=b.a;d.dataset.a2=b.a2;
+    d.style.background='linear-gradient(135deg,'+b.a+','+b.a2+')';
+    d.addEventListener('click',function(){$('f-a').value=b.a;$('f-a2').value=b.a2;update();});
+    sw.appendChild(d);
+  });
+
+  // ---- wire inputs ----
+  ['f-title','f-tag','f-icon','f-desc','f-mval','f-mlabel','f-a','f-a2','f-tilt','f-pop','f-glass','f-anim']
+    .forEach(function(id){var el=$(id);el.addEventListener('input',update);el.addEventListener('change',update);});
+
+  $('b-reset').addEventListener('click',function(){setState(DEFAULT);toast('Reset');});
+  $('b-random').addEventListener('click',function(){
+    var x=SAMPLES[Math.floor(Math.random()*SAMPLES.length)];
+    var b=BRAND[Math.floor(Math.random()*BRAND.length)];
+    setState({title:x.title,tag:x.tag,icon:x.icon,desc:x.desc,mval:x.mval,mlabel:x.mlabel,
+      a:b.a,a2:b.a2,tilt:8+Math.floor(Math.random()*14),pop:35+Math.floor(Math.random()*45),
+      glass:Math.random()>.3,anim:true});
+    toast('Randomized');
+  });
+  $('b-copy').addEventListener('click',function(){copy(buildExport(read()),'HTML copied!');});
+  $('b-download').addEventListener('click',function(){
+    var s=read();
+    var doc='<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n'+
+      '<meta name="viewport" content="width=device-width,initial-scale=1">\n'+
+      '<title>'+esc(s.title)+' · Capital Bridge graphic</title>\n'+
+      '<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">\n'+
+      '<style>body{font-family:"Plus Jakarta Sans",sans-serif;background:#f6f1e7;display:grid;place-items:center;min-height:100vh;margin:0;perspective:1400px}</style>\n'+
+      '</head>\n<body>\n'+buildExport(s)+'\n'+
+      '<script>document.querySelectorAll(".cbcard").forEach(function(c){var i=c.querySelector(".cbinner"),m=+c.dataset.tilt||0;c.addEventListener("pointermove",function(e){var r=c.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;c.style.setProperty("--mx",(px*100)+"%");c.style.setProperty("--my",(py*100)+"%");i.style.transform="rotateX("+((0.5-py)*m)+"deg) rotateY("+((px-0.5)*m)+"deg)";});c.addEventListener("pointerleave",function(){i.style.transform="rotateX(0) rotateY(0)";});});<\/script>\n'+
+      '</body>\n</html>';
+    var blob=new Blob([doc],{type:'text/html'});
+    var url=URL.createObjectURL(blob);var a=document.createElement('a');
+    a.href=url;a.download=(s.title||'graphic').toLowerCase().replace(/[^a-z0-9]+/g,'-')+'.html';
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+    toast('Downloaded .html');
+  });
+
+  // ---- 3D tilt on the live preview (event delegation; survives re-render) ----
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var stage = $('stage');
+  if(!reduce){
+    stage.addEventListener('pointermove',function(e){
+      var card=stage.querySelector('.cbcard'); if(!card) return;
+      var inner=card.querySelector('.cbinner'); var max=+card.dataset.tilt||0;
+      var r=card.getBoundingClientRect();
+      var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+      card.style.setProperty('--mx',(px*100).toFixed(1)+'%');
+      card.style.setProperty('--my',(py*100).toFixed(1)+'%');
+      inner.style.transform='rotateX('+((0.5-py)*max).toFixed(2)+'deg) rotateY('+((px-0.5)*max).toFixed(2)+'deg)';
+    });
+    stage.addEventListener('pointerleave',function(){
+      var inner=stage.querySelector('.cbinner'); if(inner) inner.style.transform='rotateX(0deg) rotateY(0deg)';
+    });
+  }
+
+  // init
+  setState(DEFAULT);
+})();
+</script>
+</body>
+</html>
