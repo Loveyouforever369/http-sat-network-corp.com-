@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Capital Bridge · Background &amp; Gradient Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Capital Bridge — Background & Gradient Studio
+   Make mesh gradients, grain, and motion; export CSS / PNG / HTML.
+   Self-contained, no runtime deps. Offline-safe.
+   ============================================================ */
+:root{
+  --bg:#f6f1e7;--emerald:#0d7a5f;--emerald-deep:#094b3a;--coral:#e0603c;
+  --gold:#bd8419;--teal:#1a9d8f;--plum:#7a4a7e;--ink:#15211d;--mid:#5a5a52;--line:#ddd5c6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--ink);background:var(--bg)}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+
+header.top{background:var(--emerald-deep);color:#fff;padding:15px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+header.top .brand{font-family:'Fraunces',serif;font-weight:700;font-size:1.12rem}
+header.top .sub{color:rgba(255,255,255,.7);font-size:.82rem}
+header.top .spacer{flex:1}
+header.top .hint{font-size:.78rem;color:rgba(255,255,255,.65);max-width:430px}
+
+.app{display:grid;grid-template-columns:330px 1fr;min-height:calc(100vh - 58px)}
+@media (max-width:880px){.app{grid-template-columns:1fr}}
+
+.panel{background:#fff;border-right:1px solid var(--line);padding:18px 18px 40px;overflow-y:auto}
+.group{margin-bottom:22px}
+.glabel{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--emerald-deep);
+  margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.glabel::before{content:'';width:14px;height:14px;border-radius:4px;background:var(--emerald)}
+.presets{display:flex;gap:8px;flex-wrap:wrap}
+.preset{height:34px;flex:1;min-width:64px;border-radius:8px;border:2px solid transparent;cursor:pointer;
+  box-shadow:0 1px 3px rgba(0,0,0,.2);font-size:0}
+.preset.active{border-color:var(--ink);transform:scale(1.04)}
+.colorgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.colorgrid input[type=color]{width:100%;height:40px;border:1.5px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;padding:2px}
+.field{margin-bottom:13px}
+.field label{display:block;font-size:.8rem;font-weight:600;color:var(--mid);margin-bottom:5px}
+.range{display:flex;align-items:center;gap:10px}
+.range input[type=range]{flex:1;accent-color:var(--emerald)}
+.range output{font-size:.78rem;color:var(--mid);min-width:46px;text-align:right}
+.check{display:flex;align-items:center;gap:9px;font-size:.85rem;cursor:pointer;padding:4px 0}
+.check input{width:17px;height:17px;accent-color:var(--emerald)}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.btn{flex:1;min-width:110px;border:none;border-radius:9px;padding:11px 12px;font-family:inherit;font-weight:600;
+  font-size:.85rem;cursor:pointer;transition:transform .12s,filter .15s}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--emerald);color:#fff}.btn.primary:hover{filter:brightness(1.08)}
+.btn.ghost{background:var(--bg);color:var(--emerald-deep);border:1px solid var(--line)}.btn.ghost:hover{filter:brightness(.97)}
+.tiny{font-size:.74rem;color:var(--mid);line-height:1.5;margin-top:8px}
+
+.stage-wrap{position:relative;padding:26px;display:flex;flex-direction:column;gap:14px}
+#stage{position:relative;flex:1;min-height:440px;border-radius:18px;overflow:hidden;border:1px solid var(--line);
+  box-shadow:0 16px 50px -24px rgba(9,75,58,.5)}
+#meshLayer{position:absolute;inset:-15%;transform-origin:center}
+#meshLayer.spin{animation:drift var(--spd,16s) ease-in-out infinite}
+@keyframes drift{0%,100%{transform:scale(1.05) rotate(0deg)}50%{transform:scale(1.18) rotate(8deg)}}
+#grainLayer{position:absolute;inset:0;mix-blend-mode:overlay;pointer-events:none;background-size:180px 180px}
+.stage-label{position:absolute;left:14px;bottom:12px;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+  color:#fff;background:rgba(0,0,0,.25);padding:5px 12px;border-radius:20px;backdrop-filter:blur(4px)}
+.code-wrap summary{cursor:pointer;font-size:.82rem;font-weight:600;color:var(--emerald-deep);padding:6px 0}
+#css{width:100%;min-height:120px;font-family:'JetBrains Mono',monospace;font-size:.72rem;border:1.5px solid var(--line);
+  border-radius:10px;padding:12px;background:#fff;color:#333;resize:vertical}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--emerald-deep);
+  color:#fff;padding:11px 20px;border-radius:30px;font-size:.85rem;opacity:0;transition:.25s;pointer-events:none;z-index:50}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media (prefers-reduced-motion:reduce){#meshLayer.spin{animation:none}}
+</style>
+</head>
+<body>
+<header class="top">
+  <span class="brand">Capital Bridge</span><span class="sub">Background &amp; Gradient Studio</span>
+  <span class="spacer"></span>
+  <span class="hint">Build a mesh gradient, add grain &amp; motion, then Copy CSS, Download PNG, or Download HTML.</span>
+</header>
+
+<div class="app">
+  <aside class="panel">
+    <div class="group">
+      <div class="glabel">Palette presets</div>
+      <div class="presets" id="presets"></div>
+      <div class="tiny">Or set each color below.</div>
+    </div>
+    <div class="group">
+      <div class="glabel">Colors</div>
+      <div class="colorgrid">
+        <input type="color" id="c0" value="#094b3a" title="Color 1">
+        <input type="color" id="c1" value="#1a9d8f" title="Color 2">
+        <input type="color" id="c2" value="#e0603c" title="Color 3">
+        <input type="color" id="c3" value="#bd8419" title="Color 4">
+        <input type="color" id="base" value="#f6f1e7" title="Base">
+      </div>
+    </div>
+    <div class="group">
+      <div class="glabel">Look</div>
+      <div class="field"><label>Spread / softness <span id="oSpread" class="mono">58%</span></label>
+        <div class="range"><input type="range" id="spread" min="30" max="95" value="58"></div></div>
+      <label class="check"><input type="checkbox" id="grain" checked> Film grain</label>
+      <div class="field"><label>Grain amount <span id="oGrain" class="mono">35%</span></label>
+        <div class="range"><input type="range" id="grainAmt" min="0" max="100" value="35"></div></div>
+      <label class="check"><input type="checkbox" id="animate"> Animate (slow drift)</label>
+      <div class="field"><label>Speed <span id="oSpeed" class="mono">16s</span></label>
+        <div class="range"><input type="range" id="speed" min="6" max="30" value="16"></div></div>
+    </div>
+    <div class="group">
+      <div class="glabel">Build</div>
+      <div class="btnrow">
+        <button class="btn ghost" id="shuffle">🎲 Shuffle</button>
+        <button class="btn ghost" id="reset">↺ Reset</button>
+      </div>
+      <div class="btnrow">
+        <button class="btn primary" id="copyCss">📋 Copy CSS</button>
+        <button class="btn primary" id="png">🖼 PNG</button>
+        <button class="btn primary" id="html">⬇ HTML</button>
+      </div>
+      <div class="tiny">PNG exports at 1600×1000. CSS is a ready <span class="mono">background</span> block.</div>
+    </div>
+  </aside>
+
+  <main class="stage-wrap">
+    <div id="stage"><div id="meshLayer"></div><div id="grainLayer"></div><div class="stage-label">Live preview</div></div>
+    <details class="code-wrap"><summary>View CSS</summary><textarea id="css" readonly spellcheck="false"></textarea></details>
+  </main>
+</div>
+<div class="toast" id="toast">Copied!</div>
+
+<script>
+(function(){
+  "use strict";
+  var $=function(id){return document.getElementById(id);};
+  var PRESETS=[
+    {n:"Capital",cols:["#094b3a","#1a9d8f","#e0603c","#bd8419"],base:"#f6f1e7"},
+    {n:"Ocean",  cols:["#063b2d","#0d7a5f","#1a9d8f","#7ad0c4"],base:"#eef6f3"},
+    {n:"Sunset", cols:["#7a2d12","#e0603c","#bd8419","#f0c25a"],base:"#fbf2e4"},
+    {n:"Royal",  cols:["#3a2147","#7a4a7e","#1a9d8f","#bd8419"],base:"#f3eef6"},
+    {n:"Mono",   cols:["#094b3a","#0d7a5f","#15211d","#5a5a52"],base:"#eef0ec"}
+  ];
+  var DEFAULT={cols:["#094b3a","#1a9d8f","#e0603c","#bd8419"],base:"#f6f1e7",spread:58,grain:true,grainAmt:35,animate:false,speed:16};
+  var pos=[];                          // positions per color
+  function randPos(){pos=[];for(var i=0;i<4;i++)pos.push({x:10+Math.random()*80,y:10+Math.random()*80});}
+  randPos();
+
+  function hexToRgb(h){h=h.replace('#','');if(h.length===3)h=h.split('').map(function(c){return c+c;}).join('');
+    return [parseInt(h.substr(0,2),16),parseInt(h.substr(2,2),16),parseInt(h.substr(4,2),16)];}
+  function rgba(h,a){var c=hexToRgb(h);return 'rgba('+c[0]+','+c[1]+','+c[2]+','+a+')';}
+
+  function state(){
+    return {cols:[$('c0').value,$('c1').value,$('c2').value,$('c3').value],base:$('base').value,
+      spread:+$('spread').value,grain:$('grain').checked,grainAmt:+$('grainAmt').value,
+      animate:$('animate').checked,speed:+$('speed').value};
+  }
+  function meshImage(s){
+    return s.cols.map(function(col,i){
+      var p=pos[i]||{x:50,y:50};
+      return 'radial-gradient(circle at '+p.x.toFixed(1)+'% '+p.y.toFixed(1)+'%, '+col+' 0%, transparent '+s.spread+'%)';
+    }).join(',');
+  }
+  function cssBlock(s){
+    return 'background-color:'+s.base+';\nbackground-image:\n  '+meshImage(s).replace(/,/g,',\n  ')+';';
+  }
+  // grain as inline SVG noise data-uri
+  var GRAIN="data:image/svg+xml,"+encodeURIComponent(
+    "<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+
+  function render(){
+    var s=state();
+    $('oSpread').textContent=s.spread+'%';$('oGrain').textContent=s.grainAmt+'%';$('oSpeed').textContent=s.speed+'s';
+    var ml=$('meshLayer');
+    ml.style.backgroundColor=s.base;ml.style.backgroundImage=meshImage(s);
+    ml.style.setProperty('--spd',s.speed+'s');
+    ml.classList.toggle('spin',s.animate);
+    var gl=$('grainLayer');
+    gl.style.backgroundImage=s.grain?"url(\""+GRAIN+"\")":'none';
+    gl.style.opacity=s.grain?(s.grainAmt/100*0.6):0;
+    $('css').value=cssBlock(s);
+    document.querySelectorAll('.preset').forEach(function(el){
+      el.classList.toggle('active', el.dataset.cols===s.cols.join(',')&&el.dataset.base===s.base);});
+  }
+
+  function setState(o){
+    $('c0').value=o.cols[0];$('c1').value=o.cols[1];$('c2').value=o.cols[2];$('c3').value=o.cols[3];$('base').value=o.base;
+    $('spread').value=o.spread;$('grain').checked=o.grain;$('grainAmt').value=o.grainAmt;
+    $('animate').checked=o.animate;$('speed').value=o.speed;render();
+  }
+  function toast(m){var t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('show');},1500);}
+  function copy(text,msg){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){toast(msg);},fb);}else fb();
+    function fb(){var c=$('css');c.focus();c.select();try{document.execCommand('copy');toast(msg);}catch(e){toast('Press Ctrl/Cmd+C');}}}
+
+  // presets
+  $('presets').innerHTML=PRESETS.map(function(p,i){
+    return '<button class="preset" data-i="'+i+'" data-cols="'+p.cols.join(',')+'" data-base="'+p.base+'" title="'+p.n+'" '+
+      'style="background:linear-gradient(120deg,'+p.cols.join(',')+')">'+p.n+'</button>';
+  }).join('');
+  Array.prototype.forEach.call(document.querySelectorAll('.preset'),function(b){
+    b.addEventListener('click',function(){var p=PRESETS[+b.dataset.i];
+      $('c0').value=p.cols[0];$('c1').value=p.cols[1];$('c2').value=p.cols[2];$('c3').value=p.cols[3];$('base').value=p.base;render();});
+  });
+
+  // canvas render for PNG
+  function renderCanvas(w,h){
+    var s=state();var cv=document.createElement('canvas');cv.width=w;cv.height=h;var ctx=cv.getContext('2d');
+    ctx.fillStyle=s.base;ctx.fillRect(0,0,w,h);
+    s.cols.forEach(function(col,i){var p=pos[i]||{x:50,y:50};
+      var cx=p.x/100*w,cy=p.y/100*h,r=s.spread/100*Math.max(w,h);
+      var g=ctx.createRadialGradient(cx,cy,0,cx,cy,r);
+      g.addColorStop(0,rgba(col,0.92));g.addColorStop(1,rgba(col,0));
+      ctx.fillStyle=g;ctx.fillRect(0,0,w,h);});
+    if(s.grain&&s.grainAmt>0){
+      var n=document.createElement('canvas');n.width=w;n.height=h;var nc=n.getContext('2d');
+      var img=nc.createImageData(w,h),d=img.data;
+      for(var i=0;i<d.length;i+=4){var v=(Math.random()*255)|0;d[i]=d[i+1]=d[i+2]=v;d[i+3]=Math.round(s.grainAmt/100*42);}
+      nc.putImageData(img,0,0);ctx.globalCompositeOperation='overlay';ctx.drawImage(n,0,0);ctx.globalCompositeOperation='source-over';
+    }
+    return cv;
+  }
+
+  // wire
+  ['c0','c1','c2','c3','base','spread','grain','grainAmt','animate','speed'].forEach(function(id){
+    var el=$(id);el.addEventListener('input',render);el.addEventListener('change',render);});
+  $('shuffle').addEventListener('click',function(){randPos();render();toast('Shuffled');});
+  $('reset').addEventListener('click',function(){randPos();setState(DEFAULT);toast('Reset');});
+  $('copyCss').addEventListener('click',function(){copy(cssBlock(state()),'CSS copied!');});
+  $('png').addEventListener('click',function(){
+    var cv=renderCanvas(1600,1000);
+    cv.toBlob(function(blob){var url=URL.createObjectURL(blob);var a=document.createElement('a');
+      a.href=url;a.download='capital-bridge-bg.png';document.body.appendChild(a);a.click();document.body.removeChild(a);
+      setTimeout(function(){URL.revokeObjectURL(url);},1000);toast('PNG downloaded');},'image/png');
+  });
+  $('html').addEventListener('click',function(){
+    var s=state();
+    var anim=s.animate?'\n  animation:drift '+s.speed+'s ease-in-out infinite;\n}\n@keyframes drift{0%,100%{transform:scale(1.05) rotate(0)}50%{transform:scale(1.18) rotate(8deg)}}\n.bg{':'';
+    var grain=s.grain?'\n.bg::after{content:"";position:absolute;inset:0;mix-blend-mode:overlay;opacity:'+(s.grainAmt/100*0.6).toFixed(2)+';background:url(\''+GRAIN+'\');background-size:180px 180px;pointer-events:none}':'';
+    var doc='<!DOCTYPE html>\n<html><head><meta charset="UTF-8"><title>Capital Bridge background</title>\n<style>\n'+
+      'html,body{margin:0;height:100%;overflow:hidden}\n'+
+      '.bg{position:fixed;inset:-15%;'+cssBlock(s).replace(/\n/g,'')+anim+'}\n'+grain+'\n</style></head>\n'+
+      '<body><div class="bg"></div></body></html>';
+    var blob=new Blob([doc],{type:'text/html'});var url=URL.createObjectURL(blob);var a=document.createElement('a');
+    a.href=url;a.download='capital-bridge-bg.html';document.body.appendChild(a);a.click();document.body.removeChild(a);
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);toast('HTML downloaded');
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

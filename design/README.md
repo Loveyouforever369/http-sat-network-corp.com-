@@ -8,13 +8,17 @@ proxy). Designed so anyone — no design background — can produce polished, on
 
 | File | What it is | Open it by… |
 |------|-----------|-------------|
-| **`lab.html`** ⭐ | **Start here.** The all-in-one **Design Lab**: Story (narrated), Studio, Learn, a full Tools hub, interactive Demos, and a Quiz — one beautiful app. | Double-click → opens in any browser |
+| **`lab.html`** ⭐ | **Start here.** The all-in-one **Design Lab**: Story (narrated), the **Cast** of 6 narrating design characters, Studio, **Backgrounds**, Learn, a full Tools hub, interactive Demos, and a Quiz — one beautiful app. | Double-click → opens in any browser |
 | **`studio.html`** | The **no-code Graphic Design Studio**. Type in fields, drag sliders, hover to feel the depth, then **Copy HTML** or **Download**. (Also embedded in the Lab.) | Double-click → opens in any browser |
+| **`backgrounds.html`** | **Background &amp; Gradient Studio** — mesh gradients, film grain, gentle motion; export **CSS / PNG / HTML**. | Double-click → opens in any browser |
 | **`graphics-showcase.html`** | The finished **3D card system** in brand colors — the quality bar to aim for. | Double-click → opens in any browser |
 | **`graphic-design-course.md`** | A plain-language **course** (Modules 0–12 + capstone) that teaches the whole process, tied to the Studio. | Any markdown viewer / GitHub |
 | **`graphic-design-specialist.md`** | The **operating manual** — process, principles, the full tool/plugin/resource stack, and how to learn from references responsibly. | Any markdown viewer / GitHub |
 | **`story.md`** | The original motivational story the AI avatar narrates (future of design / how AI made it easier). | Any markdown viewer / GitHub |
 | **`narration-script.md`** | Ready-to-render narration scripts + how to render them (HeyGen / Invideo / your own voice). | Any markdown viewer / GitHub |
+| **`avatar-cast.md`** | The 6-character "design faculty" — each avatar's look, voice, script, and the lecture running order for HeyGen / Invideo. | Any markdown viewer / GitHub |
+
+**Companion training deck (Gamma):** [Design Like a Pro — The Capital Bridge Guide](https://gamma.app/docs/9kpyizh3oefkaea) — a 10-slide visual deck generated to accompany the course.
 
 ## Quick start (2 minutes)
 
