@@ -503,6 +503,7 @@ button{font-family:inherit;cursor:pointer;color:inherit}
       <button class="btn ghost" id="beginSilent">Begin · silent</button>
       <a class="btn ghost" href="cinematic.html" style="text-decoration:none">🎬 The Film Series</a>
       <a class="btn ghost" href="toolkit.html" style="text-decoration:none">🧰 The Arsenal</a>
+      <a class="btn ghost" href="plan.html" style="text-decoration:none">🗓 90-Day Plan</a>
     </div>
     <p class="begin-note">A 42-screen cinematic briefing, narrated live by your AI avatar host. Use → ← or space to move, <b>P</b> to pause the voice, <b>D</b> for the deep-dive transcript, <b>F</b> for fullscreen. Headphones recommended.</p>
   </div>
@@ -642,7 +643,7 @@ button{font-family:inherit;cursor:pointer;color:inherit}
   </div>
   <div class="rec-foot">
     <div class="rec-foot-actions">
-      <button class="rec-btn" id="recBackup">⬇ Save backups</button>
+      <button class="rec-btn" id="recBackup">⬇ Download all (.zip)</button>
       <button class="rec-btn" id="recClear">Clear this slide</button>
     </div>
     <button class="btn solid" id="recDoneBtn">✓ Done — play the deck in my voice</button>
@@ -1935,13 +1936,36 @@ const FX=(function(){
   $('#recClear').onclick=clearOne;
   $('#recPrev').onclick=()=>recGo(recIndex-1);
   $('#recNext').onclick=()=>recGo(recIndex+1);
-  $('#recBackup').onclick=()=>{
+  /* minimal store-only ZIP writer (no dependencies) */
+  function buildZip(files){
+    const enc=new TextEncoder();const parts=[],central=[];let offset=0;
+    const T=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0;}return t;})();
+    const crc32=u8=>{let c=-1;for(let i=0;i<u8.length;i++)c=T[(c^u8[i])&255]^(c>>>8);return (c^-1)>>>0;};
+    const w16=n=>[n&255,(n>>8)&255],w32=n=>[n&255,(n>>8)&255,(n>>16)&255,(n>>24)&255];
+    for(const f of files){
+      const name=enc.encode(f.name),data=f.data,crc=crc32(data),sz=data.length;
+      const lfh=Uint8Array.from([...w32(0x04034b50),...w16(20),...w16(0),...w16(0),...w16(0),...w16(0),...w32(crc),...w32(sz),...w32(sz),...w16(name.length),...w16(0)]);
+      parts.push(lfh,name,data);
+      central.push(Uint8Array.from([...w32(0x02014b50),...w16(20),...w16(20),...w16(0),...w16(0),...w16(0),...w16(0),...w32(crc),...w32(sz),...w32(sz),...w16(name.length),...w16(0),...w16(0),...w16(0),...w16(0),...w32(0),...w32(offset)]),name);
+      offset+=lfh.length+name.length+data.length;
+    }
+    let cd=0;central.forEach(c=>cd+=c.length);
+    const eocd=Uint8Array.from([...w32(0x06054b50),...w16(0),...w16(0),...w16(files.length),...w16(files.length),...w32(cd),...w32(offset),...w16(0)]);
+    return new Blob([...parts,...central,eocd],{type:'application/zip'});
+  }
+  $('#recBackup').onclick=async()=>{
     const keys=Object.keys(recordings).map(Number).sort((a,b)=>a-b);
-    if(!keys.length){$('#recStatus').textContent='Nothing recorded yet to back up.';return;}
-    let i=0;(function nxt(){if(i>=keys.length){toast('Saved '+keys.length+' clips to your downloads');return;}
-      const k=keys[i++],t=recordings[k].type,ext=(t.indexOf('mp4')>=0||t.indexOf('mpeg')>=0)?'m4a':'webm';
-      const a=document.createElement('a');a.href=URL.createObjectURL(recordings[k]);a.download='slide-'+String(k+1).padStart(2,'0')+'.'+ext;
-      document.body.appendChild(a);a.click();a.remove();setTimeout(nxt,500);})();
+    if(!keys.length){$('#recStatus').textContent='Nothing recorded yet to export.';return;}
+    $('#recStatus').textContent='Packaging '+keys.length+' clips into one .zip…';
+    try{
+      const files=[];
+      for(const k of keys){const b=recordings[k],t=b.type,ext=(t.indexOf('mp4')>=0||t.indexOf('mpeg')>=0)?'m4a':'webm';
+        files.push({name:'slide-'+String(k+1).padStart(2,'0')+'.'+ext,data:new Uint8Array(await b.arrayBuffer())});}
+      const zip=buildZip(files);
+      const a=document.createElement('a');a.href=URL.createObjectURL(zip);a.download='prometheus-my-voice.zip';
+      document.body.appendChild(a);a.click();a.remove();
+      $('#recStatus').textContent='✓ Downloaded '+files.length+' clips as prometheus-my-voice.zip';toast('Saved '+files.length+' clips as one .zip');
+    }catch(e){$('#recStatus').textContent='⚠ Could not build the zip — try “redo” then export again.';}
   };
 
   function openRec(){recIndex=Math.min(cur,TOTAL-1);try{stopSpeak();}catch(e){}panel.classList.add('on');refresh();}

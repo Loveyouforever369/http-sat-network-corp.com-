@@ -92,6 +92,12 @@ a{color:inherit;text-decoration:none}
 .cut.v2 .cg{background:radial-gradient(120% 70% at 70% 18%,rgba(95,231,255,.34),transparent 55%),radial-gradient(120% 70% at 20% 95%,rgba(176,124,255,.3),transparent 55%)}
 .cut.v3 .cg{background:radial-gradient(120% 70% at 30% 18%,rgba(176,124,255,.36),transparent 55%),radial-gradient(120% 70% at 80% 95%,rgba(95,231,255,.26),transparent 55%)}
 .cut.v4 .cg{background:radial-gradient(120% 70% at 50% 14%,rgba(95,231,255,.3),transparent 55%),radial-gradient(120% 70% at 50% 96%,rgba(226,87,43,.3),transparent 55%)}
+.cut.v5 .cg{background:radial-gradient(120% 70% at 28% 16%,rgba(84,214,196,.34),transparent 55%),radial-gradient(120% 70% at 82% 94%,rgba(245,185,66,.28),transparent 55%)}
+.cut.v6 .cg{background:radial-gradient(120% 70% at 72% 16%,rgba(95,231,255,.32),transparent 55%),radial-gradient(120% 70% at 24% 94%,rgba(226,87,43,.3),transparent 55%)}
+.cut.v7 .cg{background:radial-gradient(120% 70% at 30% 16%,rgba(245,185,66,.34),transparent 55%),radial-gradient(120% 70% at 80% 94%,rgba(84,214,196,.26),transparent 55%)}
+.cut.v8 .cg{background:radial-gradient(120% 70% at 74% 16%,rgba(84,214,196,.32),transparent 55%),radial-gradient(120% 70% at 22% 94%,rgba(95,231,255,.28),transparent 55%)}
+.cut.v9 .cg{background:radial-gradient(120% 70% at 28% 84%,rgba(176,124,255,.36),transparent 55%),radial-gradient(120% 70% at 82% 14%,rgba(95,231,255,.26),transparent 55%)}
+.cut.v10 .cg{background:radial-gradient(120% 70% at 50% 14%,rgba(245,185,66,.32),transparent 55%),radial-gradient(120% 70% at 50% 96%,rgba(226,87,43,.32),transparent 55%)}
 .cut .scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 3px);mix-blend-mode:screen}
 .cut .play{position:relative;z-index:3;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--gold),var(--amber));color:#1a1206;font-size:20px;box-shadow:0 0 0 5px rgba(245,185,66,.14),0 0 32px rgba(245,185,66,.4)}
 .cut .ct{position:absolute;left:14px;right:14px;bottom:14px;z-index:3}
@@ -130,6 +136,7 @@ footer a{color:var(--cyan)}
     <a href="prometheus.html">The Briefing</a>
     <a href="cinematic.html">Film Series</a>
     <a href="toolkit.html" class="active">The Arsenal</a>
+    <a href="plan.html">90-Day Plan</a>
   </div>
 </nav>
 
@@ -237,7 +244,13 @@ const CUTS=[
   {c:'v1',l:'Hook · Business',n:'The one-person company',u:'https://ai.invideo.io/ai-mcp-video?video=the-one-person-ai-powered-company-dfswpb'},
   {c:'v2',l:'Hook · Creation',n:'A film from a sentence',u:'https://ai.invideo.io/ai-mcp-video?video=making-cinematic-video-from-text-with-ai-npgywx'},
   {c:'v3',l:'Hook · Visibility',n:'Be seen — or be invisible',u:'https://ai.invideo.io/ai-mcp-video?video=being-seen-with-ai-content-at-scale-rfkbjm'},
-  {c:'v4',l:'Hook · The Future',n:'AI is already here',u:'https://ai.invideo.io/ai-mcp-video?video=the-future-of-ai-is-already-here-vgfimq'}
+  {c:'v4',l:'Hook · The Future',n:'AI is already here',u:'https://ai.invideo.io/ai-mcp-video?video=the-future-of-ai-is-already-here-vgfimq'},
+  {c:'v5',l:'Hook · Automation',n:'It ran your business overnight',u:'https://ai.invideo.io/ai-mcp-video?video=ai-automation-that-runs-your-business-overnight-zndbyz'},
+  {c:'v6',l:'Hook · The Frontier',n:'The skills that never expire',u:'https://ai.invideo.io/ai-mcp-video?video=the-2026-ai-frontier-and-the-skills-that-last-xmzlth'},
+  {c:'v7',l:'Hook · Sales',n:'Never cold-prospect again',u:'https://ai.invideo.io/ai-mcp-video?video=ai-sales-prospecting-on-autopilot-uwpach'},
+  {c:'v8',l:'Hook · Service',n:'Support that never sleeps',u:'https://ai.invideo.io/ai-mcp-video?video=ai-customer-service-that-scales-to-one-person-dzpdwe'},
+  {c:'v9',l:'Hook · Data',n:'Ask your numbers anything',u:'https://ai.invideo.io/ai-mcp-video?video=ai-data-analysis-in-plain-english-mpfhry'},
+  {c:'v10',l:'Hook · Marketing',n:'Marketing as a machine',u:'https://ai.invideo.io/ai-mcp-video?video=ai-marketing-engine-at-scale-yexepq'}
 ];
 $('#cuts').innerHTML=CUTS.map(v=>`
   <a class="cut ${v.c} reveal" href="${v.u}" target="_blank" rel="noopener" aria-label="Watch: ${v.n}">

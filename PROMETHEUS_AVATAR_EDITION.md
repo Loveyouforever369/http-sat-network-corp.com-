@@ -5,9 +5,12 @@ The three pages cross-link into one product:
 
 | Page | What it is |
 | --- | --- |
-| **`prometheus.html`** — The Briefing | The deep 42-screen course, narrated by a procedural holographic **AI host**, with a deep-dive transcript and a built-in **Record Studio** for your own voice. |
-| **`cinematic.html`** — The Film Series | A scroll-based cinematic experience: **six AI-generated films** (one per section) with movie-style scripts and the latest 2026 intel. |
-| **`toolkit.html`** — The Arsenal | A practical directory of the **2026 AI stack by job** (36 tools), the production chain, and ready-to-post vertical social films. |
+| **`prometheus.html`** — The Briefing | The deep 42-screen course, narrated by a procedural holographic **AI host**, with a deep-dive transcript and a built-in **Record Studio** for your own voice (with one-click `.zip` export). |
+| **`cinematic.html`** — The Film Series | A scroll-based cinematic experience: **ten AI-generated films** (one per chapter) with movie-style scripts and the latest 2026 intel. |
+| **`toolkit.html`** — The Arsenal | A practical directory of the **2026 AI stack by job** (36 tools), the production chain, and **ten ready-to-post vertical social films**. |
+| **`plan.html`** — The 90-Day Plan | An interactive workbook — 30 days fluency, 30 toolchain, 30 build. Checkable tasks with progress saved on your device, printable to PDF. |
+
+All four pages share a top-nav and cross-links, so the suite reads as one product.
 
 ## The AI-generated films (made from written scripts via Invideo)
 
@@ -18,12 +21,22 @@ The three pages cross-link into one product:
 4. Growing Your Business with AI — https://ai.invideo.io/ai-mcp-video?video=growing-your-business-with-ai-leverage-scale-and-the-one-person-company-bjockh
 5. Being Seen — AI Visibility — https://ai.invideo.io/ai-mcp-video?video=being-seen-ai-powered-visibility-content-and-personal-brand-knxpov
 6. The 2026 Frontier (Finale) — https://ai.invideo.io/ai-mcp-video?video=the-2026-ai-frontier-latest-trends-and-a-call-to-action-finale-icmttn
+7. AI for Sales — https://ai.invideo.io/ai-mcp-video?video=ai-for-sales-prospecting-outreach-and-closing-on-autopilot-jncjrp
+8. AI Customer Service — https://ai.invideo.io/ai-mcp-video?video=ai-customer-service-instant-on-brand-support-that-scales-cxblqp
+9. AI & Data — https://ai.invideo.io/ai-mcp-video?video=ai-and-data-instant-analysis-and-decisions-in-plain-english-tewtyc
+10. AI Marketing Engine — https://ai.invideo.io/ai-mcp-video?video=ai-marketing-engine-campaigns-copy-and-creative-at-scale-azflhf
 
 **Vertical social cuts (9:16, ready to post):**
 - The one-person company — https://ai.invideo.io/ai-mcp-video?video=the-one-person-ai-powered-company-dfswpb
 - A film from a sentence — https://ai.invideo.io/ai-mcp-video?video=making-cinematic-video-from-text-with-ai-npgywx
 - Be seen or be invisible — https://ai.invideo.io/ai-mcp-video?video=being-seen-with-ai-content-at-scale-rfkbjm
 - AI is already here — https://ai.invideo.io/ai-mcp-video?video=the-future-of-ai-is-already-here-vgfimq
+- It ran your business overnight — https://ai.invideo.io/ai-mcp-video?video=ai-automation-that-runs-your-business-overnight-zndbyz
+- The skills that never expire — https://ai.invideo.io/ai-mcp-video?video=the-2026-ai-frontier-and-the-skills-that-last-xmzlth
+- Never cold-prospect again — https://ai.invideo.io/ai-mcp-video?video=ai-sales-prospecting-on-autopilot-uwpach
+- Support that never sleeps — https://ai.invideo.io/ai-mcp-video?video=ai-customer-service-that-scales-to-one-person-dzpdwe
+- Ask your numbers anything — https://ai.invideo.io/ai-mcp-video?video=ai-data-analysis-in-plain-english-mpfhry
+- Marketing as a machine — https://ai.invideo.io/ai-mcp-video?video=ai-marketing-engine-at-scale-yexepq
 
 ---
 

@@ -119,6 +119,10 @@ img,video{display:block;max-width:100%}
 .film.p4 .glowbg{background:radial-gradient(120% 90% at 25% 85%,rgba(245,185,66,.30),transparent 55%),radial-gradient(120% 90% at 85% 15%,rgba(226,87,43,.24),transparent 55%)}
 .film.p5 .glowbg{background:radial-gradient(120% 90% at 75% 20%,rgba(122,74,126,.42),transparent 55%),radial-gradient(120% 90% at 20% 90%,rgba(95,231,255,.24),transparent 55%)}
 .film.p6 .glowbg{background:radial-gradient(120% 90% at 50% 18%,rgba(95,231,255,.30),transparent 55%),radial-gradient(120% 90% at 50% 95%,rgba(226,87,43,.30),transparent 55%)}
+.film.p7 .glowbg{background:radial-gradient(120% 90% at 28% 16%,rgba(84,214,196,.30),transparent 55%),radial-gradient(120% 90% at 82% 92%,rgba(245,185,66,.26),transparent 55%)}
+.film.p8 .glowbg{background:radial-gradient(120% 90% at 75% 18%,rgba(95,231,255,.30),transparent 55%),radial-gradient(120% 90% at 22% 92%,rgba(84,214,196,.26),transparent 55%)}
+.film.p9 .glowbg{background:radial-gradient(120% 90% at 26% 84%,rgba(176,124,255,.34),transparent 55%),radial-gradient(120% 90% at 84% 14%,rgba(95,231,255,.26),transparent 55%)}
+.film.p10 .glowbg{background:radial-gradient(120% 90% at 50% 16%,rgba(245,185,66,.30),transparent 55%),radial-gradient(120% 90% at 50% 94%,rgba(226,87,43,.30),transparent 55%)}
 .film .scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 3px);mix-blend-mode:screen}
 .film .sweep{position:absolute;inset:0;background:linear-gradient(115deg,transparent 42%,rgba(95,231,255,.14) 50%,transparent 58%);background-size:280% 100%;animation:sweep 6s ease-in-out infinite}
 @keyframes sweep{0%,100%{background-position:140% 0}50%{background-position:-40% 0}}
@@ -193,11 +197,12 @@ footer a{color:var(--cyan)}
   <div class="hero-orb" id="heroOrb"></div>
   <div class="hero-kick reveal in">// A CINEMATIC AI TRAINING · SIX FILMS</div>
   <h1 class="hero-title reveal in d1">The future is <b>commanded</b>,<br>not watched.</h1>
-  <p class="hero-lead reveal in d2">Six AI-generated films and a movie-grade playbook on the future of AI and automation — <b>how to create cinematic videos with AI</b>, how to grow a business on leverage, and how to finally <b>be seen</b>. Every film below was generated from a single written script. This is the new studio. You are the director.</p>
+  <p class="hero-lead reveal in d2">Ten AI-generated films and a movie-grade playbook on the future of AI and automation — <b>how to create cinematic videos with AI</b>, automate your operation, sell, serve, read your data, market, grow, and finally <b>be seen</b>. Every film below was generated from a single written script. This is the new studio. You are the director.</p>
   <div class="hero-cta reveal in d3">
     <a class="btn solid" href="#ch1">▶ Begin the series</a>
     <a class="btn ghost" href="prometheus.html">Open the full briefing</a>
     <a class="btn ghost" href="toolkit.html">🧰 The Arsenal</a>
+    <a class="btn ghost" href="plan.html">🗓 90-Day Plan</a>
   </div>
   <div class="hero-scroll"><span>scroll</span><span class="ln"></span></div>
 </header>
@@ -341,6 +346,66 @@ const SECTIONS=[
     "<b>Real-time</b> generative video and live voice agents are crossing the realism line.",
     "On-device and open models are closing the gap — privacy and control without the cloud.",
     "The durable edge: <b>prompt · verify · build · automate</b> — not the tool of the week."
+  ]},
+{ id:'ch7', n:'07', kick:'CHAPTER SEVEN · THE PIPELINE',
+  title:"Sell while you <b>sleep</b>.",
+  film:'https://ai.invideo.io/ai-mcp-video?video=ai-for-sales-prospecting-outreach-and-closing-on-autopilot-jncjrp',
+  filmName:'AI for Sales — Pipeline on Autopilot', poster:'p7',
+  script:[
+    {lede:true,t:"Sales has always been a numbers game — and AI just changed the math."},
+    {t:"An agent finds your ideal customers, studies each one, and writes a first message so personal it feels handwritten. It enriches a messy list, scores it, and ranks who to call first. Feed it a call transcript and it tells you why the deal stalled and what to say next."},
+    {t:"The grind that burned out sales teams becomes a system that runs itself — leaving you the one thing machines can't do: build the <b>human trust</b> that closes."}
+  ],
+  know:[
+    "AI <b>SDRs</b> (Clay, Apollo, Instantly) research and personalize outreach at scale.",
+    "Auto-enrich and <b>score</b> leads — call the hottest ones first.",
+    "Transcribe and analyze calls to coach every deal and spot why it stalled.",
+    "Keep a human on the close — trust still wins the deal."
+  ]},
+{ id:'ch8', n:'08', kick:'CHAPTER EIGHT · THE FRONT DESK', flip:true,
+  title:"Support that <b>never sleeps</b>.",
+  film:'https://ai.invideo.io/ai-mcp-video?video=ai-customer-service-instant-on-brand-support-that-scales-cxblqp',
+  filmName:'AI Customer Service at Scale', poster:'p8',
+  script:[
+    {lede:true,t:"Your customers expect an answer now — at 3 a.m., on a holiday, instantly."},
+    {t:"An agent reads your docs, tickets, and policies and answers in your brand's voice, in any language, in seconds. It resolves the routine eighty percent and escalates the hard twenty to a human with full context attached."},
+    {t:"Support stops being a cost center you dread and becomes a machine that <b>delights customers</b> and teaches your business."}
+  ],
+  know:[
+    "<b>RAG</b>-powered agents answer from <i>your</i> docs — grounded and on-brand.",
+    "Auto-resolve the easy 80%; escalate the hard 20% with full context.",
+    "Every conversation becomes insight — what confuses, breaks, and converts.",
+    "Multilingual, 24/7, one operator — enterprise-grade service."
+  ]},
+{ id:'ch9', n:'09', kick:'CHAPTER NINE · THE SIGNAL',
+  title:"Ask your <b>data</b> anything.",
+  film:'https://ai.invideo.io/ai-mcp-video?video=ai-and-data-instant-analysis-and-decisions-in-plain-english-tewtyc',
+  filmName:'AI & Data — Decisions in Plain English', poster:'p9',
+  script:[
+    {lede:true,t:"Your business is drowning in data and starving for decisions. AI is the bridge."},
+    {t:"Point it at a spreadsheet, a dashboard, a pile of receipts — and ask in plain English: what changed, what's working, what should I do? It spots the trend you missed and turns a thousand rows into one clear recommendation."},
+    {t:"The winners of 2026 won't have the most data — they'll turn it into the <b>fastest decisions</b>."}
+  ],
+  know:[
+    "Plain-English analysis — no formulas, no analyst, no waiting.",
+    "Vision models extract numbers from statements, receipts, and charts.",
+    "Anomaly and trend detection flag problems before they explode.",
+    "Clear input, clear output — a clean sheet beats a messy one."
+  ]},
+{ id:'ch10', n:'10', kick:'CHAPTER TEN · THE ENGINE', flip:true,
+  title:"Marketing as a <b>machine</b>.",
+  film:'https://ai.invideo.io/ai-mcp-video?video=ai-marketing-engine-campaigns-copy-and-creative-at-scale-azflhf',
+  filmName:'The AI Marketing Engine', poster:'p10',
+  script:[
+    {lede:true,t:"Marketing used to be a guessing game played by big budgets. AI made it a machine anyone can build."},
+    {t:"One idea becomes a campaign — copy, emails, a landing page, visuals, variations to test — in an afternoon. AI writes in your voice, designs in your brand, and tells you which version is winning."},
+    {t:"Always running, always testing, always learning — turning <b>attention into customers</b> while you build the next thing."}
+  ],
+  know:[
+    "Generate full campaigns — copy, email, landing pages, creative — in hours.",
+    "A/B test at scale; let the data pick the winner.",
+    "Lookalike targeting — find a thousand of your best customer.",
+    "On-brand, on-voice, always-on — the engine never stops."
   ]}
 ];
 
@@ -384,7 +449,7 @@ SECTIONS.forEach((s,i)=>{
   wrap.appendChild(sec);
   if(i<SECTIONS.length-1){const d=document.createElement('div');d.className='cdiv';d.innerHTML=`<div class="cdiv-num reveal">${toRoman(i+2)}</div>`;wrap.appendChild(d);}
 });
-function toRoman(n){return ['','I','II','III','IV','V','VI','VII'][n]||n;}
+function toRoman(n){return ['','I','II','III','IV','V','VI','VII','VIII','IX','X','XI'][n]||n;}
 
 /* ---- scroll reveal ---- */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.18,rootMargin:'0px 0px -8% 0px'});
