@@ -312,6 +312,7 @@ footer{background:var(--emerald-deep);color:rgba(255,255,255,.7);text-align:cent
   <button class="nav-btn" onclick="showTab('invest')">Investment AI</button>
   <button class="nav-btn" onclick="showTab('portal')">🏢 Owner Portal</button>
   <button class="nav-btn" onclick="showTab('apply')">Apply Now</button>
+  <a class="nav-btn" href="design/lab.html" target="_blank" rel="noopener" style="color:var(--gold);font-weight:700;text-decoration:none">🎨 Design Lab</a>
   <button class="nav-btn" id="narr-nav-btn" onclick="toggleNarration()" title="AI Site Narration" style="margin-left:auto;color:rgba(255,255,255,.6)">🔊 Narrate</button>
 </nav>
 
@@ -2535,6 +2536,58 @@ document.addEventListener('DOMContentLoaded',()=>{
   initNetwork();
   // initialize invest dashboard lazily
 });
+</script>
+
+<!-- ============================================================
+     Design Lab enhancement layer (additive, from /design toolkit)
+     Richer mesh-gradient hero + gentle 3D depth/sheen on cards.
+     Self-contained; reduced-motion safe. Remove this block to revert.
+     ============================================================ -->
+<style>
+.hero{
+  background-color:var(--emerald-deep);
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(26,157,143,.95), transparent 46%),
+    radial-gradient(circle at 88% 10%, rgba(189,132,25,.5), transparent 45%),
+    radial-gradient(circle at 78% 92%, rgba(224,96,60,.5), transparent 50%),
+    radial-gradient(circle at 26% 86%, rgba(13,122,95,.95), transparent 55%),
+    linear-gradient(135deg, var(--emerald-deep), var(--teal));
+  background-size:200% 200%;
+}
+.hero.cb-anim{animation:cbHero 20s ease-in-out infinite}
+@keyframes cbHero{0%,100%{background-position:0% 0%}50%{background-position:100% 100%}}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.32;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px 200px}
+.card{position:relative;transform-style:preserve-3d;will-change:transform}
+.card .cb-sheen{position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .25s;
+  mix-blend-mode:soft-light;z-index:1;
+  background:radial-gradient(300px circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,.85), transparent 60%)}
+.card:hover .cb-sheen{opacity:1}
+@media (prefers-reduced-motion:reduce){.hero.cb-anim{animation:none}}
+</style>
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.hero').forEach(function(h){ if(!reduce) h.classList.add('cb-anim'); });
+  document.querySelectorAll('.card').forEach(function(card){
+    var sheen=document.createElement('span'); sheen.className='cb-sheen'; card.appendChild(sheen);
+    if(reduce) return;
+    var raf=null;
+    card.addEventListener('pointermove',function(e){
+      var r=card.getBoundingClientRect();
+      var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+      card.style.setProperty('--mx',(px*100).toFixed(1)+'%');
+      card.style.setProperty('--my',(py*100).toFixed(1)+'%');
+      if(raf)cancelAnimationFrame(raf);
+      raf=requestAnimationFrame(function(){
+        var rx=((0.5-py)*7).toFixed(2), ry=((px-0.5)*7).toFixed(2);
+        card.style.transform='perspective(720px) rotateX('+rx+'deg) rotateY('+ry+'deg) translateY(-4px)';
+      });
+    });
+    card.addEventListener('pointerleave',function(){ if(raf)cancelAnimationFrame(raf); card.style.transform=''; });
+  });
+})();
 </script>
 </body>
 </html>
