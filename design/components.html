@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Capital Bridge · Components Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Capital Bridge — Components Library
+   Premium, on-brand, copy-paste page blocks. Each block is fully
+   self-contained (scoped, prefixed CSS) so it drops into any page.
+   Self-contained tool, no runtime deps. Offline-safe.
+   ============================================================ */
+:root{--bg:#f6f1e7;--emerald:#0d7a5f;--emerald-deep:#094b3a;--coral:#e0603c;--gold:#bd8419;--teal:#1a9d8f;--ink:#15211d;--mid:#5a5a52;--line:#ddd5c6}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+header.top{background:var(--emerald-deep);color:#fff;padding:16px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+header.top .brand{font-family:'Fraunces',serif;font-weight:700;font-size:1.12rem}
+header.top .sub{color:rgba(255,255,255,.7);font-size:.82rem}
+.wrap{max-width:1040px;margin:0 auto;padding:30px 18px 80px}
+.intro{color:var(--mid);font-size:1.02rem;line-height:1.65;max-width:680px;margin-bottom:30px}
+.block{background:#fff;border:1px solid var(--line);border-radius:16px;margin-bottom:26px;overflow:hidden;box-shadow:0 12px 34px -22px rgba(9,75,58,.4)}
+.block-head{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.block-head h3{font-size:1.1rem;color:var(--emerald-deep)}
+.block-head .d{font-size:.84rem;color:var(--mid);flex:1;min-width:160px}
+.block-head .btns{display:flex;gap:8px}
+.btn{border:none;border-radius:9px;padding:9px 15px;font-family:inherit;font-weight:600;font-size:.82rem;cursor:pointer;transition:transform .12s,filter .15s}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--emerald);color:#fff}.btn.primary:hover{filter:brightness(1.08)}
+.btn.ghost{background:var(--bg);color:var(--emerald-deep);border:1px solid var(--line)}.btn.ghost:hover{filter:brightness(.97)}
+.preview{padding:26px;background:repeating-conic-gradient(#efe9dc 0% 25%,#f6f1e7 0% 50%) 50%/22px 22px}
+.code{display:none;border-top:1px solid var(--line);background:#0f1a16}
+.code pre{margin:0;padding:18px 20px;overflow-x:auto;color:#cfe6dd;font-family:'JetBrains Mono',monospace;font-size:.74rem;line-height:1.5}
+.code.show{display:block}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--emerald-deep);color:#fff;padding:11px 20px;border-radius:30px;font-size:.85rem;opacity:0;transition:.25s;pointer-events:none;z-index:50}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<header class="top"><span class="brand">Capital Bridge</span><span class="sub">Components Library — copy-paste page blocks</span></header>
+<div class="wrap">
+  <p class="intro">Production-ready, on-brand building blocks. Each one is fully self-contained — its styles are scoped, so you can <strong>Copy HTML</strong> and paste it straight into <span class="mono">index.html</span> (or anywhere) and it just works. Fonts: Fraunces + Plus Jakarta Sans.</p>
+  <div id="lib"></div>
+</div>
+<div class="toast" id="toast">Copied!</div>
+
+<script>
+(function(){
+  "use strict";
+  var BLOCKS=[
+    {id:"hero",name:"Hero Banner",desc:"Mesh-gradient hero with headline, subhead, and two CTAs.",
+     html:
+'<style>\n'+
+'.cbhb{font-family:"Plus Jakarta Sans",system-ui,sans-serif;color:#fff;border-radius:20px;overflow:hidden;position:relative;padding:60px 44px;background-color:#094b3a;background-image:radial-gradient(circle at 15% 20%,rgba(26,157,143,.9),transparent 45%),radial-gradient(circle at 85% 14%,rgba(189,132,25,.5),transparent 45%),radial-gradient(circle at 76% 92%,rgba(224,96,60,.5),transparent 50%),linear-gradient(135deg,#094b3a,#1a9d8f)}\n'+
+'.cbhb h1{font-family:"Fraunces",Georgia,serif;font-size:clamp(2rem,5vw,3.2rem);margin:0 0 14px;line-height:1.05}\n'+
+'.cbhb p{max-width:540px;font-size:1.05rem;line-height:1.6;opacity:.92;margin:0 0 24px}\n'+
+'.cbhb-cta{display:flex;gap:12px;flex-wrap:wrap}\n'+
+'.cbhb a{display:inline-block;padding:13px 26px;border-radius:11px;font-weight:600;text-decoration:none}\n'+
+'.cbhb .primary{background:#fff;color:#094b3a}\n'+
+'.cbhb .ghost{border:1.5px solid rgba(255,255,255,.5);color:#fff}\n'+
+'</style>\n'+
+'<section class="cbhb">\n'+
+'  <h1>Capital that moves at your speed</h1>\n'+
+'  <p>Funding, credit optimization, and growth strategy for entrepreneurs ready to scale — decisions in days, not weeks.</p>\n'+
+'  <div class="cbhb-cta"><a class="primary" href="#">Apply now</a><a class="ghost" href="#">See how it works</a></div>\n'+
+'</section>'},
+
+    {id:"stats",name:"Stat Strip",desc:"A band of headline metrics with gradient numbers.",
+     html:
+'<style>\n'+
+'.cbss{font-family:"Plus Jakarta Sans",system-ui,sans-serif;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px;background:#094b3a;border-radius:18px;padding:34px 28px;color:#fff}\n'+
+'.cbss .item{text-align:center}\n'+
+'.cbss b{font-family:"Fraunces",serif;display:block;font-size:2.4rem;line-height:1;background:linear-gradient(120deg,#1a9d8f,#bd8419);-webkit-background-clip:text;background-clip:text;color:transparent}\n'+
+'.cbss span{display:block;margin-top:8px;font-size:.85rem;opacity:.8}\n'+
+'</style>\n'+
+'<section class="cbss">\n'+
+'  <div class="item"><b>$40M+</b><span>Capital brokered</span></div>\n'+
+'  <div class="item"><b>40+</b><span>Lender network</span></div>\n'+
+'  <div class="item"><b>48hr</b><span>Funding decisions</span></div>\n'+
+'  <div class="item"><b>3.2&times;</b><span>Avg. modeled ROI</span></div>\n'+
+'</section>'},
+
+    {id:"features",name:"Feature Trio",desc:"Three service cards with colored tops and icons.",
+     html:
+'<style>\n'+
+'.cbft{font-family:"Plus Jakarta Sans",system-ui,sans-serif;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:20px}\n'+
+'.cbft .f{background:#fff;border:1px solid #e2dccb;border-radius:16px;padding:26px;border-top:4px solid #0d7a5f}\n'+
+'.cbft .ic{width:50px;height:50px;border-radius:13px;display:grid;place-items:center;font-size:1.5rem;background:linear-gradient(150deg,#0d7a5f,#1a9d8f);color:#fff;margin-bottom:14px}\n'+
+'.cbft h3{font-family:"Fraunces",serif;margin:0 0 6px;color:#094b3a;font-size:1.15rem}\n'+
+'.cbft p{margin:0;color:#555;font-size:.92rem;line-height:1.55}\n'+
+'</style>\n'+
+'<section class="cbft">\n'+
+'  <div class="f"><div class="ic">💳</div><h3>Debt Relief</h3><p>Consolidate high-interest debt into one lower monthly path.</p></div>\n'+
+'  <div class="f" style="border-top-color:#e0603c"><div class="ic" style="background:linear-gradient(150deg,#e0603c,#bd8419)">📈</div><h3>ROI Planning</h3><p>Model deployments and see return before you commit.</p></div>\n'+
+'  <div class="f" style="border-top-color:#bd8419"><div class="ic" style="background:linear-gradient(150deg,#bd8419,#e0603c)">🏦</div><h3>Lender Match</h3><p>Get matched to vetted lenders by your business profile.</p></div>\n'+
+'</section>'},
+
+    {id:"cta",name:"CTA Band",desc:"Centered call-to-action on a brand gradient.",
+     html:
+'<style>\n'+
+'.cbcta{font-family:"Plus Jakarta Sans",system-ui,sans-serif;border-radius:18px;padding:46px;text-align:center;color:#fff;background:linear-gradient(120deg,#094b3a,#1a9d8f 70%,#bd8419)}\n'+
+'.cbcta h2{font-family:"Fraunces",serif;font-size:clamp(1.6rem,4vw,2.4rem);margin:0 0 10px}\n'+
+'.cbcta p{opacity:.9;margin:0 auto 22px;max-width:520px}\n'+
+'.cbcta a{display:inline-block;background:#fff;color:#094b3a;padding:14px 30px;border-radius:11px;font-weight:700;text-decoration:none}\n'+
+'</style>\n'+
+'<section class="cbcta">\n'+
+'  <h2>Ready to fund your next move?</h2>\n'+
+'  <p>Get a funding decision in as little as 48 hours — no obligation, and no impact to your credit to start.</p>\n'+
+'  <a href="#">Start your application →</a>\n'+
+'</section>'},
+
+    {id:"pricing",name:"Plan Tile",desc:"A clean plan/pricing card with checklist.",
+     html:
+'<style>\n'+
+'.cbpt{font-family:"Plus Jakarta Sans",system-ui,sans-serif;max-width:340px;background:#fff;border:1px solid #e2dccb;border-radius:18px;padding:30px;box-shadow:0 16px 40px -22px rgba(9,75,58,.5)}\n'+
+'.cbpt .tag{display:inline-block;background:#0d7a5f;color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:20px}\n'+
+'.cbpt .price{font-family:"Fraunces",serif;font-size:2.6rem;color:#094b3a;margin:16px 0 4px}\n'+
+'.cbpt .price small{font-size:1rem;color:#777;font-weight:400}\n'+
+'.cbpt ul{list-style:none;padding:0;margin:18px 0}\n'+
+'.cbpt li{padding:8px 0;border-bottom:1px solid #f0ebe0;color:#444;font-size:.92rem;display:flex;gap:8px}\n'+
+'.cbpt li::before{content:"\\2713";color:#0d7a5f;font-weight:700}\n'+
+'.cbpt a{display:block;text-align:center;background:#0d7a5f;color:#fff;padding:13px;border-radius:11px;font-weight:700;text-decoration:none;margin-top:8px}\n'+
+'</style>\n'+
+'<section class="cbpt">\n'+
+'  <span class="tag">Growth</span>\n'+
+'  <div class="price">$0 <small>to apply</small></div>\n'+
+'  <p style="color:#666;margin:0;font-size:.92rem">Full access to funding, tools, and advisory.</p>\n'+
+'  <ul><li>Lender network matching</li><li>ROI &amp; credit tools</li><li>Dedicated capital advisor</li><li>48-hour decisions</li></ul>\n'+
+'  <a href="#">Get started</a>\n'+
+'</section>'},
+
+    {id:"divider",name:"Section Divider",desc:"An SVG wave to transition between sections.",
+     html:
+'<div style="background:#094b3a;line-height:0">\n'+
+'  <svg viewBox="0 0 1440 90" preserveAspectRatio="none" style="display:block;width:100%;height:70px">\n'+
+'    <path fill="#f6f1e7" d="M0,40 C240,90 480,0 720,30 C960,60 1200,90 1440,40 L1440,90 L0,90 Z"></path>\n'+
+'  </svg>\n'+
+'</div>'}
+  ];
+
+  function esc(s){return s.replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+  function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('show');},1500);}
+  function copy(text){
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){toast('HTML copied!');},fb);}else fb();
+    function fb(){var ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');toast('HTML copied!');}catch(e){toast('Copy failed');}document.body.removeChild(ta);}
+  }
+
+  var lib=document.getElementById('lib');
+  lib.innerHTML = BLOCKS.map(function(b){
+    return '<div class="block">'+
+      '<div class="block-head"><h3>'+b.name+'</h3><span class="d">'+b.desc+'</span>'+
+        '<div class="btns"><button class="btn ghost" data-code="'+b.id+'">&lt;/&gt; Code</button>'+
+        '<button class="btn primary" data-copy="'+b.id+'">📋 Copy HTML</button></div></div>'+
+      '<div class="preview">'+b.html+'</div>'+
+      '<div class="code" id="code-'+b.id+'"><pre>'+esc(b.html)+'</pre></div>'+
+    '</div>';
+  }).join('');
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-copy]'),function(btn){
+    btn.addEventListener('click',function(){var b=BLOCKS.filter(function(x){return x.id===btn.dataset.copy;})[0];copy(b.html);});
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-code]'),function(btn){
+    btn.addEventListener('click',function(){document.getElementById('code-'+btn.dataset.code).classList.toggle('show');});
+  });
+})();
+</script>
+</body>
+</html>
