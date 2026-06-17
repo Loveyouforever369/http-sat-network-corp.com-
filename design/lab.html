@@ -8,136 +8,190 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   Capital Bridge — Design Lab
-   The all-in-one hub: Story (narrated) · Studio · Learn · Tools ·
-   Demos · Quiz. Self-contained, no external runtime deps — works
-   fully offline / behind a strict egress proxy.
+   Capital Bridge — Design Lab  (v2, "go harder on the outlook")
+   Story · Cast (multi-voice avatars) · Studio · Learn · Tools ·
+   Demos · Quiz.  Self-contained, no runtime deps. Offline-safe.
    ============================================================ */
 :root{
-  --bg:#f6f1e7;--emerald:#0d7a5f;--emerald-deep:#094b3a;--coral:#e0603c;
-  --gold:#bd8419;--teal:#1a9d8f;--plum:#7a4a7e;--white:#fff;--dark:#1a1a1a;
-  --mid:#555;--light:#e8e2d6;--line:#d9d2c4;--radius:16px;
+  --bg:#f6f1e7;--ink:#15211d;--emerald:#0d7a5f;--emerald-deep:#094b3a;--coral:#e0603c;
+  --gold:#bd8419;--teal:#1a9d8f;--plum:#7a4a7e;--white:#fff;--mid:#5a5a52;--line:#ddd5c6;
+  --radius:18px;--glass:rgba(255,255,255,.72);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--dark);min-height:100vh}
-h1,h2,h3,h4,.serif{font-family:'Fraunces',Georgia,serif;line-height:1.1}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--ink);background:var(--bg);
+  min-height:100vh;overflow-x:hidden;position:relative}
+h1,h2,h3,h4,.serif{font-family:'Fraunces',Georgia,serif;line-height:1.05;letter-spacing:-.01em}
 .mono{font-family:'JetBrains Mono',ui-monospace,monospace}
-a{color:var(--emerald)}
+a{color:var(--emerald);text-decoration:none}
 
-/* NAV */
-#nav{position:sticky;top:0;z-index:100;background:var(--emerald-deep);display:flex;align-items:center;
-  gap:0;padding:0 14px;overflow-x:auto;scrollbar-width:none}
+/* ---- aurora background ---- */
+.aurora{position:fixed;inset:0;z-index:-1;overflow:hidden;background:var(--bg)}
+.aurora i{position:absolute;border-radius:50%;filter:blur(80px);opacity:.5;mix-blend-mode:multiply;
+  animation:float 22s ease-in-out infinite}
+.aurora i:nth-child(1){width:46vw;height:46vw;background:radial-gradient(circle,#1a9d8f,transparent 70%);top:-10vw;left:-8vw}
+.aurora i:nth-child(2){width:40vw;height:40vw;background:radial-gradient(circle,#e0603c,transparent 70%);top:20vh;right:-10vw;animation-delay:-7s}
+.aurora i:nth-child(3){width:38vw;height:38vw;background:radial-gradient(circle,#bd8419,transparent 70%);bottom:-12vw;left:25vw;animation-delay:-13s}
+.aurora i:nth-child(4){width:34vw;height:34vw;background:radial-gradient(circle,#7a4a7e,transparent 70%);bottom:5vh;right:20vw;animation-delay:-18s}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(4vw,-3vh) scale(1.1)}66%{transform:translate(-3vw,4vh) scale(.95)}}
+
+/* ---- glass nav ---- */
+#nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;gap:0;padding:0 16px;
+  background:rgba(9,75,58,.82);backdrop-filter:blur(14px) saturate(140%);
+  border-bottom:1px solid rgba(255,255,255,.12);overflow-x:auto;scrollbar-width:none;box-shadow:0 6px 30px -12px rgba(9,75,58,.5)}
 #nav::-webkit-scrollbar{display:none}
 .brand{color:#fff;font-family:'Fraunces',serif;font-weight:700;font-size:1.05rem;white-space:nowrap;
-  padding:14px 16px 14px 0;border-right:1px solid rgba(255,255,255,.2);margin-right:8px}
-.brand small{display:block;font-family:'Plus Jakarta Sans';font-weight:500;font-size:.62rem;
-  letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6)}
-.tab{background:none;border:none;color:rgba(255,255,255,.75);font-family:inherit;font-size:.85rem;
-  font-weight:500;padding:16px 13px;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;transition:.2s}
-.tab:hover,.tab.active{color:#fff;border-bottom-color:var(--coral)}
+  padding:14px 18px 14px 0;border-right:1px solid rgba(255,255,255,.18);margin-right:10px}
+.brand .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--coral);margin-right:8px;
+  box-shadow:0 0 10px var(--coral);animation:blink 2.4s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+.brand small{display:block;font-family:'Plus Jakarta Sans';font-weight:500;font-size:.6rem;letter-spacing:.16em;
+  text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:1px}
+.tab{background:none;border:none;color:rgba(255,255,255,.72);font-family:inherit;font-size:.85rem;font-weight:500;
+  padding:17px 13px;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;transition:.2s}
+.tab:hover{color:#fff}
+.tab.active{color:#fff;border-bottom-color:var(--coral)}
 
-.section{display:none;max-width:1120px;margin:0 auto;padding:34px 18px 80px;animation:fade .3s}
-.section.active{display:block}
-@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.section{display:none;max-width:1140px;margin:0 auto;padding:40px 18px 90px}
+.section.active{display:block;animation:rise .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 
-/* shared */
-.kicker{display:inline-block;background:var(--emerald-deep);color:#fff;font-size:.7rem;font-weight:600;
-  letter-spacing:.12em;text-transform:uppercase;padding:6px 14px;border-radius:30px}
-.lead{color:var(--mid);font-size:1.05rem;line-height:1.65;max-width:680px;margin-top:12px}
-.btn{border:none;border-radius:10px;padding:12px 20px;font-family:inherit;font-weight:600;font-size:.9rem;
-  cursor:pointer;transition:transform .12s,filter .15s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+/* ---- shared ---- */
+.kicker{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(120deg,var(--emerald-deep),var(--teal));
+  color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:7px 15px;border-radius:30px;
+  box-shadow:0 6px 16px -8px var(--teal)}
+.h-grad{background:linear-gradient(110deg,var(--emerald-deep),var(--teal) 45%,var(--gold) 80%,var(--coral));
+  background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 8s linear infinite}
+@keyframes shine{to{background-position:220% center}}
+.lead{color:var(--mid);font-size:1.06rem;line-height:1.7;max-width:700px;margin-top:14px}
+.btn{border:none;border-radius:11px;padding:12px 22px;font-family:inherit;font-weight:600;font-size:.9rem;cursor:pointer;
+  transition:transform .12s,box-shadow .2s,filter .15s;display:inline-flex;align-items:center;gap:8px;position:relative;overflow:hidden}
 .btn:active{transform:translateY(1px)}
-.btn.primary{background:var(--emerald);color:#fff}.btn.primary:hover{filter:brightness(1.08)}
-.btn.ghost{background:var(--light);color:var(--emerald-deep)}.btn.ghost:hover{filter:brightness(.97)}
-.grid{display:grid;gap:20px}
-.cards-3{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
-.cards-2{grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+.btn.primary{background:linear-gradient(120deg,var(--emerald),var(--teal));color:#fff;box-shadow:0 10px 24px -10px var(--emerald)}
+.btn.primary:hover{filter:brightness(1.07);box-shadow:0 14px 30px -10px var(--emerald)}
+.btn.ghost{background:var(--glass);color:var(--emerald-deep);border:1px solid var(--line);backdrop-filter:blur(8px)}
+.btn.ghost:hover{border-color:var(--teal)}
+.btn .shine{position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
+  transform:skewX(-20deg)}
+.btn.primary:hover .shine{animation:swipe .7s}
+@keyframes swipe{to{left:120%}}
+.grid{display:grid;gap:22px}
+.cards-3{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.glass{background:var(--glass);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.6);border-radius:var(--radius);
+  box-shadow:0 14px 40px -22px rgba(9,75,58,.5)}
 
-/* HERO / STORY */
-.hero{position:relative;border-radius:var(--radius);overflow:hidden;padding:56px 40px;color:#fff;
-  background:linear-gradient(130deg,var(--emerald-deep),var(--teal) 65%,var(--gold));margin-bottom:28px}
-.hero::before{content:'';position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;
-  background:rgba(255,255,255,.08);animation:pulse 7s ease-in-out infinite}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
-.hero h1{font-size:clamp(2.1rem,5.5vw,3.6rem);position:relative}
-.hero p{position:relative;max-width:600px;margin-top:14px;font-size:1.1rem;opacity:.92;line-height:1.6}
-.story-body{max-width:720px;font-size:1.08rem;line-height:1.8;color:#3a3a3a}
+/* ---- hero ---- */
+.hero{position:relative;border-radius:26px;overflow:hidden;padding:64px 44px;color:#fff;margin-bottom:30px;
+  background:linear-gradient(125deg,#063b2d,#0d7a5f 40%,#1a9d8f 72%,#bd8419)}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(600px circle at 80% 20%,rgba(255,255,255,.18),transparent 50%);pointer-events:none}
+.hero .orb{position:absolute;border-radius:50%;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14)}
+.hero .orb.a{width:240px;height:240px;right:-50px;top:-60px;animation:float 9s ease-in-out infinite}
+.hero .orb.b{width:120px;height:120px;right:160px;bottom:-30px;animation:float 11s ease-in-out infinite reverse}
+.hero h1{font-size:clamp(2.3rem,6vw,4rem);position:relative;text-shadow:0 2px 30px rgba(0,0,0,.15)}
+.hero p{position:relative;max-width:600px;margin-top:16px;font-size:1.12rem;opacity:.94;line-height:1.6}
+.hero .cta{position:relative;margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+
+/* ---- story ---- */
+.story-body{max-width:730px;font-size:1.1rem;line-height:1.85;color:#2c322f}
 .story-body p{margin-bottom:18px}
-.story-body .em{font-family:'Fraunces',serif;font-size:1.35rem;color:var(--emerald-deep);font-style:italic}
-.narrate-bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:22px 0 30px;
-  padding:14px 18px;background:#fff;border:1px solid var(--line);border-radius:12px}
-.wave{display:inline-flex;gap:3px;align-items:flex-end;height:20px}
-.wave span{width:3px;background:var(--emerald);border-radius:2px;height:6px}
-.narrate-bar.on .wave span{animation:eq .9s ease-in-out infinite}
+.story-body .em{font-family:'Fraunces',serif;font-size:1.4rem;font-style:italic;color:var(--emerald-deep)}
+.narrate-bar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:22px 0 30px;padding:16px 20px}
+.wave{display:inline-flex;gap:3px;align-items:flex-end;height:22px}
+.wave span{width:3px;height:6px;background:var(--emerald);border-radius:2px}
+.narrate-bar.on .wave span,.cast-card.speaking .wave span{animation:eq .9s ease-in-out infinite}
 .wave span:nth-child(2){animation-delay:.15s}.wave span:nth-child(3){animation-delay:.3s}
 .wave span:nth-child(4){animation-delay:.45s}.wave span:nth-child(5){animation-delay:.6s}
-@keyframes eq{0%,100%{height:6px}50%{height:20px}}
+@keyframes eq{0%,100%{height:6px}50%{height:22px}}
 .muted{color:var(--mid);font-size:.85rem}
 
-/* STUDIO */
-.studio-frame{width:100%;height:760px;border:1px solid var(--line);border-radius:var(--radius);
-  background:#fff;box-shadow:0 10px 30px -16px rgba(9,75,58,.4)}
+/* ---- CAST ---- */
+.cast-toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:22px 0 28px}
+.cast-grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.cast-card{position:relative;padding:24px;transition:transform .2s,box-shadow .25s;overflow:hidden}
+.cast-card:hover{transform:translateY(-4px)}
+.cast-card::before{content:'';position:absolute;left:0;top:0;width:100%;height:5px;background:linear-gradient(90deg,var(--c1),var(--c2))}
+.cast-card.speaking{box-shadow:0 0 0 2px var(--c1),0 20px 50px -20px var(--c1)}
+.cast-head{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.portrait{width:72px;height:72px;border-radius:20px;flex-shrink:0;display:grid;place-items:center;font-size:2rem;color:#fff;
+  background:linear-gradient(140deg,var(--c1),var(--c2));box-shadow:0 12px 26px -10px var(--c1);position:relative}
+.portrait::after{content:'';position:absolute;inset:0;border-radius:20px;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.45),transparent 55%)}
+.cast-name{font-family:'Fraunces',serif;font-size:1.3rem;color:var(--emerald-deep)}
+.cast-role{font-size:.78rem;font-weight:600;letter-spacing:.04em;color:var(--c1);text-transform:uppercase}
+.cast-script{font-size:.92rem;color:#3a3f3c;line-height:1.6;font-style:italic;border-left:3px solid var(--c1);padding-left:12px;margin:12px 0}
+.chiprow{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.chip{font-size:.7rem;font-weight:600;background:color-mix(in srgb,var(--c1) 12%,#fff);color:var(--c1);
+  border:1px solid color-mix(in srgb,var(--c1) 25%,#fff);padding:4px 10px;border-radius:20px}
+.know{font-size:.84rem;color:var(--mid);line-height:1.55;margin:8px 0 14px;padding-left:18px}
+.know li{margin-bottom:3px}
+.cast-card .btn{width:100%;justify-content:center}
 
-/* LEARn */
-.mod{background:#fff;border-radius:14px;padding:20px 22px;border-top:4px solid var(--emerald);
-  box-shadow:0 6px 20px -12px rgba(0,0,0,.2)}
-.mod h4{color:var(--emerald-deep);font-size:1.05rem;margin-bottom:6px}
-.mod .n{font-family:'JetBrains Mono';font-size:.72rem;color:var(--gold);font-weight:600}
-.mod p{font-size:.88rem;color:var(--mid);line-height:1.55;margin-top:6px}
+/* ---- studio ---- */
+.studio-frame{width:100%;height:780px;border:1px solid var(--line);border-radius:var(--radius);background:#fff;
+  box-shadow:0 16px 50px -24px rgba(9,75,58,.55)}
 
-/* TOOLS */
-.tcat{margin-bottom:28px}
-.tcat h3{font-size:1.15rem;color:var(--emerald-deep);margin-bottom:4px;display:flex;align-items:center;gap:9px}
-.tcat .ci{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-size:1.1rem;color:#fff}
-.tcat .desc{color:var(--mid);font-size:.85rem;margin-bottom:14px}
+/* ---- learn ---- */
+.mod{padding:20px 22px;transition:transform .18s}
+.mod:hover{transform:translateY(-3px)}
+.mod .n{font-family:'JetBrains Mono';font-size:.7rem;color:var(--gold);font-weight:600;letter-spacing:.08em}
+.mod h4{color:var(--emerald-deep);font-size:1.06rem;margin:6px 0}
+.mod p{font-size:.88rem;color:var(--mid);line-height:1.55}
+
+/* ---- tools ---- */
+.tcat{margin-bottom:30px}
+.tcat h3{font-size:1.18rem;color:var(--emerald-deep);margin-bottom:4px;display:flex;align-items:center;gap:10px}
+.tcat .ci{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-size:1.15rem;color:#fff;box-shadow:0 8px 18px -8px rgba(0,0,0,.3)}
+.tcat .desc{color:var(--mid);font-size:.86rem;margin-bottom:14px}
 .tools{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
-.tool{background:#fff;border:1px solid var(--line);border-radius:11px;padding:14px 15px;transition:.18s}
-.tool:hover{transform:translateY(-2px);box-shadow:0 10px 24px -14px rgba(9,75,58,.45);border-color:var(--teal)}
-.tool .tn{font-weight:700;font-size:.95rem;color:var(--dark)}
-.tool .tn .free{font-size:.6rem;background:var(--teal);color:#fff;padding:2px 6px;border-radius:10px;margin-left:6px;vertical-align:middle}
-.tool .tu{font-size:.78rem;color:var(--mid);line-height:1.45;margin:5px 0 8px}
-.tool a{font-size:.76rem;font-weight:600;text-decoration:none}
+.tool{padding:15px 16px;transition:.18s}
+.tool:hover{transform:translateY(-2px);border-color:var(--teal)}
+.tool .tn{font-weight:700;font-size:.95rem;color:var(--ink)}
+.tool .tn .free{font-size:.58rem;background:var(--teal);color:#fff;padding:2px 7px;border-radius:10px;margin-left:6px;vertical-align:middle;letter-spacing:.05em}
+.tool .tu{font-size:.78rem;color:var(--mid);line-height:1.45;margin:6px 0 9px}
+.tool a{font-size:.76rem;font-weight:600}
 
-/* DEMOS */
-.demo{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;margin-bottom:22px}
+/* ---- demos ---- */
+.demo{padding:24px;margin-bottom:22px}
 .demo h3{color:var(--emerald-deep);margin-bottom:4px}
 .demo .hint{color:var(--mid);font-size:.85rem;margin-bottom:16px}
 .demo label{font-size:.8rem;font-weight:600;color:var(--mid);display:block;margin-bottom:6px}
 input[type=range]{width:100%;accent-color:var(--emerald)}
-input[type=color]{width:54px;height:38px;border:1.5px solid var(--line);border-radius:8px;background:#fff;vertical-align:middle}
-.demo-row{display:flex;gap:24px;flex-wrap:wrap;align-items:center}
-.demo-row > *{flex:1;min-width:200px}
+input[type=color]{width:54px;height:38px;border:1.5px solid var(--line);border-radius:8px;background:#fff;vertical-align:middle;cursor:pointer}
+.demo-row{display:flex;gap:26px;flex-wrap:wrap;align-items:center}
+.demo-row>*{flex:1;min-width:210px}
 #depthCard{perspective:900px}
-#depthCard .dc{background:linear-gradient(150deg,var(--emerald),var(--teal));color:#fff;border-radius:14px;
-  padding:26px;transform-style:preserve-3d;transition:transform .15s;box-shadow:0 16px 36px -16px rgba(9,75,58,.6)}
+#depthCard .dc{background:linear-gradient(150deg,var(--emerald),var(--teal));color:#fff;border-radius:16px;padding:28px;
+  transform-style:preserve-3d;transition:transform .15s;box-shadow:0 18px 40px -16px rgba(9,75,58,.6)}
 #depthCard .dc .pop{display:inline-block;transition:transform .15s}
-.contrast-prev{border-radius:10px;padding:22px;text-align:center;font-weight:600;font-size:1.05rem;border:1px solid var(--line)}
+.contrast-prev{border-radius:12px;padding:24px;text-align:center;font-weight:600;font-size:1.08rem;border:1px solid var(--line)}
 .badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:700}
-.badge.pass{background:#d8f3e9;color:var(--emerald-deep)}.badge.fail{background:#fbe0d8;color:#a3331a}
-.scale-prev div{margin:2px 0;color:var(--dark);font-family:'Fraunces',serif;line-height:1.1}
+.badge.pass{background:#d6f3e8;color:var(--emerald-deep)}.badge.fail{background:#fbe0d8;color:#a3331a}
+.scale-prev div{margin:2px 0;font-family:'Fraunces',serif;line-height:1.05;color:var(--ink)}
 
-/* QUIZ */
-.q{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:16px}
+/* ---- quiz ---- */
+.q{padding:20px 22px;margin-bottom:16px}
 .q .qt{font-weight:700;margin-bottom:12px}
-.opt{display:block;width:100%;text-align:left;background:var(--bg);border:1.5px solid var(--line);
-  border-radius:9px;padding:11px 14px;margin-bottom:8px;cursor:pointer;font-family:inherit;font-size:.9rem;transition:.15s}
+.opt{display:block;width:100%;text-align:left;background:rgba(255,255,255,.6);border:1.5px solid var(--line);border-radius:10px;
+  padding:11px 14px;margin-bottom:8px;cursor:pointer;font-family:inherit;font-size:.9rem;transition:.15s}
 .opt:hover{border-color:var(--teal)}
-.opt.correct{background:#d8f3e9;border-color:var(--emerald)}
+.opt.correct{background:#d6f3e8;border-color:var(--emerald)}
 .opt.wrong{background:#fbe0d8;border-color:var(--coral)}
 .opt:disabled{cursor:default}
 .explain{font-size:.82rem;color:var(--mid);margin-top:8px;line-height:1.5;display:none}
 .explain.show{display:block}
-#score{font-family:'Fraunces',serif;font-size:1.5rem;color:var(--emerald-deep);margin-top:10px}
+#score{font-family:'Fraunces',serif;font-size:1.5rem;color:var(--emerald-deep);margin-top:12px}
 
-footer{text-align:center;color:var(--mid);font-size:.82rem;padding:30px 18px 50px;border-top:1px solid var(--line)}
+footer{text-align:center;color:var(--mid);font-size:.82rem;padding:34px 18px 56px;border-top:1px solid var(--line);margin-top:20px}
+
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
 <nav id="nav">
-  <div class="brand">Capital Bridge<small>Design Lab</small></div>
+  <div class="brand"><span class="dot"></span>Capital Bridge<small>Design Lab</small></div>
   <button class="tab active" data-t="story">✦ Story</button>
+  <button class="tab" data-t="cast">🎭 Cast</button>
   <button class="tab" data-t="studio">🎨 Studio</button>
   <button class="tab" data-t="learn">📚 Learn</button>
   <button class="tab" data-t="tools">🧰 Tools</button>
@@ -148,74 +202,84 @@ footer{text-align:center;color:var(--mid);font-size:.82rem;padding:30px 18px 50p
 <!-- ===================== STORY ===================== -->
 <section class="section active" id="s-story">
   <div class="hero">
+    <span class="orb a"></span><span class="orb b"></span>
     <h1>The future is designed<br>by everyone.</h1>
-    <p>A motivational note on how AI tore down the wall around great design — and handed you the brush.
-    This is the script our AI avatar narrates.</p>
+    <p>How AI tore down the wall around great design — and handed you the brush. This is the story our cast narrates.</p>
+    <div class="cta">
+      <button class="btn primary" id="narrate"><span class="shine"></span>▶ Narrate the story</button>
+      <button class="btn ghost" data-goto="cast">Meet the cast →</button>
+    </div>
   </div>
 
-  <div class="narrate-bar" id="nbar">
-    <button class="btn primary" id="narrate">▶ Narrate this</button>
+  <div class="narrate-bar glass" id="nbar">
     <button class="btn ghost" id="stopnar" style="display:none">⏹ Stop</button>
     <span class="wave"><span></span><span></span><span></span><span></span><span></span></span>
-    <span class="muted" id="nstatus">Reads aloud in your browser. The rendered avatar version lives in <span class="mono">narration-script.md</span> + <span class="mono">story.md</span>.</span>
+    <span class="muted" id="nstatus">Click “Narrate the story” — it reads aloud in your browser. The rendered avatar version lives in <span class="mono">story.md</span> + <span class="mono">avatar-cast.md</span>.</span>
   </div>
 
   <div class="story-body" id="story">
-    <p>Not long ago, great design lived behind a wall — years of training, expensive software, and a
-    secret language of grids, kerning, and color theory. If you weren't "a designer," the door was closed.</p>
+    <p>Not long ago, great design lived behind a wall — years of training, expensive software, and a secret language of grids, kerning, and color theory. If you weren't "a designer," the door was closed.</p>
     <p class="em">That wall is gone.</p>
-    <p>Today, the tools meet you where you are. You bring the idea; the machine handles the craft you
-    haven't learned yet. Pick a color, drag a slider, and depth and light appear — the way a studio
-    would build it, in seconds, not weeks.</p>
-    <p>AI didn't replace the designer. It replaced the <em>barrier</em>. The blank page that used to
-    intimidate now answers back. Skills that once took a decade are a starting point now, not a gate.</p>
-    <p>And here's the part that matters: <strong>taste still wins.</strong> The eye for what's clean,
-    what's clear, what makes someone stop and feel something — that's still yours. The machine hands
-    everyone a brush. What you paint is up to you.</p>
-    <p>So this is the invitation. Not to become a designer <em>someday</em> — to design <em>today</em>.
-    Open the Studio. Make one card. Make it beautiful. Then make it better.</p>
+    <p>Today, the tools meet you where you are. You bring the idea; the machine handles the craft you haven't learned yet. Pick a color, drag a slider, and depth and light appear — the way a studio would build it, in seconds, not weeks.</p>
+    <p>AI didn't replace the designer. It replaced the <em>barrier</em>. The blank page that used to intimidate now answers back. Skills that once took a decade are a starting point now, not a gate.</p>
+    <p>And here's the part that matters: <strong>taste still wins.</strong> The eye for what's clean, what's clear, what makes someone stop and feel something — that's still yours. The machine hands everyone a brush. What you paint is up to you.</p>
+    <p>So this is the invitation. Not to become a designer <em>someday</em> — to design <em>today</em>. Open the Studio. Make one card. Make it beautiful. Then make it better.</p>
     <p class="em">The future of design isn't a profession. It's a superpower — and it's in your hands now.</p>
   </div>
-  <button class="btn primary" data-goto="studio" style="margin-top:18px">Open the Studio →</button>
+</section>
+
+<!-- ===================== CAST ===================== -->
+<section class="section" id="s-cast">
+  <span class="kicker">🎭 The Design Faculty</span>
+  <h1 style="font-size:2.3rem;margin:14px 0 6px" class="h-grad">A cast that teaches &amp; directs</h1>
+  <p class="lead">Six characters, each a specialist who narrates and directs their corner of design — with the
+  knowledge and the high-level tools they're trained on, embedded right in. Press a card to hear them
+  (distinct voices, in your browser), or play the full lecture in sequence.</p>
+  <div class="cast-toolbar">
+    <button class="btn primary" id="playAll"><span class="shine"></span>▶ Play full lecture</button>
+    <button class="btn ghost" id="stopAll" style="display:none">⏹ Stop</button>
+    <span class="muted" id="castStatus">Tip: each voice is rendered live by your browser. For cinematic avatars, render the scripts in <span class="mono">avatar-cast.md</span> via HeyGen.</span>
+  </div>
+  <div class="cast-grid" id="castGrid"></div>
 </section>
 
 <!-- ===================== STUDIO ===================== -->
 <section class="section" id="s-studio">
   <span class="kicker">The Tool</span>
-  <h1 style="font-size:2rem;margin:14px 0 6px">Graphic Design Studio</h1>
+  <h1 style="font-size:2.2rem;margin:14px 0 6px" class="h-grad">Graphic Design Studio</h1>
   <p class="lead">Type in the boxes, tap a brand color, drag the depth sliders, hover to feel the 3D —
   then <strong>Copy HTML</strong> or <strong>Download</strong>. No experience needed.</p>
-  <p style="margin:14px 0"><a class="btn ghost" href="studio.html" target="_blank" rel="noopener">↗ Open full-screen</a></p>
-  <iframe class="studio-frame" src="studio.html" title="Graphic Design Studio"></iframe>
+  <p style="margin:16px 0"><a class="btn ghost" href="studio.html" target="_blank" rel="noopener">↗ Open full-screen</a></p>
+  <iframe class="studio-frame" src="studio.html" title="Graphic Design Studio" loading="lazy"></iframe>
 </section>
 
 <!-- ===================== LEARN ===================== -->
 <section class="section" id="s-learn">
   <span class="kicker">Training</span>
-  <h1 style="font-size:2rem;margin:14px 0 6px">Learn it, step by step</h1>
-  <p class="lead">A plain-language path from zero to confident. Each module is short, with one thing to
-  try in the Studio. Full text in <span class="mono">graphic-design-course.md</span>.</p>
-  <div class="grid cards-3" id="modules" style="margin-top:24px"></div>
+  <h1 style="font-size:2.2rem;margin:14px 0 6px" class="h-grad">Learn it, step by step</h1>
+  <p class="lead">A plain-language path from zero to confident. Each module is short, with one thing to try
+  in the Studio. Full text in <span class="mono">graphic-design-course.md</span>.</p>
+  <div class="grid cards-3" id="modules" style="margin-top:26px"></div>
 </section>
 
 <!-- ===================== TOOLS ===================== -->
 <section class="section" id="s-tools">
   <span class="kicker">Studio Toolbox</span>
-  <h1 style="font-size:2rem;margin:14px 0 6px">Every tool a top studio uses</h1>
-  <p class="lead">The professional stack, organized by job — free and paid. Pick the right tool for the
-  task, not the most expensive one.</p>
-  <div id="toolhub" style="margin-top:24px"></div>
+  <h1 style="font-size:2.2rem;margin:14px 0 6px" class="h-grad">Every tool a top studio uses</h1>
+  <p class="lead">The professional stack, organized by job — free and paid. Right tool for the task, not
+  the priciest one. Each cast member is trained on the tools in their domain.</p>
+  <div id="toolhub" style="margin-top:26px"></div>
 </section>
 
 <!-- ===================== DEMOS ===================== -->
 <section class="section" id="s-demos">
   <span class="kicker">Play &amp; Learn</span>
-  <h1 style="font-size:2rem;margin:14px 0 6px">Interactive demos</h1>
+  <h1 style="font-size:2.2rem;margin:14px 0 6px" class="h-grad">Interactive demos</h1>
   <p class="lead">Three core ideas you can <em>feel</em> by dragging a slider.</p>
 
-  <div class="demo" style="margin-top:24px">
+  <div class="demo glass" style="margin-top:26px">
     <h3>1 · Depth &amp; 3D</h3>
-    <p class="hint">More depth lifts the focal element toward the viewer. Drag and watch the icon pop.</p>
+    <p class="hint">More depth lifts the focal element toward the viewer. Drag, then hover the card.</p>
     <div class="demo-row">
       <div>
         <label>Depth / pop: <span id="depthVal" class="mono">40px</span></label>
@@ -229,7 +293,7 @@ footer{text-align:center;color:var(--mid);font-size:.82rem;padding:30px 18px 50p
     </div>
   </div>
 
-  <div class="demo">
+  <div class="demo glass">
     <h3>2 · Color contrast (accessibility)</h3>
     <p class="hint">Text must contrast with its background. AA needs ≥ 4.5:1 for body text.</p>
     <div class="demo-row">
@@ -242,7 +306,7 @@ footer{text-align:center;color:var(--mid);font-size:.82rem;padding:30px 18px 50p
     </div>
   </div>
 
-  <div class="demo">
+  <div class="demo glass">
     <h3>3 · Type scale</h3>
     <p class="hint">A consistent ratio between sizes creates rhythm. Try 1.2 (subtle) → 1.5 (dramatic).</p>
     <label>Ratio: <span id="scaleVal" class="mono">1.25</span></label>
@@ -254,15 +318,15 @@ footer{text-align:center;color:var(--mid);font-size:.82rem;padding:30px 18px 50p
 <!-- ===================== QUIZ ===================== -->
 <section class="section" id="s-quiz">
   <span class="kicker">Knowledge Check</span>
-  <h1 style="font-size:2rem;margin:14px 0 6px">Quick quiz</h1>
+  <h1 style="font-size:2.2rem;margin:14px 0 6px" class="h-grad">Quick quiz</h1>
   <p class="lead">Five questions from the course. Instant feedback — no pressure.</p>
-  <div id="quiz" style="margin-top:24px"></div>
+  <div id="quiz" style="margin-top:26px"></div>
   <div id="score"></div>
 </section>
 
 <footer>
   Capital Bridge · Design Lab — built to be the easiest way to make beautiful, on-brand graphics.<br>
-  Files: <span class="mono">lab.html · studio.html · graphics-showcase.html · graphic-design-course.md · graphic-design-specialist.md · story.md · narration-script.md</span>
+  <span class="mono">lab.html · studio.html · graphics-showcase.html · course · specialist · story · narration-script · avatar-cast</span>
 </footer>
 
 <script>
@@ -270,37 +334,119 @@ footer{text-align:center;color:var(--mid);font-size:.82rem;padding:30px 18px 50p
   "use strict";
   var $=function(s,c){return (c||document).querySelector(s);};
   var $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
+  var synth = window.speechSynthesis || null;
 
   /* ---------- tabs ---------- */
   function show(t){
     $$('.tab').forEach(function(b){b.classList.toggle('active',b.dataset.t===t);});
     $$('.section').forEach(function(s){s.classList.toggle('active',s.id==='s-'+t);});
+    if(synth) synth.cancel(); resetNarrate(); resetCast();
     window.scrollTo({top:0,behavior:'smooth'});
   }
   $$('.tab').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.t);});});
   $$('[data-goto]').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.goto);});});
 
-  /* ---------- narrate (Web Speech API) ---------- */
-  var synth = window.speechSynthesis;
-  var nbtn=$('#narrate'), sbtn=$('#stopnar'), nbar=$('#nbar'), nstat=$('#nstatus');
-  function speak(){
-    if(!synth){nstat.textContent='Speech not supported in this browser — read along below.';return;}
+  /* ---------- voices ---------- */
+  var voices=[];
+  function loadVoices(){ if(synth) voices=synth.getVoices()||[]; }
+  loadVoices(); if(synth) synth.onvoiceschanged=loadVoices;
+  function pickVoice(i){ if(!voices.length) return null;
+    var en=voices.filter(function(v){return /^en/i.test(v.lang);}); var pool=en.length?en:voices;
+    return pool[i%pool.length]; }
+  function utter(text,opts){ var u=new SpeechSynthesisUtterance(text);
+    u.rate=opts.rate||1; u.pitch=opts.pitch||1; var v=pickVoice(opts.vi||0); if(v)u.voice=v; return u; }
+
+  /* ---------- story narrate ---------- */
+  var nbar=$('#nbar'),nbtn=$('#narrate'),sbtn=$('#stopnar'),nstat=$('#nstatus');
+  function resetNarrate(){ if(!nbar)return; nbar.classList.remove('on'); if(nbtn)nbtn.style.display='';
+    if(sbtn)sbtn.style.display='none'; if(nstat)nstat.textContent='Click “Narrate the story” — it reads aloud in your browser.'; }
+  if(nbtn) nbtn.addEventListener('click',function(){
+    if(!synth){nstat.textContent='Speech not supported here — read along below.';return;}
     synth.cancel();
-    var text=$('#story').innerText;
-    var u=new SpeechSynthesisUtterance(text);
-    u.rate=.98;u.pitch=1;
-    u.onend=u.onerror=stop;
+    var u=utter($('#story').innerText,{rate:.98,pitch:1,vi:0});
+    u.onend=u.onerror=resetNarrate;
     nbar.classList.add('on');nbtn.style.display='none';sbtn.style.display='';nstat.textContent='Narrating…';
     synth.speak(u);
+  });
+  if(sbtn) sbtn.addEventListener('click',function(){if(synth)synth.cancel();resetNarrate();});
+
+  /* ---------- CAST ---------- */
+  var CAST=[
+    {id:"iris",name:"Iris",role:"Creative Director · Host",emoji:"🎬",c1:"#094b3a",c2:"#1a9d8f",rate:.98,pitch:1.0,
+     know:["Start every job with a one-line brief","Every choice needs a reason","Build from a reusable brand system"],
+     tools:["The whole stack","Figma","Brand tokens"],
+     script:"Welcome to the studio. I'm Iris, your creative director. I'll hand you to the specialists — but remember one rule above all: every choice needs a reason. Let's make something the world has to notice."},
+    {id:"atlas",name:"Atlas",role:"Layout · Grid · Hierarchy",emoji:"📐",c1:"#0d7a5f",c2:"#1a9d8f",rate:.94,pitch:.85,
+     know:["Everything sits on a shared grid","Rank by size and space","Control the eye's path"],
+     tools:["Figma","Illustrator","8px grid"],
+     script:"Atlas here. Before color, before type, there's structure. Put everything on a grid, then rank it — the biggest, most-spaced element is what they see first. Control the eye's path, and you control the story."},
+    {id:"nova",name:"Nova",role:"Color · Light · Mood",emoji:"🌈",c1:"#e0603c",c2:"#bd8419",rate:1.04,pitch:1.25,
+     know:["One hero, one support, one accent (60/30/10)","Reason in HSL","Contrast is kindness"],
+     tools:["Coolors","Adobe Color","Realtime Colors"],
+     script:"I'm Nova. Color isn't decoration — it's emotion with a hex code. Pick one hero color, one supporting tone, and one accent for ten percent of the frame. And contrast is kindness: if they can't read it, you didn't design it."},
+    {id:"quill",name:"Quill",role:"Typography · Voice",emoji:"🖋️",c1:"#7a4a7e",c2:"#1a9d8f",rate:.97,pitch:1.1,
+     know:["Two typefaces, max","Clear size jumps; line length ~66ch","Body line-height ~1.6"],
+     tools:["Google Fonts","Fontshare","Fontjoy"],
+     script:"I'm Quill. Two typefaces, no more — one to speak, one to sing. Make the headline unmistakably larger, keep lines short, and let the text breathe. Type is a voice; choose its tone on purpose."},
+    {id:"volt",name:"Volt",role:"3D · Depth · Motion",emoji:"⚡",c1:"#bd8419",c2:"#e0603c",rate:1.08,pitch:1.15,
+     know:["Layer, light, perspective, parallax","Ease motion — never snap","Depth is seasoning"],
+     tools:["Blender","Spline","After Effects","Rive"],
+     script:"Volt. This is where flat becomes real. Layer your elements, pick one light direction, add a little tilt and parallax — and let motion ease, never snap. Depth is seasoning: a little makes everything taste expensive."},
+    {id:"sage",name:"Sage",role:"AI Tools · Workflow",emoji:"🧠",c1:"#1a9d8f",c2:"#7a4a7e",rate:.9,pitch:.95,
+     know:["You bring taste; AI brings speed","Generate many, refine by hand","Recreate, never copy; honor consent"],
+     tools:["Firefly","Midjourney","Ideogram"],
+     script:"I'm Sage. The modern studio is a partnership — you bring taste, the machine brings speed. Generate ten directions in the time it took to make one, then refine by hand. The tools changed; the eye still decides."}
+  ];
+  var castStat=$('#castStatus'), playAllBtn=$('#playAll'), stopAllBtn=$('#stopAll');
+  $('#castGrid').innerHTML = CAST.map(function(ch){
+    return '<div class="cast-card glass" id="cc-'+ch.id+'" style="--c1:'+ch.c1+';--c2:'+ch.c2+'">'+
+      '<div class="cast-head"><div class="portrait">'+ch.emoji+'</div>'+
+        '<div><div class="cast-name">'+ch.name+'</div><div class="cast-role">'+ch.role+'</div></div></div>'+
+      '<div class="cast-script">“'+ch.script+'”</div>'+
+      '<div style="font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mid)">Trained on</div>'+
+      '<div class="chiprow">'+ch.tools.map(function(t){return '<span class="chip">'+t+'</span>';}).join('')+'</div>'+
+      '<div style="font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mid)">Directs</div>'+
+      '<ul class="know">'+ch.know.map(function(k){return '<li>'+k+'</li>';}).join('')+'</ul>'+
+      '<button class="btn ghost" data-cast="'+ch.id+'">▶ Hear from '+ch.name+' <span class="wave" style="margin-left:6px"><span></span><span></span><span></span><span></span><span></span></span></button>'+
+    '</div>';
+  }).join('');
+
+  function clearSpeaking(){ $$('.cast-card').forEach(function(c){c.classList.remove('speaking');}); }
+  function resetCast(){ clearSpeaking(); if(playAllBtn)playAllBtn.style.display='';
+    if(stopAllBtn)stopAllBtn.style.display='none';
+    if(castStat)castStat.textContent='Tip: each voice is rendered live by your browser. For cinematic avatars, render avatar-cast.md via HeyGen.'; }
+
+  function speakOne(ch,onend){
+    if(!synth){ if(castStat)castStat.textContent='Speech not supported in this browser — read the scripts on each card.'; if(onend)onend(); return; }
+    synth.cancel(); clearSpeaking();
+    var card=$('#cc-'+ch.id); if(card)card.classList.add('speaking');
+    var u=utter(ch.script,{rate:ch.rate,pitch:ch.pitch,vi:CAST.indexOf(ch)});
+    u.onend=u.onerror=function(){ if(card)card.classList.remove('speaking'); if(onend)onend(); };
+    synth.speak(u);
   }
-  function stop(){if(synth)synth.cancel();nbar.classList.remove('on');nbtn.style.display='';sbtn.style.display='none';
-    nstat.textContent='Reads aloud in your browser. The rendered avatar version lives in narration-script.md.';}
-  nbtn.addEventListener('click',speak);sbtn.addEventListener('click',stop);
-  window.addEventListener('beforeunload',function(){if(synth)synth.cancel();});
+  $$('[data-cast]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var ch=CAST.filter(function(c){return c.id===b.dataset.cast;})[0];
+      if(castStat)castStat.textContent='Now: '+ch.name+' — '+ch.role;
+      speakOne(ch,function(){ if(castStat)castStat.textContent=ch.name+' finished. Tap another, or play the full lecture.'; });
+    });
+  });
+  if(playAllBtn) playAllBtn.addEventListener('click',function(){
+    if(!synth){castStat.textContent='Speech not supported — read the scripts on each card.';return;}
+    playAllBtn.style.display='none'; stopAllBtn.style.display='';
+    var i=0;
+    (function next(){
+      if(i>=CAST.length){ resetCast(); return; }
+      var ch=CAST[i++]; castStat.textContent='Lecture · now speaking: '+ch.name;
+      var card=$('#cc-'+ch.id); if(card) card.scrollIntoView({block:'center',behavior:'smooth'});
+      speakOne(ch,next);
+    })();
+  });
+  if(stopAllBtn) stopAllBtn.addEventListener('click',function(){ if(synth)synth.cancel(); resetCast(); });
 
   /* ---------- learn modules ---------- */
   var MODS=[
-    [0,"Orientation","Design is a few rules applied consistently — not talent. Meet the Studio."],
+    [0,"Orientation","Design is a few rules applied consistently — not talent."],
     [1,"The design system","Reuse fixed tokens: our colors, two fonts, 8px spacing."],
     [2,"Typography","Two fonts, clear size jumps, short readable lines."],
     [3,"Color &amp; contrast","60/30/10. Strong text contrast so anyone can read it."],
@@ -311,11 +457,11 @@ footer{text-align:center;color:var(--mid);font-size:.82rem;padding:30px 18px 50p
     [8,"Motion","Quick, eased, reduced-motion safe."],
     [9,"Build for real","Make a brand-new card end to end in the Studio."],
     [10,"Ship it","Copy/Download, then drop it into the live site."],
-    [11,"Learn from references","Study the recipe, not the pixels. Recreate, don't copy."],
+    [11,"Learn from references","Study the recipe, not the pixels."],
     [12,"Going further","Curated tutorials + the Tools hub to grow."]
   ];
   $('#modules').innerHTML = MODS.map(function(m){
-    return '<div class="mod"><div class="n">MODULE '+m[0]+'</div><h4>'+m[1]+'</h4><p>'+m[2]+'</p></div>';
+    return '<div class="mod glass"><div class="n">MODULE '+m[0]+'</div><h4>'+m[1]+'</h4><p>'+m[2]+'</p></div>';
   }).join('');
 
   /* ---------- tools hub ---------- */
@@ -368,7 +514,7 @@ footer{text-align:center;color:var(--mid);font-size:.82rem;padding:30px 18px 50p
   ];
   $('#toolhub').innerHTML = CATS.map(function(cat){
     var tools = cat.t.map(function(t){
-      return '<div class="tool"><div class="tn">'+t[0]+(t[3]?'<span class="free">FREE</span>':'')+'</div>'+
+      return '<div class="tool glass"><div class="tn">'+t[0]+(t[3]?'<span class="free">FREE</span>':'')+'</div>'+
         '<div class="tu">'+t[1]+'</div><a href="'+t[2]+'" target="_blank" rel="noopener">Visit ↗</a></div>';
     }).join('');
     return '<div class="tcat"><h3><span class="ci" style="background:'+cat.c+'">'+cat.i+'</span>'+cat.n+'</h3>'+
@@ -378,8 +524,7 @@ footer{text-align:center;color:var(--mid);font-size:.82rem;padding:30px 18px 50p
   /* ---------- demo 1: depth ---------- */
   var dCard=$('#depthCard .dc'), dPop=$('#depthPop');
   function depthFX(e){
-    var t=+$('#tiltRange').value, p=+$('#depthRange').value;
-    var rx=0,ry=0;
+    var t=+$('#tiltRange').value, p=+$('#depthRange').value, rx=0, ry=0;
     if(e){var r=dCard.getBoundingClientRect();rx=(0.5-(e.clientY-r.top)/r.height)*t;ry=((e.clientX-r.left)/r.width-0.5)*t;}
     dCard.style.transform='rotateX('+rx.toFixed(1)+'deg) rotateY('+ry.toFixed(1)+'deg)';
     dPop.style.transform='translateZ('+p+'px)';
@@ -396,12 +541,9 @@ footer{text-align:center;color:var(--mid);font-size:.82rem;padding:30px 18px 50p
   function lum(h){var c=hexToRgb(h).map(function(v){v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4);});
     return 0.2126*c[0]+0.7152*c[1]+0.0722*c[2];}
   function contrast(){
-    var fg=$('#cFg').value, bg=$('#cBg').value;
-    var L1=lum(fg),L2=lum(bg),hi=Math.max(L1,L2),lo=Math.min(L1,L2);
-    var r=(hi+0.05)/(lo+0.05);
-    $('#cRatio').textContent=r.toFixed(2)+':1';
-    var b=$('#cBadge'); var pass=r>=4.5;
-    b.textContent=pass?'AA pass':(r>=3?'Large text only':'Fail');
+    var fg=$('#cFg').value, bg=$('#cBg').value, L1=lum(fg),L2=lum(bg),hi=Math.max(L1,L2),lo=Math.min(L1,L2);
+    var r=(hi+0.05)/(lo+0.05); $('#cRatio').textContent=r.toFixed(2)+':1';
+    var b=$('#cBadge'),pass=r>=4.5; b.textContent=pass?'AA pass':(r>=3?'Large text only':'Fail');
     b.className='badge '+(pass?'pass':'fail');
     var p=$('#cPrev');p.style.color=fg;p.style.background=bg;
   }
@@ -409,8 +551,7 @@ footer{text-align:center;color:var(--mid);font-size:.82rem;padding:30px 18px 50p
 
   /* ---------- demo 3: type scale ---------- */
   function scale(){
-    var ratio=(+$('#scaleRange').value)/100;
-    $('#scaleVal').textContent=ratio.toFixed(2);
+    var ratio=(+$('#scaleRange').value)/100; $('#scaleVal').textContent=ratio.toFixed(2);
     var base=16, names=['Caption','Body','H4','H3','H2','H1'], out='';
     names.forEach(function(n,i){var size=(base*Math.pow(ratio,i)).toFixed(0);
       out+='<div style="font-size:'+size+'px">'+n+' · '+size+'px</div>';});
@@ -420,42 +561,29 @@ footer{text-align:center;color:var(--mid);font-size:.82rem;padding:30px 18px 50p
 
   /* ---------- quiz ---------- */
   var QS=[
-    {q:"What's the fastest way to make a graphic feel organized?",
-     o:["Use more colors","Align everything to a shared grid","Add more text","Make it bigger"],a:1,
-     e:"Alignment to a common grid instantly reads as 'intentional.'"},
-    {q:"Roughly how should you split a color palette?",
-     o:["33/33/33","60/30/10 (dominant/support/accent)","All one color","50/50"],a:1,
-     e:"60/30/10 keeps one color dominant with a small, punchy accent."},
-    {q:"For readable body text, the AA contrast ratio is at least…",
-     o:["1.5:1","2:1","4.5:1","10:1"],a:2,
-     e:"WCAG AA requires ≥ 4.5:1 for normal body text."},
-    {q:"What makes a flat card read as 3D / detailed?",
-     o:["Brighter colors","Layering, consistent light, perspective & parallax","More words","A bigger icon"],a:1,
-     e:"Depth cues — not saturation — create the sense of real space."},
-    {q:"When learning from a reference video, you should copy its…",
-     o:["Exact artwork & footage","Recipe: palette, type, spacing, motion","Logo","Voice of the narrator"],a:1,
-     e:"Recreate the system/technique; never lift protected assets or clone a person."}
+    {q:"Fastest way to make a graphic feel organized?",o:["Use more colors","Align everything to a shared grid","Add more text","Make it bigger"],a:1,e:"Alignment to a common grid instantly reads as 'intentional.'"},
+    {q:"How should you split a color palette?",o:["33/33/33","60/30/10 (dominant/support/accent)","All one color","50/50"],a:1,e:"60/30/10 keeps one color dominant with a small, punchy accent."},
+    {q:"AA contrast for body text is at least…",o:["1.5:1","2:1","4.5:1","10:1"],a:2,e:"WCAG AA requires ≥ 4.5:1 for normal body text."},
+    {q:"What makes a flat card read as 3D?",o:["Brighter colors","Layering, consistent light, perspective & parallax","More words","A bigger icon"],a:1,e:"Depth cues — not saturation — create the sense of space."},
+    {q:"When learning from a reference, copy its…",o:["Exact artwork & footage","Recipe: palette, type, spacing, motion","Logo","The narrator's voice"],a:1,e:"Recreate the system/technique; never lift assets or clone a person."}
   ];
-  var answered=0, correct=0;
+  var answered=0,correct=0;
   $('#quiz').innerHTML = QS.map(function(item,qi){
     var opts=item.o.map(function(opt,oi){return '<button class="opt" data-q="'+qi+'" data-o="'+oi+'">'+opt+'</button>';}).join('');
-    return '<div class="q"><div class="qt">'+(qi+1)+'. '+item.q+'</div>'+opts+'<div class="explain" id="ex'+qi+'">'+item.e+'</div></div>';
+    return '<div class="q glass"><div class="qt">'+(qi+1)+'. '+item.q+'</div>'+opts+'<div class="explain" id="ex'+qi+'">'+item.e+'</div></div>';
   }).join('');
   $$('.opt').forEach(function(btn){
     btn.addEventListener('click',function(){
-      var qi=+btn.dataset.q, oi=+btn.dataset.o;
-      var siblings=$$('.opt[data-q="'+qi+'"]');
+      var qi=+btn.dataset.q,oi=+btn.dataset.o,siblings=$$('.opt[data-q="'+qi+'"]');
       if(siblings[0].disabled) return;
-      siblings.forEach(function(s){s.disabled=true;
-        if(+s.dataset.o===QS[qi].a)s.classList.add('correct');});
+      siblings.forEach(function(s){s.disabled=true;if(+s.dataset.o===QS[qi].a)s.classList.add('correct');});
       if(oi!==QS[qi].a) btn.classList.add('wrong'); else correct++;
-      $('#ex'+qi).classList.add('show');
-      answered++;
-      if(answered===QS.length){
-        $('#score').textContent='You scored '+correct+' / '+QS.length+(correct===QS.length?' — flawless. 🎉':'  — try the course modules for the rest.');
-      }
+      $('#ex'+qi).classList.add('show'); answered++;
+      if(answered===QS.length) $('#score').textContent='You scored '+correct+' / '+QS.length+(correct===QS.length?' — flawless. 🎉':' — revisit the modules for the rest.');
     });
   });
+
+  window.addEventListener('beforeunload',function(){if(synth)synth.cancel();});
 })();
 </script>
 </body>
