@@ -1,11 +1,38 @@
-# PROMETHEUS // OS — Avatar Edition
+# PROMETHEUS // OS — an AI training suite
+
+A three-part, self-contained cinematic training on commanding AI — no build, no server needed.
+The three pages cross-link into one product:
+
+| Page | What it is |
+| --- | --- |
+| **`prometheus.html`** — The Briefing | The deep 42-screen course, narrated by a procedural holographic **AI host**, with a deep-dive transcript and a built-in **Record Studio** for your own voice. |
+| **`cinematic.html`** — The Film Series | A scroll-based cinematic experience: **six AI-generated films** (one per section) with movie-style scripts and the latest 2026 intel. |
+| **`toolkit.html`** — The Arsenal | A practical directory of the **2026 AI stack by job** (36 tools), the production chain, and ready-to-post vertical social films. |
+
+## The AI-generated films (made from written scripts via Invideo)
+
+**Section films (16:9):**
+1. The Future of AI & Automation — https://ai.invideo.io/ai-mcp-video?video=the-future-of-ai-and-automation-a-cinematic-opening-to-a-training-on-commanding-ai-yjaccq
+2. AI Automation & Autonomous Agents — https://ai.invideo.io/ai-mcp-video?video=ai-automation-and-autonomous-agents-that-run-a-business-247-wmvqig
+3. Creating Cinematic Videos with AI — https://ai.invideo.io/ai-mcp-video?video=how-to-create-cinematic-videos-using-ai-veo-runway-sora-and-the-creative-pipeline-ypoybe
+4. Growing Your Business with AI — https://ai.invideo.io/ai-mcp-video?video=growing-your-business-with-ai-leverage-scale-and-the-one-person-company-bjockh
+5. Being Seen — AI Visibility — https://ai.invideo.io/ai-mcp-video?video=being-seen-ai-powered-visibility-content-and-personal-brand-knxpov
+6. The 2026 Frontier (Finale) — https://ai.invideo.io/ai-mcp-video?video=the-2026-ai-frontier-latest-trends-and-a-call-to-action-finale-icmttn
+
+**Vertical social cuts (9:16, ready to post):**
+- The one-person company — https://ai.invideo.io/ai-mcp-video?video=the-one-person-ai-powered-company-dfswpb
+- A film from a sentence — https://ai.invideo.io/ai-mcp-video?video=making-cinematic-video-from-text-with-ai-npgywx
+- Be seen or be invisible — https://ai.invideo.io/ai-mcp-video?video=being-seen-with-ai-content-at-scale-rfkbjm
+- AI is already here — https://ai.invideo.io/ai-mcp-video?video=the-future-of-ai-is-already-here-vgfimq
+
+---
+
+## The Briefing (`prometheus.html`)
 
 A cinematic, narrated AI-literacy briefing (42 screens, 7 chapters) — hosted by a
 **procedural holographic AI host** (a live wireframe-sphere core, rendered entirely
 in SVG/CSS — no video file), with a futuristic heads-up interface and a read-along
 deep-dive transcript on every slide.
-
-**Open:** `prometheus.html` (single self-contained file — no build, no server needed).
 
 ---
 
