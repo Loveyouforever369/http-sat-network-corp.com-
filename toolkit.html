@@ -137,6 +137,7 @@ footer a{color:var(--cyan)}
     <a href="prometheus.html">The Briefing</a>
     <a href="cinematic.html">Film Series</a>
     <a href="toolkit.html" class="active">The Arsenal</a>
+    <a href="state.html">State of AI</a>
     <a href="plan.html">90-Day Plan</a>
   </div>
 </nav>
@@ -190,27 +191,28 @@ $('#chainRow').innerHTML=CHAIN.map(s=>`<div class="step"><div class="si">${s.i}<
 /* the stack */
 const CATS=[
 {ico:'🧠',name:'Frontier Brains',job:'Reason · write · decide',tools:[
-  {n:'Claude',u:'https://claude.ai',tag:'#1 build',d:'Anthropic’s frontier — coding, agents, the hardest reasoning.'},
-  {n:'ChatGPT',u:'https://chatgpt.com',d:'OpenAI’s everyday driver and strongest creative writer; free tier.'},
-  {n:'Gemini',u:'https://gemini.google.com',d:'Google — long-context reasoning and data, grounded in Search.'},
-  {n:'Grok',u:'https://grok.com',d:'xAI — real-time, candid, the value end of the frontier.'},
+  {n:'Claude Opus 4.8',u:'https://claude.ai',tag:'#1 overall',d:'Anthropic’s frontier — leads coding, agents, and MCP tool-use (Intelligence Index 61.4).'},
+  {n:'GPT-5.5',u:'https://chatgpt.com',d:'OpenAI’s everyday driver and strongest creative writer; free tier.'},
+  {n:'Gemini 3.1 Pro',u:'https://gemini.google.com',d:'Google — leads reasoning and data analysis, grounded in Search.'},
+  {n:'Grok 4.3',u:'https://grok.com',d:'xAI — real-time and the cheapest of the four, with strong agentic scores.'},
   {n:'DeepSeek',u:'https://deepseek.com',d:'Open-weight, low-cost reasoning you can self-host.'}]},
 {ico:'🎬',name:'Cinematic Video',job:'Text & image → motion',tools:[
-  {n:'Google Veo',u:'https://deepmind.google/models/veo/',tag:'native audio',d:'Premium, coherent video with sound built in.'},
-  {n:'Runway',u:'https://runwayml.com',d:'Gen-4 — pro creative video, references, and editing.'},
-  {n:'OpenAI Sora',u:'https://sora.com',d:'Striking text-to-video and remixing.'},
-  {n:'Kling',u:'https://klingai.com',d:'High-realism motion and physics.'},
-  {n:'Luma Dream Machine',u:'https://lumalabs.ai/dream-machine',d:'Fast, fluid, great camera moves.'},
-  {n:'Pika',u:'https://pika.art',d:'Stylized, playful, fast iterations.'}]},
+  {n:'Seedance 2.0',u:'https://seedance.ai',tag:'overall #1',d:'ByteDance — best motion + value, multi-scene consistency from one reference.'},
+  {n:'Veo 3.1',u:'https://deepmind.google/models/veo/',tag:'4K · audio',d:'Google — the only true 4K-native model, with native audio.'},
+  {n:'Kling 3.0',u:'https://klingai.com',d:'Kuaishou — 10-second clips with native sound; stylized storytelling.'},
+  {n:'Sora 2',u:'https://sora.com',d:'OpenAI — the most convincing physics for maximum realism.'},
+  {n:'Runway',u:'https://runwayml.com',d:'Gen-4 — pro creative control, references, and editing.'},
+  {n:'Wan 2.7',u:'https://wan.video',d:'Alibaba — open-source leader with first/last-frame control.'}]},
 {ico:'🗣️',name:'Voice & Avatars',job:'Sound like you · be on camera',tools:[
   {n:'ElevenLabs',u:'https://elevenlabs.io',tag:'voice clone',d:'Lifelike speech and instant voice cloning from a sample.'},
   {n:'HeyGen',u:'https://heygen.com',d:'Talking AI avatars and instant video translation.'},
   {n:'Hedra',u:'https://hedra.com',d:'Expressive character video from an image + voice.'},
   {n:'Descript',u:'https://descript.com',d:'Edit audio and video by editing the transcript.'}]},
 {ico:'🎨',name:'Image & Design',job:'Stills · brand · decks',tools:[
-  {n:'Midjourney',u:'https://midjourney.com',d:'Best-in-class aesthetic, cinematic imagery.'},
-  {n:'Flux / Nano Banana',u:'https://flux1.ai',d:'Photoreal generation and precise image edits.'},
-  {n:'Ideogram',u:'https://ideogram.ai',d:'Images with crisp, legible text.'},
+  {n:'GPT Image 2',u:'https://chatgpt.com',tag:'best overall',d:'OpenAI — accurate prompts, believable realism, easy editing.'},
+  {n:'Midjourney V8',u:'https://midjourney.com',d:'The artistic leader — 5× faster, native 2K, a distinctive look.'},
+  {n:'Flux 2',u:'https://bfl.ai',d:'Black Forest Labs — best open-weights, Midjourney-class for cents.'},
+  {n:'Nano Banana',u:'https://gemini.google.com',d:'Google — best for editing and character consistency.'},
   {n:'Gamma',u:'https://gamma.app',d:'Rough notes → a designed deck or site in one step.'},
   {n:'Canva',u:'https://canva.com',d:'All-in-one design with deep AI baked in.'}]},
 {ico:'⚙️',name:'Automation & Agents',job:'Run the work without you',tools:[
