@@ -1,10 +1,11 @@
-# PROMETHEUS // OS — an AI training suite
+# PROMETHEUS // OS — a cinematic AI training suite
 
-A three-part, self-contained cinematic training on commanding AI — no build, no server needed.
-The three pages cross-link into one product:
+A self-contained, no-build cinematic training on commanding AI. **Start at `home.html`** —
+five pages share a top-nav and cross-link into one product:
 
 | Page | What it is |
 | --- | --- |
+| **`home.html`** — Home | The front door: hero, live stat counters, and four portal cards into the suite. |
 | **`prometheus.html`** — The Briefing | The deep 42-screen course, narrated by a procedural holographic **AI host**, with a deep-dive transcript and a built-in **Record Studio** for your own voice (with one-click `.zip` export). |
 | **`cinematic.html`** — The Film Series | A scroll-based cinematic experience: **ten AI-generated films** (one per chapter) with movie-style scripts and the latest 2026 intel. |
 | **`toolkit.html`** — The Arsenal | A practical directory of the **2026 AI stack by job** (36 tools), the production chain, and **ten ready-to-post vertical social films**. |
