@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PROMETHEUS // THE 30-DAY CONTENT ENGINE</title>
+<meta name="description" content="A 30-day AI content calendar: copy-ready hooks, captions, and hashtags mapped to a weekly posting rhythm and the PROMETHEUS social films. Turn the training into attention.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700&family=Sora:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--void:#04060c;--ink:#0b1120;--panel:#0f1626;--panel-2:#131c30;
+  --line:rgba(245,185,66,.16);--line-soft:rgba(245,185,66,.07);--line-cool:rgba(140,160,200,.13);
+  --gold:#f5b942;--gold-bright:#ffd479;--amber:#ff9b3d;--ember:#e2572b;
+  --cyan:#5fe7ff;--cyan-soft:rgba(95,231,255,.12);--cyan-line:rgba(95,231,255,.22);--verify:#54d6c4;--plum:#b07cff;--green:#6ee7a8;
+  --bone:#f4ecdb;--text:#cdd3e1;--dim:#9aa2b6;--faint:#6a7286;--shadow:0 30px 80px rgba(0,0,0,.6);}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--text);font-family:'Sora',system-ui,sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(1200px 700px at 80% -10%,rgba(245,185,66,.06),transparent 60%),radial-gradient(1000px 800px at 5% 110%,rgba(176,124,255,.06),transparent 62%)}
+::selection{background:var(--gold);color:var(--void)}
+h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:500;line-height:1.05;letter-spacing:-.012em;color:var(--bone)}
+b,strong{color:var(--bone);font-weight:600}em{font-style:italic;color:var(--gold)}a{color:inherit;text-decoration:none}
+#fx{position:fixed;inset:0;z-index:1;pointer-events:none}
+#nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;gap:18px;padding:11px clamp(16px,4vw,40px);background:linear-gradient(180deg,rgba(4,6,12,.92),rgba(4,6,12,.4) 70%,transparent);backdrop-filter:blur(8px)}
+.nav-brand{display:flex;align-items:center;gap:9px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone)}
+.nav-brand b{color:var(--gold)}.nav-brand svg{width:16px;height:16px;filter:drop-shadow(0 0 6px rgba(245,185,66,.6))}
+.nav-links{margin-left:auto;display:flex;gap:5px;flex-wrap:wrap}
+.nav-links a{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);padding:8px 12px;border-radius:9px;border:1px solid transparent;transition:all .2s}
+.nav-links a:hover{color:var(--bone);border-color:var(--line-cool)}.nav-links a.active{color:var(--gold);border-color:var(--line);background:rgba(245,185,66,.06)}
+.wrap{position:relative;z-index:5;max-width:1180px;margin:0 auto;padding:0 clamp(18px,5vw,40px)}
+.hero{position:relative;z-index:5;text-align:center;padding:clamp(108px,15vh,170px) 22px clamp(20px,4vh,40px)}
+.hero .kick{font-family:'JetBrains Mono',monospace;letter-spacing:.4em;text-transform:uppercase;font-size:clamp(9px,1.3vw,12px);color:var(--cyan);margin-bottom:18px}
+.hero h1{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(38px,7.5vw,92px);letter-spacing:.03em;text-transform:uppercase;color:var(--bone);line-height:.95}
+.hero h1 b{font-weight:700;font-style:italic;color:var(--gold)}
+.hero p{font-size:clamp(15px,1.6vw,19px);color:var(--dim);line-height:1.6;max-width:60ch;margin:22px auto 0}
+/* rhythm legend */
+.rhythm{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:30px auto clamp(40px,6vh,70px);max-width:920px}
+.rp{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;color:var(--dim);border:1px solid var(--line-cool);border-radius:20px;padding:7px 13px}
+.rp .dot{width:9px;height:9px;border-radius:3px}
+/* week */
+.week{margin-bottom:clamp(36px,6vh,60px)}
+.week-h{display:flex;align-items:baseline;gap:14px;margin-bottom:18px}
+.week-n{font-family:'Fraunces',serif;font-style:italic;font-size:clamp(26px,3.4vw,40px);background:linear-gradient(135deg,var(--gold),var(--ember));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.week-t{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan)}
+.days{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
+.day{position:relative;border:1px solid var(--line-soft);border-radius:15px;padding:18px;background:linear-gradient(160deg,var(--panel),var(--ink));display:flex;flex-direction:column;transition:transform .2s,border-color .2s}
+.day:hover{transform:translateY(-3px);border-color:var(--line)}
+.day-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.daynum{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--gold);border:1px solid var(--line);border-radius:7px;padding:4px 8px;flex:0 0 auto}
+.pill{font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;border-radius:20px;padding:4px 9px}
+.fmt{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.day h4{font-size:16px;line-height:1.25;margin-bottom:8px}
+.cap{font-size:13px;color:var(--text);line-height:1.55;flex:1}
+.tags{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--cyan);margin-top:11px;line-height:1.5;word-break:break-word}
+.day-foot{display:flex;align-items:center;gap:9px;margin-top:13px;padding-top:12px;border-top:1px solid var(--line-soft)}
+.copy{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);border:1px solid var(--line);border-radius:8px;padding:8px 12px;background:transparent;cursor:pointer;transition:all .2s}
+.copy:hover{background:rgba(245,185,66,.08)}.copy.done{color:var(--green);border-color:rgba(110,231,168,.4)}
+.filmlink{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--cyan);margin-left:auto}.filmlink:hover{color:var(--gold)}
+.cta{text-align:center;padding:clamp(40px,7vh,80px) 22px}
+.cta h2{font-family:'Fraunces',serif;font-size:clamp(26px,4.4vw,52px);color:var(--bone)}.cta h2 b{color:var(--gold);font-style:italic}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:14px 24px;border-radius:12px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(245,185,66,.12),rgba(245,185,66,.03));color:var(--gold);transition:all .22s}
+.btn:hover{border-color:var(--gold);transform:translateY(-2px)}.btn.solid{background:linear-gradient(135deg,var(--gold),var(--amber));color:#1a1206;border:none;font-weight:700}
+.row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:26px}
+footer{position:relative;z-index:5;text-align:center;padding:30px 20px 56px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--faint);border-top:1px solid var(--line-soft);max-width:1180px;margin:0 auto}
+.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,160%);z-index:120;background:linear-gradient(135deg,var(--gold),var(--amber));color:#1a1206;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;padding:11px 18px;border-radius:10px;box-shadow:var(--shadow);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.toast.show{transform:translate(-50%,0)}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}.reveal.in{opacity:1;transform:none}
+@media(max-width:560px){.nav-brand span{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<canvas id="fx"></canvas>
+<nav id="nav">
+  <a class="nav-brand" href="home.html"><svg viewBox="0 0 64 64" fill="none"><path d="M32 4C30 16 20 20 20 34a12 12 0 0 0 24 0c0-6-3-9-3-9 1 7-3 10-3 10 2-13-6-18-6-31Z" fill="#ff9b3d"/></svg><span>PROMETHEUS<b>//OS</b></span></a>
+  <div class="nav-links">
+    <a href="home.html">Home</a><a href="prometheus.html">Briefing</a><a href="cinematic.html">Films</a>
+    <a href="toolkit.html">Arsenal</a><a href="state.html">State of AI</a><a href="calendar.html" class="active">Calendar</a><a href="plan.html">Plan</a>
+  </div>
+</nav>
+<header class="hero">
+  <div class="kick">// THE 30-DAY CONTENT ENGINE</div>
+  <h1>Post daily.<br>Get <b>seen</b>.</h1>
+  <p>A month of ready-to-post content — hooks, captions, and hashtags mapped to a weekly rhythm and your AI films. Tap <b>Copy</b>, record or attach the film, and ship. Consistency beats perfection.</p>
+  <div class="rhythm" id="rhythm"></div>
+</header>
+<div class="wrap"><div id="cal"></div></div>
+<section class="cta">
+  <h2>30 days of showing up <b>compounds</b>.</h2>
+  <div class="row"><a class="btn solid" href="toolkit.html">🧰 Get the films</a><a class="btn" href="cinematic.html">🎬 Film Series</a><a class="btn" href="plan.html">🗓 90-Day Plan</a></div>
+</section>
+<footer>PROMETHEUS // OS · THE 30-DAY CONTENT ENGINE — the machine amplifies; your taste is the signal · pick up the megaphone</footer>
+<div class="toast" id="toast"></div>
+<script>
+const $=(s,r=document)=>r.querySelector(s);const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const reduce=matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+const PILLARS={hook:['#e2572b','Hook'],teach:['#5fe7ff','Teach'],tool:['#f5b942','Tool'],pov:['#b07cff','Hot take'],proof:['#6ee7a8','Proof'],story:['#ff9b3d','Story'],engage:['#54d6c4','Engage']};
+$('#rhythm').innerHTML=Object.values(PILLARS).map(p=>`<span class="rp"><span class="dot" style="background:${p[0]}"></span>${p[1]}</span>`).join('');
+const F={future:'https://ai.invideo.io/ai-mcp-video?video=the-future-of-ai-is-already-here-vgfimq',one:'https://ai.invideo.io/ai-mcp-video?video=the-one-person-ai-powered-company-dfswpb',film:'https://ai.invideo.io/ai-mcp-video?video=making-cinematic-video-from-text-with-ai-npgywx',seen:'https://ai.invideo.io/ai-mcp-video?video=being-seen-with-ai-content-at-scale-rfkbjm',auto:'https://ai.invideo.io/ai-mcp-video?video=ai-automation-that-runs-your-business-overnight-zndbyz',front:'https://ai.invideo.io/ai-mcp-video?video=the-2026-ai-frontier-and-the-skills-that-last-xmzlth',sales:'https://ai.invideo.io/ai-mcp-video?video=ai-sales-prospecting-on-autopilot-uwpach',serve:'https://ai.invideo.io/ai-mcp-video?video=ai-customer-service-that-scales-to-one-person-dzpdwe',data:'https://ai.invideo.io/ai-mcp-video?video=ai-data-analysis-in-plain-english-mpfhry',mkt:'https://ai.invideo.io/ai-mcp-video?video=ai-marketing-engine-at-scale-yexepq'};
+const TAGS={ai:'#AI #ArtificialIntelligence #FutureOfWork',biz:'#Entrepreneur #SmallBusiness #Solopreneur',create:'#AIvideo #ContentCreation #CreatorEconomy',auto:'#Automation #AIagents #Productivity',mkt:'#Marketing #DigitalMarketing #GrowthHacking'};
+/* 30 days */
+const DAYS=[
+{p:'hook',f:'Reel',film:F.future,h:'“AI isn’t coming. It’s here.”',c:'AI isn’t coming — it’s already rewriting who wins. The gap isn’t rich vs. poor anymore. It’s those who command the machines… and those commanded by them. Which side are you on? 🔥',t:TAGS.ai},
+{p:'teach',f:'Carousel',h:'The 5-part prompt that fixes everything',c:'Most people beg AI. Pros brief it. Role → Context → Task → Format → Constraints. Swipe for the exact template I use every day. Save this. 📌',t:TAGS.ai},
+{p:'tool',f:'Reel',film:F.film,h:'I made this with one sentence',c:'No camera. No crew. I typed what I wanted to see and AI rendered it. Here’s the 4-tool chain: script → voice → footage → assemble. Studios charged thousands for this. 🎬',t:TAGS.create},
+{p:'pov',f:'Text/Reel',h:'Unpopular opinion',c:'“AI will take your job” is the wrong fear. AI won’t take your job — a person USING AI will. The skill gap is the new wealth gap. Close it now. 👇',t:TAGS.ai},
+{p:'proof',f:'Carousel',film:F.one,h:'One person. A whole company.',c:'In 2026, 74% of solopreneurs use AI — and it’s giving them back 1–4 hours a day. A $400/mo stack now does the work of an $80k/mo team. The one-person company is real. 📈',t:TAGS.biz},
+{p:'story',f:'Story',h:'Behind the scenes',c:'My actual AI stack (screenshots). The 6 tools I open every morning, and exactly what each one does for the business. Ask me anything in the replies. 🛠️',t:TAGS.biz},
+{p:'engage',f:'Text',h:'Your turn',c:'If an AI agent could do ONE repetitive task in your business while you sleep — what would you hand it first? Drop it below. I’ll reply with how I’d build it. 💬',t:TAGS.auto},
+{p:'hook',f:'Reel',film:F.auto,h:'It ran your business overnight',c:'Imagine waking up to leads scored, replies drafted, invoices sent, inbox sorted — and you didn’t lift a finger. That’s AI automation in 2026. Build the machine, then go live your life. 🌙',t:TAGS.auto},
+{p:'teach',f:'Carousel',h:'Trust, Verify, or Reject',c:'The 10-second habit that separates pros from believers. Every AI output is one of three: trust it, verify it, or reject it. Swipe for when to use each. Confident ≠ correct. ✅',t:TAGS.ai},
+{p:'tool',f:'Reel',h:'Stop describing. Start showing.',c:'The fastest way to make AI sound like YOU: don’t use adjectives — paste 2 examples and say “more like these.” It’s voice-cloning for text. Try it on your next email. ✍️',t:TAGS.ai},
+{p:'pov',f:'Text/Reel',h:'Hot take',c:'There is no “best AI.” Asking which model is best is the beginner mistake. The pros route: the right brain for the job in front of them. Loyalty to one tool is expensive. 🧠',t:TAGS.ai},
+{p:'proof',f:'Carousel',film:F.front,h:'The June 2026 leaderboard',c:'No model wins everything: Claude Opus 4.8 leads overall, GPT-5.5 writes best, Gemini 3.1 reasons, Grok 4.3 is cheapest. The skill isn’t loyalty — it’s routing. Save for reference. 📊',t:TAGS.ai},
+{p:'story',f:'Story',h:'My biggest AI fail',c:'I once shipped a “fact” AI invented — confidently. Lesson burned in: tone tells you nothing about truth. Here’s the verification habit that saved me since. 🔥',t:TAGS.ai},
+{p:'engage',f:'Text',h:'Quick poll',c:'Be honest — what’s stopping you from using AI daily? 1) Don’t know where to start 2) Too many tools 3) Don’t trust it 4) No time. Comment your number. 👇',t:TAGS.ai},
+{p:'hook',f:'Reel',film:F.sales,h:'Never cold-prospect again',c:'An AI agent finds your perfect customers, researches each one, and writes a DM so personal they swear you typed it. It follows up forever. You show up only to close. 🤝',t:TAGS.biz},
+{p:'teach',f:'Carousel',h:'Make it think first',c:'One sentence that measurably improves AI accuracy: “Work through this step by step, then answer.” A model that blurts reasons backward to defend a guess. Save this. 🧩',t:TAGS.ai},
+{p:'tool',f:'Reel',film:F.data,h:'Talk to your spreadsheet',c:'Stop staring at data. Point AI at any sheet and just ASK: “What changed? What should I do?” Plain English. No formulas. Snap a photo of a statement — every number extracted in seconds. 📈',t:TAGS.auto},
+{p:'pov',f:'Text/Reel',h:'The real moat',c:'Your competitors have the same AI you do. So access isn’t the edge — command is. Knowing which tool to reach for, how to direct it, and when to trust it. That’s the moat. 🏰',t:TAGS.biz},
+{p:'proof',f:'Carousel',film:F.serve,h:'Support that never sleeps',c:'A customer messaged at 3 a.m. and got a perfect answer in seconds — in their language. The easy 80% solved instantly; the hard 20% handed to a human with full context. One person, enterprise service. 💬',t:TAGS.biz},
+{p:'story',f:'Story',h:'A day in the build',c:'Watch me wire one automation start to finish: new lead → enrich → score → draft email → queue for my approval. ~15 minutes. Then it runs every lead forever. 🛠️',t:TAGS.auto},
+{p:'engage',f:'Text',h:'Drop your niche',c:'Comment your industry and I’ll reply with the #1 AI automation I’d build for you first. No fluff — one concrete idea per comment. 👇',t:TAGS.auto},
+{p:'hook',f:'Reel',film:F.mkt,h:'A campaign in an afternoon',c:'Ad copy. Emails. Landing page. Visuals. 10 versions to test — all in your brand voice, in one afternoon. The old way took an agency a month. Marketing is an engine now. Build it. ⚡',t:TAGS.mkt},
+{p:'teach',f:'Carousel',h:'The MCP cheat sheet',c:'“USB-C for AI.” The Model Context Protocol lets any AI safely reach your files, CRM, and tools — one standard. 10,000+ servers now. Here’s what it means for you. Save it. 🔌',t:TAGS.auto},
+{p:'tool',f:'Reel',h:'Clone your voice in 60 seconds',c:'Record one minute of yourself → ElevenLabs clones your voice → now AI reads anything in YOUR voice. Pair it with a HeyGen avatar and you can “show up” daily without filming. 🎙️',t:TAGS.create},
+{p:'pov',f:'Text/Reel',h:'The 80/20 of money',c:'Cost discipline separates people who profit from AI from people who get a shocking bill. Hard 20% → the brilliant expensive model. Easy 80% → a cheap fast one. Route by price. 💸',t:TAGS.ai},
+{p:'proof',f:'Carousel',film:F.seen,h:'1 idea → 10 posts',c:'Attention is the only currency that matters, and AI mints it. One idea becomes a long video, 10 clips, a week of posts, an email, a thread — in minutes. The machine is your megaphone. 📣',t:TAGS.create},
+{p:'story',f:'Story',h:'What I’d do with $0',c:'Starting from scratch today with zero budget: the exact free-tier AI stack I’d use to land my first 10 clients. Step by step in the next slides. 🚀',t:TAGS.biz},
+{p:'engage',f:'Text',h:'Biggest win',c:'What’s the best thing AI has done for your business or life this month? Brag a little — I’m collecting wins and will feature the best ones. 🏆',t:TAGS.ai},
+{p:'hook',f:'Reel',film:F.front,h:'The skills that never expire',c:'Stop chasing the newest tool — it’s obsolete next month. Master the 4 that last: prompt, verify, build, automate. The future isn’t handed out. It’s commanded by the prepared. 🔥',t:TAGS.ai},
+{p:'proof',f:'Carousel',h:'Your 90-day glow-up',c:'30 days fluency → 30 days toolchain → 30 days building. By day 90 you don’t just use AI — you have a routing instinct, a verification reflex, and live systems earning. Here’s the plan. Save + start. 🗓️',t:TAGS.ai}
+];
+let html='';
+for(let w=0;w<5;w++){
+  const slice=DAYS.slice(w*7,w*7+7);if(!slice.length)break;
+  const titles=['Plant the flag · what AI is','Automate · the machine','Create · be the studio','Sell, serve & scale','The frontier · compound'];
+  html+=`<div class="week reveal"><div class="week-h"><span class="week-n">W${w+1}</span><span class="week-t">Days ${w*7+1}–${Math.min(w*7+7,30)} · ${titles[w]}</span></div><div class="days">`;
+  slice.forEach((d,i)=>{
+    const dn=w*7+i+1;const pl=PILLARS[d.p];
+    html+=`<div class="day"><div class="day-top"><span class="daynum">DAY ${dn}</span><span class="pill" style="color:${pl[0]};border:1px solid ${pl[0]}44;background:${pl[0]}14">${pl[1]}</span><span class="fmt">${d.f}</span></div>
+      <h4>${d.h}</h4><div class="cap" data-cap="${encodeURIComponent(d.c+'\n\n'+d.t)}">${d.c}</div><div class="tags">${d.t}</div>
+      <div class="day-foot"><button class="copy">⧉ Copy caption</button>${d.film?`<a class="filmlink" href="${d.film}" target="_blank" rel="noopener">▶ film ↗</a>`:''}</div></div>`;
+  });
+  html+='</div></div>';
+}
+$('#cal').innerHTML=html;
+let tT;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('show'),1600);}
+$$('.copy').forEach(btn=>btn.onclick=()=>{const cap=decodeURIComponent(btn.closest('.day').querySelector('.cap').dataset.cap);
+  (navigator.clipboard?navigator.clipboard.writeText(cap):Promise.reject()).then(()=>{btn.textContent='✓ Copied';btn.classList.add('done');toast('Caption copied — go post it');setTimeout(()=>{btn.textContent='⧉ Copy caption';btn.classList.remove('done');},1800);}).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=cap;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Caption copied');}catch(e){toast('Select & copy manually');}ta.remove();});});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.08});
+$$('.reveal').forEach(el=>io.observe(el));
+const c=$('#fx'),x=c.getContext('2d');let W,H,parts=[];
+function size(){W=c.width=innerWidth;H=c.height=innerHeight;}
+function init(){parts=[];for(let i=0;i<50;i++)parts.push({x:Math.random()*W,y:Math.random()*H,z:Math.random(),s:Math.random()*1.3+.3,vy:-(Math.random()*.2+.05),vx:(Math.random()-.5)*.1});}
+function frame(){requestAnimationFrame(frame);x.clearRect(0,0,W,H);parts.forEach(p=>{p.y+=p.vy;p.x+=p.vx;if(p.y<-4)p.y=H+4;if(p.x<-4)p.x=W+4;if(p.x>W+4)p.x=-4;const a=.12+p.z*.4;x.beginPath();x.arc(p.x,p.y,p.s,0,7);x.fillStyle='rgba(176,124,255,'+a+')';x.shadowBlur=6;x.shadowColor='rgba(176,124,255,'+a+')';x.fill();});x.shadowBlur=0;}
+size();init();addEventListener('resize',()=>{size();init();});if(!reduce)frame();
+</script>
+</body>
+</html>

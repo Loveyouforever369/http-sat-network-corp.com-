@@ -10,6 +10,7 @@ five pages share a top-nav and cross-link into one product:
 | **`cinematic.html`** — The Film Series | A scroll-based cinematic experience: **ten AI-generated films** (one per chapter) with movie-style scripts and the latest 2026 intel. |
 | **`toolkit.html`** — The Arsenal | A practical directory of the **2026 AI stack by job** (current versions), the production chain, and **ten ready-to-post vertical social films**. |
 | **`state.html`** — State of AI 2026 | A **research-grounded, sourced** intelligence report with live data-viz: the frontier model leaderboard, the generative video/image races, the agentic shift (MCP), and the solopreneur economy. Companion Gamma deck: https://gamma.app/docs/95qd55nbme3ukzy |
+| **`calendar.html`** — 30-Day Content Engine | A month of copy-ready posts — hooks, captions, and hashtags on a weekly rhythm, with one-tap **Copy** and links to the matching social films. |
 | **`plan.html`** — The 90-Day Plan | An interactive workbook — 30 days fluency, 30 toolchain, 30 build. Checkable tasks with progress saved on your device, printable to PDF. |
 
 All four pages share a top-nav and cross-links, so the suite reads as one product.
