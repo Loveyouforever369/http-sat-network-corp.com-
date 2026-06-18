@@ -1,7 +1,11 @@
 # PROMETHEUS // OS — a cinematic AI training suite
 
+**🌐 Live hosted web platform (shareable link): https://gamma.app/docs/21a1kps18pr2avm**
+**🖼️ State-of-AI companion deck: https://gamma.app/docs/95qd55nbme3ukzy**
+
 A self-contained, no-build cinematic training on commanding AI. **Start at `home.html`** —
-five pages share a top-nav and cross-link into one product:
+the pages share a top-nav and cross-link into one product (incl. `history.html`, a detailed
+1943→2026 timeline):
 
 | Page | What it is |
 | --- | --- |
