@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prometheus · Become the Director of AI</title>
+<meta name="description" content="Prometheus — the immersive AI training platform. Avatar-taught lessons, a live prompt sandbox, and arcade-style games take you from doer of tasks to director of workflows.">
+<meta name="theme-color" content="#05060f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="bg-gradient"></div>
+<canvas id="bg-canvas"></canvas>
+
+<!-- ============================== NAV ============================== -->
+<nav id="nav">
+  <div class="brand">
+    <span class="flame">🔥</span>
+    <span class="brand-text">Prometheus</span>
+  </div>
+  <div class="nav-links">
+    <button class="nav-btn" data-go="home">Home</button>
+    <button class="nav-btn" data-go="dashboard">Skill Tree</button>
+    <button class="nav-btn" data-go="pricing">Pricing</button>
+    <button class="nav-btn" data-go="about">Integrations</button>
+  </div>
+  <div class="nav-xp" title="Total experience earned">
+    <span>✦</span><span id="nav-xp-val">0</span><span>XP</span>
+  </div>
+</nav>
+
+<!-- ============================== HOME ============================== -->
+<main id="view-home" class="view">
+  <section class="hero">
+    <div class="hero-badge"><span class="dot"></span> The AI Director Academy · 5 Modules · 15 Activities</div>
+    <h1>Become the<br><span class="gradient-text">Director</span> of AI</h1>
+    <p>The era of doing tasks by hand is ending. Prometheus trains you to orchestrate AI agents — through avatar-taught lessons, a live prompt sandbox, and arcade-style games.</p>
+    <div class="hero-cta">
+      <button class="btn btn-primary" data-go="dashboard">⚡ Enter the Skill Tree</button>
+      <button class="btn btn-ghost" data-go="about">See how it works</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num gradient-text">5</div><div class="lbl">Modules</div></div>
+      <div class="hero-stat"><div class="num gradient-text">5</div><div class="lbl">Games</div></div>
+      <div class="hero-stat"><div class="num gradient-text" id="home-xp">1,920</div><div class="lbl">XP to master</div></div>
+      <div class="hero-stat"><div class="num gradient-text">∞</div><div class="lbl">Leverage</div></div>
+    </div>
+  </section>
+
+  <section style="margin-top:30px">
+    <div class="section-eyebrow center" style="text-align:center">// The experience</div>
+    <h2 class="section-title center" style="text-align:center">Three ways to <span class="gradient-text">level up</span></h2>
+    <div class="price-grid" style="margin-top:30px">
+      <div class="panel" style="padding:28px">
+        <div class="node-orb blue" style="width:60px;height:60px;font-size:1.4rem;margin-bottom:16px">▶</div>
+        <h3 style="font-size:1.2rem;margin-bottom:8px">Avatar Instructors</h3>
+        <p class="dim" style="font-size:.92rem">Ultra-realistic digital humans teach every lesson with perfectly synced cinematic subtitles — powered by HeyGen when you connect it.</p>
+      </div>
+      <div class="panel" style="padding:28px">
+        <div class="node-orb purple" style="width:60px;height:60px;font-size:1.4rem;margin-bottom:16px">✎</div>
+        <h3 style="font-size:1.2rem;margin-bottom:8px">Live Prompt Sandbox</h3>
+        <p class="dim" style="font-size:.92rem">Write prompts and get real AI responses in a split-screen lab. Your prompts are graded out of 100 on Role, Task, Constraints and Output.</p>
+      </div>
+      <div class="panel" style="padding:28px">
+        <div class="node-orb gold" style="width:60px;height:60px;font-size:1.4rem;margin-bottom:16px">✦</div>
+        <h3 style="font-size:1.2rem;margin-bottom:8px">Gamified Mastery</h3>
+        <p class="dim" style="font-size:.92rem">Five arcade-style games — from Hallucination Hunter to The Viral Editor — turn every concept into a skill you can feel.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top:50px">
+    <div class="flex-between">
+      <div><div class="section-eyebrow">// The curriculum</div><h2 class="section-title">Five modules to mastery</h2></div>
+      <button class="btn btn-electric" data-go="dashboard">Open skill tree →</button>
+    </div>
+    <div id="home-modules" class="price-grid" style="margin-top:24px"></div>
+  </section>
+</main>
+
+<!-- ============================== DASHBOARD ============================== -->
+<main id="view-dashboard" class="view"></main>
+
+<!-- ============================== MODULE (dynamic) ============================== -->
+<main id="view-module" class="view"></main>
+
+<!-- ============================== PRICING ============================== -->
+<main id="view-pricing" class="view"></main>
+
+<!-- ============================== ABOUT / INTEGRATIONS ============================== -->
+<main id="view-about" class="view">
+  <div class="section-eyebrow">// Under the hood</div>
+  <h2 class="section-title">Built to <span class="gradient-text">go live</span></h2>
+  <p class="section-sub">Prometheus runs fully in <strong>demo mode</strong> out of the box — every lesson, sandbox and game works with no setup. Each premium integration is wired to a single config switch, so you can take it live on Vercel whenever you're ready.</p>
+
+  <div class="price-grid">
+    <div class="panel" style="padding:26px">
+      <h3 style="font-size:1.1rem;margin-bottom:10px">🎬 HeyGen Avatars</h3>
+      <p class="dim" style="font-size:.9rem">The lesson player auto-swaps the animated avatar for a real HeyGen video. Map module → video URL in <code>CONFIG.heygen.videos</code>, or wire <code>/api/heygen</code> from <code>api-reference/heygen.ts</code>.</p>
+    </div>
+    <div class="panel" style="padding:26px">
+      <h3 style="font-size:1.1rem;margin-bottom:10px">🧠 Claude &amp; GPT Sandbox</h3>
+      <p class="dim" style="font-size:.9rem">The Prompt Sandbox calls <code>CONFIG.sandbox.endpoint</code>. Deploy <code>api-reference/sandbox.ts</code> as a serverless route holding your Anthropic/OpenAI keys — never in the browser.</p>
+    </div>
+    <div class="panel" style="padding:26px">
+      <h3 style="font-size:1.1rem;margin-bottom:10px">💳 Stripe Payments</h3>
+      <p class="dim" style="font-size:.9rem">The static-friendly path: create Stripe <strong>Payment Links</strong> and drop them in <code>CONFIG.stripe.paymentLinks</code>. Buttons go live instantly — no backend required.</p>
+    </div>
+    <div class="panel" style="padding:26px">
+      <h3 style="font-size:1.1rem;margin-bottom:10px">🗄️ Supabase + Drizzle</h3>
+      <p class="dim" style="font-size:.9rem">Progress is saved in <code>localStorage</code> using the exact shape of <code>schema.sql</code> (users, modules, lessons, progress, scores) — so promoting to Postgres + Drizzle is a drop-in.</p>
+    </div>
+  </div>
+
+  <div class="panel" style="padding:26px;margin-top:24px">
+    <h3 style="font-size:1.15rem;margin-bottom:10px">🚀 Deploy to Vercel</h3>
+    <p class="dim" style="font-size:.92rem;margin-bottom:8px">This build is zero-config static. From the repo root:</p>
+    <div class="sb-response" style="margin-top:0"><span class="resp-label">Terminal</span>cd prometheus &amp;&amp; vercel deploy --prod</div>
+    <p class="dim" style="font-size:.88rem;margin-top:12px">A <code>vercel.json</code> is included. When you're ready to test live HeyGen / Claude / Stripe, that's the moment to add your API keys to the config and serverless routes.</p>
+  </div>
+</main>
+
+<!-- ============================== FOOTER ============================== -->
+<footer class="site-footer">
+  <p><strong style="font-family:var(--font-display);letter-spacing:.1em">PROMETHEUS</strong> · From doers to directors.</p>
+  <p style="margin-top:8px">Demo build · runs offline · <a data-go="about" style="cursor:pointer">integration guide</a> · <a href="../index.html">↩ Capital Bridge</a></p>
+</footer>
+
+<!-- ============================== SCRIPTS ============================== -->
+<script src="js/data.js"></script>
+<script src="js/background.js"></script>
+<script src="js/app.js"></script>
+<script src="js/sandbox.js"></script>
+<script src="js/trainings.js"></script>
+<script src="js/games.js"></script>
+<script>
+  /* Home view: render module teaser cards + total XP */
+  (function () {
+    var x = document.getElementById("home-xp"); if (x) x.textContent = PROMETHEUS_DATA.totalXP.toLocaleString();
+    var wrap = document.getElementById("home-modules"); if (!wrap) return;
+    wrap.innerHTML = PROMETHEUS_DATA.modules.map(function (m) {
+      return '<div class="panel" style="padding:24px;cursor:pointer" data-mod="' + m.id + '">' +
+        '<div class="nc-top" style="display:flex;gap:10px;align-items:center;margin-bottom:6px">' +
+        '<span class="node-orb ' + m.color + '" style="width:48px;height:48px;font-size:1.2rem">' + m.icon + '</span>' +
+        '<div><div class="mod-code" style="font-family:var(--font-mono);font-size:.7rem;color:var(--electric);letter-spacing:.18em">MODULE ' + m.code + '</div>' +
+        '<h3 style="font-size:1.1rem">' + m.title + '</h3></div></div>' +
+        '<p class="dim" style="font-size:.88rem;margin-top:8px">' + m.summary + '</p>' +
+        '<div class="node-progress" style="margin-top:12px"><span class="chip">▶ Lesson</span><span class="chip">✎ Training</span><span class="chip">✦ ' + m.game.title + '</span></div>' +
+        '</div>';
+    }).join("");
+    Array.prototype.forEach.call(wrap.querySelectorAll("[data-mod]"), function (el) {
+      el.addEventListener("click", function () { PROM.go("module", el.getAttribute("data-mod")); });
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+# 🔥 Prometheus
+
+**The immersive AI-director training platform.** From doers of tasks to directors of workflows — taught by avatar instructors, practiced in a live prompt sandbox, and tested with five arcade-style games.
+
+This is a **self-contained, zero-build static app**. It runs offline in any modern browser and deploys to Vercel (or any static host) in seconds. It lives in `/prometheus/` and does not touch the existing site at the repo root.
+
+---
+
+## ▶️ Run it locally
+
+No build step. Either:
+
+```bash
+# Option A — just open it
+open prometheus/index.html        # macOS  (or double-click the file)
+
+# Option B — serve it (recommended; needed for the live API integrations)
+cd prometheus && python3 -m http.server 8000
+# → http://localhost:8000
+```
+
+## 🚀 Deploy to Vercel
+
+```bash
+cd prometheus
+vercel deploy --prod
+```
+
+A `vercel.json` is included (clean URLs + sensible security headers). Vercel auto-detects the static site — no framework config needed.
+
+---
+
+## 🧭 What's inside
+
+| Module | Lesson | Training | Game |
+|---|---|---|---|
+| **01 · The Paradigm Shift** | From Doers to Directors | Prompt Sandbox (graded /100 on Role·Task·Constraints·Output) | **Hallucination Hunter** |
+| **02 · Vibe Coding & Instant Apps** | Generators vs. Living Systems | Scaffold an MVP (v0 → Cursor → Lovable) | **Prompt-to-Prod** |
+| **03 · The Wealth Engine** | Clay & the Outbound Engine | Build a 6-step Clay waterfall | **The Credit Optimizer** |
+| **04 · Agentic Orchestration** | Zapier vs. Gumloop/n8n | Build a Meeting Prep Agent | **Fix the Flow** |
+| **05 · Faceless Media** | Automated Content Empires | Faceless Video Studio | **The Viral Editor** |
+
+Plus: a holographic **skill tree** dashboard with progress rings, XP, mastery tracking, animated WebGL/canvas background, avatar lesson player with synced cinematic subtitles, and a pricing page.
+
+### File map
+```
+prometheus/
+├── index.html            # app shell + views
+├── vercel.json           # static deploy config
+├── schema.sql            # Postgres + Drizzle schema (mirrors localStorage)
+├── css/styles.css        # the full sci-fi visual system
+├── js/
+│   ├── data.js           # curriculum + game design (single source of truth)
+│   ├── background.js      # animated neural-constellation background
+│   ├── app.js            # router, skill tree, lesson player, progress, CONFIG
+│   ├── sandbox.js        # Prompt Sandbox + AI wiring + /100 grader
+│   ├── trainings.js      # the 4 hands-on trainings + shared drag UI
+│   └── games.js          # the 5 games
+└── api-reference/
+    ├── sandbox.ts        # Next.js route for live Claude/GPT (template)
+    └── heygen.ts         # Next.js route for HeyGen avatar video (template)
+```
+
+---
+
+## 🔌 Going live (demo mode → production)
+
+Everything works in **demo mode** out of the box. Each integration is one config switch in `js/app.js` (`CONFIG`):
+
+### 1. AI Prompt Sandbox (Claude / OpenAI)
+- Deploy `api-reference/sandbox.ts` as a serverless route (`app/api/sandbox/route.ts`) on Vercel.
+- Add `ANTHROPIC_API_KEY` in Vercel → Settings → Environment Variables.
+- Set `CONFIG.sandbox.endpoint = "/api/sandbox"`.
+- **Never put model API keys in the browser** — the route keeps them server-side.
+
+### 2. HeyGen Avatar Instructors
+- Simplest: pre-render lessons and map URLs: `CONFIG.heygen.videos = { m1: "https://.../m1.mp4" }`. The lesson player swaps the animated avatar for the real video automatically.
+- Or generate on demand with `api-reference/heygen.ts` + `HEYGEN_API_KEY`.
+
+### 3. Stripe Payments
+- Create **Stripe Payment Links** (no backend needed for static hosting).
+- Add them: `CONFIG.stripe.paymentLinks = { operator: "https://buy.stripe.com/...", architect: "..." }`.
+- The pricing buttons go live instantly.
+
+### 4. Accounts + Database (optional, the full stack)
+- Progress is saved in `localStorage` using the exact shape of `schema.sql`.
+- To go multi-device: stand up Supabase, run `schema.sql`, wire Drizzle (schema included in the file), add Better Auth, and swap the `localStorage` reads/writes in `app.js` (`load`/`save`) for DB calls keyed to the signed-in user.
+
+---
+
+## 🛠 Tech notes
+- Pure vanilla JS (no framework, no bundler) → nothing to build, nothing to break.
+- Drag-and-drop works with mouse **and** ▲▼ buttons (touch-friendly).
+- Respects `prefers-reduced-motion`.
+- The whole experience is data-driven from `js/data.js` — add a module or change a game by editing that one file.
