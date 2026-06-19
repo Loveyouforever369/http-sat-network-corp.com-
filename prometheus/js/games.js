@@ -16,7 +16,7 @@
       <div class="game-title-wrap"><h3>✦ ${esc(g.title)}</h3><p>${esc(g.tagline)}</p></div>
       <div class="game-stats">${statsHtml || ""}</div></div>`;
   }
-  function passXP(m) { return PROM.xpFor(m, "game"); }
+  function passXP(m) { return m.gameXP != null ? m.gameXP : PROM.xpFor(m, "game"); }
 
   /* ===========================================================================
      M1 · HALLUCINATION HUNTER
@@ -89,6 +89,7 @@
         </div></div></div>`;
       $("#hh-retry", mount).addEventListener("click", () => { round = 0; score = 0; render(); });
       if (won) $("#hh-done", mount).addEventListener("click", () => { onComplete({ score: pct }); toast("Hallucination Hunter cleared!", "xp", "✦"); $("#hh-done", mount).textContent = "✓ Claimed"; $("#hh-done", mount).disabled = true; });
+      else if (PROM.maybeIntervene) PROM.maybeIntervene(m.id, "spotting AI hallucinations");
     }
     render();
   };
@@ -306,6 +307,7 @@
         <button class="btn btn-primary" id="ff-retry">↻ Try again</button>
       </div></div>`;
       $("#ff-retry", mount).addEventListener("click", () => { round = 0; render(); });
+      if (PROM.maybeIntervene) PROM.maybeIntervene(m.id, "finding the broken node");
     }
     render();
   };
@@ -373,6 +375,119 @@
           $("#ve-out", mount).appendChild(btn);
         }
       });
+    }
+    render();
+  };
+
+  /* ===========================================================================
+     M1 BONUS · THE PROMPT DEBUGGER  (fix the slop until it scores)
+  =========================================================================== */
+  PROM.games["prompt-debugger"] = function (mount, m, onComplete) {
+    const g = m.game;
+    mount.innerHTML = `
+      <div class="panel game-shell">
+        ${head(g, `<div class="gstat">Target <span class="gv">${g.targetScore}/100</span></div><div class="gstat">${esc(g.difficulty || "Beginner")}</div>`)}
+        <div class="how-to">${esc(g.howTo)}</div>
+        <div class="sb-objective">🎯 ${esc(g.brief)}</div>
+        <div class="dbg-grid">
+          <div class="panel sb-panel">
+            <h3>① The "AI slop" a lazy prompt produced</h3>
+            <div class="slop-box">${esc(g.slop)}</div>
+            <h3 style="margin-top:14px">② Fix the prompt</h3>
+            <textarea class="sb-input" id="dbg-input" style="min-height:130px">${esc(g.weakPrompt)}</textarea>
+            <div class="sb-actions">
+              <button class="btn btn-primary" id="dbg-run">⚡ Run &amp; grade</button>
+              <button class="btn btn-ghost btn-sm" id="dbg-hint">💡 Hints</button>
+            </div>
+          </div>
+          <div class="panel sb-panel"><h3>③ Output</h3><div id="dbg-out"><p class="dim">Rewrite the prompt and run it. Hit ${g.targetScore}+ to ship a perfect output.</p></div></div>
+        </div>
+      </div>`;
+    $(".game-shell", mount).addEventListener("click", (e) => {
+      if (e.target.closest("#dbg-hint")) {
+        $("#dbg-out", mount).innerHTML = `<div class="sb-response"><span class="resp-label">Coach</span><ul class="tips-box">${g.tips.map((t) => `<li>${esc(t)}</li>`).join("")}</ul></div>`;
+      }
+    });
+    $("#dbg-run", mount).addEventListener("click", () => {
+      const gr = PROM.ai.gradePrompt($("#dbg-input", mount).value);
+      const out = $("#dbg-out", mount);
+      const color = gr.total >= g.targetScore ? "var(--teal)" : gr.total >= 50 ? "var(--gold)" : "#fb7185";
+      out.innerHTML = `
+        <div class="grade-wrap"><div class="grade-score" style="color:${color}">${gr.total}<span style="font-size:1.1rem;color:var(--text-faint)">/100</span></div>
+        <div class="grade-bar"><div class="grade-fill" id="dbgfill"></div></div></div>
+        <div class="rubric-list">${gr.pillars.map((p) => `<div class="rubric-item"><span class="rb-ic ${p.pass ? "pass" : "fail"}">${p.pass ? "✓" : "!"}</span><span><strong>${p.name}</strong> · ${p.score}/25</span></div>`).join("")}</div>`;
+      requestAnimationFrame(() => { const f = $("#dbgfill", mount); if (f) f.style.width = gr.total + "%"; });
+      if (gr.total >= g.targetScore) {
+        out.insertAdjacentHTML("beforeend", `<div class="sb-response" style="margin-top:14px"><span class="resp-label">✅ Perfect output — shipped</span>${esc(g.perfectOutput)}</div>`);
+        const btn = document.createElement("button");
+        btn.className = "btn btn-primary mt-2"; btn.style.cssText = "justify-content:center;width:100%"; btn.textContent = `Claim +${passXP(m)} XP`;
+        btn.addEventListener("click", () => { onComplete({ score: gr.total }); toast("Prompt Debugger cleared!", "xp", "✦"); btn.textContent = "✓ Claimed"; btn.disabled = true; });
+        out.appendChild(btn);
+      } else {
+        out.insertAdjacentHTML("beforeend", `<div class="sb-response" style="margin-top:12px;border-color:var(--gold);background:rgba(245,197,24,.06)"><span class="resp-label">Still slop — keep fixing</span>Add the missing pillars (try Hints). You need ${g.targetScore}+ to ship.</div>`);
+        if (PROM.maybeIntervene) PROM.maybeIntervene(m.id, "writing a high-scoring prompt");
+      }
+    });
+  };
+
+  /* ===========================================================================
+     M6 · CHAOS ENGINEERING SANDBOX  (trace the outage, merge the fix, 75s)
+  =========================================================================== */
+  PROM.games["chaos-engineering-sandbox"] = function (mount, m, onComplete) {
+    const g = m.game;
+    let timeLeft = g.timeLimit, timer = null, opened = false;
+
+    function render() {
+      timeLeft = g.timeLimit; opened = false;
+      mount.innerHTML = `
+        <div class="panel game-shell">
+          ${head(g, `<div class="gstat timer">Time <span class="gv" id="cx-time">${timeLeft}s</span></div><div class="gstat danger">Status <span class="gv">OUTAGE</span></div>`)}
+          <div class="how-to">${esc(g.howTo)}</div>
+          <div class="tag-row"><span class="chip">${esc(g.difficulty || "Advanced")}</span><span class="chip done">incident #8842</span></div>
+          <div class="term" id="cx-logs">${g.logs.map((l) => `<div class="term-line${/ERROR/.test(l) ? " err" : /WARN/.test(l) ? " warn" : ""}">${esc(l)}</div>`).join("")}</div>
+          <div style="font-weight:600;margin:14px 0 8px">Open the file with the failing dependency:</div>
+          <div class="file-grid" id="cx-files">${g.files.map((f) => `<button class="file-btn" data-id="${f.id}"><span class="mono">${esc(f.name)}</span></button>`).join("")}</div>
+          <div id="cx-fix"></div>
+        </div>`;
+      $$(".file-btn", mount).forEach((b) => b.addEventListener("click", () => {
+        if (opened) return;
+        const f = g.files.find((x) => x.id === b.dataset.id);
+        if (f.broken) { b.classList.add("correct"); opened = true; showFix(f); }
+        else {
+          b.classList.add("wrong");
+          timeLeft = Math.max(0, timeLeft - 8); const t = $("#cx-time", mount); if (t) t.textContent = timeLeft + "s";
+          b.insertAdjacentHTML("beforeend", `<span class="fb-hint">${esc(f.hint)} (−8s)</span>`);
+          setTimeout(() => b.classList.remove("wrong"), 350);
+        }
+      }));
+      clearInterval(timer);
+      timer = PROM.addTimer(setInterval(() => {
+        timeLeft--; const t = $("#cx-time", mount); if (t) t.textContent = timeLeft + "s";
+        if (timeLeft <= 0) { clearInterval(timer); fail(); }
+      }, 1000));
+    }
+    function showFix(f) {
+      $("#cx-fix", mount).innerHTML = `<div class="flow-fix"><strong>🔧 ${esc(f.name)} — ${esc(f.hint)}.</strong> Choose the fix to merge:
+        <div class="endpoint-options">${PROM.ui.shuffled(g.fixes).map((fx) => `<button class="ep-btn" data-fx="${esc(fx)}" style="text-align:left">${esc(fx)}</button>`).join("")}</div></div>`;
+      $$(".ep-btn", mount).forEach((b) => b.addEventListener("click", () => {
+        if (b.dataset.fx === g.correctFix) { clearInterval(timer); win(); }
+        else { b.style.borderColor = "#fb7185"; b.style.color = "#fb7185"; timeLeft = Math.max(0, timeLeft - 8); const t = $("#cx-time", mount); if (t) t.textContent = timeLeft + "s"; }
+      }));
+    }
+    function win() {
+      mount.innerHTML = `<div class="panel game-shell"><div class="game-overlay">
+        <div class="big gradient-text">Outage Resolved ⚡</div>
+        <div class="verdict">You traced the failing dependency and merged the fix. Pipeline restored — 412 leads flowing again.</div>
+        <button class="btn btn-primary" id="cx-done">Claim +${passXP(m)} XP</button></div></div>`;
+      $("#cx-done", mount).addEventListener("click", () => { onComplete({ score: 100 }); toast("Chaos Sandbox cleared!", "xp", "✦"); $("#cx-done", mount).textContent = "✓ Claimed"; $("#cx-done", mount).disabled = true; });
+    }
+    function fail() {
+      mount.innerHTML = `<div class="panel game-shell"><div class="game-overlay">
+        <div class="big" style="color:#fb7185">Pipeline down</div>
+        <div class="verdict">The clock won. Read the ERROR line — it names the exact file and the dependency refusing connections.</div>
+        <button class="btn btn-primary" id="cx-retry">↻ Try again</button></div></div>`;
+      $("#cx-retry", mount).addEventListener("click", render);
+      if (PROM.maybeIntervene) PROM.maybeIntervene(m.id, "tracing the outage under pressure");
     }
     render();
   };

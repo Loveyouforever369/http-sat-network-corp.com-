@@ -25,18 +25,28 @@
   <div class="nav-links">
     <button class="nav-btn" data-go="home">Home</button>
     <button class="nav-btn" data-go="dashboard">Skill Tree</button>
+    <button class="nav-btn" data-go="arcade">Arcade</button>
     <button class="nav-btn" data-go="pricing">Pricing</button>
     <button class="nav-btn" data-go="about">Integrations</button>
   </div>
-  <div class="nav-xp" title="Total experience earned">
-    <span>✦</span><span id="nav-xp-val">0</span><span>XP</span>
+  <div class="nav-controls">
+    <select id="lang-select" class="nav-select" title="AI dubbing language">
+      <option value="en">EN</option><option value="es">ES</option><option value="fr">FR</option>
+      <option value="de">DE</option><option value="pt">PT</option><option value="hi">HI</option>
+      <option value="ar">AR</option><option value="zh">ZH</option><option value="ja">JA</option>
+      <option value="ko">KO</option><option value="ru">RU</option><option value="it">IT</option>
+    </select>
+    <button id="sound-toggle" class="nav-icon-btn" title="Toggle soundscape">🔊</button>
+    <div class="nav-xp" title="Total experience earned">
+      <span>✦</span><span id="nav-xp-val">0</span><span>XP</span>
+    </div>
   </div>
 </nav>
 
 <!-- ============================== HOME ============================== -->
 <main id="view-home" class="view">
   <section class="hero">
-    <div class="hero-badge"><span class="dot"></span> The AI Director Academy · 5 Modules · 15 Activities</div>
+    <div class="hero-badge"><span class="dot"></span> The AI Director Academy · 6 Modules · 18 Activities</div>
     <h1>Become the<br><span class="gradient-text">Director</span> of AI</h1>
     <p>The era of doing tasks by hand is ending. Prometheus trains you to orchestrate AI agents — through avatar-taught lessons, a live prompt sandbox, and arcade-style games.</p>
     <div class="hero-cta">
@@ -44,9 +54,9 @@
       <button class="btn btn-ghost" data-go="about">See how it works</button>
     </div>
     <div class="hero-stats">
-      <div class="hero-stat"><div class="num gradient-text">5</div><div class="lbl">Modules</div></div>
-      <div class="hero-stat"><div class="num gradient-text">5</div><div class="lbl">Games</div></div>
-      <div class="hero-stat"><div class="num gradient-text" id="home-xp">1,920</div><div class="lbl">XP to master</div></div>
+      <div class="hero-stat"><div class="num gradient-text">6</div><div class="lbl">Modules</div></div>
+      <div class="hero-stat"><div class="num gradient-text">7</div><div class="lbl">Games</div></div>
+      <div class="hero-stat"><div class="num gradient-text" id="home-xp">2,400</div><div class="lbl">XP to master</div></div>
       <div class="hero-stat"><div class="num gradient-text">∞</div><div class="lbl">Leverage</div></div>
     </div>
   </section>
@@ -84,6 +94,9 @@
 
 <!-- ============================== DASHBOARD ============================== -->
 <main id="view-dashboard" class="view"></main>
+
+<!-- ============================== ARCADE ============================== -->
+<main id="view-arcade" class="view"></main>
 
 <!-- ============================== MODULE (dynamic) ============================== -->
 <main id="view-module" class="view"></main>
@@ -134,6 +147,7 @@
 <script src="js/data.js"></script>
 <script src="js/background.js"></script>
 <script src="js/app.js"></script>
+<script src="js/audio.js"></script>
 <script src="js/sandbox.js"></script>
 <script src="js/trainings.js"></script>
 <script src="js/games.js"></script>

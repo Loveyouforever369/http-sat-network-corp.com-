@@ -1,6 +1,6 @@
 # 🔥 Prometheus
 
-**The immersive AI-director training platform.** From doers of tasks to directors of workflows — taught by avatar instructors, practiced in a live prompt sandbox, and tested with five arcade-style games.
+**The immersive AI-director training platform.** From doers of tasks to directors of workflows — taught by three AI-avatar characters, practiced in a live prompt sandbox, and tested with seven arcade-style games.
 
 This is a **self-contained, zero-build static app**. It runs offline in any modern browser and deploys to Vercel (or any static host) in seconds. It lives in `/prometheus/` and does not touch the existing site at the repo root.
 
@@ -39,8 +39,22 @@ A `vercel.json` is included (clean URLs + sensible security headers). Vercel aut
 | **03 · The Wealth Engine** | Clay & the Outbound Engine | Build a 6-step Clay waterfall | **The Credit Optimizer** |
 | **04 · Agentic Orchestration** | Zapier vs. Gumloop/n8n | Build a Meeting Prep Agent | **Fix the Flow** |
 | **05 · Faceless Media** | Automated Content Empires | Faceless Video Studio | **The Viral Editor** |
+| **06 · Advanced Operations** | Deep Dives: Waterfalls · MCP · Living Software | MCP Gateway builder | **Chaos Engineering Sandbox** |
 
-Plus: a holographic **skill tree** dashboard with progress rings, XP, mastery tracking, animated WebGL/canvas background, avatar lesson player with synced cinematic subtitles, and a pricing page.
+**Bonus game:** Module 1 also unlocks **The Prompt Debugger** (fix "AI slop" until it scores). All 7 games are also playable from the **Arcade** tab.
+
+### Characters (HeyGen-ready cast)
+Lessons are hosted by three AI-avatar instructors, each with a cinematic backdrop and voice:
+- **The Architect** — backend & system design (deep, methodical) · server-room stage
+- **The Catalyst** — marketing, sales & outbound (energetic) · bright agency stage
+- **Byte** — beginner guide & sandbox assistant (warm, encouraging)
+
+### Signature systems
+- **Dynamic Learning Paths** — fail a game and the relevant character addresses you **by name** with a 30-second refresher (a personalized HeyGen video renders here once wired).
+- **Adaptive soundscape** — generative Web Audio: ambient during lessons, a driving pulse during games (mute toggle in the nav).
+- **AI dubbing selector** — language picker in the nav (wire a dubbing API for 175+ languages).
+
+Plus: a holographic **skill tree** dashboard with progress rings, XP/mastery tracking, animated WebGL/canvas background, an avatar lesson player with character backdrops + B-roll layer + synced cinematic subtitles, an Arcade, and a pricing page.
 
 ### File map
 ```
@@ -50,12 +64,13 @@ prometheus/
 ├── schema.sql            # Postgres + Drizzle schema (mirrors localStorage)
 ├── css/styles.css        # the full sci-fi visual system
 ├── js/
-│   ├── data.js           # curriculum + game design (single source of truth)
+│   ├── data.js           # curriculum + characters + game design (source of truth)
 │   ├── background.js      # animated neural-constellation background
-│   ├── app.js            # router, skill tree, lesson player, progress, CONFIG
+│   ├── app.js            # router, skill tree, lesson player, arcade, learning paths, CONFIG
+│   ├── audio.js          # adaptive Web Audio soundscape engine
 │   ├── sandbox.js        # Prompt Sandbox + AI wiring + /100 grader
-│   ├── trainings.js      # the 4 hands-on trainings + shared drag UI
-│   └── games.js          # the 5 games
+│   ├── trainings.js      # hands-on trainings (incl. MCP Gateway) + shared drag UI
+│   └── games.js          # all 7 games
 └── api-reference/
     ├── sandbox.ts        # Next.js route for live Claude/GPT (template)
     └── heygen.ts         # Next.js route for HeyGen avatar video (template)
@@ -77,12 +92,23 @@ Everything works in **demo mode** out of the box. Each integration is one config
 - Simplest: pre-render lessons and map URLs: `CONFIG.heygen.videos = { m1: "https://.../m1.mp4" }`. The lesson player swaps the animated avatar for the real video automatically.
 - Or generate on demand with `api-reference/heygen.ts` + `HEYGEN_API_KEY`.
 
-### 3. Stripe Payments
+### 3. ElevenLabs narration (Multilingual v2)
+- Wire a TTS route and set `CONFIG.elevenlabs = { endpoint: "/api/narrate", voices: { architect, catalyst, byte } }`.
+- The lesson player already labels each character's voice; point playback at the stream when ready.
+
+### 4. Cinematic B-roll (InVideo AI · Sora 2 · Veo 3.1)
+- Render movie-like background clips per concept, then map: `CONFIG.broll = { m1: "https://.../m1-broll.mp4" }`.
+- The lesson stage plays it as a backdrop behind the avatar automatically.
+- Stylized deep-dive transitions (Crreo AI: Cyberpunk/Anime/Watercolor) and studio upscaling (Magnific) are asset-pipeline steps — produce the clips/images, then reference them via `CONFIG.broll` / image assets.
+
+### 5. AI dubbing (175+ languages)
+- The nav language selector sets `CONFIG.dubbing.lang`. Wire `CONFIG.dubbing.endpoint` to an AI dubbing API (e.g. ElevenLabs Dubbing / HeyGen) to translate narration + subtitles with lip-sync.
+
+### 6. Stripe Payments
 - Create **Stripe Payment Links** (no backend needed for static hosting).
 - Add them: `CONFIG.stripe.paymentLinks = { operator: "https://buy.stripe.com/...", architect: "..." }`.
-- The pricing buttons go live instantly.
 
-### 4. Accounts + Database (optional, the full stack)
+### 7. Accounts + Database (optional, the full stack)
 - Progress is saved in `localStorage` using the exact shape of `schema.sql`.
 - To go multi-device: stand up Supabase, run `schema.sql`, wire Drizzle (schema included in the file), add Better Auth, and swap the `localStorage` reads/writes in `app.js` (`load`/`save`) for DB calls keyed to the signed-in user.
 

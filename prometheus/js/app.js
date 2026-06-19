@@ -27,6 +27,21 @@ const CONFIG = {
   stripe: {
     paymentLinks: {}, // e.g. { operator: "https://buy.stripe.com/...", architect: "https://buy.stripe.com/..." }
   },
+  // ElevenLabs Multilingual v2 narration (per-character voices). Wire a backend
+  // route that streams TTS; map characters → voice ids.
+  elevenlabs: {
+    endpoint: "",            // e.g. "/api/narrate"
+    voices: {},              // e.g. { architect: "voiceIdA", catalyst: "voiceIdB", byte: "voiceIdC" }
+  },
+  // Cinematic B-roll behind the avatar (InVideo AI / Sora 2 / Veo 3.1 renders).
+  // Map a moduleId → a hosted MP4 URL and the lesson stage plays it as backdrop.
+  broll: {},                 // e.g. { m1: "https://.../m1-broll.mp4" }
+  // AI dubbing — translate narration & subtitles. 175+ langs when wired to a
+  // dubbing API (e.g. ElevenLabs Dubbing / HeyGen). UI selector sets this.
+  dubbing: { lang: "en", endpoint: "" },
+  // Asset pipeline (reference only): Crreo AI for stylized deep-dive transitions
+  // (Cyberpunk/Anime/Watercolor), Magnific for studio-quality upscaling.
+  assets: { crreo: "", magnific: "" },
 };
 window.CONFIG = CONFIG;
 
@@ -51,6 +66,7 @@ const PROM = {
   xpFor(module, activity) {
     if (activity === "lesson") return Math.round(module.xp * 0.34);
     if (activity === "training") return Math.round(module.xp * 0.33);
+    if (activity === "bonus") return (module.bonusGame && module.bonusGame.xp) || 120;
     return module.xp - Math.round(module.xp * 0.34) - Math.round(module.xp * 0.33); // game = remainder
   },
 
@@ -73,10 +89,14 @@ const PROM = {
       return m ? sum + this.xpFor(m, act) : sum;
     }, 0);
   },
+  coreDoneCount() {
+    return Object.entries(this.state.done).filter(([k, v]) => v && /:(lesson|training|game)$/.test(k)).length;
+  },
+  maxXP() {
+    return this.data.totalXP + this.data.modules.reduce((s, m) => s + (m.bonusGame ? this.xpFor(m, "bonus") : 0), 0);
+  },
   masteryPct() {
-    const total = this.data.totalActivities;
-    const done = Object.values(this.state.done).filter(Boolean).length;
-    return Math.round((done / total) * 100);
+    return Math.round((this.coreDoneCount() / this.data.totalActivities) * 100);
   },
 
   complete(moduleId, activity, extra) {
@@ -141,17 +161,75 @@ function closeModal() { const b = $("#modal-backdrop"); if (b) b.classList.remov
 window.PROM.toast = toast; window.PROM.modal = modal; window.PROM.closeModal = closeModal; window.PROM.esc = esc;
 
 /* -----------------------------------------------------------------------------
+   Dynamic Learning Paths — on a fail, the relevant Character addresses the
+   learner by name and offers a refresher. (HeyGen renders a real personalized
+   avatar video here when CONFIG.heygen is wired.)
+----------------------------------------------------------------------------- */
+try { PROM.userName = localStorage.getItem("prometheus.name") || ""; } catch (e) { PROM.userName = ""; }
+
+function askName(then) {
+  modal(`<h3>Before we continue…</h3>
+    <p>I'll keep you moving and tailor tips to you. What should I call you?</p>
+    <input class="txt" id="iv-name" placeholder="Your first name" maxlength="24" autocomplete="given-name" />
+    <div class="sb-actions" style="margin-top:14px"><button class="btn btn-primary" id="iv-name-go" style="justify-content:center;flex:1">Continue</button></div>`);
+  const submit = () => {
+    const v = ($("#iv-name") || {}).value ? $("#iv-name").value.trim() : "";
+    if (v) { PROM.userName = v; try { localStorage.setItem("prometheus.name", v); } catch (e) {} }
+    closeModal(); then();
+  };
+  const b = $("#iv-name-go"); if (b) b.addEventListener("click", submit);
+  const inp = $("#iv-name"); if (inp) { inp.addEventListener("keydown", (e) => { if (e.key === "Enter") submit(); }); setTimeout(() => inp.focus(), 50); }
+}
+
+function interventionTips(m) {
+  const t = m && m.training;
+  const lines = (t && t.tips) ? t.tips.slice(0, 3)
+    : (m && m.bonusGame && m.bonusGame.tips) ? m.bonusGame.tips.slice(0, 3)
+    : (t && t.note) ? [t.note]
+    : ["Re-watch the lesson, then tackle the activity one step at a time."];
+  return lines.map((x) => "• " + esc(x)).join("<br>");
+}
+
+function showIntervention(m, ch, topic) {
+  const name = PROM.userName || "there";
+  modal(`<div class="intervention">
+    <div class="iv-avatar ${ch.backdrop}"><span class="iv-portrait">${esc(ch.portrait)}</span><span class="iv-live">● ${esc(ch.name.toUpperCase())}</span></div>
+    <h3 style="margin-top:16px">Hey ${esc(name)} — let's nail this 💪</h3>
+    <p>${esc(ch.name)} here. I noticed <strong>${esc(topic || (m && m.title) || "this one")}</strong> tripped you up. Here's the 30-second fix, then jump right back in.</p>
+    <div class="sb-response"><span class="resp-label">${esc(ch.name)} · refresher</span>${interventionTips(m)}</div>
+    <div class="sb-actions" style="margin-top:14px">
+      <button class="btn btn-ghost" id="iv-dismiss" style="flex:1;justify-content:center">Got it — retry</button>
+      ${m ? `<button class="btn btn-primary" id="iv-refresh" style="flex:1;justify-content:center">↺ Replay lesson</button>` : ""}
+    </div>
+    <p class="dim" style="font-size:.74rem;margin-top:12px">▶ A custom ${esc(ch.name)} avatar video renders here once HeyGen is connected — addressing you by name (Dynamic Learning Paths).</p>
+  </div>`);
+  const d = $("#iv-dismiss"); if (d) d.addEventListener("click", closeModal);
+  if (m) { const r = $("#iv-refresh"); if (r) r.addEventListener("click", () => { closeModal(); go("module", m.id); }); }
+}
+
+function maybeIntervene(moduleId, topic) {
+  const m = PROM.data.modules.find((x) => x.id === moduleId) || null;
+  const charKey = (m && m.lesson && m.lesson.character) || "catalyst";
+  const ch = PROM.data.characters[charKey] || PROM.data.characters.catalyst;
+  const run = () => showIntervention(m, ch, topic);
+  if (!PROM.userName) askName(run); else run();
+}
+PROM.maybeIntervene = maybeIntervene;
+
+/* -----------------------------------------------------------------------------
    Router
 ----------------------------------------------------------------------------- */
-const ROUTES = ["home", "dashboard", "pricing", "about"];
-function go(view, param) {
-  if (view === "module") { renderModule(param); view = "module"; }
+const ROUTES = ["home", "dashboard", "pricing", "about", "arcade"];
+function go(view, param, activity) {
+  if (view === "module") renderModule(param, activity);
   $$(".view").forEach((v) => v.classList.toggle("active", v.id === `view-${view}`));
   $$(".nav-btn").forEach((b) => b.classList.toggle("active", b.dataset.go === view));
   window.scrollTo({ top: 0, behavior: "smooth" });
   if (ROUTES.includes(view)) location.hash = view;
   if (view === "dashboard") renderDashboard();
   if (view === "pricing") renderPricing();
+  if (view === "arcade") renderArcade();
+  if (PROM.audio && view !== "module") PROM.audio.setMode("ambient");
 }
 window.PROM.go = go;
 
@@ -220,13 +298,13 @@ function renderDashboard() {
         <div class="ring-wrap">${ring(pct)}<div class="ring-label">${pct}%</div></div>
         <div class="ring-meta">
           <div class="t">Total Mastery</div>
-          <div class="v">${Object.values(PROM.state.done).filter(Boolean).length} / ${PROM.data.totalActivities} <span class="dim" style="font-size:.8rem">activities</span></div>
+          <div class="v">${PROM.coreDoneCount()} / ${PROM.data.totalActivities} <span class="dim" style="font-size:.8rem">activities</span></div>
         </div>
       </div>
       <div class="mastery-ring">
         <div class="ring-meta center">
           <div class="t">Experience</div>
-          <div class="v" style="color:var(--gold)">${xp.toLocaleString()} <span class="dim" style="font-size:.8rem">/ ${PROM.data.totalXP.toLocaleString()} XP</span></div>
+          <div class="v" style="color:var(--gold)">${xp.toLocaleString()} <span class="dim" style="font-size:.8rem">/ ${PROM.maxXP().toLocaleString()} XP</span></div>
         </div>
       </div>
       <button class="btn btn-ghost btn-sm" id="reset-progress">↺ Reset progress</button>
@@ -283,6 +361,7 @@ function renderModule(moduleId, activity) {
       ${tab("lesson", "▶", "Lesson")}
       ${tab("training", "✎", "Training")}
       ${tab("game", "✦", "Game")}
+      ${m.bonusGame ? tab("bonus", "◎", "Bonus") : ""}
     </div>
     <div id="activity-mount"></div>`;
 
@@ -304,6 +383,7 @@ function mountActivity(m) {
   mount = fresh;
   stopLessonPlayback();
   PROM.clearTimers();
+  if (PROM.audio) PROM.audio.setMode(CURRENT.activity === "game" || CURRENT.activity === "bonus" ? "intense" : "ambient");
   const onComplete = (activity, extra) => {
     PROM.complete(m.id, activity, extra);
     // refresh tab "done" state
@@ -322,6 +402,13 @@ function mountActivity(m) {
     const fn = PROM.games && PROM.games[m.game.type];
     if (fn) return fn(mount, m, (extra) => onComplete("game", extra));
     mount.innerHTML = `<div class="panel game-shell">Game module coming online…</div>`;
+    return;
+  }
+  if (CURRENT.activity === "bonus" && m.bonusGame) {
+    const fn = PROM.games && PROM.games[m.bonusGame.type];
+    const synth = Object.assign({}, m, { game: m.bonusGame, gameXP: PROM.xpFor(m, "bonus") });
+    if (fn) return fn(mount, synth, (extra) => onComplete("bonus", extra));
+    mount.innerHTML = `<div class="panel game-shell">Bonus game coming online…</div>`;
   }
 }
 
@@ -334,6 +421,9 @@ function stopLessonPlayback() { if (lessonState && lessonState.raf) cancelAnimat
 function renderLesson(mount, m, onComplete) {
   const L = m.lesson;
   const heygenUrl = CONFIG.heygen.videos[m.id];
+  const ch = (L.character && PROM.data.characters[L.character]) || null;
+  const broll = CONFIG.broll[m.id];
+  const stageClass = ch ? ch.backdrop : "";
   const totalT = L.transcript[L.transcript.length - 1].t + 6;
 
   const sections = L.sections.map((s) => `
@@ -342,12 +432,13 @@ function renderLesson(mount, m, onComplete) {
   mount.innerHTML = `
   <div class="split">
     <div class="panel avatar-player">
-      <div class="avatar-stage">
+      <div class="avatar-stage ${stageClass}">
+        ${broll ? `<video class="broll" src="${esc(broll)}" autoplay muted loop playsinline></video>` : ""}
         ${heygenUrl
           ? `<video id="heygen-video" src="${esc(heygenUrl)}" playsinline></video>`
-          : `<div class="avatar-orb" id="avatar-orb">${esc(L.avatar.portrait)}</div>`}
-        <span class="live-tag">● AVATAR INSTRUCTOR</span>
-        <span class="heygen-tag">${heygenUrl ? "HeyGen · live" : "HeyGen-ready"}</span>
+          : `<div class="avatar-orb" id="avatar-orb">${esc(ch ? ch.portrait : L.avatar.portrait)}</div>`}
+        <span class="live-tag">● ${ch ? esc(ch.name.toUpperCase()) : "AVATAR INSTRUCTOR"}</span>
+        <span class="heygen-tag">${heygenUrl ? "HeyGen · live" : broll ? "B-roll · live" : "HeyGen-ready"}</span>
       </div>
       <div class="subtitles" id="subtitles"><span class="sub-idle">Press play to begin the lesson…</span></div>
       <div class="player-bar">
@@ -356,8 +447,11 @@ function renderLesson(mount, m, onComplete) {
         <div class="player-time" id="time">0:00 / ${fmt(totalT)}</div>
       </div>
       <div class="avatar-meta">
-        <div class="am-orb">${esc(L.avatar.portrait)}</div>
-        <div><div class="am-name">${esc(L.avatar.name)}</div><div class="am-role">${esc(L.avatar.role)} · ${esc(L.avatar.voice)}</div></div>
+        <div class="am-orb">${esc(ch ? ch.portrait : L.avatar.portrait)}</div>
+        <div>
+          <div class="am-name">${ch ? esc(ch.name) : esc(L.avatar.name)}${ch ? ` <span class="dim" style="font-weight:500">· ${esc(ch.discipline)}</span>` : ""}</div>
+          <div class="am-role">🎙 ${ch ? esc(ch.voice) : esc(L.avatar.voice)} · ElevenLabs Multilingual v2</div>
+        </div>
       </div>
     </div>
 
@@ -421,6 +515,40 @@ function renderLesson(mount, m, onComplete) {
 function fmt(s) { s = Math.floor(s); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`; }
 
 /* -----------------------------------------------------------------------------
+   Arcade — every game in one place (module games + bonus games)
+----------------------------------------------------------------------------- */
+function renderArcade() {
+  const root = $("#view-arcade");
+  const cards = [];
+  PROM.data.modules.forEach((m) => {
+    if (m.bonusGame) cards.push({ m, activity: "bonus", g: m.bonusGame });
+    if (m.game) cards.push({ m, activity: "game", g: m.game });
+  });
+  root.innerHTML = `
+    <div class="section-eyebrow">// Arcade</div>
+    <h2 class="section-title">The <span class="gradient-text">Games</span> Arcade</h2>
+    <p class="section-sub">Every skill-building game in one place — drag, debug, optimize, and beat the clock. Music shifts into high gear while you play.</p>
+    <div class="price-grid">
+      ${cards.map(({ m, activity, g }) => {
+        const done = PROM.isDone(m.id, activity);
+        const diff = g.difficulty || (activity === "bonus" ? "Beginner" : "Core");
+        return `<div class="panel arcade-card" data-mod="${m.id}" data-act="${activity}" role="button" tabindex="0">
+          <div class="arcade-ic node-orb ${m.color}">✦</div>
+          <div class="tag-row" style="margin-top:14px"><span class="chip">${esc(diff)}</span><span class="chip">Module ${m.code}</span>${done ? `<span class="chip done">✓ Cleared</span>` : ""}</div>
+          <h3 style="font-size:1.15rem;margin:6px 0">${esc(g.title)}</h3>
+          <p class="dim" style="font-size:.88rem;flex:1">${esc(g.tagline || "")}</p>
+          <button class="btn btn-primary btn-sm" style="justify-content:center;margin-top:14px">▶ Play</button>
+        </div>`;
+      }).join("")}
+    </div>`;
+  $$(".arcade-card", root).forEach((c) => {
+    const open = () => go("module", c.dataset.mod, c.dataset.act);
+    c.addEventListener("click", open);
+    c.addEventListener("keydown", (e) => { if (e.key === "Enter") open(); });
+  });
+}
+
+/* -----------------------------------------------------------------------------
    Pricing
 ----------------------------------------------------------------------------- */
 function renderPricing() {
@@ -467,6 +595,23 @@ function updateXPBadge() {
 function boot() {
   $$(".nav-btn").forEach((b) => b.addEventListener("click", () => go(b.dataset.go)));
   $$("[data-go]").forEach((b) => { if (!b.classList.contains("nav-btn")) b.addEventListener("click", () => go(b.dataset.go)); });
+
+  // Adaptive soundscape toggle
+  const snd = $("#sound-toggle");
+  if (snd) snd.addEventListener("click", () => {
+    const on = PROM.audio ? PROM.audio.toggle() : false;
+    snd.textContent = on ? "🔊" : "🔇";
+    snd.classList.toggle("muted", !on);
+    snd.title = on ? "Mute soundscape" : "Unmute soundscape";
+  });
+
+  // AI dubbing / language selector (integration point)
+  const lang = $("#lang-select");
+  if (lang) lang.addEventListener("change", () => {
+    CONFIG.dubbing.lang = lang.value;
+    toast(`Dubbing → ${lang.options[lang.selectedIndex].text} · connect AI dubbing to go live`, "", "🌐");
+  });
+
   updateXPBadge();
   const hash = location.hash.replace("#", "");
   go(ROUTES.includes(hash) ? hash : "home");

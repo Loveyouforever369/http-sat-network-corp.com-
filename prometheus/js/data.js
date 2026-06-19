@@ -31,6 +31,29 @@ const PROMETHEUS_DATA = {
       cta: "Go Architect" },
   ],
 
+  /* Cast — ultra-realistic AI avatar instructors (HeyGen). Each lesson is hosted
+     by one of these characters; the player styles the stage to match. */
+  characters: {
+    architect: {
+      name: "The Architect", discipline: "Backend & System Design",
+      look: "Sharp minimalist attire in a dim, futuristic server room",
+      voice: "Deep · calm · methodical · authoritative", portrait: "AR",
+      backdrop: "stage-architect", accent: "blue",
+    },
+    catalyst: {
+      name: "The Catalyst", discipline: "Marketing, Sales & Outbound AI",
+      look: "Modern streetwear against a bright, bustling agency backdrop",
+      voice: "Energetic · fast-paced · hype", portrait: "CA",
+      backdrop: "stage-catalyst", accent: "gold",
+    },
+    byte: {
+      name: "Byte", discipline: "Beginner Guide & Sandbox Assistant",
+      look: "Friendly, highly expressive digital human",
+      voice: "Warm · empathetic · encouraging", portrait: "BY",
+      backdrop: "stage-byte", accent: "teal",
+    },
+  },
+
   modules: [
     /* ====================== MODULE 1 ====================== */
     {
@@ -48,6 +71,7 @@ const PROMETHEUS_DATA = {
         title: "From Doers to Directors",
         duration: "14 min",
         level: "Foundations",
+        character: "byte",
         avatar: { name: "Dr. Aria Vance", role: "AI Historian", voice: "Aria · Calm Authority", portrait: "AV" },
         summary: "How the era of 'doers' is ending and the era of 'directors' — orchestrating fleets of AI agents — has begun.",
         sections: [
@@ -117,6 +141,25 @@ const PROMETHEUS_DATA = {
           },
         ],
       },
+      bonusGame: {
+        type: "prompt-debugger",
+        title: "The Prompt Debugger",
+        tagline: "Fix the slop. Make the AI sing.",
+        difficulty: "Beginner",
+        howTo: "Here's the 'AI slop' a lazy prompt produced. Rewrite the prompt in the terminal — add a role, constraints, a tone, and negative prompts (what to avoid) — until it scores high enough to ship a perfect output.",
+        brief: "Get the AI to write ONE punchy LinkedIn hook for an AI automation agency owner.",
+        weakPrompt: "write a linkedin post about my business",
+        slop: "Sure! 😊 Here is a great LinkedIn post about your business!\n\n\"In today's fast-paced world, businesses need to leverage cutting-edge solutions to stay ahead. Our company is passionate about delivering value and synergy to all our valued customers. Contact us today to learn more!\" #business #success #innovation",
+        targetScore: 80,
+        perfectOutput: "Your competitors reply to new leads in 6 hours.\nMine reply in 60 seconds — automatically, 24/7.\n\nHere's the exact 3-step system I install for agencies 👇",
+        tips: [
+          "ROLE — 'You are a senior B2B copywriter who writes scroll-stopping hooks.'",
+          "TASK — 'Write ONE LinkedIn hook (max 25 words) for an AI automation agency.'",
+          "CONSTRAINTS — 'Lead with a concrete number, one idea, no hashtags.'",
+          "NEGATIVE PROMPTS — 'Avoid clichés like synergy, cutting-edge, fast-paced, valued customers, emojis.'",
+          "OUTPUT — 'Return only the hook, plain text.'",
+        ],
+      },
     },
 
     /* ====================== MODULE 2 ====================== */
@@ -135,6 +178,7 @@ const PROMETHEUS_DATA = {
         title: "Vibe Coding & Living Systems",
         duration: "16 min",
         level: "Intermediate",
+        character: "byte",
         avatar: { name: "Nova Reyes", role: "Vibe Coding Lead", voice: "Nova · Energetic", portrait: "NR" },
         summary: "The difference between basic code generators that hand you raw files and 'living systems' that ship deployed apps with built-in memory and agents.",
         sections: [
@@ -196,6 +240,7 @@ const PROMETHEUS_DATA = {
         title: "Clay & the Outbound Engine",
         duration: "18 min",
         level: "Advanced",
+        character: "catalyst",
         avatar: { name: "Sofia Lang", role: "GTM Engineer", voice: "Sofia · Warm Pro", portrait: "SL" },
         summary: "The mechanics of building high-converting outbound sales engines, using Clay as a spreadsheet with API superpowers.",
         sections: [
@@ -229,15 +274,15 @@ const PROMETHEUS_DATA = {
         type: "credit-optimizer",
         title: "The Credit Optimizer",
         tagline: "Find the most emails without bankrupting your credits.",
-        howTo: "You have a fixed budget of Data Credits and a list of leads. Order your providers into a waterfall — each provider only queries the leads the previous one missed, and you pay per query. Cheaper-first conserves credits for the hard cases. Maximize emails found without going over budget.",
-        budget: 150,
-        leads: 50,
+        howTo: "You have 500 leads and a strict budget of Data Credits. Order your enrichment tools into a waterfall — each tool only queries the leads the previous one missed, and you pay per query. Cheaper-first conserves credits for the hard cases. Maximize emails found without bankrupting your credit pool.",
+        budget: 1800,
+        leads: 500,
         providers: [
-          { name: "Apollo", cost: 1, hitRate: 0.55, note: "Cheap, broad coverage. Run first." },
-          { name: "Findymail", cost: 2, hitRate: 0.45, note: "Mid-cost, good for misses." },
-          { name: "Datagma", cost: 4, hitRate: 0.40, note: "Pricey, catches hard cases. Run last." },
+          { name: "Apollo", cost: 1, hitRate: 0.50, note: "Cheap, broad coverage. Run first." },
+          { name: "Clearbit", cost: 2, hitRate: 0.40, note: "Mid-cost, good on the misses." },
+          { name: "Claygent", cost: 5, hitRate: 0.45, note: "AI web research — pricey, catches hard cases. Run last." },
         ],
-        optimalOrder: ["Apollo", "Findymail", "Datagma"],
+        optimalOrder: ["Apollo", "Clearbit", "Claygent"],
       },
     },
 
@@ -257,6 +302,7 @@ const PROMETHEUS_DATA = {
         title: "Zapier vs. AI-Native Orchestration",
         duration: "17 min",
         level: "Advanced",
+        character: "architect",
         avatar: { name: "Kai Mercer", role: "Orchestration Architect", voice: "Kai · Methodical", portrait: "KM" },
         summary: "Connecting applications so they think and act autonomously — and the difference between simple trigger-action tools and AI-native reasoning platforms.",
         sections: [
@@ -335,6 +381,7 @@ const PROMETHEUS_DATA = {
         title: "The Faceless Media Empire",
         duration: "15 min",
         level: "Monetization",
+        character: "catalyst",
         avatar: { name: "Mara Quinn", role: "Content Systems Coach", voice: "Mara · Inspiring", portrait: "MQ" },
         summary: "How to build automated media empires — generating full 10–15 minute YouTube videos from a single script with no timeline editing skills.",
         sections: [
@@ -379,6 +426,84 @@ const PROMETHEUS_DATA = {
           { id: "linkedin", label: "LinkedIn Post", hint: "Story + result + lesson, professional." },
           { id: "short", label: "YouTube Short", hint: "A 7-second pattern-interrupt hook." },
         ],
+      },
+    },
+
+    /* ====================== MODULE 6 ====================== */
+    {
+      id: "m6",
+      code: "06",
+      title: "Advanced Operations",
+      subtitle: "Enterprise AI engineering",
+      tagline: "Where most courses stop, you begin.",
+      color: "blue",
+      icon: "⌬",
+      xp: 480,
+      summary:
+        "The deep end. Enterprise-grade waterfall enrichment with Claygent web research, giving agents secure tool access via the Model Context Protocol, and building self-running 'living software' with Workspace DNA — then debugging a live outage against the clock.",
+      lesson: {
+        title: "Deep Dives: Waterfalls, MCP & Living Software",
+        duration: "24 min",
+        level: "Expert",
+        character: "architect",
+        avatar: { name: "The Architect", role: "Systems Architect", voice: "Architect · Deep Authority", portrait: "AR" },
+        summary: "Three operations most courses ignore — advanced waterfall enrichment, the Model Context Protocol, and living software with Workspace DNA.",
+        sections: [
+          { heading: "Deep Dive 1 · Advanced Waterfall Enrichment", body: "Enterprise outbound stacks 150+ data providers sequentially: if Apollo misses an email, Clearbit catches it, then Claygent — an AI web research agent — scrapes SEC filings and press releases for hyper-personalized hooks. You pay only for hits and personalize at a depth manual research can't match." },
+          { heading: "Deep Dive 2 · Mastering MCP (Model Context Protocol)", body: "MCP gives AI agents secure, governed access to external tools. You deploy an MCP Gateway that authenticates the agent, enforces tool permissions, and routes calls to Jira, Slack, Stripe, and internal databases — moving past chat into true enterprise automation." },
+          { heading: "Deep Dive 3 · Living Software & Workspace DNA", body: "Beyond one-shot code generators, 'living systems' (e.g. Taskade Genesis) have Workspace DNA — memory and intelligence that read real-time databases and run 24/7 background automations. You build apps that keep working after you close the laptop." },
+        ],
+        transcript: [
+          { t: 0, text: "Welcome to the deep end. I'm the Architect." },
+          { t: 5, text: "First: waterfall enrichment. Stack providers so a miss always has a backup." },
+          { t: 12, text: "Then Claygent scrapes filings and press releases for the perfect hook." },
+          { t: 19, text: "Next, MCP — a gateway that gives your agent secure access to real tools." },
+          { t: 27, text: "Finally, living software: apps with memory that run 24/7 on their own." },
+          { t: 34, text: "Master these and you're not using AI — you're engineering with it." },
+        ],
+      },
+      training: {
+        type: "mcp-gateway",
+        title: "Deploy an MCP Gateway",
+        objective: "Wire a secure MCP Gateway between an AI agent and enterprise tools. Order the steps so every tool call is authenticated and policy-checked before it ever reaches Jira, Slack, Stripe, or your database.",
+        correctSteps: [
+          "AI agent issues a tool request",
+          "MCP Gateway authenticates the agent",
+          "Gateway checks tool permissions & policy",
+          "Gateway routes to the tool (Jira / Slack / Stripe / DB)",
+          "Tool result returns through the gateway",
+          "Gateway logs the call for audit",
+        ],
+        note: "Why this order? The gateway is the trust boundary: authenticate first, authorize against policy second, and only then touch a real tool. Logging every call keeps the whole thing auditable.",
+      },
+      game: {
+        type: "chaos-engineering-sandbox",
+        title: "Chaos Engineering Sandbox",
+        tagline: "Trace the outage. Merge the fix. Beat the clock.",
+        difficulty: "Advanced",
+        howTo: "An outage was injected into your live pipeline. Read the logs, open the file with the failing dependency, then choose the correct fix to merge — before the timer hits zero. Open the wrong file and you lose time.",
+        timeLimit: 75,
+        logs: [
+          "12:04:01 INFO  webhook/lead.ts → new lead accepted (id 8842)",
+          "12:04:01 INFO  api/enrich.ts → calling clearbit.v1/find …",
+          "12:04:31 ERROR api/enrich.ts:42 → ECONNREFUSED clearbit.v1 (timeout 30s)",
+          "12:04:31 WARN  queue/worker.ts → enrich retry 3/3 failed, job parked",
+          "12:04:32 INFO  api/score.ts → awaiting enrich result … (blocked)",
+          "12:04:32 ERROR pipeline stalled: 412 leads queued, 0 processed",
+        ],
+        files: [
+          { id: "f1", name: "api/enrich.ts", broken: true, hint: "calls clearbit.v1 — the endpoint throwing ECONNREFUSED" },
+          { id: "f2", name: "api/score.ts", broken: false, hint: "only blocked because enrich never returns" },
+          { id: "f3", name: "queue/worker.ts", broken: false, hint: "correctly retried 3x then parked the job" },
+          { id: "f4", name: "lib/db.ts", broken: false, hint: "healthy — no DB errors in the logs" },
+        ],
+        fixes: [
+          "Point enrich.ts at the healthy clearbit.v2 endpoint and add an Apollo fallback on timeout",
+          "Delete the queue so jobs stop parking",
+          "Increase the score.ts timeout to 10 minutes",
+          "Restart the leads webhook",
+        ],
+        correctFix: "Point enrich.ts at the healthy clearbit.v2 endpoint and add an Apollo fallback on timeout",
       },
     },
   ],

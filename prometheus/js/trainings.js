@@ -230,5 +230,33 @@
     });
   };
 
+  /* ===========================================================================
+     M6 · mcp-gateway — order the secure MCP Gateway request flow
+  =========================================================================== */
+  PROM.trainings["mcp-gateway"] = function (mount, m, onComplete) {
+    const T = m.training;
+    const items = T.correctSteps.map((label, i) => ({ id: String(i), label }));
+    mount.innerHTML = `
+      <div class="panel game-shell">
+        ${gameHead(m)}
+        <div class="how-to">Drag the steps (or use ▲▼) into the correct secure order. The gateway must <strong>authenticate</strong> and <strong>authorize</strong> before any real tool (Jira / Slack / Stripe / DB) is ever touched.</div>
+        <div id="list-mount"></div>
+        <div class="sb-actions mt-2"><button class="btn btn-primary" id="mg-check">✓ Verify gateway</button></div>
+        <div id="mg-result"></div>
+      </div>`;
+    const list = PROM.ui.orderList(items);
+    $("#list-mount", mount).appendChild(list);
+    $("#mg-check", mount).addEventListener("click", () => {
+      const order = PROM.ui.getOrder(list).map((id) => items[+id].label);
+      const ok = order.every((lbl, i) => lbl === T.correctSteps[i]);
+      $$(".co-provider", list).forEach((row, i) => { row.style.borderColor = items[+row.dataset.id].label === T.correctSteps[i] ? "var(--teal)" : "#fb7185"; });
+      $("#mg-result", mount).innerHTML = ok
+        ? `<div class="sb-response"><span class="resp-label">🔒 Gateway secure</span>${esc(T.note)}</div>`
+        : `<div class="sb-response" style="border-color:#fb7185;background:rgba(244,63,94,.06)"><span class="resp-label" style="color:#fb7185">Insecure order</span>Authenticate the agent, authorize against policy, THEN route to the tool — and log it. Never touch a real tool before the policy check. Reorder and retry.</div>`;
+      if (ok) { onComplete({ score: 100 }); toast("MCP Gateway deployed!", "xp", "✦"); }
+      else if (PROM.maybeIntervene) PROM.maybeIntervene(m.id, "the secure MCP Gateway order");
+    });
+  };
+
   function toast(msg, k, ic) { PROM.toast(msg, k, ic); }
 })();
