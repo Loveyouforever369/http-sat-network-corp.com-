@@ -118,3 +118,31 @@ Everything works in **demo mode** out of the box. Each integration is one config
 - Drag-and-drop works with mouse **and** ▲▼ buttons (touch-friendly).
 - Respects `prefers-reduced-motion`.
 - The whole experience is data-driven from `js/data.js` — add a module or change a game by editing that one file.
+
+---
+
+## 🎓 The AI Mastery Academy
+
+A deep, data-driven course library bolted onto Prometheus. Every track teaches a
+top AI tool or discipline beginner → advanced, with **real in-browser narration**
+(Web Speech API), copy-able **prompt playbooks**, **settings & features**
+deep-dives, business + life use cases, and graded exercises.
+
+**Architecture**
+
+| File | Role |
+|------|------|
+| `js/narrator.js` | Narration engine. Web Speech API with sentence-synced teleprompter; plays a pre-rendered `audioUrl` (e.g. ElevenLabs) when a lesson supplies one. |
+| `js/academy/_core.js` | Registry + schema defaults + self-contained progress/XP engine (feeds the nav XP badge). |
+| `js/academy/*.js` | Content files. Each calls `ACADEMY.register({...})` once per track. Add a file (and a `<script>` tag) to grow the library — it scales without limit. |
+| `js/academy.js` | Renderer: landing (search + filters), track pages, the long-form lesson reader, quizzes. |
+| `css/academy.css` | Academy visual system (extends `css/styles.css`). |
+| `scripts/academy-qa.js` | `node scripts/academy-qa.js` — loads every track in a sandbox and validates the schema. |
+
+**Add a track:** create `js/academy/your-file.js`, register tracks against the
+schema documented at the top of `js/academy/_core.js`, add a `<script>` tag in
+`index.html`, then run `node scripts/academy-qa.js`.
+
+**Go live with studio narration:** drop an `audioUrl` (an ElevenLabs render) on any
+lesson and the narrator plays it instead of the browser voice — synced to the
+teleprompter automatically.
