@@ -7,8 +7,8 @@
 
 /* -----------------------------------------------------------------------------
    CONFIG — the single place to wire live integrations. Everything runs in a
-   self-contained DEMO mode until you fill these in. See /prometheus/README.md
-   and /prometheus/api-reference/ for the matching serverless routes.
+   self-contained DEMO mode until you fill these in. See /README.md
+   and /api-reference/ for the matching serverless routes.
 ----------------------------------------------------------------------------- */
 const CONFIG = {
   // AI Prompt Sandbox. Point this at your deployed serverless route (which holds

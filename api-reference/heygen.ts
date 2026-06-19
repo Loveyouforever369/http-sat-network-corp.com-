@@ -2,7 +2,7 @@
    PROMETHEUS · HeyGen Avatar Video — serverless route (REFERENCE TEMPLATE)
    -----------------------------------------------------------------------------
    Drop this into a Next.js (App Router) project at: app/api/heygen/route.ts
-   Then set CONFIG.heygen.endpoint = "/api/heygen" in /prometheus/js/app.js.
+   Then set CONFIG.heygen.endpoint = "/api/heygen" in /js/app.js.
 
    Two ways to feed avatar video into the lesson player:
      (A) Pre-render lessons once, store the MP4 URLs, and map them in

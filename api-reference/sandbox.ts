@@ -2,7 +2,7 @@
    PROMETHEUS · Prompt Sandbox — serverless route (REFERENCE TEMPLATE)
    -----------------------------------------------------------------------------
    Drop this into a Next.js (App Router) project at: app/api/sandbox/route.ts
-   Then set CONFIG.sandbox.endpoint = "/api/sandbox" in /prometheus/js/app.js.
+   Then set CONFIG.sandbox.endpoint = "/api/sandbox" in /js/app.js.
 
    It holds your AI provider key SERVER-SIDE — never ship model keys to the
    browser. Uses the official Anthropic SDK by default; an OpenAI variant is

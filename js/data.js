@@ -4,7 +4,7 @@
    Single source of truth. Follows the 5-module plan exactly: every module has
    a LESSON (avatar video + transcript), a TRAINING (hands-on simulation) and a
    GAME (gamified test). The UI renders entirely from this structure, and
-   /prometheus/schema.sql mirrors it so the static build can graduate to the
+   /schema.sql mirrors it so the static build can graduate to the
    full Next.js + Supabase + Drizzle + Vercel stack with no data rework.
    ============================================================================= */
 

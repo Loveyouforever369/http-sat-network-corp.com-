@@ -2,31 +2,30 @@
 
 **The immersive AI-director training platform.** From doers of tasks to directors of workflows — taught by three AI-avatar characters, practiced in a live prompt sandbox, and tested with seven arcade-style games.
 
-This is a **self-contained, zero-build static app**. It runs offline in any modern browser and deploys to Vercel (or any static host) in seconds. It lives in `/prometheus/` and does not touch the existing site at the repo root.
+This is a **self-contained, zero-build static app** at the root of this repo. It runs offline in any modern browser and deploys to Vercel (or any static host) in seconds.
 
 ---
 
 ## ▶️ Run it locally
 
-No build step. Either:
+No build step. From the repo root, either:
 
 ```bash
 # Option A — just open it
-open prometheus/index.html        # macOS  (or double-click the file)
+open index.html        # macOS  (or double-click the file)
 
 # Option B — serve it (recommended; needed for the live API integrations)
-cd prometheus && python3 -m http.server 8000
+python3 -m http.server 8000
 # → http://localhost:8000
 ```
 
 ## 🚀 Deploy to Vercel
 
 ```bash
-cd prometheus
-vercel deploy --prod
+vercel deploy --prod      # from the repo root
 ```
 
-A `vercel.json` is included (clean URLs + sensible security headers). Vercel auto-detects the static site — no framework config needed.
+Or import the GitHub repo at vercel.com/new (Framework: **Other**, no build command) — it deploys as a static site automatically. A `vercel.json` is included (clean URLs + security headers).
 
 ---
 
@@ -58,7 +57,7 @@ Plus: a holographic **skill tree** dashboard with progress rings, XP/mastery tra
 
 ### File map
 ```
-prometheus/
+. (repo root)
 ├── index.html            # app shell + views
 ├── vercel.json           # static deploy config
 ├── schema.sql            # Postgres + Drizzle schema (mirrors localStorage)
