@@ -274,3 +274,15 @@
 
 /* Category section header gets a subtle accent bullet */
 .ac-cat-head h2::before { content: "▍"; color: var(--neon-purple); margin-right: 8px; }
+
+/* =============================================================================
+   Section cover banners — generative SVG art per category
+   ============================================================================= */
+.ac-cat-banner { position: relative; height: 122px; border-radius: 16px; overflow: hidden; margin-bottom: 16px; border: 1px solid var(--line); }
+.ac-cat-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.ac-cat-banner-inner { position: absolute; inset: 0; display: flex; align-items: center; gap: 18px; padding: 0 24px; }
+.ac-cat-glyph { font-size: 2.2rem; width: 62px; height: 62px; display: grid; place-items: center; border-radius: 16px; flex-shrink: 0; background: rgba(0,0,0,.32); border: 1px solid color-mix(in srgb, var(--b) 55%, transparent); box-shadow: 0 0 26px color-mix(in srgb, var(--b) 45%, transparent); }
+.ac-cat-bk { font-family: var(--font-mono); font-size: .64rem; letter-spacing: .32em; text-transform: uppercase; color: var(--b); }
+.ac-cat-btitle { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; font-size: clamp(1.05rem, 2.6vw, 1.7rem); line-height: 1.05; }
+.ac-cat-watch { margin-left: auto; flex-shrink: 0; }
+@media (max-width: 560px) { .ac-cat-banner { height: 104px; } .ac-cat-glyph { width: 50px; height: 50px; font-size: 1.7rem; } }
