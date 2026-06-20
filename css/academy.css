@@ -286,3 +286,8 @@
 .ac-cat-btitle { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; font-size: clamp(1.05rem, 2.6vw, 1.7rem); line-height: 1.05; }
 .ac-cat-watch { margin-left: auto; flex-shrink: 0; }
 @media (max-width: 560px) { .ac-cat-banner { height: 104px; } .ac-cat-glyph { width: 50px; height: 50px; font-size: 1.7rem; } }
+
+/* photo banner layer (when ACADEMY.sectionImage has a URL) */
+.ac-cat-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.ac-cat-img-shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(5,6,15,.88), rgba(5,6,15,.35) 55%, rgba(5,6,15,.7)); }
+.ac-cat-banner-inner { z-index: 2; }

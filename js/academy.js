@@ -87,7 +87,9 @@
     const hex = art[0], glyph = art[1];
     const seed = c.replace(/[^a-z]/gi, "").toLowerCase();
     const vid = (A.sectionVideo || {})[c];
+    const img = (A.sectionImage || {})[c];
     return `<div class="ac-cat-banner" style="--b:${hex}">
+      ${img ? `<img class="ac-cat-img" src="${esc(img)}" alt="" loading="lazy"><div class="ac-cat-img-shade"></div>` : ""}
       <svg class="ac-cat-svg" viewBox="0 0 1200 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
         <defs><radialGradient id="cg-${seed}" cx="16%" cy="34%" r="85%">
           <stop offset="0%" stop-color="${hex}" stop-opacity="0.55"/>
