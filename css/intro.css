@@ -1,0 +1,98 @@
+/* =============================================================================
+   PROMETHEUS · Cinematic Intro Experience styles (overlay player)
+   ============================================================================= */
+#intro-overlay {
+  position: fixed; inset: 0; z-index: 500; display: none;
+  background: radial-gradient(120% 90% at 50% 0%, #0b0e22, #04060f 70%, #02030a);
+  overflow: hidden;
+}
+#intro-overlay.show { display: block; animation: viewIn .5s ease; }
+#intro-canvas { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: .7; }
+
+.intro-stage {
+  position: absolute; inset: 0; z-index: 2;
+  display: grid; place-content: center; justify-items: center; text-align: center;
+  padding: 5vh 6vw 22vh; gap: 4px;
+  --acc: var(--neon-purple);
+}
+.intro-stage.accent-purple   { --acc: #a855f7; }
+.intro-stage.accent-electric { --acc: #22d3ee; }
+.intro-stage.accent-gold     { --acc: #f5c518; }
+.intro-stage.accent-teal     { --acc: #2dd4bf; }
+.intro-stage.accent-violet   { --acc: #8b5cf6; }
+.intro-stage.accent-blue     { --acc: #3b82f6; }
+
+/* a soft accent wash that shifts per scene */
+.intro-stage::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(70% 55% at 50% 28%, color-mix(in srgb, var(--acc) 26%, transparent), transparent 70%);
+  transition: background .8s ease;
+}
+
+.intro-scene { display: grid; justify-items: center; gap: 18px; max-width: 980px; }
+.intro-scene.active { animation: introIn .9s cubic-bezier(.2,.7,.2,1); }
+@keyframes introIn { from { opacity: 0; transform: translateY(26px) scale(.98); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
+
+.intro-orb {
+  width: 92px; height: 92px; border-radius: 28px; display: grid; place-items: center; font-size: 2.6rem;
+  background: radial-gradient(circle at 30% 30%, #161a3a, #06070f);
+  border: 1.5px solid color-mix(in srgb, var(--acc) 60%, transparent);
+  box-shadow: 0 0 50px color-mix(in srgb, var(--acc) 55%, transparent);
+  animation: introOrb 3s ease-in-out infinite;
+}
+@keyframes introOrb { 0%,100% { transform: translateY(0); box-shadow: 0 0 40px color-mix(in srgb, var(--acc) 45%, transparent); } 50% { transform: translateY(-8px); box-shadow: 0 0 70px color-mix(in srgb, var(--acc) 70%, transparent); } }
+
+.intro-kicker {
+  font-family: var(--font-mono); font-size: clamp(.7rem, 1.4vw, .82rem); letter-spacing: .42em; text-transform: uppercase;
+  color: var(--acc);
+}
+.intro-title {
+  font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
+  font-size: clamp(2.2rem, 7.5vw, 5.4rem); line-height: 1.02; letter-spacing: .01em; color: #fff;
+  text-shadow: 0 0 40px color-mix(in srgb, var(--acc) 35%, transparent);
+}
+.intro-title .g { background: linear-gradient(100deg, var(--acc), #fff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.intro-chips { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 6px; }
+.intro-chips span {
+  font-family: var(--font-mono); font-size: clamp(.66rem, 1.3vw, .8rem); padding: 7px 14px; border-radius: 20px;
+  background: rgba(255,255,255,.05); border: 1px solid color-mix(in srgb, var(--acc) 45%, transparent); color: #e8ecff;
+}
+.intro-cta { margin-top: 26px; font-size: 1.05rem; padding: 16px 30px; animation: introOrb 2.4s ease-in-out infinite; }
+
+/* teleprompter caption */
+.intro-caption {
+  position: absolute; left: 50%; transform: translateX(-50%); bottom: 13vh; z-index: 3;
+  width: min(900px, 88vw); max-height: 22vh; overflow-y: auto; text-align: center;
+  font-size: clamp(1rem, 2.2vw, 1.35rem); line-height: 1.6; color: var(--text-faint);
+}
+.intro-caption .intro-seg { transition: color .25s; }
+.intro-caption .intro-seg.active { color: #fff; }
+.intro-caption .intro-seg.past { color: var(--text-dim); }
+
+/* dots */
+.intro-dots { position: absolute; left: 50%; transform: translateX(-50%); bottom: 9vh; z-index: 4; display: flex; gap: 8px; }
+.intro-dots .dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,.18); cursor: pointer; transition: all .25s; }
+.intro-dots .dot.active { background: var(--acc); box-shadow: 0 0 10px var(--acc); transform: scale(1.25); }
+.intro-dots .dot.done { background: rgba(255,255,255,.45); }
+
+/* controls */
+.intro-controls { position: absolute; left: 50%; transform: translateX(-50%); bottom: 3.5vh; z-index: 4; display: flex; align-items: center; gap: 16px; }
+.intro-btn {
+  width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line-bright); background: rgba(12,15,32,.7);
+  color: #fff; font-size: 1rem; display: grid; place-items: center; backdrop-filter: blur(8px); transition: transform .15s, border-color .2s;
+}
+.intro-btn:hover { transform: scale(1.08); border-color: var(--acc); color: var(--acc); }
+.intro-btn.lg { width: 60px; height: 60px; font-size: 1.2rem; background: linear-gradient(120deg, var(--neon-purple), var(--electric)); border: none; box-shadow: var(--glow-purple); }
+
+.intro-skip { position: absolute; right: 22px; bottom: 4vh; z-index: 4; background: none; border: 1px solid var(--line); color: var(--text-dim); font-size: .82rem; font-weight: 600; padding: 9px 16px; border-radius: 20px; transition: all .2s; }
+.intro-skip:hover { color: #fff; border-color: var(--line-bright); }
+.intro-close { position: absolute; top: 18px; right: 20px; z-index: 5; background: rgba(0,0,0,.4); border: 1px solid var(--line); color: var(--text-dim); width: 40px; height: 40px; border-radius: 50%; font-size: 1.1rem; transition: all .2s; }
+.intro-close:hover { color: #fff; border-color: var(--line-bright); }
+
+@media (max-width: 640px) {
+  .intro-caption { bottom: 15vh; }
+  .intro-skip { right: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro-scene.active, .intro-orb, .intro-cta { animation: none; }
+}
