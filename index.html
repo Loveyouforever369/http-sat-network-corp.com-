@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/academy.css">
 </head>
 <body>
 
@@ -24,6 +25,7 @@
   </div>
   <div class="nav-links">
     <button class="nav-btn" data-go="home">Home</button>
+    <button class="nav-btn" data-go="academy">Academy</button>
     <button class="nav-btn" data-go="dashboard">Skill Tree</button>
     <button class="nav-btn" data-go="arcade">Arcade</button>
     <button class="nav-btn" data-go="pricing">Pricing</button>
@@ -50,8 +52,9 @@
     <h1>Become the<br><span class="gradient-text">Director</span> of AI</h1>
     <p>The era of doing tasks by hand is ending. Prometheus trains you to orchestrate AI agents — through avatar-taught lessons, a live prompt sandbox, and arcade-style games.</p>
     <div class="hero-cta">
-      <button class="btn btn-primary" data-go="dashboard">⚡ Enter the Skill Tree</button>
-      <button class="btn btn-ghost" data-go="about">See how it works</button>
+      <button class="btn btn-primary" data-go="academy">🎓 Open the Academy</button>
+      <button class="btn btn-electric" data-go="dashboard">⚡ Enter the Skill Tree</button>
+      <button class="btn btn-ghost" data-go="about">How it works</button>
     </div>
     <div class="hero-stats">
       <div class="hero-stat"><div class="num gradient-text">6</div><div class="lbl">Modules</div></div>
@@ -84,6 +87,25 @@
   </section>
 
   <section style="margin-top:50px">
+    <div class="panel" style="padding:34px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;align-items:center">
+      <div>
+        <div class="section-eyebrow">// New · The Academy</div>
+        <h2 class="section-title">Master <span class="gradient-text">every AI tool</span>, hands-free</h2>
+        <p class="dim" style="max-width:560px">Deep, narrated, up-to-date courses on the tools running the 2026 AI economy — ChatGPT, Claude, Gemini, Midjourney, Sora, Veo, n8n, Clay and more. Exactly how to prompt each one, their settings and features, and how to leverage them in business and life.</p>
+        <div class="hero-cta" style="justify-content:flex-start;margin-top:18px">
+          <button class="btn btn-primary" data-go="academy">🎓 Open the Academy</button>
+        </div>
+      </div>
+      <div style="display:grid;gap:10px;justify-items:start">
+        <div class="chip">🔊 Real in-browser narration</div>
+        <div class="chip">⌘ Prompt playbooks you can copy</div>
+        <div class="chip">⚙️ Settings &amp; features deep-dives</div>
+        <div class="chip">📈 Beginner → advanced</div>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top:50px">
     <div class="flex-between">
       <div><div class="section-eyebrow">// The curriculum</div><h2 class="section-title">Five modules to mastery</h2></div>
       <button class="btn btn-electric" data-go="dashboard">Open skill tree →</button>
@@ -97,6 +119,9 @@
 
 <!-- ============================== ARCADE ============================== -->
 <main id="view-arcade" class="view"></main>
+
+<!-- ============================== ACADEMY (dynamic) ============================== -->
+<main id="view-academy" class="view"></main>
 
 <!-- ============================== MODULE (dynamic) ============================== -->
 <main id="view-module" class="view"></main>
@@ -151,6 +176,20 @@
 <script src="js/sandbox.js"></script>
 <script src="js/trainings.js"></script>
 <script src="js/games.js"></script>
+<!-- Academy: narration engine + data-driven course library -->
+<script src="js/narrator.js"></script>
+<script src="js/academy/_core.js"></script>
+<script src="js/academy/foundations.js"></script>
+<script src="js/academy/conversational.js"></script>
+<script src="js/academy/image-design.js"></script>
+<script src="js/academy/video-avatars.js"></script>
+<script src="js/academy/video-avatars-2.js"></script>
+<script src="js/academy/audio-voice.js"></script>
+<script src="js/academy/automation-agents.js"></script>
+<script src="js/academy/vibe-coding.js"></script>
+<script src="js/academy/vibe-coding-2.js"></script>
+<script src="js/academy/business-life.js"></script>
+<script src="js/academy.js"></script>
 <script>
   /* Home view: render module teaser cards + total XP */
   (function () {

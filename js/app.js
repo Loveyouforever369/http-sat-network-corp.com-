@@ -219,9 +219,11 @@ PROM.maybeIntervene = maybeIntervene;
 /* -----------------------------------------------------------------------------
    Router
 ----------------------------------------------------------------------------- */
-const ROUTES = ["home", "dashboard", "pricing", "about", "arcade"];
+const ROUTES = ["home", "dashboard", "pricing", "about", "arcade", "academy"];
 function go(view, param, activity) {
+  if (window.PROM && PROM.narrator) PROM.narrator.stop(); // never let narration bleed across views
   if (view === "module") renderModule(param, activity);
+  if (view === "academy" && PROM.openAcademy) PROM.openAcademy();
   $$(".view").forEach((v) => v.classList.toggle("active", v.id === `view-${view}`));
   $$(".nav-btn").forEach((b) => b.classList.toggle("active", b.dataset.go === view));
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -586,8 +588,10 @@ function checkout(tierId) {
 ----------------------------------------------------------------------------- */
 function updateXPBadge() {
   const el = $("#nav-xp-val");
-  if (el) el.textContent = PROM.totalXP().toLocaleString();
+  const academyXP = (window.ACADEMY && ACADEMY.xp) ? ACADEMY.xp() : 0;
+  if (el) el.textContent = (PROM.totalXP() + academyXP).toLocaleString();
 }
+window.updateXPBadge = updateXPBadge;
 
 /* -----------------------------------------------------------------------------
    Boot
@@ -613,7 +617,7 @@ function boot() {
   });
 
   updateXPBadge();
-  const hash = location.hash.replace("#", "");
+  const hash = location.hash.replace("#", "").split("/")[0];
   go(ROUTES.includes(hash) ? hash : "home");
 }
 // Defer with setTimeout(0) so later <script> tags (trainings/games) finish
