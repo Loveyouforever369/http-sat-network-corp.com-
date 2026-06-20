@@ -71,6 +71,43 @@
     return hay.includes(q);
   }
 
+  /* Generative SVG cover art per section (creative, self-contained, no external tool). */
+  const CAT_ART = {
+    "Foundations": ["#a855f7", "◇"],
+    "Conversational AI": ["#2dd4bf", "✦"],
+    "Image & Design": ["#8b5cf6", "◐"],
+    "Video & Avatars": ["#f5c518", "▷"],
+    "Audio, Voice & Music": ["#22d3ee", "♪"],
+    "Automation & Agents": ["#3b82f6", "⬡"],
+    "Vibe Coding": ["#38bdf8", "❮❯"],
+    "Business & Life Playbooks": ["#f5c518", "△"],
+  };
+  function categoryBanner(c) {
+    const art = CAT_ART[c] || ["#a855f7", "✦"];
+    const hex = art[0], glyph = art[1];
+    const seed = c.replace(/[^a-z]/gi, "").toLowerCase();
+    const vid = (A.sectionVideo || {})[c];
+    return `<div class="ac-cat-banner" style="--b:${hex}">
+      <svg class="ac-cat-svg" viewBox="0 0 1200 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs><radialGradient id="cg-${seed}" cx="16%" cy="34%" r="85%">
+          <stop offset="0%" stop-color="${hex}" stop-opacity="0.55"/>
+          <stop offset="55%" stop-color="${hex}" stop-opacity="0.08"/>
+          <stop offset="100%" stop-color="${hex}" stop-opacity="0"/>
+        </radialGradient></defs>
+        <rect width="1200" height="300" fill="#0a0c1c"/>
+        <rect width="1200" height="300" fill="url(#cg-${seed})"/>
+        <g fill="none" stroke="${hex}" stroke-opacity="0.16">
+          <circle cx="1010" cy="150" r="58"/><circle cx="1010" cy="150" r="110"/><circle cx="1010" cy="150" r="166"/><circle cx="1010" cy="150" r="228"/>
+        </g>
+      </svg>
+      <div class="ac-cat-banner-inner">
+        <span class="ac-cat-glyph">${esc(glyph)}</span>
+        <div><div class="ac-cat-bk">Section</div><div class="ac-cat-btitle">${esc(c)}</div></div>
+        ${vid ? `<a class="btn btn-ghost btn-sm ac-cat-watch" href="${esc(vid)}" target="_blank" rel="noopener">🎬 Watch film</a>` : ""}
+      </div>
+    </div>`;
+  }
+
   function renderResults() {
     const root = mountEl();
     const wrap = $("#ac-results", root); if (!wrap) return;
@@ -78,6 +115,7 @@
     if (!cats.length) { wrap.innerHTML = `<div class="ac-empty">No tracks match “${esc(filter.q)}”. Try another search.</div>`; return; }
     wrap.innerHTML = cats.map(([c, list]) => `
       <section class="ac-cat">
+        ${categoryBanner(c)}
         <div class="ac-cat-head"><h2>${esc(c)}</h2><span class="count">${list.length} track${list.length > 1 ? "s" : ""}</span><span class="ac-cat-line"></span></div>
         <div class="ac-grid">${list.map(cardHTML).join("")}</div>
       </section>`).join("");
