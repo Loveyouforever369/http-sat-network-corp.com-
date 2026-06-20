@@ -16,4 +16,11 @@
     // "Vibe Coding": "https://ai.invideo.io/...",
     // "Business & Life Playbooks": "https://ai.invideo.io/...",
   };
+  // Per-section realistic images — drop a hosted image URL per category to show a
+  // photo banner (overrides the generative SVG art). Generate it in your image
+  // tool of choice (Adobe Firefly, Leonardo, Ideogram, Canva) using the prompts in
+  // docs/PRODUCTION-PACK.md, host the file, and paste the URL here.
+  ACADEMY.sectionImage = ACADEMY.sectionImage || {
+    // "Foundations": "https://.../foundations.jpg",
+  };
 })();
