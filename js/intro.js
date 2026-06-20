@@ -10,7 +10,6 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const esc = (s) => (window.PROM ? PROM.esc(s) : String(s));
-  const FILM_URL = "https://ai.invideo.io/ai-mcp-video?video=prometheus-the-ai-mastery-academy-from-doer-to-director-across-every-ai-tool-ltooew";
 
   /* ---- Scene script (a ~7-10 min narrated journey) ---- */
   const SCENES = [
@@ -118,8 +117,7 @@
         '<div class="intro-kicker">' + esc(sc.kicker) + '</div>' +
         '<h1 class="intro-title">' + sc.title + '</h1>' +
         (sc.chips && sc.chips.length ? '<div class="intro-chips">' + sc.chips.map((c) => '<span>' + esc(c) + '</span>').join("") + '</div>' : "") +
-        (sc.end ? '<button class="btn btn-gold intro-cta" id="intro-enter">⚡ Enter the Academy</button>' +
-          '<a class="intro-film-link" href="' + FILM_URL + '" target="_blank" rel="noopener" style="display:inline-block;margin-top:16px;color:var(--text-dim);text-decoration:underline;font-size:.9rem">🎬 Watch the film version</a>' : "") +
+        (sc.end ? '<button class="btn btn-gold intro-cta" id="intro-enter">Enter the Academy</button>' : "") +
       '</div>';
     const cap = $("#intro-caption");
     cap.innerHTML = segs.map((s, i) => '<span class="intro-seg" data-seg="' + i + '">' + esc(s) + ' </span>').join("");
