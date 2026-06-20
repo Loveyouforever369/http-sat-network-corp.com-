@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PROMETHEUS // OS — Command the Future of AI</title>
+<meta name="description" content="PROMETHEUS // OS — a cinematic AI training suite: a 42-screen narrated briefing, ten AI-generated films, the 2026 toolkit, and a 90-day action plan. Learn to command AI and automation, create cinematic video, grow your business, and be seen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500;1,9..144,600&family=Sora:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#04060c;--ink:#0b1120;--panel:#0f1626;--panel-2:#131c30;--raise:#172238;
+  --line:rgba(245,185,66,.16);--line-soft:rgba(245,185,66,.07);--line-cool:rgba(140,160,200,.13);
+  --gold:#f5b942;--gold-bright:#ffd479;--amber:#ff9b3d;--ember:#e2572b;--ember-bright:#ff7a45;
+  --cyan:#5fe7ff;--cyan-soft:rgba(95,231,255,.12);--cyan-line:rgba(95,231,255,.22);--verify:#54d6c4;--plum:#b07cff;
+  --bone:#f4ecdb;--text:#cdd3e1;--dim:#9aa2b6;--faint:#6a7286;--shadow:0 30px 80px rgba(0,0,0,.6);
+}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--text);font-family:'Sora',system-ui,sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:
+  radial-gradient(1200px 700px at 80% -10%,rgba(245,185,66,.07),transparent 60%),
+  radial-gradient(1000px 800px at 5% 110%,rgba(226,87,43,.08),transparent 62%),
+  radial-gradient(900px 800px at 50% 40%,rgba(95,231,255,.05),transparent 70%)}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");mix-blend-mode:overlay}
+::selection{background:var(--gold);color:var(--void)}
+h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:500;line-height:1.04;letter-spacing:-.012em;color:var(--bone)}
+em{font-style:italic;color:var(--gold)}b,strong{color:var(--bone);font-weight:600}
+a{color:inherit;text-decoration:none}
+#fx{position:fixed;inset:0;z-index:1;pointer-events:none}
+#grid{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5;background:repeating-linear-gradient(90deg,transparent 0 79px,rgba(95,231,255,.03) 79px 80px);mask:linear-gradient(180deg,transparent 30%,#000 100%)}
+
+#nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;gap:18px;padding:11px clamp(16px,4vw,40px);background:linear-gradient(180deg,rgba(4,6,12,.9),rgba(4,6,12,.35) 70%,transparent);backdrop-filter:blur(8px)}
+.nav-brand{display:flex;align-items:center;gap:9px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone)}
+.nav-brand b{color:var(--gold)}.nav-brand svg{width:16px;height:16px;filter:drop-shadow(0 0 6px rgba(245,185,66,.6))}
+.nav-links{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+.nav-links a{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);padding:8px 13px;border-radius:9px;border:1px solid transparent;transition:all .2s}
+.nav-links a:hover{color:var(--bone);border-color:var(--line-cool)}
+.nav-links a.active{color:var(--gold);border-color:var(--line);background:rgba(245,185,66,.06)}
+
+.hero{position:relative;z-index:5;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 22px 80px}
+.hero-orb{position:relative;width:clamp(150px,18vw,232px);aspect-ratio:1/1;display:grid;place-items:center;margin-bottom:28px}
+.ai-core-svg{width:100%;height:100%;display:block}
+.cspin,.cspin-rev,.cspin-slow{transform-box:fill-box;transform-origin:center}
+.cspin{animation:cspin 16s linear infinite}.cspin-rev{animation:cspin 24s linear infinite reverse}.cspin-slow{animation:cspin 46s linear infinite}
+@keyframes cspin{to{transform:rotate(360deg)}}
+.ai-coreglow{transform-box:fill-box;transform-origin:center;animation:corepulse 4s ease-in-out infinite}
+@keyframes corepulse{0%,100%{opacity:.55;transform:scale(.92)}50%{opacity:1;transform:scale(1.05)}}
+.hero-kick{font-family:'JetBrains Mono',monospace;letter-spacing:.44em;text-transform:uppercase;font-size:clamp(9px,1.4vw,12px);color:var(--cyan);margin-bottom:22px}
+.hero h1{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(44px,9vw,128px);letter-spacing:.04em;text-transform:uppercase;color:var(--bone);line-height:.92}
+.hero h1 b{font-weight:700;font-style:italic;color:var(--gold)}
+.hero-lead{font-size:clamp(15px,1.8vw,21px);color:var(--dim);line-height:1.6;max-width:62ch;margin:26px auto 0}
+.hero-lead b{color:var(--text)}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:36px}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;padding:15px 28px;border-radius:12px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(245,185,66,.12),rgba(245,185,66,.03));color:var(--gold);transition:all .22s}
+.btn:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 0 30px rgba(245,185,66,.2)}
+.btn.solid{background:linear-gradient(135deg,var(--gold),var(--amber));color:#1a1206;border:none;font-weight:700}
+.btn.ghost{background:transparent;color:var(--dim);border-color:var(--line-cool)}
+.btn.ghost:hover{color:var(--bone)}
+.hero-scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--faint);display:flex;flex-direction:column;align-items:center;gap:8px}
+.hero-scroll .ln{width:1px;height:28px;background:linear-gradient(var(--gold),transparent);animation:scrolln 2s ease-in-out infinite}
+@keyframes scrolln{0%,100%{opacity:.3;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+
+.wrap{position:relative;z-index:5;max-width:1180px;margin:0 auto;padding:0 clamp(18px,5vw,40px)}
+
+/* stats */
+.stats{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(18px,4vw,54px);padding:clamp(30px,5vh,50px) 0;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);margin-bottom:clamp(50px,8vh,90px)}
+.stat{text-align:center}
+.stat .n{font-family:'Fraunces',serif;font-size:clamp(34px,5vw,58px);font-weight:600;background:linear-gradient(135deg,var(--gold-bright),var(--ember));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.stat .l{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-top:9px}
+
+/* portal cards */
+.sec-h{text-align:center;margin-bottom:34px}
+.sec-h .e{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+.sec-h h2{font-size:clamp(26px,4vw,46px);margin-top:12px}
+.sec-h h2 b{color:var(--gold);font-style:italic}
+.portals{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-bottom:clamp(50px,8vh,90px)}
+.portal{position:relative;display:flex;flex-direction:column;border:1px solid var(--line-soft);border-radius:20px;padding:clamp(22px,3vw,32px);overflow:hidden;background:linear-gradient(165deg,var(--panel),var(--ink));transition:transform .3s,box-shadow .3s,border-color .3s;min-height:280px}
+.portal:hover{transform:translateY(-6px);box-shadow:0 36px 90px rgba(0,0,0,.6);border-color:var(--line)}
+.portal .glow{position:absolute;inset:0;opacity:.5;pointer-events:none}
+.portal.b1 .glow{background:radial-gradient(120% 80% at 80% 10%,rgba(245,185,66,.18),transparent 55%)}
+.portal.b2 .glow{background:radial-gradient(120% 80% at 80% 10%,rgba(226,87,43,.2),transparent 55%)}
+.portal.b3 .glow{background:radial-gradient(120% 80% at 80% 10%,rgba(95,231,255,.2),transparent 55%)}
+.portal.b4 .glow{background:radial-gradient(120% 80% at 80% 10%,rgba(176,124,255,.2),transparent 55%)}
+.portal .pnum{position:absolute;top:18px;right:24px;font-family:'Fraunces',serif;font-style:italic;font-size:60px;color:rgba(245,236,219,.06);line-height:1}
+.portal .pico{font-size:30px;margin-bottom:14px}
+.portal h3{font-size:clamp(22px,2.6vw,30px)}
+.portal h3 b{color:var(--gold);font-style:italic}
+.portal .pd{font-size:14.5px;color:var(--dim);line-height:1.6;margin-top:10px;max-width:46ch}
+.portal .pin{list-style:none;margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+.portal .pin li{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--cyan);border:1px solid var(--cyan-line);border-radius:20px;padding:5px 11px;background:var(--cyan-soft)}
+.portal .penter{margin-top:auto;padding-top:20px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:8px;transition:gap .2s}
+.portal:hover .penter{gap:14px}
+
+/* how to use */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:clamp(50px,8vh,90px)}
+.step3{border:1px solid var(--line-soft);border-radius:16px;padding:24px;background:linear-gradient(165deg,var(--panel),var(--ink))}
+.step3 .sn{font-family:'Fraunces',serif;font-style:italic;font-size:40px;background:linear-gradient(135deg,var(--gold),var(--ember));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.step3 h4{font-size:19px;margin:10px 0 6px}
+.step3 p{font-size:13.5px;color:var(--dim);line-height:1.6}
+
+.finale{position:relative;z-index:5;text-align:center;padding:clamp(50px,9vh,100px) 22px;max-width:880px;margin:0 auto}
+.finale h2{font-family:'Fraunces',serif;font-size:clamp(32px,6vw,72px);color:var(--bone);line-height:1}
+.finale h2 b{color:var(--gold);font-style:italic}
+.finale p{font-size:clamp(15px,1.7vw,19px);color:var(--dim);line-height:1.65;max-width:52ch;margin:22px auto 0}
+footer{position:relative;z-index:5;text-align:center;padding:36px 20px 58px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--faint);border-top:1px solid var(--line-soft);max-width:1180px;margin:30px auto 0}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+@media(max-width:760px){.portals,.steps{grid-template-columns:1fr}.nav-brand span{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<canvas id="fx"></canvas>
+<div id="grid"></div>
+<nav id="nav">
+  <a class="nav-brand" href="home.html"><svg viewBox="0 0 64 64" fill="none"><path d="M32 4C30 16 20 20 20 34a12 12 0 0 0 24 0c0-6-3-9-3-9 1 7-3 10-3 10 2-13-6-18-6-31Z" fill="#ff9b3d"/></svg><span>PROMETHEUS<b>//OS</b></span></a>
+  <div class="nav-links">
+    <a href="home.html" class="active">Home</a>
+    <a href="prometheus.html">The Briefing</a>
+    <a href="cinematic.html">Film Series</a>
+    <a href="history.html">History</a>
+    <a href="toolkit.html">The Arsenal</a>
+    <a href="state.html">State of AI</a>
+    <a href="calendar.html">Calendar</a>
+    <a href="plan.html">90-Day Plan</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-orb" id="heroOrb"></div>
+  <div class="hero-kick reveal in">// PROMETHEUS · THE OPERATING SYSTEM FOR AI</div>
+  <h1 class="reveal in d1">Command the<br><b>future</b> of AI.</h1>
+  <p class="hero-lead reveal in d2">A complete cinematic training to command AI and automation — <b>create films with AI</b>, automate your operation, grow your business, and finally <b>be seen</b>. A 42-screen narrated briefing, ten AI-generated films, the 2026 toolkit, and a 90-day plan. Doctrine before tactics. The fire is yours to carry.</p>
+  <div class="hero-cta reveal in d3">
+    <a class="btn solid" href="prometheus.html">▶ Start the Briefing</a>
+    <a class="btn ghost" href="cinematic.html">🎬 Watch the Films</a>
+    <a class="btn ghost" href="https://gamma.app/docs/2wp60rtkfcq7owt" target="_blank" rel="noopener">🌐 Live web platform ↗</a>
+  </div>
+  <div class="hero-scroll"><span>explore</span><span class="ln"></span></div>
+</header>
+
+<div class="wrap">
+  <section class="stats" id="stats">
+    <div class="stat"><div class="n" data-to="42">0</div><div class="l">Cinematic slides</div></div>
+    <div class="stat"><div class="n" data-to="13">0</div><div class="l">Cinematic films</div></div>
+    <div class="stat"><div class="n" data-to="10">0</div><div class="l">Social cuts</div></div>
+    <div class="stat"><div class="n" data-to="36">0</div><div class="l">Tools, by job</div></div>
+    <div class="stat"><div class="n" data-to="90">0</div><div class="l">Day action plan</div></div>
+  </section>
+
+  <a href="state.html" class="reveal" style="display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;text-align:center;border:1px solid var(--cyan-line);border-radius:16px;padding:16px 22px;margin-bottom:clamp(40px,7vh,80px);background:linear-gradient(160deg,rgba(95,231,255,.06),var(--ink));font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;color:var(--text)">
+    <span style="color:var(--cyan);font-weight:600;letter-spacing:.16em">📊 NEW</span>
+    <span>The <b style="color:var(--bone)">State of AI · 2026</b> report — the frontier leaderboard, the video &amp; image races, the agentic shift, and the new economy. Sourced.</span>
+    <span style="color:var(--gold)">Read it →</span>
+  </a>
+  <div class="sec-h reveal"><div class="e">Four ways in · one mission</div><h2>Choose your <b>entry point</b>.</h2></div>
+  <section class="portals">
+    <a class="portal b1 reveal" href="prometheus.html">
+      <div class="glow"></div><div class="pnum">I</div>
+      <div class="pico">📖</div>
+      <h3>The <b>Briefing</b></h3>
+      <p class="pd">The full 42-screen course on commanding AI — doctrine, foundations, the prompting craft, the toolchain, verification, agents, and the build. Narrated live by a holographic AI host.</p>
+      <ul class="pin"><li>AI host narration</li><li>Deep-dive transcript</li><li>Record your own voice</li></ul>
+      <span class="penter">Enter the briefing →</span>
+    </a>
+    <a class="portal b2 reveal d1" href="cinematic.html">
+      <div class="glow"></div><div class="pnum">II</div>
+      <div class="pico">🎬</div>
+      <h3>The <b>Film Series</b></h3>
+      <p class="pd">Ten cinematic films — the future of AI, automation, cinematic video, sales, service, data, marketing, growth, visibility, and the 2026 frontier. Each generated from a written script.</p>
+      <ul class="pin"><li>10 AI films</li><li>Movie-style scripts</li><li>Latest 2026 intel</li></ul>
+      <span class="penter">Watch the series →</span>
+    </a>
+    <a class="portal b3 reveal d2" href="toolkit.html">
+      <div class="glow"></div><div class="pnum">III</div>
+      <div class="pico">🧰</div>
+      <h3>The <b>Arsenal</b></h3>
+      <p class="pd">The working 2026 AI stack, organized by job — the brains, the video engines, voices, image, automation, and builders — plus the production chain and ten ready-to-post social cuts.</p>
+      <ul class="pin"><li>36 tools</li><li>Production chain</li><li>10 social cuts</li></ul>
+      <span class="penter">Open the arsenal →</span>
+    </a>
+    <a class="portal b4 reveal d3" href="plan.html">
+      <div class="glow"></div><div class="pnum">IV</div>
+      <div class="pico">🗓</div>
+      <h3>The <b>90-Day Plan</b></h3>
+      <p class="pd">Turn knowledge into a practice: 30 days of fluency, 30 of toolchain, 30 of building. Check off actions as you go — your progress saves automatically and prints to a PDF.</p>
+      <ul class="pin"><li>3 phases</li><li>29 actions</li><li>Progress saved</li></ul>
+      <span class="penter">Open the plan →</span>
+    </a>
+  </section>
+
+  <div class="sec-h reveal"><div class="e">New · cinematic films</div><h2>Watch the <b>story</b>.</h2></div>
+  <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin-bottom:clamp(50px,8vh,90px)">
+    <a href="history.html" style="position:relative;display:block;aspect-ratio:16/9;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:radial-gradient(120% 90% at 25% 15%,rgba(95,231,255,.26),transparent 55%),radial-gradient(120% 90% at 85% 95%,rgba(245,185,66,.24),transparent 55%),linear-gradient(160deg,var(--panel),var(--ink))">
+      <div style="position:absolute;left:16px;bottom:14px;right:16px;font-family:'JetBrains Mono',monospace"><div style="font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan)">▶ Film · The Story</div><div style="font-family:'Fraunces',serif;font-size:16px;color:var(--bone);margin-top:3px">The History of AI</div></div></a>
+    <a href="https://ai.invideo.io/ai-mcp-video?video=how-anyone-can-use-ai-to-change-their-life-zrbjyo" target="_blank" rel="noopener" style="position:relative;display:block;aspect-ratio:16/9;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:radial-gradient(120% 90% at 75% 18%,rgba(176,124,255,.3),transparent 55%),radial-gradient(120% 90% at 20% 95%,rgba(245,185,66,.22),transparent 55%),linear-gradient(160deg,var(--panel),var(--ink))">
+      <div style="position:absolute;left:16px;bottom:14px;right:16px;font-family:'JetBrains Mono',monospace"><div style="font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan)">▶ Film · For Everyone</div><div style="font-family:'Fraunces',serif;font-size:16px;color:var(--bone);margin-top:3px">Change Your Life with AI</div></div></a>
+    <a href="https://ai.invideo.io/ai-mcp-video?video=the-magic-of-what-ai-can-do-today-cnvyht" target="_blank" rel="noopener" style="position:relative;display:block;aspect-ratio:16/9;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:radial-gradient(120% 90% at 50% 16%,rgba(95,231,255,.28),transparent 55%),radial-gradient(120% 90% at 50% 96%,rgba(226,87,43,.26),transparent 55%),linear-gradient(160deg,var(--panel),var(--ink))">
+      <div style="position:absolute;left:16px;bottom:14px;right:16px;font-family:'JetBrains Mono',monospace"><div style="font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan)">▶ Film · Wonder</div><div style="font-family:'Fraunces',serif;font-size:16px;color:var(--bone);margin-top:3px">The Magic of AI Today</div></div></a>
+  </div>
+  <div class="sec-h reveal"><div class="e">How to use this</div><h2>Watch. Learn. <b>Build.</b></h2></div>
+  <section class="steps">
+    <div class="step3 reveal"><div class="sn">01</div><h4>Watch the films</h4><p>Start with the Film Series for the cinematic overview — the why and the wow, in ten short films.</p></div>
+    <div class="step3 reveal d1"><div class="sn">02</div><h4>Run the briefing</h4><p>Go deep in the 42-screen briefing. Let the AI host narrate, or record it in your own voice.</p></div>
+    <div class="step3 reveal d2"><div class="sn">03</div><h4>Work the plan</h4><p>Open the 90-day plan and the Arsenal. Build one automation, ship one tool, post one idea. Repeat.</p></div>
+  </section>
+</div>
+
+<section class="finale">
+  <h2>Intelligence is now <b>rentable</b>. Learn to command it.</h2>
+  <p>The constraint moved — from access to command. This is the training that closes the gap. Begin where you like; the fire is the same.</p>
+  <div class="hero-cta reveal" style="justify-content:center;margin-top:32px">
+    <a class="btn solid" href="prometheus.html">▶ Start now</a>
+    <a class="btn ghost" href="plan.html">🗓 See the 90-day plan</a>
+  </div>
+</section>
+<footer>PROMETHEUS // OS — a cinematic AI training suite · The Briefing · The Film Series · The Arsenal · The 90-Day Plan · verify everything · carry the fire</footer>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s);const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const reduce=matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* AI core */
+$('#heroOrb').innerHTML=`<svg class="ai-core-svg" viewBox="0 0 240 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+ <defs><radialGradient id="cgH" cx="50%" cy="44%" r="58%"><stop offset="0" stop-color="#f4feff"/><stop offset=".22" stop-color="#7defff"/><stop offset=".55" stop-color="#1f6fc4"/><stop offset="1" stop-color="#08152b" stop-opacity="0"/></radialGradient>
+ <filter id="cbH" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.6"/></filter></defs>
+ <g class="cspin-slow"><circle cx="120" cy="120" r="110" fill="none" stroke="#5fe7ff" stroke-opacity=".22" stroke-width="1" stroke-dasharray="1.5 13"/></g>
+ <g class="cspin-rev"><circle cx="120" cy="120" r="97" fill="none" stroke="#f5b942" stroke-opacity=".18" stroke-width="1.2" stroke-dasharray="22 13"/></g>
+ <circle class="ai-coreglow" cx="120" cy="120" r="60" fill="url(#cgH)"/>
+ <g class="cspin" opacity=".92">
+   <circle cx="120" cy="120" r="62" fill="none" stroke="#9ff0ff" stroke-opacity=".5" stroke-width="1"/>
+   <ellipse cx="120" cy="120" rx="62" ry="20" fill="none" stroke="#5fe7ff" stroke-opacity=".34" stroke-width="1"/>
+   <ellipse cx="120" cy="120" rx="62" ry="42" fill="none" stroke="#5fe7ff" stroke-opacity=".24" stroke-width="1"/>
+   <ellipse cx="120" cy="120" ry="62" rx="60" fill="none" stroke="#7defff" stroke-opacity=".46" stroke-width="1"><animate attributeName="rx" values="60;3;60" dur="6s" repeatCount="indefinite"/></ellipse>
+   <ellipse cx="120" cy="120" ry="62" rx="34" fill="none" stroke="#7defff" stroke-opacity=".32" stroke-width="1"><animate attributeName="rx" values="34;0;34;62;34" dur="6s" begin="1.5s" repeatCount="indefinite"/></ellipse>
+ </g>
+ <circle class="ai-hot" cx="120" cy="120" r="13" fill="#f4feff" filter="url(#cbH)"/><circle cx="120" cy="120" r="5" fill="#fff"/>
+</svg>`;
+/* reveal + count-up */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');if(e.target.id==='stats')countUp();io.unobserve(e.target);}}),{threshold:.18});
+$$('.reveal').forEach(el=>io.observe(el));io.observe($('#stats'));
+let counted=false;
+function countUp(){if(counted)return;counted=true;$$('#stats .n').forEach(el=>{const to=+el.dataset.to;let v=0;const step=Math.max(1,Math.round(to/40));const t=setInterval(()=>{v+=step;if(v>=to){v=to;clearInterval(t);}el.textContent=v;},22);});}
+/* fx bg */
+const c=$('#fx'),x=c.getContext('2d');let W,H,parts=[],streams=[];
+function size(){W=c.width=innerWidth;H=c.height=innerHeight;}
+function init(){parts=[];for(let i=0;i<66;i++)parts.push({x:Math.random()*W,y:Math.random()*H,z:Math.random(),s:Math.random()*1.4+.3,vy:-(Math.random()*.26+.05),vx:(Math.random()-.5)*.12});
+  streams=[];for(let i=0;i<8;i++)streams.push({x:Math.random()*W,y:Math.random()*H,len:60+Math.random()*150,sp:Math.random()*1.1+.4,a:Math.random()*.2+.05});}
+function grid(){const hor=H*0.66;x.strokeStyle='rgba(95,231,255,.05)';x.lineWidth=1;for(let i=1;i<=12;i++){const t=i/12,y=hor+(H-hor)*t*t;x.beginPath();x.moveTo(0,y);x.lineTo(W,y);x.stroke();}for(let i=-9;i<=9;i++){const px=W/2+i*(W/12);x.beginPath();x.moveTo(W/2+i*7,hor);x.lineTo(px,H);x.stroke();}}
+function frame(){requestAnimationFrame(frame);x.clearRect(0,0,W,H);grid();
+  streams.forEach(s=>{s.y-=s.sp*4;if(s.y<-s.len)s.y=H+s.len;const g=x.createLinearGradient(0,s.y,0,s.y+s.len);g.addColorStop(0,'rgba(95,231,255,0)');g.addColorStop(.5,'rgba(95,231,255,'+s.a+')');g.addColorStop(1,'rgba(95,231,255,0)');x.strokeStyle=g;x.lineWidth=1;x.beginPath();x.moveTo(s.x,s.y);x.lineTo(s.x,s.y+s.len);x.stroke();});
+  parts.forEach(p=>{p.y+=p.vy;p.x+=p.vx;if(p.y<-4)p.y=H+4;if(p.x<-4)p.x=W+4;if(p.x>W+4)p.x=-4;const a=.16+p.z*.5;x.beginPath();x.arc(p.x,p.y,p.s,0,7);x.fillStyle='rgba(95,231,255,'+a+')';x.shadowBlur=6;x.shadowColor='rgba(95,231,255,'+a+')';x.fill();});x.shadowBlur=0;}
+size();init();addEventListener('resize',()=>{size();init();});if(!reduce)frame();
+</script>
+</body>
+</html>

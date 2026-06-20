@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PROMETHEUS // THE 90-DAY PLAN — From Knowing to Building</title>
+<meta name="description" content="An interactive 90-day action plan to turn AI knowledge into a daily practice: 30 days of fluency, 30 of toolchain, 30 of building. Checkable tasks, saved progress, printable.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700&family=Sora:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#04060c;--ink:#0b1120;--panel:#0f1626;--panel-2:#131c30;
+  --line:rgba(245,185,66,.16);--line-soft:rgba(245,185,66,.07);--line-cool:rgba(140,160,200,.13);
+  --gold:#f5b942;--gold-bright:#ffd479;--amber:#ff9b3d;--ember:#e2572b;
+  --cyan:#5fe7ff;--cyan-soft:rgba(95,231,255,.12);--cyan-line:rgba(95,231,255,.22);--verify:#54d6c4;--plum:#b07cff;
+  --bone:#f4ecdb;--text:#cdd3e1;--dim:#9aa2b6;--faint:#6a7286;--shadow:0 30px 80px rgba(0,0,0,.6);
+}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--text);font-family:'Sora',system-ui,sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(1200px 700px at 80% -10%,rgba(245,185,66,.06),transparent 60%),radial-gradient(1000px 800px at 5% 110%,rgba(95,231,255,.06),transparent 62%)}
+::selection{background:var(--gold);color:var(--void)}
+h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:500;line-height:1.06;letter-spacing:-.012em;color:var(--bone)}
+b,strong{color:var(--bone);font-weight:600}em{font-style:italic;color:var(--gold)}
+a{color:inherit;text-decoration:none}
+#fx{position:fixed;inset:0;z-index:1;pointer-events:none}
+
+#nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;gap:18px;padding:11px clamp(16px,4vw,40px);background:linear-gradient(180deg,rgba(4,6,12,.92),rgba(4,6,12,.4) 70%,transparent);backdrop-filter:blur(8px)}
+.nav-brand{display:flex;align-items:center;gap:9px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone)}
+.nav-brand b{color:var(--gold)}.nav-brand svg{width:16px;height:16px;filter:drop-shadow(0 0 6px rgba(245,185,66,.6))}
+.nav-links{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+.nav-links a{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);padding:8px 13px;border-radius:9px;border:1px solid transparent;transition:all .2s}
+.nav-links a:hover{color:var(--bone);border-color:var(--line-cool)}
+.nav-links a.active{color:var(--gold);border-color:var(--line);background:rgba(245,185,66,.06)}
+
+.wrap{position:relative;z-index:5;max-width:1080px;margin:0 auto;padding:0 clamp(18px,5vw,40px)}
+.hero{position:relative;z-index:5;text-align:center;padding:clamp(108px,15vh,170px) 22px clamp(20px,4vh,40px)}
+.hero .kick{font-family:'JetBrains Mono',monospace;letter-spacing:.4em;text-transform:uppercase;font-size:clamp(9px,1.3vw,12px);color:var(--cyan);margin-bottom:18px}
+.hero h1{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(40px,7.5vw,96px);letter-spacing:.03em;text-transform:uppercase;color:var(--bone);line-height:.95}
+.hero h1 b{font-weight:700;font-style:italic;color:var(--gold)}
+.hero p{font-size:clamp(15px,1.6vw,19px);color:var(--dim);line-height:1.6;max-width:58ch;margin:22px auto 0}
+
+/* overall progress panel */
+.ovr{position:relative;z-index:5;display:flex;align-items:center;gap:clamp(20px,4vw,44px);flex-wrap:wrap;justify-content:center;
+  border:1px solid var(--line);border-radius:20px;padding:clamp(20px,3vw,30px);margin:10px auto clamp(40px,6vh,70px);
+  background:linear-gradient(160deg,var(--panel),var(--ink));box-shadow:var(--shadow)}
+.ring{position:relative;width:128px;height:128px;flex:0 0 auto}
+.ring svg{transform:rotate(-90deg)}
+.ring .pct{position:absolute;inset:0;display:grid;place-items:center;font-family:'Fraunces',serif;font-size:30px;color:var(--bone)}
+.ovr-meta{flex:1;min-width:220px}
+.ovr-meta h3{font-size:clamp(19px,2.3vw,26px)}
+.ovr-meta h3 b{color:var(--gold);font-style:italic}
+.ovr-meta p{font-size:13.5px;color:var(--dim);margin-top:6px;line-height:1.6}
+.ovr-meta .count{font-family:'JetBrains Mono',monospace;color:var(--cyan);font-size:12px;margin-top:10px;letter-spacing:.06em}
+.ovr-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.mini{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);border:1px solid var(--line-cool);border-radius:9px;padding:9px 14px;background:transparent;transition:all .2s;cursor:pointer}
+.mini:hover{color:var(--gold);border-color:var(--line)}
+
+/* phases */
+.phase{position:relative;z-index:5;margin-bottom:clamp(34px,5vh,60px);border:1px solid var(--line-soft);border-radius:20px;overflow:hidden;background:linear-gradient(165deg,var(--panel),var(--ink))}
+.ph-head{display:flex;align-items:center;gap:16px;padding:clamp(18px,2.6vw,26px);border-bottom:1px solid var(--line-soft);position:relative}
+.ph-head::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px}
+.phase.c1 .ph-head::before{background:linear-gradient(var(--cyan),transparent)}
+.phase.c2 .ph-head::before{background:linear-gradient(var(--gold),transparent)}
+.phase.c3 .ph-head::before{background:linear-gradient(var(--ember),transparent)}
+.ph-days{font-family:'Fraunces',serif;font-style:italic;font-size:clamp(30px,4vw,46px);line-height:.9;flex:0 0 auto;
+  background:linear-gradient(135deg,var(--gold),var(--ember));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.ph-info{flex:1;min-width:0}
+.ph-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan)}
+.ph-name{font-size:clamp(20px,2.6vw,30px);margin-top:3px}
+.ph-bar{flex:0 0 auto;width:clamp(90px,14vw,150px)}
+.ph-bar .track{height:7px;border-radius:5px;background:var(--panel-2);overflow:hidden}
+.ph-bar .fill{height:100%;width:0;background:linear-gradient(90deg,var(--ember),var(--gold),var(--cyan));transition:width .4s}
+.ph-bar .lbl{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--dim);margin-top:6px;text-align:right;letter-spacing:.06em}
+.weeks{padding:clamp(8px,1.5vw,16px) clamp(14px,2.4vw,26px) clamp(18px,2.6vw,26px)}
+.week{padding:16px 0;border-top:1px solid var(--line-soft)}
+.week:first-child{border-top:none}
+.wk-h{display:flex;align-items:baseline;gap:12px;margin-bottom:12px}
+.wk-n{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.wk-f{font-family:'Fraunces',serif;font-size:17px;color:var(--bone)}
+.task{display:flex;gap:13px;align-items:flex-start;padding:9px 0;cursor:pointer;user-select:none}
+.task .box{flex:0 0 auto;width:22px;height:22px;border-radius:7px;border:1.5px solid var(--line-cool);display:grid;place-items:center;margin-top:1px;transition:all .2s;color:transparent;font-size:12px;font-weight:700}
+.task:hover .box{border-color:var(--gold)}
+.task.done .box{background:linear-gradient(135deg,var(--gold),var(--amber));border-color:transparent;color:#1a1206}
+.task .tx{font-size:14.5px;line-height:1.5;color:var(--text);transition:color .2s}
+.task.done .tx{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--line)}
+.task .tx b{color:var(--gold-bright)}
+
+.cta{text-align:center;padding:clamp(40px,8vh,90px) 22px}
+.cta h2{font-family:'Fraunces',serif;font-size:clamp(26px,4.4vw,52px);color:var(--bone)}
+.cta h2 b{color:var(--gold);font-style:italic}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;padding:14px 26px;border-radius:12px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(245,185,66,.12),rgba(245,185,66,.03));color:var(--gold);transition:all .22s}
+.btn:hover{border-color:var(--gold);transform:translateY(-2px)}
+.btn.solid{background:linear-gradient(135deg,var(--gold),var(--amber));color:#1a1206;border:none;font-weight:700}
+.row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:26px}
+footer{position:relative;z-index:5;text-align:center;padding:30px 20px 56px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--faint);border-top:1px solid var(--line-soft);max-width:1080px;margin:0 auto}
+.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,160%);z-index:120;background:linear-gradient(135deg,var(--gold),var(--amber));color:#1a1206;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;padding:11px 18px;border-radius:10px;box-shadow:var(--shadow);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.toast.show{transform:translate(-50%,0)}
+@media(max-width:560px){.nav-brand span{display:none}.ph-bar{display:none}}
+@media print{
+  body{background:#fff;color:#111}#fx,#nav,.cta,.toast,.ovr-actions{display:none}
+  .phase,.ovr{box-shadow:none;border-color:#ccc;background:#fff}
+  *{color:#111 !important}.task .box{border-color:#444}.task.done .box{background:#444}
+}
+</style>
+</head>
+<body>
+<canvas id="fx"></canvas>
+<nav id="nav">
+  <a class="nav-brand" href="home.html"><svg viewBox="0 0 64 64" fill="none"><path d="M32 4C30 16 20 20 20 34a12 12 0 0 0 24 0c0-6-3-9-3-9 1 7-3 10-3 10 2-13-6-18-6-31Z" fill="#ff9b3d"/></svg><span>PROMETHEUS<b>//OS</b></span></a>
+  <div class="nav-links">
+    <a href="home.html">Home</a>
+    <a href="prometheus.html">The Briefing</a>
+    <a href="cinematic.html">Film Series</a>
+    <a href="history.html">History</a>
+    <a href="toolkit.html">The Arsenal</a>
+    <a href="state.html">State of AI</a>
+    <a href="calendar.html">Calendar</a>
+    <a href="plan.html" class="active">90-Day Plan</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="kick">// THE PRACTICE · 90 DAYS</div>
+  <h1>From knowing<br>to <b>building</b>.</h1>
+  <p>Knowledge without a plan evaporates. This turns the whole training into a daily practice — 30 days of fluency, 30 of toolchain, 30 of building. Check off as you go; your progress saves automatically on this device.</p>
+</header>
+
+<div class="wrap">
+  <section class="ovr">
+    <div class="ring">
+      <svg width="128" height="128"><circle cx="64" cy="64" r="56" fill="none" stroke="rgba(140,160,200,.15)" stroke-width="9"/>
+        <circle id="ringFill" cx="64" cy="64" r="56" fill="none" stroke="url(#pg)" stroke-width="9" stroke-linecap="round" stroke-dasharray="351.86" stroke-dashoffset="351.86"/>
+        <defs><linearGradient id="pg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e2572b"/><stop offset=".5" stop-color="#f5b942"/><stop offset="1" stop-color="#5fe7ff"/></linearGradient></defs></svg>
+      <div class="pct" id="pct">0%</div>
+    </div>
+    <div class="ovr-meta">
+      <h3>Your <b>90-day</b> trajectory</h3>
+      <p>By day 90 you won't just use AI — you'll have a routing instinct, a verification reflex, and live systems earning their keep.</p>
+      <div class="count" id="count">0 of 0 actions complete</div>
+      <div class="ovr-actions">
+        <button class="mini pr" onclick="window.print()">⎙ Print / Save PDF</button>
+        <button class="mini" id="resetBtn">↺ Reset progress</button>
+      </div>
+    </div>
+  </section>
+  <div id="phases"></div>
+</div>
+
+<section class="cta">
+  <h2>Day 90: <b>you command it.</b></h2>
+  <div class="row">
+    <a class="btn solid" href="cinematic.html">🎬 The Film Series</a>
+    <a class="btn" href="toolkit.html">🧰 The Arsenal</a>
+    <a class="btn" href="prometheus.html">The Briefing</a>
+  </div>
+</section>
+<footer>PROMETHEUS // OS · THE 90-DAY PLAN — automate the boring 80%, keep your judgment on the critical 20% · progress saved locally on this device</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s);const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const reduce=matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+const KEY='prometheus_plan_v1';
+let done=new Set();try{done=new Set(JSON.parse(localStorage.getItem(KEY)||'[]'));}catch(e){}
+
+const PHASES=[
+{c:'c1',days:'01–30',tag:'Phase One · Fluency',name:'Make AI a daily habit',weeks:[
+  {wk:'Week 1',f:'Foundations',tasks:[
+    "Pick <b>one</b> flagship model (Claude, ChatGPT, or Gemini) and commit to it daily for 30 days.",
+    "Replace one Google search a day with a grounded AI question.",
+    "Learn the 5-part prompt — <b>Role, Context, Task, Format, Constraints</b> — and write one a day."]},
+  {wk:'Week 2',f:'The prompting craft',tasks:[
+    "Use <b>show, don't tell</b>: paste two examples and say “more like these.”",
+    "Add “<b>think step by step</b>” to every reasoning task.",
+    "Treat the first reply as a draft — practice three follow-ups every time."]},
+  {wk:'Week 3',f:'The verification reflex',tasks:[
+    "Sort every important output: <b>Trust, Verify, or Reject</b>.",
+    "Ask “what are you <b>not confident</b> about?” on anything factual.",
+    "Never paste secrets; learn your tool's data policy."]},
+  {wk:'Week 4',f:'Lock it in',tasks:[
+    "Do real work in AI daily — emails, plans, analysis.",
+    "Feed it images & PDFs — extract a statement into a clean table.",
+    "Journal one place AI saved you time this week."]}
+]},
+{c:'c2',days:'31–60',tag:'Phase Two · Toolchain',name:'Route, build, and create',weeks:[
+  {wk:'Week 5',f:'Route, don’t marry',tasks:[
+    "Add a <b>second</b> model; route by job — writing vs. code vs. analysis.",
+    "Generate your first clip from text with a video tool (Veo / Runway / Sora)."]},
+  {wk:'Week 6',f:'Voice & media',tasks:[
+    "Clone your voice in <b>ElevenLabs</b> — or record your own in the Briefing's studio.",
+    "Make one short video: <b>script → voice → footage → assemble</b>."]},
+  {wk:'Week 7',f:'Your first automation',tasks:[
+    "Map <b>one</b> repetitive process on paper: trigger → steps → outcome.",
+    "Build it in Zapier or Make; run it on three real cases and watch it."]},
+  {wk:'Week 8',f:'Start being seen',tasks:[
+    "Turn one idea into <b>5 posts + 1 video</b> with AI.",
+    "Post consistently for two weeks; track what lands."]}
+]},
+{c:'c3',days:'61–90',tag:'Phase Three · Build',name:'Ship systems that earn',weeks:[
+  {wk:'Week 9',f:'Ship the automation',tasks:[
+    "Put your automation live — with a <b>human-approval gate</b> on money or customers.",
+    "Add error handling; measure the hours it saves."]},
+  {wk:'Week 10',f:'Vibe-code a tool',tasks:[
+    "Build one small tool (Lovable / Bolt / v0 / Cursor) — “<b>plan first, then code</b>.”",
+    "Read it, run it, test the edges; never let secrets leak in."]},
+  {wk:'Week 11',f:'Agents & systems',tasks:[
+    "Stand up one <b>agent</b> (Zapier Agents / Lindy / n8n) with a clear goal and guardrails.",
+    "Connect it to a real tool — email or CRM — via MCP where you can."]},
+  {wk:'Week 12',f:'Compound it',tasks:[
+    "Build a <b>content engine</b>: one idea → ten assets, scheduled.",
+    "Measure ROI — hours saved + attention/revenue gained.",
+    "Plan your next 90 days. The fire is yours now."]}
+]}
+];
+
+let TOTAL=0;
+const wrap=$('#phases');
+PHASES.forEach((ph,pi)=>{
+  const sec=document.createElement('section');sec.className='phase '+ph.c;
+  let tasksHtml='';
+  ph.weeks.forEach((w,wi)=>{
+    tasksHtml+=`<div class="week"><div class="wk-h"><span class="wk-n">${w.wk}</span><span class="wk-f">${w.f}</span></div>`;
+    w.tasks.forEach((t,ti)=>{const id='p'+pi+'w'+wi+'t'+ti;TOTAL++;
+      tasksHtml+=`<div class="task${done.has(id)?' done':''}" data-id="${id}"><span class="box">✓</span><span class="tx">${t}</span></div>`;});
+    tasksHtml+='</div>';
+  });
+  sec.innerHTML=`<div class="ph-head"><div class="ph-days">${ph.days}</div>
+    <div class="ph-info"><div class="ph-tag">${ph.tag}</div><div class="ph-name">${ph.name}</div></div>
+    <div class="ph-bar"><div class="track"><div class="fill" data-ph="${pi}"></div></div><div class="lbl" data-phlbl="${pi}">0%</div></div></div>
+    <div class="weeks">${tasksHtml}</div>`;
+  wrap.appendChild(sec);
+});
+
+const C=2*Math.PI*56;
+function render(){
+  const pct=TOTAL?Math.round(done.size/TOTAL*100):0;
+  $('#ringFill').style.strokeDashoffset=C*(1-done.size/(TOTAL||1));
+  $('#pct').textContent=pct+'%';
+  $('#count').textContent=done.size+' of '+TOTAL+' actions complete';
+  PHASES.forEach((ph,pi)=>{
+    let t=0,d=0;ph.weeks.forEach((w,wi)=>w.tasks.forEach((_,ti)=>{t++;if(done.has('p'+pi+'w'+wi+'t'+ti))d++;}));
+    const p=t?Math.round(d/t*100):0;
+    const f=document.querySelector('.fill[data-ph="'+pi+'"]');if(f)f.style.width=p+'%';
+    const l=document.querySelector('[data-phlbl="'+pi+'"]');if(l)l.textContent=p+'%';
+  });
+}
+let tT;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('show'),1800);}
+wrap.addEventListener('click',e=>{
+  const task=e.target.closest('.task');if(!task)return;
+  const id=task.dataset.id;
+  if(done.has(id)){done.delete(id);task.classList.remove('done');}
+  else{done.add(id);task.classList.add('done');}
+  localStorage.setItem(KEY,JSON.stringify([...done]));
+  render();
+  if(done.size===TOTAL)toast('🔥 90 days complete — the fire is yours.');
+});
+$('#resetBtn').onclick=()=>{if(confirm('Reset all checked actions?')){done.clear();localStorage.removeItem(KEY);$$('.task').forEach(t=>t.classList.remove('done'));render();toast('Progress reset');}};
+render();
+
+/* fx */
+const c=$('#fx'),x=c.getContext('2d');let W,H,parts=[];
+function size(){W=c.width=innerWidth;H=c.height=innerHeight;}
+function init(){parts=[];for(let i=0;i<54;i++)parts.push({x:Math.random()*W,y:Math.random()*H,z:Math.random(),s:Math.random()*1.3+.3,vy:-(Math.random()*.22+.05),vx:(Math.random()-.5)*.1});}
+function frame(){requestAnimationFrame(frame);x.clearRect(0,0,W,H);parts.forEach(p=>{p.y+=p.vy;p.x+=p.vx;if(p.y<-4)p.y=H+4;if(p.x<-4)p.x=W+4;if(p.x>W+4)p.x=-4;const a=.13+p.z*.4;x.beginPath();x.arc(p.x,p.y,p.s,0,7);x.fillStyle='rgba(95,231,255,'+a+')';x.shadowBlur=6;x.shadowColor='rgba(95,231,255,'+a+')';x.fill();});x.shadowBlur=0;}
+size();init();addEventListener('resize',()=>{size();init();});if(!reduce)frame();
+</script>
+</body>
+</html>

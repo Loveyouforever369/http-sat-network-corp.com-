@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STATE OF AI · 2026 — The Intelligence Report</title>
+<meta name="description" content="The State of AI, June 2026: a research-grounded intelligence report — the frontier model leaderboard, the generative video and image races, the agentic shift and MCP, and the solopreneur economy. With sources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700&family=Sora:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#04060c;--ink:#0b1120;--panel:#0f1626;--panel-2:#131c30;--raise:#172238;
+  --line:rgba(245,185,66,.16);--line-soft:rgba(245,185,66,.07);--line-cool:rgba(140,160,200,.13);
+  --gold:#f5b942;--gold-bright:#ffd479;--amber:#ff9b3d;--ember:#e2572b;
+  --cyan:#5fe7ff;--cyan-soft:rgba(95,231,255,.12);--cyan-line:rgba(95,231,255,.22);--verify:#54d6c4;--plum:#b07cff;--green:#6ee7a8;
+  --bone:#f4ecdb;--text:#cdd3e1;--dim:#9aa2b6;--faint:#6a7286;--shadow:0 30px 80px rgba(0,0,0,.6);
+}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--text);font-family:'Sora',system-ui,sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(1200px 700px at 80% -10%,rgba(245,185,66,.06),transparent 60%),radial-gradient(1000px 800px at 5% 110%,rgba(95,231,255,.06),transparent 62%)}
+::selection{background:var(--gold);color:var(--void)}
+h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:500;line-height:1.05;letter-spacing:-.012em;color:var(--bone)}
+b,strong{color:var(--bone);font-weight:600}em{font-style:italic;color:var(--gold)}
+a{color:inherit;text-decoration:none}
+#fx{position:fixed;inset:0;z-index:1;pointer-events:none}
+
+#nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;gap:18px;padding:11px clamp(16px,4vw,40px);background:linear-gradient(180deg,rgba(4,6,12,.92),rgba(4,6,12,.4) 70%,transparent);backdrop-filter:blur(8px)}
+.nav-brand{display:flex;align-items:center;gap:9px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone)}
+.nav-brand b{color:var(--gold)}.nav-brand svg{width:16px;height:16px;filter:drop-shadow(0 0 6px rgba(245,185,66,.6))}
+.nav-links{margin-left:auto;display:flex;gap:5px;flex-wrap:wrap}
+.nav-links a{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);padding:8px 12px;border-radius:9px;border:1px solid transparent;transition:all .2s}
+.nav-links a:hover{color:var(--bone);border-color:var(--line-cool)}
+.nav-links a.active{color:var(--gold);border-color:var(--line);background:rgba(245,185,66,.06)}
+
+.wrap{position:relative;z-index:5;max-width:1100px;margin:0 auto;padding:0 clamp(18px,5vw,40px)}
+.hero{position:relative;z-index:5;text-align:center;padding:clamp(110px,16vh,180px) 22px clamp(30px,5vh,50px)}
+.hero .badge{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--verify);border:1px solid var(--cyan-line);border-radius:20px;padding:6px 14px;margin-bottom:22px}
+.hero .badge .dot{width:6px;height:6px;border-radius:50%;background:var(--verify);box-shadow:0 0 8px var(--verify);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+.hero h1{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(40px,8vw,108px);letter-spacing:.03em;text-transform:uppercase;color:var(--bone);line-height:.94}
+.hero h1 b{font-weight:700;font-style:italic;color:var(--gold)}
+.hero p{font-size:clamp(15px,1.7vw,20px);color:var(--dim);line-height:1.6;max-width:60ch;margin:24px auto 0}
+.hero p b{color:var(--text)}
+
+.sec{margin-bottom:clamp(54px,9vh,100px)}
+.sec-h{margin-bottom:30px}
+.sec-h .e{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:12px}
+.sec-h .e .ln{flex:1;max-width:120px;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+.sec-h h2{font-size:clamp(26px,4vw,46px);margin-top:14px}
+.sec-h h2 b{color:var(--gold);font-style:italic}
+.sec-h .sub{color:var(--dim);font-size:14.5px;margin-top:10px;max-width:64ch;line-height:1.6}
+
+/* leaderboard bars */
+.board{border:1px solid var(--line-soft);border-radius:18px;padding:clamp(20px,3vw,32px);background:linear-gradient(160deg,var(--panel),var(--ink))}
+.bar{margin-bottom:20px}.bar:last-child{margin-bottom:0}
+.bar-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:8px}
+.bar-name{font-family:'Fraunces',serif;font-size:clamp(16px,2vw,20px);color:var(--bone)}
+.bar-name .rk{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);margin-right:9px}
+.bar-note{font-size:12px;color:var(--dim)}
+.bar-val{font-family:'JetBrains Mono',monospace;font-size:clamp(15px,2vw,19px);color:var(--gold-bright);font-weight:500}
+.bar-track{height:14px;border-radius:8px;background:var(--panel-2);overflow:hidden;position:relative}
+.bar-fill{height:100%;width:0;border-radius:8px;transition:width 1.3s cubic-bezier(.2,.8,.2,1)}
+.bar-fill.g{background:linear-gradient(90deg,var(--ember),var(--gold))}
+.bar-fill.t{background:linear-gradient(90deg,#2a7f6a,var(--green))}
+.bar-fill.c{background:linear-gradient(90deg,#1f6fc4,var(--cyan))}
+.bar-fill.p{background:linear-gradient(90deg,#6a3fb0,var(--plum))}
+.board-foot{margin-top:18px;padding-top:16px;border-top:1px solid var(--line-soft);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--faint);letter-spacing:.04em}
+
+/* ranked tool cards */
+.rank{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.rc{position:relative;border:1px solid var(--line-soft);border-radius:14px;padding:18px 18px 18px 18px;background:linear-gradient(160deg,var(--panel),var(--ink));overflow:hidden;transition:transform .25s,border-color .25s}
+.rc:hover{transform:translateY(-4px);border-color:var(--line)}
+.rc .rcn{position:absolute;top:10px;right:16px;font-family:'Fraunces',serif;font-style:italic;font-size:42px;color:rgba(245,236,219,.06);line-height:1}
+.rc .rt{font-family:'Fraunces',serif;font-size:18px;color:var(--bone)}
+.rc .rm{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);margin-top:4px}
+.rc .rd{font-size:13px;color:var(--dim);line-height:1.5;margin-top:10px}
+.rc .rtag{display:inline-block;margin-top:11px;font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--void);background:var(--gold);border-radius:5px;padding:3px 7px}
+
+/* big stat numbers */
+.bigstats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px}
+.bs{border:1px solid var(--line-soft);border-radius:16px;padding:24px 22px;background:linear-gradient(160deg,var(--panel),var(--ink));text-align:center}
+.bs .n{font-family:'Fraunces',serif;font-size:clamp(38px,6vw,66px);font-weight:600;line-height:1;background:linear-gradient(135deg,var(--gold-bright),var(--ember));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.bs .n .suf{font-size:.5em}
+.bs .l{font-size:13px;color:var(--dim);margin-top:12px;line-height:1.5}
+.bs .l b{color:var(--text)}
+
+/* cost comparison */
+.cost{border:1px solid var(--line);border-radius:18px;padding:clamp(20px,3vw,32px);background:linear-gradient(160deg,var(--panel),var(--ink));margin-top:20px}
+.cost h4{font-size:20px;margin-bottom:18px}.cost h4 b{color:var(--gold);font-style:italic}
+.cbar{margin-bottom:16px}
+.cbar .ct{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:7px}
+.cbar .ct .lab{color:var(--text)}.cbar .ct .val{color:var(--gold-bright)}
+.cbar .track{height:18px;border-radius:9px;background:var(--panel-2);overflow:hidden}
+.cbar .fill{height:100%;width:0;border-radius:9px;transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+.cbar.a .fill{background:linear-gradient(90deg,#2a7f6a,var(--green))}
+.cbar.b .fill{background:linear-gradient(90deg,var(--ember),var(--gold))}
+.cost .punch{font-family:'Fraunces',serif;font-size:clamp(16px,2.2vw,22px);color:var(--bone);font-style:italic;margin-top:6px}
+.cost .punch b{color:var(--gold)}
+
+/* takeaways */
+.takes{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.take{border:1px solid var(--line-soft);border-radius:14px;padding:20px;background:linear-gradient(160deg,var(--panel),var(--ink))}
+.take .ti{font-size:22px;margin-bottom:8px}
+.take h4{font-size:17px}.take p{font-size:13.5px;color:var(--dim);line-height:1.6;margin-top:7px}
+
+/* gamma cta */
+.gcta{display:flex;align-items:center;gap:20px;flex-wrap:wrap;border:1px solid var(--cyan-line);border-radius:18px;padding:clamp(20px,3vw,28px);background:linear-gradient(160deg,rgba(95,231,255,.06),var(--ink));margin-bottom:clamp(50px,8vh,90px)}
+.gcta .gi{font-size:34px}
+.gcta .gt{flex:1;min-width:220px}
+.gcta .gt h3{font-size:22px}.gcta .gt h3 b{color:var(--cyan);font-style:italic}
+.gcta .gt p{font-size:13.5px;color:var(--dim);margin-top:6px;line-height:1.55}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:14px 24px;border-radius:12px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(245,185,66,.12),rgba(245,185,66,.03));color:var(--gold);transition:all .22s;white-space:nowrap}
+.btn:hover{border-color:var(--gold);transform:translateY(-2px)}
+.btn.solid{background:linear-gradient(135deg,var(--gold),var(--amber));color:#1a1206;border:none;font-weight:700}
+.btn.cyan{background:linear-gradient(135deg,#2a7fd6,var(--cyan));color:#04131c;border:none;font-weight:700}
+
+/* sources */
+.sources{border-top:1px solid var(--line-soft);padding-top:24px}
+.sources h3{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:14px}
+.sources ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.sources li{font-size:12.5px;color:var(--dim);line-height:1.5}
+.sources a{color:var(--cyan);border-bottom:1px dashed var(--cyan-line)}
+.sources a:hover{color:var(--gold)}
+
+.cta{text-align:center;padding:clamp(40px,8vh,90px) 22px}
+.cta h2{font-family:'Fraunces',serif;font-size:clamp(28px,4.6vw,56px);color:var(--bone)}
+.cta h2 b{color:var(--gold);font-style:italic}
+.row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:28px}
+footer{position:relative;z-index:5;text-align:center;padding:30px 20px 56px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--faint);border-top:1px solid var(--line-soft);max-width:1100px;margin:30px auto 0}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media(max-width:560px){.nav-brand span{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<canvas id="fx"></canvas>
+<nav id="nav">
+  <a class="nav-brand" href="home.html"><svg viewBox="0 0 64 64" fill="none"><path d="M32 4C30 16 20 20 20 34a12 12 0 0 0 24 0c0-6-3-9-3-9 1 7-3 10-3 10 2-13-6-18-6-31Z" fill="#ff9b3d"/></svg><span>PROMETHEUS<b>//OS</b></span></a>
+  <div class="nav-links">
+    <a href="home.html">Home</a>
+    <a href="prometheus.html">Briefing</a>
+    <a href="cinematic.html">Films</a>
+    <a href="history.html">History</a>
+    <a href="toolkit.html">Arsenal</a>
+    <a href="state.html" class="active">State of AI</a>
+    <a href="calendar.html">Calendar</a>
+    <a href="plan.html">Plan</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="badge"><span class="dot"></span>Live intelligence · June 2026</div>
+  <h1>State of <b>AI</b><br>2026</h1>
+  <p>A research-grounded snapshot of the frontier — the models, the video and image races, the agentic shift, and the economy AI is rewriting. <b>The numbers below are real and sourced.</b> Any honest snapshot of a field this fast is a photograph, not a live feed — so it's dated, and cited.</p>
+</header>
+
+<div class="wrap">
+  <!-- FRONTIER LEADERBOARD -->
+  <section class="sec">
+    <div class="sec-h reveal"><div class="e">01 · The Frontier <span class="ln"></span></div><h2>No model wins <b>everything</b>.</h2>
+      <div class="sub">The Artificial Analysis Intelligence Index, June 2026. The leaderboard turns over monthly — which is exactly why the durable skill is <b>routing</b>, not loyalty.</div></div>
+    <div class="board reveal" id="board"></div>
+  </section>
+
+  <!-- VIDEO -->
+  <section class="sec">
+    <div class="sec-h reveal"><div class="e">02 · Generative Video <span class="ln"></span></div><h2>A film from a <b>sentence</b>.</h2>
+      <div class="sub">Text-to-video crossed the realism line in 2026. The leaders, ranked by current capability and value.</div></div>
+    <div class="rank reveal" id="video"></div>
+  </section>
+
+  <!-- IMAGE -->
+  <section class="sec">
+    <div class="sec-h reveal"><div class="e">03 · Generative Image <span class="ln"></span></div><h2>Photoreal for <b>cents</b>.</h2>
+      <div class="sub">Stills, brand art, and thumbnails — the current best by job.</div></div>
+    <div class="rank reveal" id="image"></div>
+  </section>
+
+  <!-- AGENTIC / MCP -->
+  <section class="sec">
+    <div class="sec-h reveal"><div class="e">04 · The Agentic Shift <span class="ln"></span></div><h2>AI stopped answering. It started <b>acting</b>.</h2>
+      <div class="sub">The Model Context Protocol — the “USB-C for AI” — became the universal standard for connecting agents to your tools.</div></div>
+    <div class="bigstats reveal" id="mcp"></div>
+  </section>
+
+  <!-- SOLOPRENEUR ECONOMY -->
+  <section class="sec">
+    <div class="sec-h reveal"><div class="e">05 · The New Economy <span class="ln"></span></div><h2>The rise of the <b>one-person</b> company.</h2>
+      <div class="sub">AI is collapsing the cost of doing business — and a single operator can now run at the scale of a team.</div></div>
+    <div class="bigstats reveal" id="solo"></div>
+    <div class="cost reveal">
+      <h4>Your <b>AI stack</b> vs. the team it replaces</h4>
+      <div class="cbar a"><div class="ct"><span class="lab">A solo AI stack</span><span class="val">$300–500 / mo</span></div><div class="track"><div class="fill" data-w="4"></div></div></div>
+      <div class="cbar b"><div class="ct"><span class="lab">The team it replaces</span><span class="val">$80,000–120,000 / mo</span></div><div class="track"><div class="fill" data-w="100"></div></div></div>
+      <div class="punch">Roughly a <b>200×</b> cost collapse. That is the leverage on the table.</div>
+    </div>
+  </section>
+
+  <!-- COMPANION DECK -->
+  <section class="gcta reveal">
+    <div class="gi">🖼️</div>
+    <div class="gt"><h3>The <b>cinematic</b> companion deck</h3><p>I generated a photoreal AI-image slide version of this report in Gamma — present it, export it, or remix it.</p></div>
+    <a class="btn cyan" id="gammaBtn" href="https://gamma.app/docs/95qd55nbme3ukzy" target="_blank" rel="noopener">Open the visual deck ↗</a>
+  </section>
+
+  <!-- TAKEAWAYS -->
+  <section class="sec">
+    <div class="sec-h reveal"><div class="e">06 · What it means <span class="ln"></span></div><h2>How to <b>win</b> from here.</h2></div>
+    <div class="takes reveal" id="takes"></div>
+  </section>
+
+  <!-- SOURCES -->
+  <section class="sec sources reveal">
+    <h3>Sources · June 2026</h3>
+    <ul>
+      <li>Frontier model benchmarks (Artificial Analysis Intelligence Index) — <a href="https://lmcouncil.ai/benchmarks" target="_blank" rel="noopener">LM Council</a>, <a href="https://felloai.com/best-ai-models/" target="_blank" rel="noopener">FelloAI</a></li>
+      <li>Generative video models 2026 — <a href="https://invideo.io/blog/best-ai-video-generation-models/" target="_blank" rel="noopener">Invideo</a>, <a href="https://higgsfield.ai/blog/best-ai-video-generators-2026" target="_blank" rel="noopener">Higgsfield</a></li>
+      <li>Generative image models 2026 — <a href="https://wavespeed.ai/blog/posts/midjourney-v8-vs-flux-vs-sora-best-ai-image-generator-2026/" target="_blank" rel="noopener">WaveSpeed</a>, <a href="https://www.gradually.ai/en/ai-image-models/" target="_blank" rel="noopener">Gradually</a></li>
+      <li>MCP & the agentic shift — <a href="https://www.dualmedia.fr/en/mcp-standard-2026-ia/" target="_blank" rel="noopener">DualMedia</a>, <a href="https://rootstack.com/en/blog/mcp-trend-2026-ai" target="_blank" rel="noopener">Rootstack</a></li>
+      <li>The solopreneur economy — <a href="https://entrepreneurloop.com/solopreneur-guide-to-scaling-2026/" target="_blank" rel="noopener">EntrepreneurLoop</a>, <a href="https://www.taskade.com/blog/one-person-companies" target="_blank" rel="noopener">Taskade</a></li>
+    </ul>
+  </section>
+</div>
+
+<section class="cta">
+  <h2>Knowing is half. <b>Building is the rest.</b></h2>
+  <div class="row">
+    <a class="btn solid" href="cinematic.html">🎬 Watch the Films</a>
+    <a class="btn" href="toolkit.html">🧰 The Arsenal</a>
+    <a class="btn" href="plan.html">🗓 90-Day Plan</a>
+  </div>
+</section>
+<footer>PROMETHEUS // OS · STATE OF AI 2026 — a snapshot of a fast-moving field · figures sourced June 2026 · verify everything · carry the fire</footer>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s);const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const reduce=matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* leaderboard */
+const MODELS=[
+  {rk:'#1',n:'Claude Opus 4.8',v:61.4,note:'Best overall · coding, agents, MCP tool-use',c:'g'},
+  {rk:'#2',n:'GPT-5.5',v:60.2,note:'Best creative writing · the everyday driver',c:'t'},
+  {rk:'#3',n:'Gemini 3.1 Pro',v:57,note:'Leads reasoning & data analysis',c:'c'},
+  {rk:'#4',n:'Grok 4.3',v:53,note:'Cheapest · strong agentic & tool-use',c:'p'}
+];
+const base=48,maxv=62.5;
+$('#board').innerHTML=MODELS.map(m=>`<div class="bar"><div class="bar-top"><div><span class="bar-name"><span class="rk">${m.rk}</span>${m.n}</span></div><div class="bar-val">${m.v}</div></div>
+  <div class="bar-track"><div class="bar-fill ${m.c}" data-w="${((m.v-base)/(maxv-base)*100).toFixed(1)}"></div></div>
+  <div class="bar-note" style="margin-top:7px">${m.note}</div></div>`).join('')
+  +`<div class="board-foot">Artificial Analysis Intelligence Index · higher is broader capability · the ranking turns over roughly monthly</div>`;
+
+/* video */
+const VIDEO=[
+  {n:'Seedance 2.0',m:'ByteDance',d:'Overall #1 — best motion and price-performance, with multi-scene consistency from one reference.',tag:'overall best'},
+  {n:'Veo 3.1',m:'Google',d:'The only true 4K-native model, with native audio and SynthID watermarking.',tag:'4K · audio'},
+  {n:'Kling 3.0',m:'Kuaishou',d:'Up to 10-second clips with native sound; excellent for stylized storytelling.',tag:'10s + sound'},
+  {n:'Sora 2',m:'OpenAI',d:'The most convincing physics engine for maximum realism.',tag:'best physics'},
+  {n:'Wan 2.7',m:'Alibaba · open',d:'Open-source leader — first/last-frame control and instruction-based editing.',tag:'open-source'}
+];
+$('#video').innerHTML=VIDEO.map((t,i)=>card(t,i)).join('');
+/* image */
+const IMAGE=[
+  {n:'GPT Image 2',m:'OpenAI',d:'Best all-rounder — accurate prompts, believable realism, easy editing.',tag:'best overall'},
+  {n:'Midjourney V8',m:'Midjourney',d:'The artistic-quality leader — 5× faster, native 2K, a distinctive aesthetic.',tag:'most artistic'},
+  {n:'Flux 2',m:'Black Forest Labs',d:'Best open-weights model — Midjourney-class quality for cents per image.',tag:'open · cheap'},
+  {n:'Nano Banana',m:'Google Gemini',d:'Best for editing and character consistency across a series.',tag:'best editing'}
+];
+$('#image').innerHTML=IMAGE.map((t,i)=>card(t,i)).join('');
+function card(t,i){return `<div class="rc"><div class="rcn">${i+1}</div><div class="rt">${t.n}</div><div class="rm">${t.m}</div><div class="rd">${t.d}</div><span class="rtag">${t.tag}</span></div>`;}
+
+/* mcp stats */
+const MCP=[
+  {n:10000,suf:'+',l:'public <b>MCP servers</b> — the connectors agents use'},
+  {n:97,suf:'M+',l:'<b>SDK downloads</b> of the protocol'},
+  {n:5,suf:'',l:'frontier labs adopted it — <b>Anthropic, OpenAI, Google, Microsoft, AWS</b>'}
+];
+$('#mcp').innerHTML=MCP.map(s=>`<div class="bs"><div class="n" data-to="${s.n}">0<span class="suf">${s.suf}</span></div><div class="l">${s.l}</div></div>`).join('');
+/* solo stats */
+const SOLO=[
+  {n:74,suf:'%',l:'of <b>solopreneurs</b> now use AI'},
+  {n:4,pre:'1–',suf:' hrs',l:'of daily work time <b>returned</b>, every day'},
+  {n:41.8,suf:'M',l:'US solopreneurs — a <b>$1.3T</b> slice of the economy'}
+];
+$('#solo').innerHTML=SOLO.map(s=>`<div class="bs"><div class="n" data-to="${s.n}" data-pre="${s.pre||''}">0<span class="suf">${s.suf}</span></div><div class="l">${s.l}</div></div>`).join('');
+
+/* takeaways */
+const TAKES=[
+  {i:'🎯',h:'Route, don\'t marry',p:'No model wins everything. Match each job to the right engine; build model-agnostic.'},
+  {i:'🧩',h:'Chain the tools',p:'The edge is the pipeline — script, voice, video, assembly — not any single tool.'},
+  {i:'⚙️',h:'Build systems',p:'Replace tasks with automations and agents. Design once; let them earn daily.'},
+  {i:'🛡️',h:'Verify everything',p:'Confident is not correct. Check facts; keep a human gate on money and customers.'}
+];
+$('#takes').innerHTML=TAKES.map(t=>`<div class="take"><div class="ti">${t.i}</div><h4>${t.h}</h4><p>${t.p}</p></div>`).join('');
+
+/* reveal + animate bars/counters on view */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');animate(e.target);io.unobserve(e.target);}}),{threshold:.15});
+$$('.reveal').forEach(el=>io.observe(el));
+function animate(el){
+  el.querySelectorAll('.bar-fill,.fill').forEach(f=>{setTimeout(()=>f.style.width=f.dataset.w+'%',60);});
+  el.querySelectorAll('.n[data-to]').forEach(n=>{
+    const to=+n.dataset.to,pre=n.dataset.pre||'',suf=n.querySelector('.suf')?n.querySelector('.suf').textContent:'';
+    const dec=(to%1!==0);let v=0;const step=to/40;
+    const t=setInterval(()=>{v+=step;if(v>=to){v=to;clearInterval(t);}n.innerHTML=pre+(dec?v.toFixed(1):Math.round(v).toLocaleString())+'<span class="suf">'+suf+'</span>';},24);
+  });
+}
+
+/* fx */
+const c=$('#fx'),x=c.getContext('2d');let W,H,parts=[];
+function size(){W=c.width=innerWidth;H=c.height=innerHeight;}
+function init(){parts=[];for(let i=0;i<56;i++)parts.push({x:Math.random()*W,y:Math.random()*H,z:Math.random(),s:Math.random()*1.3+.3,vy:-(Math.random()*.22+.05),vx:(Math.random()-.5)*.1});}
+function frame(){requestAnimationFrame(frame);x.clearRect(0,0,W,H);parts.forEach(p=>{p.y+=p.vy;p.x+=p.vx;if(p.y<-4)p.y=H+4;if(p.x<-4)p.x=W+4;if(p.x>W+4)p.x=-4;const a=.13+p.z*.4;x.beginPath();x.arc(p.x,p.y,p.s,0,7);x.fillStyle='rgba(95,231,255,'+a+')';x.shadowBlur=6;x.shadowColor='rgba(95,231,255,'+a+')';x.fill();});x.shadowBlur=0;}
+size();init();addEventListener('resize',()=>{size();init();});if(!reduce)frame();
+</script>
+</body>
+</html>
