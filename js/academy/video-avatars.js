@@ -9,8 +9,8 @@
   if (!window.ACADEMY) return;
   ACADEMY.register({
     id: "sora",
-    title: "Sora 2 Mastery",
-    tagline: "Cinematic AI video with physics-accurate motion and synchronized audio — from a single prompt.",
+    title: "Cinematic Video Prompting (Sora 2 legacy)",
+    tagline: "Sora 2 was retired in 2026 — but its four-layer prompting discipline still powers Veo, Kling, Runway & OpenArt.",
     category: "Video & Avatars",
     icon: "🎬",
     color: "violet",
@@ -24,8 +24,8 @@
       voiceLang: "en-US"
     },
     hero: { tags: ["Updated for 2026", "Hands-on", "Real prompts included"] },
-    overview: "Sora 2 is OpenAI's flagship video generation model — built for filmmakers, marketers, and storytellers who need cinematic quality without a crew. It produces 15-to-25-second clips with physics-accurate motion, consistent lighting, and synchronized audio including dialogue, ambient sound, and score — all from a structured natural-language prompt.\n\nThis track teaches you the exact prompting architecture Sora 2 responds to best: how to separate subject, camera, lighting, and audio into distinct layers; how to use image-to-video and the video extension endpoint; and how to work within its real-world constraints — including the API deprecation timeline and the consumer access limitations that affect where and how you can actually run it.",
-    whyItMatters: "Sora 2 set the bar for prompt-to-cinematic-quality in 2025 and remains the reference model for understanding how to write structured video prompts. Even as the API sunsets in late 2026, the prompting discipline you build here transfers directly to every other video tool in this category.",
+    overview: "Sora 2 was OpenAI's landmark video model — but OpenAI shut down the Sora apps and website on April 26, 2026, and the API is scheduled to stop on September 24, 2026. So this is not a course about a tool you will run day to day.\n\nInstead, it is the best place to learn the four-layer prompting discipline Sora pioneered — separating subject, camera, lighting, and audio — because that discipline transfers directly to every current video model. For tools to actually use today, see the 'AI Video 2026' track plus Veo 3.1 and Runway & Kling.",
+    whyItMatters: "Sora 2 set the standard for structured prompt-to-cinema, and learning its four-layer framework makes you sharper on every tool that replaced it. Treat this as the theory track; treat AI Video 2026, Veo, and Runway/Kling as the practice.",
     outcomes: [
       "You will be able to write a structured Sora 2 prompt that separates subject, motion, camera, lighting, and audio into clear layers.",
       "You will be able to use the image-to-video and video extension endpoints via the API.",
@@ -46,8 +46,8 @@
             body: "Sora 2 is a diffusion transformer that models video as a sequence of spacetime patches — not individual frames. This means it maintains physics consistency across the clip: a coffee cup stays the same size as the camera moves, water splashes realistically, and fabric folds follow gravity. It is qualitatively different from earlier frame-by-frame models.\n\nThe model generates video and audio in a single pass. You do not add audio separately — dialogue, ambient sound, and music are inferred from the same prompt that drives the visuals. This unified generation is its core structural advantage over most competitors."
           },
           {
-            heading: "Where You Can Actually Use It in 2026",
-            body: "Consumer access to Sora 2 is limited. The ChatGPT Plus and Pro tiers include a usage-capped video generation feature, but the full API is the only path to programmatic control. The Videos API supports three endpoints: POST /v1/videos (create), POST /v1/videos/characters (upload reference clips for consistency), and POST /v1/videos/extensions (extend an existing clip).\n\nCritically: OpenAI has announced the Sora 2 API will be deprecated on September 24, 2026. Plan your production pipelines accordingly. The prompting skills you build are model-agnostic and transfer immediately."
+            heading: "What Happened to Sora — and Where to Go Now",
+            body: "Reality check for 2026: OpenAI discontinued the Sora apps and website on April 26, 2026, and the Sora 2 API is scheduled to stop working on September 24, 2026. The shutdown was driven by operating costs, copyright litigation, and a strategic pivot toward agents. In short, you can no longer rely on Sora for production.\n\nWhere to go instead: Google Veo 3.1 (native audio, 4K), Kling (top quality per dollar), Runway (fine camera control), and OpenArt (a studio that runs Veo, Kling, Hailuo, PixVerse and more in one place). The four-layer prompting framework in this track applies to all of them directly."
           },
           {
             heading: "Resolution and Duration Trade-offs",
