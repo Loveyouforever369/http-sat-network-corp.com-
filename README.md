@@ -1,120 +1,82 @@
-# 🔥 Prometheus
+# SAT Agent Network
 
-**The immersive AI-director training platform.** From doers of tasks to directors of workflows — taught by three AI-avatar characters, practiced in a live prompt sandbox, and tested with seven arcade-style games.
+A platform that stores and serves **1,000,000 agent records** with low-latency
+search, where every agent is defined by standardized **Agent DNA**
+(`SOUL.md` = identity + guardrails, `SKILL.md` = executable Python tools) and
+acts on the world through an **MCP Gateway** that securely routes each agent's
+tool calls to external services (Stripe, Slack, Salesforce, Shopify, Zendesk,
+Linear, Twilio, DocuSign, …).
 
-This is a **self-contained, zero-build static app** at the root of this repo. It runs offline in any modern browser and deploys to Vercel (or any static host) in seconds.
+Agents are **event-triggered automation workflows with a Claude brain**: a
+webhook fires → conditions match → a multi-step API workflow runs with data
+flowing between steps → results are audited. Think "Zapier/n8n + Claude," plus a
+million-agent marketplace and AI-generated marketing media.
 
----
+> ⚠️ **Security:** never put real secrets in chat, code, or commits. Copy
+> `.env.example` → `.env.local` (gitignored) and fill values there. If a key was
+> ever shared in plaintext, rotate it.
 
-## ▶️ Run it locally
+## Architecture (high level)
 
-No build step. From the repo root, either:
+```
+Next.js (web/)  ──────────────  MCP Gateway (in-app)
+  catalog/search over 1M           authenticate → enforce SOUL guardrails →
+  run + trigger console            inject vault creds → route → audit
+  credential management                    │
+        │ Claude agent loop                │ internal authed HTTP
+        ▼                                  ▼
+  Anthropic API (claude-opus-4-8)   Python Skill Runner (runner/)
+                                    sandboxed workflow engine + connectors
+                                            │
+                                    Stripe · Slack · Salesforce · Shopify · …
+Supabase Postgres (db/) — 1M agents, GIN/trgm/btree indexes, RLS, audit
+```
+
+See [`PLAN.md`](./PLAN.md) for the full roadmap and [`docs/`](./docs) for
+architecture and security details.
+
+## Monorepo layout
+
+| Path            | What it is                                                        |
+| --------------- | ----------------------------------------------------------------- |
+| `web/`          | Next.js (App Router, TS) — UI + MCP Gateway + agent-run API       |
+| `runner/`       | Python (FastAPI) — sandboxed Skill Runner + workflow engine       |
+| `db/`           | Drizzle ORM schema, migrations, 1M seeder, benchmark              |
+| `packages/dna/` | Shared SOUL.md/SKILL.md spec, base DNA, validators, compiler      |
+| `agents/`       | Example agent DNA files (the flagship agents)                     |
+| `docs/`         | Architecture, security, setup                                     |
+| `legacy/`       | Archived unrelated prior site (not part of this project)          |
+
+## Quickstart
 
 ```bash
-# Option A — just open it
-open index.html        # macOS  (or double-click the file)
-
-# Option B — serve it (recommended; needed for the live API integrations)
-python3 -m http.server 8000
-# → http://localhost:8000
+pnpm install
+cp .env.example .env.local         # fill in values
+pnpm db:generate                   # generate SQL migrations from the schema
+pnpm db:migrate                    # apply to your Supabase Postgres
+pnpm db:seed                       # seed agents (configurable count)
+pnpm dev                           # run the web app
 ```
 
-## 🚀 Deploy to Vercel
+The Python runner:
 
 ```bash
-vercel deploy --prod      # from the repo root
+cd runner
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn app.main:app --reload      # or: docker compose up runner
 ```
 
-Or import the GitHub repo at vercel.com/new (Framework: **Other**, no build command) — it deploys as a static site automatically. A `vercel.json` is included (clean URLs + security headers).
+## Status
 
----
+Built in milestones (see `PLAN.md`). Each milestone is committed and pushed to
+the `claude/pensive-volta-2yf3zi` branch.
 
-## 🧭 What's inside
-
-| Module | Lesson | Training | Game |
-|---|---|---|---|
-| **01 · The Paradigm Shift** | From Doers to Directors | Prompt Sandbox (graded /100 on Role·Task·Constraints·Output) | **Hallucination Hunter** |
-| **02 · Vibe Coding & Instant Apps** | Generators vs. Living Systems | Scaffold an MVP (v0 → Cursor → Lovable) | **Prompt-to-Prod** |
-| **03 · The Wealth Engine** | Clay & the Outbound Engine | Build a 6-step Clay waterfall | **The Credit Optimizer** |
-| **04 · Agentic Orchestration** | Zapier vs. Gumloop/n8n | Build a Meeting Prep Agent | **Fix the Flow** |
-| **05 · Faceless Media** | Automated Content Empires | Faceless Video Studio | **The Viral Editor** |
-| **06 · Advanced Operations** | Deep Dives: Waterfalls · MCP · Living Software | MCP Gateway builder | **Chaos Engineering Sandbox** |
-
-**Bonus game:** Module 1 also unlocks **The Prompt Debugger** (fix "AI slop" until it scores). All 7 games are also playable from the **Arcade** tab.
-
-### Characters (HeyGen-ready cast)
-Lessons are hosted by three AI-avatar instructors, each with a cinematic backdrop and voice:
-- **The Architect** — backend & system design (deep, methodical) · server-room stage
-- **The Catalyst** — marketing, sales & outbound (energetic) · bright agency stage
-- **Byte** — beginner guide & sandbox assistant (warm, encouraging)
-
-### Signature systems
-- **Dynamic Learning Paths** — fail a game and the relevant character addresses you **by name** with a 30-second refresher (a personalized HeyGen video renders here once wired).
-- **Adaptive soundscape** — generative Web Audio: ambient during lessons, a driving pulse during games (mute toggle in the nav).
-- **AI dubbing selector** — language picker in the nav (wire a dubbing API for 175+ languages).
-
-Plus: a holographic **skill tree** dashboard with progress rings, XP/mastery tracking, animated WebGL/canvas background, an avatar lesson player with character backdrops + B-roll layer + synced cinematic subtitles, an Arcade, and a pricing page.
-
-### File map
-```
-. (repo root)
-├── index.html            # app shell + views
-├── vercel.json           # static deploy config
-├── schema.sql            # Postgres + Drizzle schema (mirrors localStorage)
-├── css/styles.css        # the full sci-fi visual system
-├── js/
-│   ├── data.js           # curriculum + characters + game design (source of truth)
-│   ├── background.js      # animated neural-constellation background
-│   ├── app.js            # router, skill tree, lesson player, arcade, learning paths, CONFIG
-│   ├── audio.js          # adaptive Web Audio soundscape engine
-│   ├── sandbox.js        # Prompt Sandbox + AI wiring + /100 grader
-│   ├── trainings.js      # hands-on trainings (incl. MCP Gateway) + shared drag UI
-│   └── games.js          # all 7 games
-└── api-reference/
-    ├── sandbox.ts        # Next.js route for live Claude/GPT (template)
-    └── heygen.ts         # Next.js route for HeyGen avatar video (template)
-```
-
----
-
-## 🔌 Going live (demo mode → production)
-
-Everything works in **demo mode** out of the box. Each integration is one config switch in `js/app.js` (`CONFIG`):
-
-### 1. AI Prompt Sandbox (Claude / OpenAI)
-- Deploy `api-reference/sandbox.ts` as a serverless route (`app/api/sandbox/route.ts`) on Vercel.
-- Add `ANTHROPIC_API_KEY` in Vercel → Settings → Environment Variables.
-- Set `CONFIG.sandbox.endpoint = "/api/sandbox"`.
-- **Never put model API keys in the browser** — the route keeps them server-side.
-
-### 2. HeyGen Avatar Instructors
-- Simplest: pre-render lessons and map URLs: `CONFIG.heygen.videos = { m1: "https://.../m1.mp4" }`. The lesson player swaps the animated avatar for the real video automatically.
-- Or generate on demand with `api-reference/heygen.ts` + `HEYGEN_API_KEY`.
-
-### 3. ElevenLabs narration (Multilingual v2)
-- Wire a TTS route and set `CONFIG.elevenlabs = { endpoint: "/api/narrate", voices: { architect, catalyst, byte } }`.
-- The lesson player already labels each character's voice; point playback at the stream when ready.
-
-### 4. Cinematic B-roll (InVideo AI · Sora 2 · Veo 3.1)
-- Render movie-like background clips per concept, then map: `CONFIG.broll = { m1: "https://.../m1-broll.mp4" }`.
-- The lesson stage plays it as a backdrop behind the avatar automatically.
-- Stylized deep-dive transitions (Crreo AI: Cyberpunk/Anime/Watercolor) and studio upscaling (Magnific) are asset-pipeline steps — produce the clips/images, then reference them via `CONFIG.broll` / image assets.
-
-### 5. AI dubbing (175+ languages)
-- The nav language selector sets `CONFIG.dubbing.lang`. Wire `CONFIG.dubbing.endpoint` to an AI dubbing API (e.g. ElevenLabs Dubbing / HeyGen) to translate narration + subtitles with lip-sync.
-
-### 6. Stripe Payments
-- Create **Stripe Payment Links** (no backend needed for static hosting).
-- Add them: `CONFIG.stripe.paymentLinks = { operator: "https://buy.stripe.com/...", architect: "..." }`.
-
-### 7. Accounts + Database (optional, the full stack)
-- Progress is saved in `localStorage` using the exact shape of `schema.sql`.
-- To go multi-device: stand up Supabase, run `schema.sql`, wire Drizzle (schema included in the file), add Better Auth, and swap the `localStorage` reads/writes in `app.js` (`load`/`save`) for DB calls keyed to the signed-in user.
-
----
-
-## 🛠 Tech notes
-- Pure vanilla JS (no framework, no bundler) → nothing to build, nothing to break.
-- Drag-and-drop works with mouse **and** ▲▼ buttons (touch-friendly).
-- Respects `prefers-reduced-motion`.
-- The whole experience is data-driven from `js/data.js` — add a module or change a game by editing that one file.
+- [x] **M0** — Monorepo scaffold, env template, docs
+- [ ] **M1** — Live Supabase DB + 1M-row schema/seed/benchmark
+- [ ] **M2** — Agent DNA framework (SOUL.md / SKILL.md)
+- [ ] **M3** — Python Skill Runner + workflow engine + connectors
+- [ ] **M4** — MCP Gateway + trigger ingestion + vault + guardrails
+- [ ] **M5** — Claude generator + Veo/Firefly render pipeline
+- [ ] **M6** — Web app (catalog, run console, credentials, DNA viewer)
+- [ ] **M7** — Hardening, tests, deploy docs

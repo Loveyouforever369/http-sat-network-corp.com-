@@ -1,0 +1,28 @@
+{
+  "name": "sat-agent-network",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SAT Agent Network — a 1,000,000-agent marketplace + MCP Gateway + Agent DNA (SOUL.md/SKILL.md) platform.",
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=10"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @sat/web dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "format": "prettier --write \"**/*.{ts,tsx,js,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,json,md}\"",
+    "dna:validate": "pnpm --filter @sat/dna validate",
+    "db:generate": "pnpm --filter @sat/db generate",
+    "db:migrate": "pnpm --filter @sat/db migrate",
+    "db:seed": "pnpm --filter @sat/db seed",
+    "db:bench": "pnpm --filter @sat/db bench"
+  },
+  "devDependencies": {
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.3"
+  }
+}

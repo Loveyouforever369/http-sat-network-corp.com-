@@ -1,0 +1,10 @@
+{
+  "name": "@sat/dna",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate": "echo 'DNA validator is scaffolded in Milestone 2' && exit 0",
+    "typecheck": "echo 'noop' && exit 0"
+  }
+}

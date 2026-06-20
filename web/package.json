@@ -1,0 +1,11 @@
+{
+  "name": "@sat/web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "echo 'web app is scaffolded in Milestone 6' && exit 0",
+    "build": "echo 'web app is scaffolded in Milestone 6' && exit 0",
+    "lint": "echo 'noop' && exit 0",
+    "typecheck": "echo 'noop' && exit 0"
+  }
+}
