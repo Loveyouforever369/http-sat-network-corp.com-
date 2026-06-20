@@ -11,6 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/academy.css">
+<link rel="stylesheet" href="css/intro.css">
 </head>
 <body>
 
@@ -53,8 +54,8 @@
     <p>The era of doing tasks by hand is ending. Prometheus trains you to orchestrate AI agents — through avatar-taught lessons, a live prompt sandbox, and arcade-style games.</p>
     <div class="hero-cta">
       <button class="btn btn-primary" data-go="academy">🎓 Open the Academy</button>
-      <button class="btn btn-electric" data-go="dashboard">⚡ Enter the Skill Tree</button>
-      <button class="btn btn-ghost" data-go="about">How it works</button>
+      <button class="btn btn-electric" onclick="PROM.playIntro()">▶ Watch the intro</button>
+      <button class="btn btn-ghost" data-go="dashboard">⚡ Skill Tree</button>
     </div>
     <div class="hero-stats">
       <div class="hero-stat"><div class="num gradient-text">6</div><div class="lbl">Modules</div></div>
@@ -190,6 +191,7 @@
 <script src="js/academy/vibe-coding-2.js"></script>
 <script src="js/academy/business-life.js"></script>
 <script src="js/academy.js"></script>
+<script src="js/intro.js"></script>
 <script>
   /* Home view: render module teaser cards + total XP */
   (function () {
