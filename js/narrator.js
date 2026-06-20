@@ -44,8 +44,8 @@
   const stateSubs = new Set();
 
   function loadPref() {
-    try { return Object.assign({ provider: "polly", pollyVoice: "Matthew", voiceURI: "", rate: 1 }, JSON.parse(localStorage.getItem(PREF_KEY)) || {}); }
-    catch (e) { return { provider: "polly", pollyVoice: "Matthew", voiceURI: "", rate: 1 }; }
+    try { return Object.assign({ provider: "polly", pollyVoice: "Matthew", voiceURI: "", rate: 1, elKey: "", elVoice: "", elModel: "eleven_multilingual_v2" }, JSON.parse(localStorage.getItem(PREF_KEY)) || {}); }
+    catch (e) { return { provider: "polly", pollyVoice: "Matthew", voiceURI: "", rate: 1, elKey: "", elVoice: "", elModel: "eleven_multilingual_v2" }; }
   }
   function savePref() { try { localStorage.setItem(PREF_KEY, JSON.stringify(pref)); } catch (e) {} }
 
@@ -136,6 +136,29 @@
     if (current) current.next = null;
   }
 
+  /* ---------------- provider: ElevenLabs (client-side, your key) ---------------- */
+  function elevenFetch(text, el) {
+    return fetch("https://api.elevenlabs.io/v1/text-to-speech/" + encodeURIComponent(el.voice) + "?output_format=mp3_44100_128", {
+      method: "POST",
+      headers: { "xi-api-key": el.key, "Content-Type": "application/json", "Accept": "audio/mpeg" },
+      body: JSON.stringify({ text: text, model_id: el.model || "eleven_multilingual_v2", voice_settings: { stability: 0.5, similarity_boost: 0.8, style: 0.12, use_speaker_boost: true } }),
+    }).then((r) => { if (!r.ok) throw new Error("elevenlabs " + r.status); return r.blob(); });
+  }
+  function elevenPlay() {
+    const segs = current.segs, opts = current.opts, el = current._el;
+    elevenFetch(segs.join(" "), el).then((blob) => {
+      if (!current || mode !== "playing") return;
+      const url = URL.createObjectURL(blob);
+      audioEl = new Audio(url);
+      try { audioEl.playbackRate = clamp(pref.rate || 1, 0.6, 1.6); } catch (e) {}
+      audioEl.ontimeupdate = () => { if (audioEl && audioEl.duration && opts.onSegment) { const idx = Math.min(segs.length - 1, Math.floor((audioEl.currentTime / audioEl.duration) * segs.length)); opts.onSegment(idx, segs.length); } };
+      audioEl.onended = () => { URL.revokeObjectURL(url); finish(); };
+      audioEl.onerror = () => { URL.revokeObjectURL(url); elevenFail(); };
+      audioEl.play().catch(() => elevenFail());
+    }).catch(() => elevenFail());
+  }
+  function elevenFail() { if (!current) return; if (audioEl) { try { audioEl.pause(); } catch (e) {} audioEl = null; } current.provider = "polly"; pollyPlay(); }
+
   const api = {
     supported: true, // audio playback is universal; Polly works without Web Speech
     pollyVoices: POLLY_VOICES,
@@ -144,6 +167,8 @@
     getPref() { return Object.assign({}, pref); },
     setProvider(p) { pref.provider = (p === "browser" || p === "polly") ? p : "polly"; savePref(); },
     setPollyVoice(v) { pref.pollyVoice = v || "Matthew"; savePref(); },
+    setElevenLabs(key, voice, model) { pref.elKey = (key || "").trim(); pref.elVoice = (voice || "").trim(); if (model) pref.elModel = model; pref.provider = "elevenlabs"; savePref(); },
+    hasElevenLabs() { const cfg = (window.CONFIG && CONFIG.elevenlabs) || {}; return !!((pref.elKey || cfg.apiKey) && (pref.elVoice || cfg.voiceId)); },
     setVoice(uri) { pref.voiceURI = uri || ""; savePref(); },
     setRate(r) { pref.rate = clamp(r, 0.6, 1.6); savePref(); },
     state() { return mode; },
@@ -155,6 +180,9 @@
       if (!current.segs.length) return false;
       setMode("playing");
       if (opts.audioUrl) { current.provider = "audio"; audioUrlPlay(); return true; }
+      const cfg = (window.CONFIG && CONFIG.elevenlabs) || {};
+      const elKey = pref.elKey || cfg.apiKey, elVoice = pref.elVoice || cfg.voiceId;
+      if (pref.provider === "elevenlabs" && elKey && elVoice) { current.provider = "elevenlabs"; current._el = { key: elKey, voice: elVoice, model: pref.elModel || cfg.modelId || "eleven_multilingual_v2" }; elevenPlay(); return true; }
       if (pref.provider === "browser" && WEBSPEECH) { current.provider = "browser"; startKeepAlive(); setTimeout(runSpeech, 50); return true; }
       // default: Polly natural voice
       current.provider = "polly";

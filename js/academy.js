@@ -382,6 +382,25 @@
   }
 
   /* ---- narrator wiring ---- */
+  function promptElevenKey(then) {
+    if (!(window.PROM && PROM.modal)) return;
+    PROM.modal(`<h3>Use your ElevenLabs voice</h3>
+      <p class="dim" style="font-size:.9rem">Paste your ElevenLabs <strong>API key</strong> and a <strong>Voice ID</strong>. It's stored only in this browser and sent directly to ElevenLabs from your device. (For a public production site, use a serverless proxy instead of a browser key.)</p>
+      <input class="txt" id="el-key" placeholder="API key (xi-api-key)" autocomplete="off" style="margin-bottom:10px">
+      <input class="txt" id="el-voice" placeholder="Voice ID — e.g. 21m00Tcm4TlvDq8ikWAM" autocomplete="off" style="margin-bottom:6px">
+      <p class="dim" style="font-size:.78rem;margin-bottom:12px">Find a Voice ID in ElevenLabs → Voices → (voice) → "ID".</p>
+      <div class="sb-actions"><button class="btn btn-ghost" onclick="PROM.closeModal()">Cancel</button><button class="btn btn-primary" id="el-save" style="flex:1;justify-content:center">Save &amp; use</button></div>`);
+    const s = document.getElementById("el-save");
+    if (s) s.addEventListener("click", () => {
+      const k = (document.getElementById("el-key") || {}).value || "";
+      const v = (document.getElementById("el-voice") || {}).value || "";
+      if (!k.trim() || !v.trim()) return;
+      PROM.narrator.setElevenLabs(k.trim(), v.trim());
+      PROM.closeModal();
+      if (then) then();
+    });
+  }
+
   function wireNarrator(root, t, l, segs) {
     const N = window.PROM && PROM.narrator;
     const playBtn = $("#nr-play", root), stopBtn = $("#nr-stop", root), status = $("#nr-status", root);
@@ -393,15 +412,23 @@
       if (note) note.textContent = "Narration unavailable.";
       if (playBtn) { playBtn.disabled = true; playBtn.style.opacity = ".5"; }
     } else {
-      if (note) note.textContent = "Natural AI voice (Amazon Polly). Pick a voice or speed below; for studio quality, drop an ElevenLabs render into the lesson's audioUrl.";
+      const elOn = N.hasElevenLabs && N.hasElevenLabs();
+      if (note) note.textContent = elOn
+        ? "Using your ElevenLabs voice. Change voice or speed below."
+        : "Natural AI voice (Amazon Polly) by default. For studio quality, choose ✨ ElevenLabs and paste your key once — it applies everywhere, including the intro.";
       const pf = N.getPref();
-      const vopts = N.getPollyVoices().map((v) => `<option value="polly:${esc(v.id)}" ${pf.provider !== "browser" && pf.pollyVoice === v.id ? "selected" : ""}>${esc(v.label)}</option>`).join("");
-      voiceSel.innerHTML = vopts + `<option value="browser" ${pf.provider === "browser" ? "selected" : ""}>Browser voice (offline)</option>`;
+      const vopts = N.getPollyVoices().map((v) => `<option value="polly:${esc(v.id)}" ${pf.provider === "polly" && pf.pollyVoice === v.id ? "selected" : ""}>${esc(v.label)}</option>`).join("");
+      voiceSel.innerHTML =
+        `<option value="elevenlabs" ${pf.provider === "elevenlabs" ? "selected" : ""}>✨ ElevenLabs${elOn ? "" : " — add key"}</option>` +
+        vopts +
+        `<option value="browser" ${pf.provider === "browser" ? "selected" : ""}>Browser voice (offline)</option>`;
       voiceSel.addEventListener("change", () => {
         const v = voiceSel.value;
-        if (v === "browser") N.setProvider("browser");
-        else { N.setProvider("polly"); N.setPollyVoice(v.replace(/^polly:/, "")); }
-        if (N.state() !== "idle") startPlay();
+        if (v === "elevenlabs") {
+          if (N.hasElevenLabs()) { N.setProvider("elevenlabs"); if (N.state() !== "idle") startPlay(); }
+          else promptElevenKey(() => startPlay());
+        } else if (v === "browser") { N.setProvider("browser"); if (N.state() !== "idle") startPlay(); }
+        else { N.setProvider("polly"); N.setPollyVoice(v.replace(/^polly:/, "")); if (N.state() !== "idle") startPlay(); }
       });
       rateSel.addEventListener("change", () => { N.setRate(parseFloat(rateSel.value)); if (N.state() !== "idle") startPlay(); });
     }
