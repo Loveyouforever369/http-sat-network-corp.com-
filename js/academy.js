@@ -389,22 +389,20 @@
     const voiceSel = $("#nr-voice", root), rateSel = $("#nr-rate", root);
     const av = $("#ac-read-av", root);
 
-    if (!N || !N.supported) {
-      if (note) note.textContent = "Live voice narration isn't supported in this browser — the script above is your read-along. (Tip: try Chrome or Edge for spoken narration.)";
+    if (!N) {
+      if (note) note.textContent = "Narration unavailable.";
       if (playBtn) { playBtn.disabled = true; playBtn.style.opacity = ".5"; }
     } else {
-      // populate voices for this lesson's language
-      const lang = (t.instructor && t.instructor.voiceLang) || "en-US";
-      const populate = () => {
-        const all = N.getVoices();
-        const L = lang.toLowerCase().slice(0, 2);
-        const list = (all.filter((v) => (v.lang || "").toLowerCase().startsWith(L)).length ? all.filter((v) => (v.lang || "").toLowerCase().startsWith(L)) : all);
-        const pref = N.getPref();
-        voiceSel.innerHTML = list.map((v) => `<option value="${esc(v.voiceURI)}" ${v.voiceURI === pref.voiceURI ? "selected" : ""}>${esc(v.name)}</option>`).join("") || `<option>Default</option>`;
-      };
-      populate();
-      if (window.speechSynthesis && !voiceSel.options.length) setTimeout(populate, 300);
-      voiceSel.addEventListener("change", () => { N.setVoice(voiceSel.value); if (N.state() !== "idle") startPlay(); });
+      if (note) note.textContent = "Natural AI voice (Amazon Polly). Pick a voice or speed below; for studio quality, drop an ElevenLabs render into the lesson's audioUrl.";
+      const pf = N.getPref();
+      const vopts = N.getPollyVoices().map((v) => `<option value="polly:${esc(v.id)}" ${pf.provider !== "browser" && pf.pollyVoice === v.id ? "selected" : ""}>${esc(v.label)}</option>`).join("");
+      voiceSel.innerHTML = vopts + `<option value="browser" ${pf.provider === "browser" ? "selected" : ""}>Browser voice (offline)</option>`;
+      voiceSel.addEventListener("change", () => {
+        const v = voiceSel.value;
+        if (v === "browser") N.setProvider("browser");
+        else { N.setProvider("polly"); N.setPollyVoice(v.replace(/^polly:/, "")); }
+        if (N.state() !== "idle") startPlay();
+      });
       rateSel.addEventListener("change", () => { N.setRate(parseFloat(rateSel.value)); if (N.state() !== "idle") startPlay(); });
     }
 
