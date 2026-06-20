@@ -242,3 +242,35 @@
   .ac-hero::before, .ac-hero h1 .gradient-text, .ac-eq i, .ac-avatar::before { animation: none; }
   .ac-card::after { transition: none; }
 }
+
+/* =============================================================================
+   Visual depth pass — per-card color identity (driven by the track's orb color)
+   ============================================================================= */
+.ac-card { border-top-width: 2px; }
+.ac-card:has(.ac-orb.blue)   { border-top-color: rgba(59,130,246,.55); }
+.ac-card:has(.ac-orb.purple) { border-top-color: rgba(168,85,247,.55); }
+.ac-card:has(.ac-orb.teal)   { border-top-color: rgba(45,212,191,.55); }
+.ac-card:has(.ac-orb.violet) { border-top-color: rgba(139,92,246,.55); }
+.ac-card:has(.ac-orb.gold)   { border-top-color: rgba(245,197,24,.55); }
+.ac-card:has(.ac-orb.blue)::before,
+.ac-card:has(.ac-orb.purple)::before,
+.ac-card:has(.ac-orb.teal)::before,
+.ac-card:has(.ac-orb.violet)::before,
+.ac-card:has(.ac-orb.gold)::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: .5;
+  -webkit-mask: none; mask: none; border-radius: inherit; padding: 0; background: none;
+}
+.ac-card:has(.ac-orb.blue)::before   { background: radial-gradient(120% 60% at 0% 0%, rgba(59,130,246,.10), transparent 60%); }
+.ac-card:has(.ac-orb.purple)::before { background: radial-gradient(120% 60% at 0% 0%, rgba(168,85,247,.10), transparent 60%); }
+.ac-card:has(.ac-orb.teal)::before   { background: radial-gradient(120% 60% at 0% 0%, rgba(45,212,191,.10), transparent 60%); }
+.ac-card:has(.ac-orb.violet)::before { background: radial-gradient(120% 60% at 0% 0%, rgba(139,92,246,.10), transparent 60%); }
+.ac-card:has(.ac-orb.gold)::before   { background: radial-gradient(120% 60% at 0% 0%, rgba(245,197,24,.10), transparent 60%); }
+.ac-card > * { position: relative; z-index: 1; }
+.ac-card:has(.ac-orb.blue):hover   { box-shadow: 0 18px 50px rgba(59,130,246,.22); }
+.ac-card:has(.ac-orb.purple):hover { box-shadow: 0 18px 50px rgba(168,85,247,.22); }
+.ac-card:has(.ac-orb.teal):hover   { box-shadow: 0 18px 50px rgba(45,212,191,.22); }
+.ac-card:has(.ac-orb.violet):hover { box-shadow: 0 18px 50px rgba(139,92,246,.22); }
+.ac-card:has(.ac-orb.gold):hover   { box-shadow: 0 18px 50px rgba(245,197,24,.22); }
+
+/* Category section header gets a subtle accent bullet */
+.ac-cat-head h2::before { content: "▍"; color: var(--neon-purple); margin-right: 8px; }
