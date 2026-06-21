@@ -162,6 +162,39 @@ body::after {
 /* ---------------- Scrollbar ---------------- */
 ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, rgba(176,107,255,.5), rgba(53,214,238,.4)); border-radius: 10px; }
 
+/* ---------------- Icon system (replaces emojis) ---------------- */
+.ic { display: inline-block; vertical-align: -0.18em; }
+/* icons that fill an orb/glyph center cleanly as blocks */
+.ac-orb .ic, .node-orb .ic, .am-orb .ic, .ac-cat-glyph .ic, .intro-orb .ic { display: block; vertical-align: 0; }
+.intro-orb svg { width: 40px; height: 40px; }
+/* inline icon wrappers that sit beside text */
+.bico, .cico, .hico, .xp-spark { display: inline-flex; align-items: center; vertical-align: -0.22em; }
+.cico, .hico { margin-right: 3px; }
+.ac-cat-watch { display: inline-flex; align-items: center; gap: 6px; }
+.nav-icon-btn { display: inline-grid; place-items: center; }
+/* tint orb icons with their accent so the set still feels colorful */
+.ac-orb.blue, .node-orb.blue { color: #7db4ff; }
+.ac-orb.purple, .node-orb.purple { color: #c79bff; }
+.ac-orb.teal, .node-orb.teal { color: #5eead4; }
+.ac-orb.violet, .node-orb.violet { color: #b69bff; }
+.ac-orb.gold, .node-orb.gold { color: #ffd76a; }
+.ac-cat-glyph { color: var(--b); }
+.nav-xp .xp-spark { color: var(--gold); }
+/* the cinematic intro orb gets a soft neon ring around its line icon */
+.intro-orb { color: var(--acc, #fff); }
+/* inline icons inside headings, callouts, search, controls */
+.co-ic { display: inline-flex; align-items: center; vertical-align: -0.2em; margin-right: 5px; color: currentColor; }
+.ac-callout h5 { display: inline-flex; align-items: center; }
+.ac-callout.tips .co-ic { color: var(--electric); }
+.ac-callout.takeaways .co-ic { color: var(--neon-purple); }
+.ac-callout.pitfalls .co-ic { color: var(--gold); }
+.ac-search-ic { display: inline-flex; align-items: center; color: var(--electric); }
+.ac-search-ic svg { display: block; }
+.am-role .co-ic { color: var(--electric); margin-right: 4px; }
+.intro-voice-btn { display: inline-flex; align-items: center; gap: 6px; }
+.intro-voice-btn svg { display: block; }
+h4 .co-ic { color: var(--electric); }
+
 /* ---------------- Motion safety ---------------- */
 @media (prefers-reduced-motion: reduce) {
   .bg-gradient, .hero::before, .hero h1 .gradient-text { animation: none; }

@@ -604,7 +604,7 @@ function boot() {
   const snd = $("#sound-toggle");
   if (snd) snd.addEventListener("click", () => {
     const on = PROM.audio ? PROM.audio.toggle() : false;
-    snd.textContent = on ? "🔊" : "🔇";
+    snd.innerHTML = (window.PROM && PROM.icon) ? PROM.icon(on ? "volume" : "mute", 20) : (on ? "🔊" : "🔇");
     snd.classList.toggle("muted", !on);
     snd.title = on ? "Mute soundscape" : "Unmute soundscape";
   });
