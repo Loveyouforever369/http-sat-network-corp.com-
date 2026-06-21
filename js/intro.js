@@ -76,6 +76,8 @@
         '<button class="intro-btn lg" id="intro-play" title="Play / pause">❚❚</button>' +
         '<button class="intro-btn" id="intro-next" title="Next">⏭</button>' +
       '</div>' +
+      '<button class="intro-voice-btn" id="intro-voice" title="Choose narrator voice">🎙 Voice</button>' +
+      '<div class="intro-voice-panel" id="intro-voice-panel" style="display:none"></div>' +
       '<button class="intro-skip" id="intro-skip">Skip intro ▶▶</button>' +
       '<button class="intro-close" id="intro-close" title="Close">✕</button>';
     document.body.appendChild(ov);
@@ -84,6 +86,7 @@
     $("#intro-play", ov).addEventListener("click", togglePlay);
     $("#intro-skip", ov).addEventListener("click", close);
     $("#intro-close", ov).addEventListener("click", close);
+    $("#intro-voice", ov).addEventListener("click", toggleVoicePanel);
     document.addEventListener("keydown", onKey);
     return ov;
   }
@@ -188,6 +191,48 @@
     addEventListener("resize", () => { size(); make(); }, { passive: true });
     if (reduce) { frame(); cancelAnimationFrame(raf); } else frame();
     state._canvasStop = () => cancelAnimationFrame(raf);
+  }
+
+  function toggleVoicePanel() {
+    const panel = $("#intro-voice-panel"); if (!panel) return;
+    if (panel.style.display !== "none") { panel.style.display = "none"; return; }
+    const N = window.PROM && PROM.narrator; if (!N) return;
+    const pf = N.getPref();
+    const edge = (N.getEdgeVoices ? N.getEdgeVoices() : []).map((v) => '<option value="edge:' + v.id + '" ' + ((pf.provider === "edge" && pf.edgeVoice === v.id) ? "selected" : "") + '>' + v.label + '</option>').join("");
+    const polly = N.getPollyVoices().map((v) => '<option value="polly:' + v.id + '" ' + ((pf.provider === "polly" && pf.pollyVoice === v.id) ? "selected" : "") + '>' + v.label + '</option>').join("");
+    panel.innerHTML =
+      '<div class="intro-voice-card">' +
+        '<div class="ivc-title">Narrator voice</div>' +
+        '<select id="iv-sel" class="ac-narr-select">' +
+          '<option value="elevenlabs" ' + (pf.provider === "elevenlabs" ? "selected" : "") + '>✨ ElevenLabs (best)</option>' +
+          '<optgroup label="Neural voices (recommended)">' + edge + '</optgroup>' +
+          '<optgroup label="Standard voices">' + polly + '</optgroup>' +
+          '<option value="browser" ' + (pf.provider === "browser" ? "selected" : "") + '>Browser voice</option>' +
+        '</select>' +
+        '<div id="iv-el" style="display:none;margin-top:8px">' +
+          '<input class="txt" id="iv-el-key" placeholder="ElevenLabs API key" autocomplete="off">' +
+          '<input class="txt" id="iv-el-voice" placeholder="Voice ID — e.g. 21m00Tcm4TlvDq8ikWAM" autocomplete="off" style="margin-top:8px">' +
+        '</div>' +
+        '<button class="btn btn-primary btn-sm" id="iv-apply" style="width:100%;justify-content:center;margin-top:10px">Apply &amp; play</button>' +
+      '</div>';
+    panel.style.display = "block";
+    const sel = $("#iv-sel", panel), elBox = $("#iv-el", panel);
+    const showEl = () => { elBox.style.display = (sel.value === "elevenlabs" && !N.hasElevenLabs()) ? "block" : "none"; };
+    showEl(); sel.addEventListener("change", showEl);
+    $("#iv-apply", panel).addEventListener("click", () => {
+      const v = sel.value;
+      if (v === "elevenlabs") {
+        if (!N.hasElevenLabs()) {
+          const k = ($("#iv-el-key", panel) || {}).value || "", vid = ($("#iv-el-voice", panel) || {}).value || "";
+          if (!k.trim() || !vid.trim()) return;
+          N.setElevenLabs(k.trim(), vid.trim());
+        } else N.setProvider("elevenlabs");
+      } else if (v === "browser") N.setProvider("browser");
+      else if (v.indexOf("edge:") === 0) N.setEdgeVoice(v.replace(/^edge:/, ""));
+      else { N.setPollyVoice(v.replace(/^polly:/, "")); }
+      panel.style.display = "none";
+      if (state) { state.playing = true; const pb = $("#intro-play"); if (pb) pb.textContent = "❚❚"; speakScene(); }
+    });
   }
 
   function open() {

@@ -415,12 +415,14 @@
       const elOn = N.hasElevenLabs && N.hasElevenLabs();
       if (note) note.textContent = elOn
         ? "Using your ElevenLabs voice. Change voice or speed below."
-        : "Natural AI voice (Amazon Polly) by default. For studio quality, choose ✨ ElevenLabs and paste your key once — it applies everywhere, including the intro.";
+        : "Natural neural voice by default — no setup. Want studio quality? Choose ✨ ElevenLabs and paste your key once; it applies everywhere, including the intro.";
       const pf = N.getPref();
-      const vopts = N.getPollyVoices().map((v) => `<option value="polly:${esc(v.id)}" ${pf.provider === "polly" && pf.pollyVoice === v.id ? "selected" : ""}>${esc(v.label)}</option>`).join("");
+      const edgeOpts = (N.getEdgeVoices ? N.getEdgeVoices() : []).map((v) => `<option value="edge:${esc(v.id)}" ${pf.provider === "edge" && pf.edgeVoice === v.id ? "selected" : ""}>${esc(v.label)}</option>`).join("");
+      const pollyOpts = N.getPollyVoices().map((v) => `<option value="polly:${esc(v.id)}" ${pf.provider === "polly" && pf.pollyVoice === v.id ? "selected" : ""}>${esc(v.label)}</option>`).join("");
       voiceSel.innerHTML =
         `<option value="elevenlabs" ${pf.provider === "elevenlabs" ? "selected" : ""}>✨ ElevenLabs${elOn ? "" : " — add key"}</option>` +
-        vopts +
+        `<optgroup label="Neural voices (recommended)">${edgeOpts}</optgroup>` +
+        `<optgroup label="Standard voices">${pollyOpts}</optgroup>` +
         `<option value="browser" ${pf.provider === "browser" ? "selected" : ""}>Browser voice (offline)</option>`;
       voiceSel.addEventListener("change", () => {
         const v = voiceSel.value;
@@ -428,7 +430,8 @@
           if (N.hasElevenLabs()) { N.setProvider("elevenlabs"); if (N.state() !== "idle") startPlay(); }
           else promptElevenKey(() => startPlay());
         } else if (v === "browser") { N.setProvider("browser"); if (N.state() !== "idle") startPlay(); }
-        else { N.setProvider("polly"); N.setPollyVoice(v.replace(/^polly:/, "")); if (N.state() !== "idle") startPlay(); }
+        else if (v.indexOf("edge:") === 0) { N.setEdgeVoice(v.replace(/^edge:/, "")); if (N.state() !== "idle") startPlay(); }
+        else { N.setPollyVoice(v.replace(/^polly:/, "")); if (N.state() !== "idle") startPlay(); }
       });
       rateSel.addEventListener("change", () => { N.setRate(parseFloat(rateSel.value)); if (N.state() !== "idle") startPlay(); });
     }

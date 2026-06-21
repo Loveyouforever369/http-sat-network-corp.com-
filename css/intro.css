@@ -89,9 +89,35 @@
 .intro-close { position: absolute; top: 18px; right: 20px; z-index: 5; background: rgba(0,0,0,.4); border: 1px solid var(--line); color: var(--text-dim); width: 40px; height: 40px; border-radius: 50%; font-size: 1.1rem; transition: all .2s; }
 .intro-close:hover { color: #fff; border-color: var(--line-bright); }
 
+/* ---- In-intro narrator voice control ---- */
+.intro-voice-btn {
+  position: absolute; left: 22px; bottom: 4vh; z-index: 4;
+  background: none; border: 1px solid var(--line); color: var(--text-dim);
+  font-size: .82rem; font-weight: 600; padding: 9px 16px; border-radius: 20px;
+  display: inline-flex; align-items: center; gap: 6px; transition: all .2s;
+}
+.intro-voice-btn:hover { color: #fff; border-color: var(--line-bright); }
+.intro-voice-panel { position: absolute; left: 22px; bottom: 9vh; z-index: 6; }
+.intro-voice-card {
+  background: rgba(10,12,26,.97); border: 1px solid var(--line-bright);
+  border-radius: 14px; padding: 16px; width: min(330px, 86vw);
+  box-shadow: 0 24px 70px rgba(0,0,0,.65);
+  animation: ivcRise .28s cubic-bezier(.2,.7,.2,1) both;
+}
+@keyframes ivcRise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.ivc-title { font-weight: 700; font-size: .95rem; margin-bottom: 10px; color: #fff; }
+.intro-voice-card .ac-narr-select { width: 100%; max-width: none; }
+.intro-voice-card .txt {
+  width: 100%; background: rgba(255,255,255,.04); border: 1px solid var(--line);
+  border-radius: 9px; padding: 9px 11px; color: var(--text); font-size: .85rem;
+}
+.intro-voice-card .txt:focus { outline: none; border-color: var(--neon-purple); }
+
 @media (max-width: 640px) {
-  .intro-caption { bottom: 15vh; }
+  .intro-caption { bottom: 18vh; }
   .intro-skip { right: 12px; }
+  .intro-voice-btn { left: 12px; bottom: 11vh; }
+  .intro-voice-panel { bottom: 16vh; left: 12px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .intro-scene.active, .intro-orb, .intro-cta { animation: none; }
