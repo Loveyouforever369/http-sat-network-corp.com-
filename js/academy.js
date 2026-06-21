@@ -9,6 +9,9 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const esc = (s) => (window.PROM ? PROM.esc(s) : String(s));
+  // SVG icon for a (possibly legacy emoji) glyph; falls back to the raw glyph
+  const ic = (glyph, size) => (window.PROM && PROM.iconEmoji) ? PROM.iconEmoji(glyph, size) : esc(glyph);
+  const icName = (name, size) => (window.PROM && PROM.icon) ? PROM.icon(name, size) : "";
   const A = window.ACADEMY;
 
   let filter = { cat: "all", q: "" };
@@ -47,12 +50,12 @@
           <div class="ac-hero-stat"><div class="num gradient-text">${totalTracks}</div><div class="lbl">Mastery Tracks</div></div>
           <div class="ac-hero-stat"><div class="num gradient-text">${totalLessons}</div><div class="lbl">Lessons</div></div>
           <div class="ac-hero-stat"><div class="num gradient-text">${mastery}%</div><div class="lbl">Your mastery</div></div>
-          <div class="ac-hero-stat"><div class="num gradient-text">🔊</div><div class="lbl">Real narration</div></div>
+          <div class="ac-hero-stat"><div class="num gradient-text">${A.categories().length}</div><div class="lbl">Domains</div></div>
         </div>
       </div>
 
       <div class="ac-toolbar">
-        <div class="ac-search"><span class="ic">🔎</span><input id="ac-q" type="text" placeholder="Search tools, skills, topics…" value="${esc(filter.q)}"></div>
+        <div class="ac-search"><span class="ac-search-ic">${icName("search", 17)}</span><input id="ac-q" type="text" placeholder="Search tools, skills, topics…" value="${esc(filter.q)}"></div>
       </div>
       <div class="ac-filters" style="margin-bottom:26px">${filters}</div>
 
@@ -73,17 +76,17 @@
 
   /* Generative SVG cover art per section (creative, self-contained, no external tool). */
   const CAT_ART = {
-    "Foundations": ["#a855f7", "◇"],
-    "Conversational AI": ["#2dd4bf", "✦"],
-    "Image & Design": ["#8b5cf6", "◐"],
-    "Video & Avatars": ["#f5c518", "▷"],
-    "Audio, Voice & Music": ["#22d3ee", "♪"],
-    "Automation & Agents": ["#3b82f6", "⬡"],
-    "Vibe Coding": ["#38bdf8", "❮❯"],
-    "Business & Life Playbooks": ["#f5c518", "△"],
+    "Foundations": ["#a855f7", "compass"],
+    "Conversational AI": ["#2dd4bf", "chat"],
+    "Image & Design": ["#8b5cf6", "palette"],
+    "Video & Avatars": ["#f5c518", "film"],
+    "Audio, Voice & Music": ["#22d3ee", "volume"],
+    "Automation & Agents": ["#3b82f6", "workflow"],
+    "Vibe Coding": ["#38bdf8", "code"],
+    "Business & Life Playbooks": ["#f5c518", "trending"],
   };
   function categoryBanner(c) {
-    const art = CAT_ART[c] || ["#a855f7", "✦"];
+    const art = CAT_ART[c] || ["#a855f7", "sparkle"];
     const hex = art[0], glyph = art[1];
     const seed = c.replace(/[^a-z]/gi, "").toLowerCase();
     const vid = (A.sectionVideo || {})[c];
@@ -103,9 +106,9 @@
         </g>
       </svg>
       <div class="ac-cat-banner-inner">
-        <span class="ac-cat-glyph">${esc(glyph)}</span>
+        <span class="ac-cat-glyph">${icName(glyph, 30)}</span>
         <div><div class="ac-cat-bk">Section</div><div class="ac-cat-btitle">${esc(c)}</div></div>
-        ${vid ? `<a class="btn btn-ghost btn-sm ac-cat-watch" href="${esc(vid)}" target="_blank" rel="noopener">🎬 Watch film</a>` : ""}
+        ${vid ? `<a class="btn btn-ghost btn-sm ac-cat-watch" href="${esc(vid)}" target="_blank" rel="noopener">${icName("film", 16)} Watch film</a>` : ""}
       </div>
     </div>`;
   }
@@ -130,7 +133,7 @@
     return `<div class="ac-card panel ${all ? "done-all" : ""}" data-id="${esc(t.id)}">
       ${all ? `<span class="ac-done-badge">★ Mastered</span>` : ""}
       <div class="ac-card-top">
-        <div class="ac-orb ${esc(t.color)}">${esc(t.icon)}</div>
+        <div class="ac-orb ${esc(t.color)}">${ic(t.icon, 26)}</div>
         <div><div class="ac-cat-tag">${esc(t.category)}</div><h3>${esc(t.title)}</h3></div>
       </div>
       <p class="ac-tagline">${esc(t.tagline || "")}</p>
@@ -215,7 +218,7 @@
           const pct = Math.round((correct / t.quiz.length) * 100);
           A.setQuizScore(t.id, pct);
           const s = $("#ac-quiz-score");
-          s.innerHTML = `<strong style="color:${pct >= 70 ? "var(--teal)" : "var(--gold)"}">${correct}/${t.quiz.length} correct · ${pct}%</strong> ${pct >= 70 ? "— passed! ✦" : "— review the lessons and retry."}`;
+          s.innerHTML = `<strong style="color:${pct >= 70 ? "var(--teal)" : "var(--gold)"}">${correct}/${t.quiz.length} correct · ${pct}%</strong> ${pct >= 70 ? "— passed! " + icName("sparkle", 15) : "— review the lessons and retry."}`;
         }
       }));
     });
@@ -239,7 +242,7 @@
     // sections
     (l.sections || []).forEach((s) => blocks.push(`<div class="ac-section"><h4>${esc(s.heading)}</h4>${paras(s.body)}</div>`));
     // takeaways
-    if (l.keyTakeaways && l.keyTakeaways.length) blocks.push(callout("takeaways", "✦ Key takeaways", l.keyTakeaways));
+    if (l.keyTakeaways && l.keyTakeaways.length) blocks.push(callout("takeaways", "Key takeaways", l.keyTakeaways, "sparkle"));
     // prompt playbook
     if (l.promptPlaybook && l.promptPlaybook.length) {
       blocks.push(`<div class="ac-block-title">Prompt playbook</div><div class="ac-pb">${l.promptPlaybook.map(pbCard).join("")}</div>`);
@@ -251,15 +254,15 @@
     // use cases
     if ((l.business && l.business.length) || (l.life && l.life.length)) {
       blocks.push(`<div class="ac-block-title">How to leverage it</div><div class="ac-twocol">
-        ${l.business && l.business.length ? callout("tips", "💼 In business", l.business) : ""}
-        ${l.life && l.life.length ? callout("takeaways", "🌱 In life", l.life) : ""}
+        ${l.business && l.business.length ? callout("tips", "In business", l.business, "briefcase") : ""}
+        ${l.life && l.life.length ? callout("takeaways", "In life", l.life, "leaf") : ""}
       </div>`);
     }
     // tips / pitfalls
     if ((l.proTips && l.proTips.length) || (l.pitfalls && l.pitfalls.length)) {
       blocks.push(`<div class="ac-twocol">
-        ${l.proTips && l.proTips.length ? callout("tips", "✅ Pro tips", l.proTips) : ""}
-        ${l.pitfalls && l.pitfalls.length ? callout("pitfalls", "⚠️ Pitfalls to avoid", l.pitfalls) : ""}
+        ${l.proTips && l.proTips.length ? callout("tips", "Pro tips", l.proTips, "check") : ""}
+        ${l.pitfalls && l.pitfalls.length ? callout("pitfalls", "Pitfalls to avoid", l.pitfalls, "warning") : ""}
       </div>`);
     }
     // exercise
@@ -277,7 +280,7 @@
           <div class="avatar-meta" style="padding:0">
             <div class="am-orb" id="ac-read-av">${esc(initials)}</div>
             <div><div class="am-name">${esc(t.instructor.name)} <span class="dim" style="font-weight:500">· narrating</span></div>
-            <div class="am-role">🎙 In-browser narration · upgrade to ElevenLabs via CONFIG</div></div>
+            <div class="am-role"><span class="co-ic">${icName("mic", 14)}</span> Natural neural narration · choose ✨ ElevenLabs for studio quality</div></div>
           </div>
         </div>
 
@@ -317,8 +320,9 @@
   }
 
   function trim(s) { return s && s.length > 22 ? s.slice(0, 20) + "…" : s; }
-  function callout(kind, title, items) {
-    return `<div class="ac-callout ${kind}"><h5>${esc(title)}</h5><ul>${items.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>`;
+  function callout(kind, title, items, iconName) {
+    const head = (iconName ? `<span class="co-ic">${icName(iconName, 16)}</span>` : "") + esc(title);
+    return `<div class="ac-callout ${kind}"><h5>${head}</h5><ul>${items.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>`;
   }
   function defs(arr) { return arr.map((d) => `<div class="ac-def"><div class="dt">${esc(d.name)}</div><div class="dd">${esc(d.detail)}</div></div>`).join(""); }
   function pbCard(p, i) {
@@ -346,12 +350,12 @@
   function exerciseHTML(ex) {
     const isPrompt = ex.type === "prompt";
     return `<div class="ac-exercise" id="ac-ex">
-      <h4>${isPrompt ? "✍️ Try it — graded" : "🧠 Reflect"}</h4>
+      <h4><span class="co-ic">${icName(isPrompt ? "pen" : "brain", 17)}</span> ${isPrompt ? "Try it — graded" : "Reflect"}</h4>
       <div class="brief">${esc(ex.brief)}</div>
       <textarea class="sb-input" id="ac-ex-input" placeholder="${esc(isPrompt ? "Write your prompt here…" : "Write your answer here…")}" style="min-height:110px">${esc(ex.starter || "")}</textarea>
       <div class="sb-actions">
-        ${isPrompt ? `<button class="btn btn-primary" id="ac-ex-grade">⚡ Grade my prompt</button>` : `<button class="btn btn-primary" id="ac-ex-check">Reveal model answer</button>`}
-        ${ex.hint ? `<button class="btn btn-ghost btn-sm" id="ac-ex-hint">💡 Hint</button>` : ""}
+        ${isPrompt ? `<button class="btn btn-primary" id="ac-ex-grade"><span class="bico">${icName("zap", 16)}</span> Grade my prompt</button>` : `<button class="btn btn-primary" id="ac-ex-check">Reveal model answer</button>`}
+        ${ex.hint ? `<button class="btn btn-ghost btn-sm" id="ac-ex-hint"><span class="bico">${icName("bulb", 15)}</span> Hint</button>` : ""}
       </div>
       <div id="ac-ex-out"></div>
     </div>`;

@@ -23,8 +23,8 @@
       narration: "A doer earns once, for one task, capped by their own hours. A director designs a system that runs a thousand times while they sleep. This is the single most valuable shift you can make — and it is learnable." },
     { accent: "gold", icon: "🎓", kicker: "WELCOME",
       title: "The AI Mastery<br>Academy.",
-      chips: ["8 domains", "29 tracks", "95 lessons"],
-      narration: "Welcome to Prometheus — an immersive academy that takes you from curious to commanding across every major AI tool. Eight domains. Twenty-nine deep tracks. Ninety-five narrated lessons. Beginner to advanced, all in one place." },
+      chips: ["8 domains", "47 tracks", "123 lessons"],
+      narration: "Welcome to Prometheus — an immersive academy that takes you from curious to commanding across every major AI tool. Eight domains. Forty-seven deep tracks. One hundred and twenty-three narrated lessons. Beginner to advanced, all in one place." },
     { accent: "teal", icon: "💬", kicker: "DOMAIN 01",
       title: "Talk to the<br>frontier models.",
       chips: ["ChatGPT", "Claude", "Gemini", "Perplexity"],
@@ -76,7 +76,7 @@
         '<button class="intro-btn lg" id="intro-play" title="Play / pause">❚❚</button>' +
         '<button class="intro-btn" id="intro-next" title="Next">⏭</button>' +
       '</div>' +
-      '<button class="intro-voice-btn" id="intro-voice" title="Choose narrator voice">🎙 Voice</button>' +
+      '<button class="intro-voice-btn" id="intro-voice" title="Choose narrator voice">' + ((window.PROM && PROM.icon) ? PROM.icon("mic", 15) : "") + ' Voice</button>' +
       '<div class="intro-voice-panel" id="intro-voice-panel" style="display:none"></div>' +
       '<button class="intro-skip" id="intro-skip">Skip intro ▶▶</button>' +
       '<button class="intro-close" id="intro-close" title="Close">✕</button>';
@@ -116,7 +116,7 @@
     stage.className = "intro-stage accent-" + sc.accent;
     stage.innerHTML =
       '<div class="intro-scene active">' +
-        '<div class="intro-orb">' + esc(sc.icon) + '</div>' +
+        '<div class="intro-orb">' + ((window.PROM && PROM.iconEmoji) ? PROM.iconEmoji(sc.icon, 40) : esc(sc.icon)) + '</div>' +
         '<div class="intro-kicker">' + esc(sc.kicker) + '</div>' +
         '<h1 class="intro-title">' + sc.title + '</h1>' +
         (sc.chips && sc.chips.length ? '<div class="intro-chips">' + sc.chips.map((c) => '<span>' + esc(c) + '</span>').join("") + '</div>' : "") +
