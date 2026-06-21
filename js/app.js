@@ -51,6 +51,9 @@ window.CONFIG = CONFIG;
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+// SVG icon helpers (icons.js); fall back to the raw glyph if unavailable
+const ICO = (glyph, size) => (window.PROM && PROM.iconEmoji) ? PROM.iconEmoji(glyph, size) : esc(glyph);
+const ICN = (name, size) => (window.PROM && PROM.icon) ? PROM.icon(name, size) : "";
 
 /* -----------------------------------------------------------------------------
    Progress engine — persisted in localStorage. The shape mirrors schema.sql
@@ -275,7 +278,7 @@ function renderDashboard() {
     const state = mastered ? "mastered" : unlocked ? "unlocked" : "locked";
     return `<div class="tree-node ${state}" data-mod="${m.id}" data-unlocked="${unlocked}">
       <div class="node-orb ${m.color}" data-open="${m.id}" role="button" tabindex="0" aria-label="${esc(m.title)}">
-        ${unlocked ? `<span>${m.icon}</span>` : `<span class="lock">🔒</span>`}
+        ${unlocked ? `<span>${ICO(m.icon, 30)}</span>` : `<span class="lock">${ICN("shield", 24)}</span>`}
       </div>
       <div class="node-card" data-open="${m.id}">
         <div class="nc-top">
@@ -356,7 +359,7 @@ function renderModule(moduleId, activity) {
         <div class="section-eyebrow">// Module ${m.code} · ${esc(m.subtitle)}</div>
         <h2 class="section-title">${esc(m.title)}</h2>
       </div>
-      <div class="node-orb ${m.color}" style="cursor:default">${m.icon}</div>
+      <div class="node-orb ${m.color}" style="cursor:default">${ICO(m.icon, 34)}</div>
     </div>
     <p class="section-sub" style="margin-top:10px">${esc(m.summary)}</p>
     <div class="activity-tabs">
@@ -535,7 +538,7 @@ function renderArcade() {
         const done = PROM.isDone(m.id, activity);
         const diff = g.difficulty || (activity === "bonus" ? "Beginner" : "Core");
         return `<div class="panel arcade-card" data-mod="${m.id}" data-act="${activity}" role="button" tabindex="0">
-          <div class="arcade-ic node-orb ${m.color}">✦</div>
+          <div class="arcade-ic node-orb ${m.color}">${ICO(g.icon || "🎮", 26)}</div>
           <div class="tag-row" style="margin-top:14px"><span class="chip">${esc(diff)}</span><span class="chip">Module ${m.code}</span>${done ? `<span class="chip done">✓ Cleared</span>` : ""}</div>
           <h3 style="font-size:1.15rem;margin:6px 0">${esc(g.title)}</h3>
           <p class="dim" style="font-size:.88rem;flex:1">${esc(g.tagline || "")}</p>

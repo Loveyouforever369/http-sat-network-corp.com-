@@ -61,6 +61,7 @@
     warning: '<path d="M12 3 2.5 20h19L12 3Z"/><path d="M12 10v4.5M12 17.5h.01"/>',
     bulb: '<path d="M12 3a6 6 0 0 0-4 10.5c.7.6 1 1.4 1 2.5h6c0-1.1.3-1.9 1-2.5A6 6 0 0 0 12 3Z"/><path d="M9.5 19h5M10.5 21.5h3"/>',
     target: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/>',
+    gamepad: '<rect x="2.5" y="7.5" width="19" height="9" rx="4.5"/><path d="M7 11v2.5M5.75 12.25h2.5"/><circle cx="15.5" cy="11.3" r="1"/><circle cx="18" cy="13.5" r="1"/>',
     sliders: '<path d="M4 7h10M18 7h2M4 12h2M10 12h10M4 17h7M15 17h5"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="13" cy="17" r="2"/>',
   };
 
@@ -75,6 +76,9 @@
     "🏠": "home", "🏗": "building", "🏗️": "building", "🚀": "rocket", "🔥": "flame", "🧭": "compass",
     "✦": "sparkle", "✨": "sparkle", "✧": "sparkle", "🌱": "leaf", "⚡": "zap", "✒️": "pen", "✍️": "pen", "✎": "pen", "✏️": "pen",
     "🔎": "search", "🔍": "search", "🩺": "heart", "🧬": "dna", "💳": "card", "🗄️": "database", "🗄": "database", "▶": "play", "▶️": "play",
+    // geometric module glyphs (skill-tree / home modules) -> meaningful icons
+    "◈": "compass", "❖": "code", "▲": "trending", "⬡": "workflow", "⌬": "bot", "◎": "target", "●": "target",
+    "🎯": "target", "🔒": "shield", "🌐": "compass", "💪": "zap", "💡": "bulb", "📝": "pen", "💸": "dollar", "🔧": "wrench", "🗑": "warning", "📊": "chart", "🎮": "gamepad",
   };
 
   function icon(name, size) {
