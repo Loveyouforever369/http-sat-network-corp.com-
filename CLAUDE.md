@@ -81,6 +81,29 @@ actually works — deeply — using the family of agents as the curriculum.**
 - Business contacts in CTAs: **phone 725-314-9140**, **email
   michaelparks011@gmail.com**.
 
+## Lessons learned — corrections (never repeat these)
+
+> **Standing rule: whenever you fix a mistake, append it here** with the date and
+> the fix. This file is auto-read at the start of every session, so logging a
+> mistake once is how "future Claude" avoids repeating it. Keep entries short:
+> what went wrong → what to do instead.
+
+- **2026-06-23 — This sandbox can't deploy to hosting providers.** No
+  `vercel`/`wrangler` CLI, no API tokens, and outbound to `api.vercel.com` /
+  `api.cloudflare.com` is blocked (HTTP 403). The Vercel MCP `deploy_to_vercel`
+  only returns *advice*, it doesn't push. → Don't promise to deploy from here.
+  Keep the repo deploy-ready and give the user exact steps; the deploy runs on
+  their side.
+- **2026-06-23 — Production branch ≠ default branch.** The repo default branch
+  is `claude/lending-platform-major-overhaul-NW144` (a *different* project); our
+  site is on `claude/sweet-knuth-gem84c`. → When wiring any host, explicitly set
+  its production branch to `claude/sweet-knuth-gem84c`, or it deploys the wrong site.
+- **2026-06-23 — Read before Edit.** The Edit tool fails if the file wasn't Read
+  in this session. → Read the file (or the target region) before editing it.
+- **2026-06-23 — Don't estimate Academy counts.** I guessed "19 tracks/66
+  lessons"; the real total was 30/101. → Get track/lesson counts from
+  `node scripts/academy-qa.js`, never from memory.
+
 ## Run / deploy
 
 ```bash
