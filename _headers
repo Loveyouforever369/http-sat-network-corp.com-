@@ -1,0 +1,7 @@
+# Cloudflare Pages headers — mirrors the security headers in vercel.json.
+# Applies to every route of this static site. (Hash-routed single-page app,
+# so no _redirects/SPA-fallback rule is required.)
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN

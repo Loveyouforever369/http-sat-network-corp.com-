@@ -27,6 +27,16 @@ vercel deploy --prod      # from the repo root
 
 Or import the GitHub repo at vercel.com/new (Framework: **Other**, no build command) — it deploys as a static site automatically. A `vercel.json` is included (clean URLs + security headers).
 
+## ☁️ Deploy to Cloudflare Pages
+
+Easiest path — connect the repo, no build step:
+
+1. Cloudflare dashboard → **Workers & Pages** → **Create** → **Pages** → **Connect to Git** → pick this repo.
+2. Build settings: **Framework preset: None**, **Build command: _(empty)_**, **Build output directory: `/`**.
+3. **Save and Deploy.** Every push auto-deploys.
+
+A `_headers` file ships the same security headers as `vercel.json`. The app is hash-routed from a single `index.html`, so no SPA redirect rule is needed. CLI alternative: `npx wrangler pages deploy . --project-name prometheus`. Full guide: `docs/DEPLOY-CLOUDFLARE.md`.
+
 ---
 
 ## 🧭 What's inside
