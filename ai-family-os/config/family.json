@@ -1,0 +1,87 @@
+{
+  "$schema": "ai-family-os/1.0",
+  "version": "1.0.0",
+  "brand": "AI Family",
+  "settings": {
+    "model": "claude-sonnet-4-6",
+    "model_note": "Default routing/automation model. Escalate heavy-reasoning steps to a more capable Claude model as needed.",
+    "demo_mode": true,
+    "publish_targets": ["youtube", "shorts", "instagram", "x", "tiktok"],
+    "paths": { "logs": "logs", "briefs": "briefs", "assets": "assets" },
+    "env": {
+      "FAMILY_ROOT": "(repo root)",
+      "FAMILY_LOGS": "logs",
+      "FAMILY_CONFIG": "config/family.json",
+      "FAMILY_BRIEFS": "briefs"
+    }
+  },
+  "crews": [
+    { "id": "CRW-001", "name": "The Elders", "mission": "orchestration, direction, decisions", "lead": "MBR-0001", "members": ["MBR-0001", "MBR-0002"] },
+    { "id": "CRW-002", "name": "The Thinkers", "mission": "research, analysis, deep tool understanding", "lead": "MBR-0010", "members": ["MBR-0003", "MBR-0010", "MBR-0012"] },
+    { "id": "CRW-003", "name": "The Creators", "mission": "turn research into content", "lead": "MBR-0013", "members": ["MBR-0013", "MBR-0014"] },
+    { "id": "CRW-004", "name": "The Builders", "mission": "code, automation, implementation", "lead": "MBR-0015", "members": ["MBR-0015"] },
+    { "id": "CRW-005", "name": "The Guardians", "mission": "quality, ethics, trust, disclosure", "lead": "MBR-0008", "members": ["MBR-0008"] },
+    { "id": "CRW-006", "name": "The Connectors", "mission": "community, conversation, distribution", "lead": "MBR-0006", "members": ["MBR-0006"] },
+    { "id": "CRW-007", "name": "The Operators", "mission": "automation spine, scheduling, loops, triggers", "lead": "MBR-0011", "members": ["MBR-0011"] },
+    { "id": "CRW-008", "name": "The Studio", "mission": "cinematic visuals, scene design, episode look", "lead": "MBR-0004", "members": ["MBR-0004"] },
+    { "id": "CRW-009", "name": "The Voice Studio", "mission": "narration, cloned voices, dialogue", "lead": "MBR-0007", "members": ["MBR-0007"] },
+    { "id": "CRW-010", "name": "The Soundtrack", "mission": "music identity, emotional pacing, sonic brand", "lead": "MBR-0016", "members": ["MBR-0016"] }
+  ],
+  "members": [
+    { "id": "MBR-0001", "name": "Grandpa Vellum", "kind": "character", "crew": "CRW-001", "role": "master orchestrator & planner", "outputs": ["execution_plan"], "invoke": "call-family.ps1 -Member grandpa-vellum -Request {{x}}", "status": "active" },
+    { "id": "MBR-0002", "name": "Prometheus", "kind": "character", "crew": "CRW-001", "role": "mentor host — the future of AI, big-picture meaning", "outputs": ["episode_narrative"], "invoke": "call-family.ps1 -Member prometheus -Request {{x}}", "status": "active" },
+    { "id": "MBR-0003", "name": "Cipher", "kind": "character", "crew": "CRW-002", "role": "code sorcerer — agents, terminals, frameworks", "outputs": ["tech_playbook"], "invoke": "call-family.ps1 -Member cipher -Request {{x}}", "status": "active" },
+    { "id": "MBR-0010", "name": "Sage", "kind": "character", "crew": "CRW-002", "role": "researcher — model comparison, truth-finding", "outputs": ["training_brief", "mastery_checklist"], "invoke": "call-family.ps1 -Member sage -Request {{x}}", "status": "active" },
+    { "id": "MBR-0012", "name": "Brother News", "kind": "character", "crew": "CRW-002", "role": "AI Signal Desk — news triage into segments", "outputs": ["signal_brief"], "invoke": "call-family.ps1 -Member brother-news -Request {{x}}", "status": "active" },
+    { "id": "MBR-0013", "name": "Nova", "kind": "character", "crew": "CRW-003", "role": "creator — content, visual systems, branding", "outputs": ["content_concept"], "invoke": "call-family.ps1 -Member nova -Request {{x}}", "status": "active" },
+    { "id": "MBR-0014", "name": "Mom Social", "kind": "character", "crew": "CRW-003", "role": "platform copy, captions, packaging", "outputs": ["platform_copy"], "invoke": "call-family.ps1 -Member mom-social -Request {{x}}", "status": "active" },
+    { "id": "MBR-0015", "name": "Atlas", "kind": "character", "crew": "CRW-004", "role": "builder — systems, workflows, automation", "outputs": ["implementation"], "invoke": "call-family.ps1 -Member atlas -Request {{x}}", "status": "active" },
+    { "id": "MBR-0008", "name": "Guardian", "kind": "character", "crew": "CRW-005", "role": "protector — safety, accuracy, trust, disclosure", "outputs": ["guardian_report"], "invoke": "call-family.ps1 -Member guardian -Request {{x}}", "status": "active" },
+    { "id": "MBR-0006", "name": "Luna", "kind": "character", "crew": "CRW-006", "role": "communicator — audience, distribution, platform strategy", "outputs": ["platform_plan"], "invoke": "call-family.ps1 -Member luna -Request {{x}}", "status": "active" },
+    { "id": "MBR-0011", "name": "Uncle n8n", "kind": "operator", "crew": "CRW-007", "role": "automation queue, scheduling, handoffs", "outputs": ["queue"], "invoke": "call-family.ps1 -Member uncle-n8n -Request {{x}}", "status": "active" },
+    { "id": "MBR-0004", "name": "Nova Studio", "kind": "visual", "crew": "CRW-008", "role": "visual packs & shot prompts", "outputs": ["visual_spec"], "invoke": "call-family.ps1 -Member nova-studio -Request {{x}}", "status": "active" },
+    { "id": "MBR-0007", "name": "Echo", "kind": "voice", "crew": "CRW-009", "role": "narration & voice plans", "outputs": ["voice_plan"], "invoke": "call-family.ps1 -Member echo -Request {{x}}", "status": "active" },
+    { "id": "MBR-0016", "name": "Soundtrack Director", "kind": "music", "crew": "CRW-010", "role": "score maps, motifs, cue sheets", "outputs": ["music_spec"], "invoke": "call-family.ps1 -Member soundtrack-director -Request {{x}}", "status": "active" }
+  ],
+  "pipelines": [
+    { "id": "PIPE-001", "name": "daily-family-loop", "goal": "route and run today's family execution", "trigger": "schedule(daily 09:00)", "steps": [
+      { "member": "MBR-0001", "emits": "execution_plan" },
+      { "member": "MBR-0012", "emits": "signal_brief" },
+      { "member": "MBR-0010", "emits": "training_brief" },
+      { "member": "MBR-0013", "emits": "content_concept" }
+    ] },
+    { "id": "PIPE-002", "name": "family-training-loop", "goal": "master new tools and emit reusable assets", "trigger": "signal.created", "steps": [
+      { "member": "MBR-0012", "emits": "signal_brief" },
+      { "member": "MBR-0010", "emits": "training_brief" },
+      { "member": "MBR-0010", "emits": "mastery_checklist" },
+      { "member": "MBR-0003", "emits": "tech_playbook" },
+      { "member": "MBR-0013", "emits": "content_concept" }
+    ] },
+    { "id": "PIPE-003", "name": "content-engine", "goal": "turn a concept into a full episode package", "trigger": "manual", "steps": [
+      { "member": "MBR-0013", "emits": "content_concept" },
+      { "member": "MBR-0014", "emits": "platform_copy" },
+      { "member": "MBR-0004", "emits": "visual_spec" },
+      { "member": "MBR-0007", "emits": "voice_plan" },
+      { "member": "MBR-0016", "emits": "music_spec" }
+    ] },
+    { "id": "PIPE-004", "name": "guardian-review", "goal": "verify accuracy, trust, and disclosure before publish", "trigger": "manual", "steps": [
+      { "member": "MBR-0008", "emits": "guardian_report" }
+    ] },
+    { "id": "PIPE-005", "name": "visual-world-build", "goal": "lock an episode's visual + sonic world", "trigger": "manual", "steps": [
+      { "member": "MBR-0004", "emits": "visual_spec" },
+      { "member": "MBR-0016", "emits": "music_spec" }
+    ] }
+  ],
+  "campaigns": [
+    { "id": "CMP-001", "name": "prometheus-is-coming", "pipelines": ["PIPE-002", "PIPE-003", "PIPE-004"] },
+    { "id": "CMP-002", "name": "weekly-signal-drop", "pipelines": ["PIPE-001", "PIPE-003"] }
+  ],
+  "signals": [
+    { "id": "SIG-0001", "headline": "New open model ships with native agentic tool-use", "source": "https://example.com/news/1", "why_it_matters": "shifts the cost/performance math for the Builders' automations", "assigned_host": "MBR-0010", "priority": "P1", "status": "new", "linked_episode": null },
+    { "id": "SIG-0002", "headline": "Major video model adds lip-synced dubbing", "source": "https://example.com/news/2", "why_it_matters": "unlocks 175+ language cutdowns for the Studio", "assigned_host": "MBR-0012", "priority": "P2", "status": "new", "linked_episode": null }
+  ],
+  "episodes": [
+    { "id": "EP-0001", "title": "What actually changed in AI this week", "series": "signal-desk", "host": "MBR-0002", "core_question": "What matters this week and why?", "status": "review", "publish_targets": ["youtube", "shorts", "x"] },
+    { "id": "EP-0002", "title": "Build an agent that briefs you every morning", "series": "prometheus", "host": "MBR-0003", "core_question": "How do agents turn raw signals into action?", "status": "scripted", "publish_targets": ["youtube", "shorts"] }
+  ]
+}
