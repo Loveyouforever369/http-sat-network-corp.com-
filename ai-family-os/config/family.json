@@ -78,10 +78,46 @@
   ],
   "signals": [
     { "id": "SIG-0001", "headline": "New open model ships with native agentic tool-use", "source": "https://example.com/news/1", "why_it_matters": "shifts the cost/performance math for the Builders' automations", "assigned_host": "MBR-0010", "priority": "P1", "status": "new", "linked_episode": null },
-    { "id": "SIG-0002", "headline": "Major video model adds lip-synced dubbing", "source": "https://example.com/news/2", "why_it_matters": "unlocks 175+ language cutdowns for the Studio", "assigned_host": "MBR-0012", "priority": "P2", "status": "new", "linked_episode": null }
+    { "id": "SIG-0002", "headline": "Major video model adds lip-synced dubbing", "source": "https://example.com/news/2", "why_it_matters": "unlocks 175+ language cutdowns for the Studio", "assigned_host": "MBR-0012", "priority": "P2", "status": "new", "linked_episode": null },
+    { "id": "SIG-0003", "headline": "MCP protocol ships breaking changes (effective July 28)", "source": "agent-family/intel/perplexity-briefings/briefing-2026-06-23-claude-training.md", "why_it_matters": "every MCP server in the stack needs migration: stateless protocol, new HTTP headers, new capability negotiation", "assigned_host": "MBR-0003", "priority": "P1", "status": "new", "linked_episode": "EP-0105" }
   ],
   "episodes": [
     { "id": "EP-0001", "title": "What actually changed in AI this week", "series": "signal-desk", "host": "MBR-0002", "core_question": "What matters this week and why?", "status": "review", "publish_targets": ["youtube", "shorts", "x"] },
-    { "id": "EP-0002", "title": "Build an agent that briefs you every morning", "series": "prometheus", "host": "MBR-0003", "core_question": "How do agents turn raw signals into action?", "status": "scripted", "publish_targets": ["youtube", "shorts"] }
-  ]
+    { "id": "EP-0002", "title": "Build an agent that briefs you every morning", "series": "prometheus", "host": "MBR-0003", "core_question": "How do agents turn raw signals into action?", "status": "scripted", "publish_targets": ["youtube", "shorts"] },
+    { "id": "EP-0105", "title": "MCP Registry + Multi-Model Routing: USB-C for AI Tools", "series": "signal-desk", "host": "MBR-0012", "core_question": "How do you route many models through one MCP layer?", "status": "scripted", "publish_targets": ["youtube", "shorts", "x"], "source": "ai-signal-desk/content/episodes/tool05-mcp-multimodel-config.json" }
+  ],
+  "tools": [
+    { "id": "TOOL-001", "name": "Playwright MCP", "category": "browser-automation", "kind": "mcp", "status": "install-scripted", "source": "install-mcp-servers.ps1" },
+    { "id": "TOOL-002", "name": "Filesystem MCP", "category": "files", "kind": "mcp", "status": "install-scripted", "source": "install-mcp-servers.ps1" },
+    { "id": "TOOL-003", "name": "GitHub MCP", "category": "dev", "kind": "mcp", "status": "install-scripted", "source": "install-mcp-servers.ps1" },
+    { "id": "TOOL-004", "name": "Memory MCP", "category": "memory", "kind": "mcp", "status": "install-scripted", "source": "install-mcp-servers.ps1" },
+    { "id": "TOOL-005", "name": "Fetch MCP", "category": "web-fetch", "kind": "mcp", "status": "install-scripted", "source": "install-mcp-servers.ps1" },
+    { "id": "TOOL-006", "name": "SQLite MCP", "category": "data", "kind": "mcp", "status": "install-scripted", "source": "install-mcp-servers.ps1" },
+    { "id": "TOOL-007", "name": "Brave Search MCP", "category": "search", "kind": "mcp", "status": "install-scripted", "source": "install-mcp-servers.ps1" },
+    { "id": "TOOL-008", "name": "Puppeteer MCP", "category": "browser-automation", "kind": "mcp", "status": "documented", "source": "AI-FAMILY-MCP-SERVERS.md" },
+    { "id": "TOOL-009", "name": "PostgreSQL MCP", "category": "data", "kind": "mcp", "status": "documented", "source": "AI-FAMILY-MCP-SERVERS.md" },
+    { "id": "TOOL-010", "name": "Twitter/X MCP", "category": "social-publishing", "kind": "mcp", "status": "documented", "source": "AI-FAMILY-MCP-SERVERS.md" },
+    { "id": "TOOL-011", "name": "LinkedIn MCP", "category": "social-publishing", "kind": "mcp", "status": "documented", "source": "AI-FAMILY-MCP-SERVERS.md" },
+    { "id": "TOOL-012", "name": "Instagram MCP", "category": "social-publishing", "kind": "mcp", "status": "documented", "source": "AI-FAMILY-MCP-SERVERS.md" },
+    { "id": "TOOL-013", "name": "YouTube MCP", "category": "social-publishing", "kind": "mcp", "status": "documented", "source": "AI-FAMILY-MCP-SERVERS.md" },
+    { "id": "TOOL-014", "name": "ElevenLabs MCP", "category": "voice", "kind": "mcp", "status": "documented", "source": "AI-FAMILY-MCP-SERVERS.md" },
+    { "id": "TOOL-015", "name": "Midjourney MCP", "category": "image", "kind": "mcp", "status": "documented", "source": "AI-FAMILY-MCP-SERVERS.md" },
+    { "id": "TOOL-016", "name": "Runway MCP", "category": "video", "kind": "mcp", "status": "documented", "source": "AI-FAMILY-MCP-SERVERS.md" },
+    { "id": "TOOL-017", "name": "Slack MCP", "category": "comms", "kind": "mcp", "status": "documented", "source": "AI-FAMILY-MCP-SERVERS.md" },
+    { "id": "TOOL-018", "name": "Discord MCP", "category": "comms", "kind": "mcp", "status": "documented", "source": "AI-FAMILY-MCP-SERVERS.md" },
+    { "id": "TOOL-019", "name": "Email MCP", "category": "comms", "kind": "mcp", "status": "documented", "source": "AI-FAMILY-MCP-SERVERS.md" },
+    { "id": "TOOL-020", "name": "Google Maps MCP", "category": "maps", "kind": "mcp", "status": "documented", "source": "AI-FAMILY-MCP-SERVERS.md" },
+    { "id": "TOOL-021", "name": "Google Drive MCP", "category": "storage", "kind": "mcp", "status": "documented", "source": "AI-FAMILY-MCP-SERVERS.md" },
+    { "id": "TOOL-051", "name": "browser-use-agent", "category": "web-browsing", "kind": "agent", "crew": "CRW-007", "status": "active", "source": "agent-family/browser-agents/browser-use-agent.py" },
+    { "id": "TOOL-052", "name": "browser-auto-post", "category": "web-browsing", "kind": "agent", "crew": "CRW-007", "status": "active", "source": "agent-family/scripts/browser-auto-post.js" },
+    { "id": "TOOL-053", "name": "browser-content-deploy", "category": "web-browsing", "kind": "agent", "crew": "CRW-007", "status": "active", "source": "agent-family/scripts/browser-content-deploy.ps1" },
+    { "id": "TOOL-054", "name": "Agent-Browser", "category": "web-browsing", "kind": "agent", "crew": "CRW-007", "status": "documented", "source": "agent-family/FAMILY-ROSTER.md" }
+  ],
+  "roster_meta": {
+    "documented_members_here": 14,
+    "external_roster_total": 107,
+    "external_roster_active_rollcall": 46,
+    "source_file": "agent-family/FAMILY-ROSTER.md (on the user's machine; not yet ingested into this repo)",
+    "note": "This config seeds the canonical host/operator members. The full 107-member roster, exact MCP install commands, and the browser-agent scripts live on the user's local machine and must be committed here for a faithful import. Counts cross-referenced: README says 107 members; the 2026-06-21 huddle rolls call 46; the content-drops thread cites 45 active."
+  }
 }

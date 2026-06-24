@@ -25,7 +25,7 @@ function dupCheck(arr, label) {
     seen.add(x.id);
   }
 }
-['members', 'crews', 'pipelines', 'campaigns', 'signals', 'episodes'].forEach(k => dupCheck(cfg[k], k));
+['members', 'crews', 'pipelines', 'campaigns', 'signals', 'episodes', 'tools'].forEach(k => dupCheck(cfg[k], k));
 
 // members -> crew
 for (const m of cfg.members) {
@@ -75,9 +75,19 @@ for (const e of (cfg.episodes || [])) {
   if (!EP_STATUS.has(e.status)) errors.push(`Episode ${e.id} has invalid status ${e.status}`);
 }
 
+// tools registry (MCP servers + web-browsing agents)
+const TOOL_STATUS = new Set(['documented', 'install-scripted', 'active', 'deprecated']);
+for (const t of (cfg.tools || [])) {
+  if (!t.id || !/^TOOL-/.test(t.id)) { errors.push(`Tool ${t.id || '(no id)'} has a malformed id`); continue; }
+  if (!t.name) errors.push(`Tool ${t.id} is missing a name`);
+  if (t.status && !TOOL_STATUS.has(t.status)) warns.push(`Tool ${t.id} status '${t.status}' not in enum`);
+  if (t.crew && !crewIds.has(t.crew)) errors.push(`Tool ${t.id} references missing crew ${t.crew}`);
+}
+
 console.log('AI Family OS - config validation');
 console.log(`  roster: ${cfg.members.length} members, ${cfg.crews.length} crews`);
 console.log(`  flow:   ${cfg.pipelines.length} pipelines, ${(cfg.campaigns || []).length} campaigns`);
+console.log(`  tools:  ${(cfg.tools || []).length} registered (MCP + web agents)`);
 console.log(`  work:   ${(cfg.signals || []).length} signals, ${(cfg.episodes || []).length} episodes`);
 
 if (warns.length) {
