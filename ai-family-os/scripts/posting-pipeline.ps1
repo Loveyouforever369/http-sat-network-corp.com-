@@ -31,5 +31,5 @@ foreach ($e in $ctx.Config.episodes) {
 $outFile = Join-Path $ctx.Briefs ("posting-queue-$today.json")
 $queue | ConvertTo-Json -Depth 5 | Set-Content -Path $outFile -Encoding utf8
 Write-Host ("OK Posting queue: {0} item(s) -> {1}" -f $queue.Count, $outFile) -ForegroundColor Green
-$queue | Select-Object episode, target, status | Format-Table -AutoSize
+$queue | Select-Object episode, target, status | Format-Table -AutoSize | Out-String -Width 4096 | Write-Host
 Write-FamilyLog -Ctx $ctx -System 'posting-pipeline' -Actor 'MBR-0011' -Task ("generated queue: " + $queue.Count + " items") | Out-Null
