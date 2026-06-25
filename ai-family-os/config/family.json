@@ -70,6 +70,17 @@
     { "id": "PIPE-005", "name": "visual-world-build", "goal": "lock an episode's visual + sonic world", "trigger": "manual", "steps": [
       { "member": "MBR-0004", "emits": "visual_spec" },
       { "member": "MBR-0016", "emits": "music_spec" }
+    ] },
+    { "id": "PIPE-006", "name": "content-drop-machine", "goal": "make a video, update the site, and publish everywhere on a schedule - with one human gate", "trigger": "manual | schedule", "steps": [
+      { "member": "MBR-0012", "emits": "topic_brief", "tool": "Brave Search / Tavily / browser-use" },
+      { "member": "MBR-0013", "emits": "content_concept", "tool": "Claude (script)" },
+      { "member": "MBR-0007", "emits": "voice_plan", "tool": "HeyGen / Descript" },
+      { "member": "MBR-0004", "emits": "visual_spec", "tool": "Canva / Invideo" },
+      { "member": "MBR-0016", "emits": "music_spec", "tool": "soundtrack" },
+      { "member": "MBR-0015", "emits": "site_update", "tool": "Lovable / Base44 -> Vercel" },
+      { "member": "MBR-0008", "emits": "guardian_report", "tool": "human approval", "gate": true },
+      { "member": "MBR-0006", "emits": "distribution", "tool": "Postiz (YouTube, Facebook, Instagram +25)" },
+      { "member": "MBR-0011", "emits": "schedule", "tool": "n8n / Zapier" }
     ] }
   ],
   "campaigns": [
@@ -111,7 +122,19 @@
     { "id": "TOOL-051", "name": "browser-use-agent", "category": "web-browsing", "kind": "agent", "crew": "CRW-007", "status": "active", "source": "agent-family/browser-agents/browser-use-agent.py" },
     { "id": "TOOL-052", "name": "browser-auto-post", "category": "web-browsing", "kind": "agent", "crew": "CRW-007", "status": "active", "source": "agent-family/scripts/browser-auto-post.js" },
     { "id": "TOOL-053", "name": "browser-content-deploy", "category": "web-browsing", "kind": "agent", "crew": "CRW-007", "status": "active", "source": "agent-family/scripts/browser-content-deploy.ps1" },
-    { "id": "TOOL-054", "name": "Agent-Browser", "category": "web-browsing", "kind": "agent", "crew": "CRW-007", "status": "documented", "source": "agent-family/FAMILY-ROSTER.md" }
+    { "id": "TOOL-054", "name": "Agent-Browser", "category": "web-browsing", "kind": "agent", "crew": "CRW-007", "status": "documented", "source": "agent-family/FAMILY-ROSTER.md" },
+    { "id": "TOOL-101", "name": "Postiz", "category": "social-publishing", "kind": "connector", "status": "active", "source": "user-confirmed connected 2026-06-25", "note": "one-to-many publishing to YouTube, Facebook, Instagram, TikTok, LinkedIn, X, Threads, Pinterest (28+ channels)" },
+    { "id": "TOOL-102", "name": "Vercel", "category": "deploy", "kind": "connector", "status": "active", "source": "user-confirmed connected 2026-06-25" },
+    { "id": "TOOL-103", "name": "Lovable", "category": "site-builder", "kind": "connector", "status": "active", "source": "user-confirmed connected 2026-06-25" },
+    { "id": "TOOL-104", "name": "Base44", "category": "site-builder", "kind": "connector", "status": "active", "source": "user-confirmed connected 2026-06-25" },
+    { "id": "TOOL-105", "name": "Replit", "category": "site-builder", "kind": "connector", "status": "active", "source": "user-confirmed connected 2026-06-25" },
+    { "id": "TOOL-106", "name": "Gamma", "category": "site-builder", "kind": "connector", "status": "active", "source": "user-confirmed connected 2026-06-25", "note": "fast landing pages / one-pagers / decks" },
+    { "id": "TOOL-107", "name": "Invideo", "category": "video", "kind": "connector", "status": "active", "source": "user-confirmed connected 2026-06-25" },
+    { "id": "TOOL-108", "name": "HeyGen", "category": "video", "kind": "connector", "status": "active", "source": "user-confirmed connected 2026-06-25" },
+    { "id": "TOOL-109", "name": "Descript", "category": "video", "kind": "connector", "status": "active", "source": "user-confirmed connected 2026-06-25" },
+    { "id": "TOOL-110", "name": "Canva", "category": "image", "kind": "connector", "status": "active", "source": "user-confirmed connected 2026-06-25" },
+    { "id": "TOOL-111", "name": "Zapier", "category": "orchestration", "kind": "connector", "status": "active", "source": "user-confirmed connected 2026-06-25", "note": "9000+ app glue for anything Postiz does not cover" },
+    { "id": "TOOL-112", "name": "n8n", "category": "orchestration", "kind": "self-hosted", "status": "documented", "source": "user-confirmed self-hosted 2026-06-25", "note": "heavy automation chains you own" }
   ],
   "roster_meta": {
     "documented_members_here": 14,
