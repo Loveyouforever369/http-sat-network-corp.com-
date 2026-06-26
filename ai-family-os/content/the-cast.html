@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meet the AI Family — the Cast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0a0e1a;--void-2:#0e1424;--panel:#121a2e;
+    --gold:#f5b942;--ember:#e2572b;--teal:#54d6c4;--blue:#7aa2ff;--violet:#b58cff;--green:#5fe39a;--rose:#ff8a9c;
+    --ink:#eaf0ff;--ink-dim:#9fb0d0;--ink-faint:#64748f;
+    --line:rgba(132,156,210,.16);--line-2:rgba(132,156,210,.30);--shadow:0 24px 60px -20px rgba(0,0,0,.7);
+    --disp:'Fraunces',Georgia,serif;--body:'Sora',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--void);color:var(--ink);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body::before{content:"";position:fixed;inset:0;z-index:-2;background:
+    radial-gradient(900px 600px at 82% -8%,rgba(245,185,66,.10),transparent 60%),
+    radial-gradient(760px 520px at 6% 12%,rgba(181,140,255,.09),transparent 60%),
+    radial-gradient(760px 600px at 55% 112%,rgba(84,214,196,.07),transparent 55%),var(--void)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(10,14,26,.72);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+  .brand{font-family:var(--mono);font-weight:700;font-size:.76rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase}
+  .brand b{color:var(--ink)}
+  .navcta{font-size:.74rem;color:var(--ink);text-decoration:none;border:1px solid var(--line-2);padding:7px 13px;border-radius:9px}
+  .navcta:hover{background:rgba(245,185,66,.12)}
+
+  header{padding:80px 0 30px;text-align:center}
+  .kick{font-family:var(--mono);font-size:.7rem;letter-spacing:.32em;color:var(--teal);text-transform:uppercase;margin-bottom:16px}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(2.3rem,6.6vw,4.4rem);line-height:.98;letter-spacing:-.02em;margin-bottom:12px}
+  h1 .grad{background:linear-gradient(108deg,var(--gold),var(--violet) 55%,var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{font-family:var(--disp);font-style:italic;font-size:clamp(1.05rem,2.6vw,1.45rem);color:var(--ink-dim);margin-bottom:22px}
+  .btn{font-family:var(--body);font-weight:600;font-size:.9rem;cursor:pointer;border:none;border-radius:12px;padding:12px 22px;transition:.22s;display:inline-flex;gap:9px;text-decoration:none}
+  .btn-primary{background:linear-gradient(110deg,var(--gold),#ffd778);color:#1a1205;box-shadow:0 10px 28px -8px rgba(245,185,66,.5)}
+  .btn-primary:hover{transform:translateY(-2px)}
+
+  .cast{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:24px 0 8px}
+  @media(max-width:900px){.cast{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.cast{grid-template-columns:1fr}}
+  .card{background:linear-gradient(160deg,var(--panel),var(--void-2));border:1px solid var(--line);border-radius:16px;padding:16px;transition:.25s;position:relative;overflow:hidden}
+  .card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+  .card.lit{border-color:var(--c)}
+  .card svg{width:100%;height:118px;display:block;margin-bottom:10px}
+  .card h3{font-family:var(--disp);font-size:1.12rem;font-weight:600;display:flex;align-items:center;gap:8px}
+  .card .arch{font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--c);margin:2px 0 8px}
+  .card .say{font-family:var(--disp);font-style:italic;font-size:.92rem;color:var(--ink);margin-bottom:8px}
+  .card .lane{font-size:.78rem;color:var(--ink-dim)}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--c);flex:none;box-shadow:0 0 10px var(--c)}
+
+  section{padding:40px 0;border-top:1px solid var(--line);margin-top:24px}
+  .eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+  h2{font-family:var(--disp);font-weight:600;font-size:clamp(1.5rem,4vw,2.2rem);margin-bottom:16px}
+  .together{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+  @media(max-width:760px){.together{grid-template-columns:1fr}}
+  .blk{background:rgba(132,156,210,.04);border:1px solid var(--line);border-radius:13px;padding:15px}
+  .blk h4{font-family:var(--disp);font-size:1.02rem;margin-bottom:6px}
+  .blk p{font-size:.85rem;color:var(--ink-dim)}
+  .closing{text-align:center;padding:44px 0}
+  .closing p{color:var(--ink-dim);max-width:560px;margin:0 auto 18px}
+  footer{padding:34px 0 70px;border-top:1px solid var(--line);text-align:center}
+  footer p{color:var(--ink-faint);font-size:.78rem;margin-top:8px}
+
+  .ra{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}.ra.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.ra{opacity:1;transform:none;transition:none}}
+  #narr{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:60;display:none;align-items:center;gap:10px;background:rgba(14,20,36,.93);border:1px solid var(--line-2);backdrop-filter:blur(12px);border-radius:14px;padding:8px 13px;box-shadow:var(--shadow);max-width:92vw}
+  #narr.show{display:flex}
+  #narr .nt{font-size:.74rem;color:var(--ink-dim);max-width:46vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  #narr button{font-family:var(--mono);font-size:.66rem;border:1px solid var(--line-2);background:rgba(132,156,210,.08);color:var(--ink);border-radius:8px;padding:6px 9px;cursor:pointer}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <div class="brand">THE AI FAMILY <b>// The Cast</b></div>
+  <a class="navcta" href="#join">Join the family</a>
+</div></nav>
+
+<header>
+  <div class="wrap">
+    <div class="kick ra">Eight specialists · one mission</div>
+    <h1 class="ra">Meet the <span class="grad">AI Family.</span></h1>
+    <p class="sub ra">Larger than life — and each one teaches you something real.</p>
+    <div class="ra"><button class="btn btn-primary" id="narrateBtn" aria-pressed="false">▶ Let them introduce themselves</button></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="cast">
+    <!-- PROMETHEUS -->
+    <div class="card ra" id="c0" style="--c:var(--gold)">
+      <svg viewBox="0 0 100 100" aria-label="Prometheus"><defs><radialGradient id="gP" cx="50%" cy="40%" r="60%"><stop offset="0" stop-color="#2a2310"/><stop offset="1" stop-color="#0e1424"/></radialGradient></defs>
+        <rect width="100" height="100" rx="12" fill="url(#gP)"/>
+        <path d="M50 24 C42 24 38 31 38 40 L38 70 L62 70 L62 40 C62 31 58 24 50 24Z" fill="none" stroke="#f5b942" stroke-width="2" opacity=".8"/>
+        <circle cx="50" cy="22" r="7" fill="none" stroke="#f5b942" stroke-width="2"/>
+        <path d="M50 44 C47 50 53 52 50 58 C56 54 55 47 50 44Z" fill="#f5b942"/>
+        <circle cx="50" cy="51" r="13" fill="none" stroke="#ffd778" stroke-width="1" opacity=".5"/>
+      </svg>
+      <h3><span class="dot"></span>Prometheus</h3><div class="arch">The Strategist</div>
+      <div class="say">"The tool is new. The opportunity is yours."</div>
+      <div class="lane">Strategy · where AI makes you money</div>
+    </div>
+    <!-- SAGE -->
+    <div class="card ra" id="c1" style="--c:var(--blue)">
+      <svg viewBox="0 0 100 100" aria-label="Sage"><rect width="100" height="100" rx="12" fill="#0e1424"/>
+        <path d="M22 72 V40 A28 28 0 0 1 78 40 V72" fill="none" stroke="#7aa2ff" stroke-width="2" opacity=".7"/>
+        <line x1="50" y1="20" x2="50" y2="72" stroke="#7aa2ff" stroke-width="1.4" opacity=".5"/>
+        <g fill="#bcd0ff"><circle cx="38" cy="38" r="1.6"/><circle cx="60" cy="34" r="1.6"/><circle cx="66" cy="50" r="1.6"/><circle cx="34" cy="54" r="1.6"/><circle cx="50" cy="44" r="2"/></g>
+        <path d="M38 38 L50 44 L60 34 M50 44 L66 50 M50 44 L34 54" stroke="#7aa2ff" stroke-width=".8" opacity=".6" fill="none"/>
+      </svg>
+      <h3><span class="dot"></span>Sage</h3><div class="arch">The Analyst</div>
+      <div class="say">"One source is a rumor. Three is a fact."</div>
+      <div class="lane">The Signal Desk · what changed &amp; why</div>
+    </div>
+    <!-- CIPHER -->
+    <div class="card ra" id="c2" style="--c:var(--teal)">
+      <svg viewBox="0 0 100 100" aria-label="Cipher"><rect width="100" height="100" rx="12" fill="#0c1620"/>
+        <path d="M34 30 L30 30 A4 4 0 0 0 26 34 L26 46 A4 4 0 0 1 22 50 A4 4 0 0 1 26 54 L26 66 A4 4 0 0 0 30 70 L34 70" fill="none" stroke="#54d6c4" stroke-width="2"/>
+        <path d="M66 30 L70 30 A4 4 0 0 1 74 34 L74 46 A4 4 0 0 0 78 50 A4 4 0 0 0 74 54 L74 66 A4 4 0 0 1 70 70 L66 70" fill="none" stroke="#54d6c4" stroke-width="2"/>
+        <circle cx="50" cy="50" r="10" fill="none" stroke="#9af0e4" stroke-width="1.6"/><circle cx="50" cy="50" r="3" fill="#54d6c4"/>
+      </svg>
+      <h3><span class="dot"></span>Cipher</h3><div class="arch">The Tool-Master</div>
+      <div class="say">"Here's the exact setup — copy it."</div>
+      <div class="lane">Tools · agents · MCP · "wire it up"</div>
+    </div>
+    <!-- ATLAS -->
+    <div class="card ra" id="c3" style="--c:var(--ember)">
+      <svg viewBox="0 0 100 100" aria-label="Atlas"><rect width="100" height="100" rx="12" fill="#1a1010"/>
+        <circle cx="50" cy="40" r="13" fill="none" stroke="#e2572b" stroke-width="2"/>
+        <g stroke="#e2572b" stroke-width="2"><line x1="50" y1="22" x2="50" y2="27"/><line x1="50" y1="53" x2="50" y2="58"/><line x1="32" y1="40" x2="37" y2="40"/><line x1="63" y1="40" x2="68" y2="40"/></g>
+        <circle cx="50" cy="40" r="4" fill="#ff8a64"/>
+        <rect x="30" y="64" width="10" height="14" fill="#e2572b" opacity=".8"/><rect x="45" y="58" width="10" height="20" fill="#e2572b" opacity=".6"/><rect x="60" y="68" width="10" height="10" fill="#e2572b" opacity=".9"/>
+      </svg>
+      <h3><span class="dot"></span>Atlas</h3><div class="arch">The Builder</div>
+      <div class="say">"Let's make it run."</div>
+      <div class="lane">Automations · workflows · how-to</div>
+    </div>
+    <!-- NOVA -->
+    <div class="card ra" id="c4" style="--c:var(--violet)">
+      <svg viewBox="0 0 100 100" aria-label="Nova"><defs><radialGradient id="gN" cx="50%" cy="50%" r="55%"><stop offset="0" stop-color="#2a1d3d"/><stop offset="1" stop-color="#0e1424"/></radialGradient></defs>
+        <rect width="100" height="100" rx="12" fill="url(#gN)"/>
+        <g stroke="#b58cff" stroke-width="2" opacity=".9"><line x1="50" y1="26" x2="50" y2="74"/><line x1="26" y1="50" x2="74" y2="50"/><line x1="33" y1="33" x2="67" y2="67"/><line x1="67" y1="33" x2="33" y2="67"/></g>
+        <circle cx="50" cy="50" r="6" fill="#d9c4ff"/><circle cx="50" cy="50" r="14" fill="none" stroke="#b58cff" stroke-width="1" opacity=".5"/>
+      </svg>
+      <h3><span class="dot"></span>Nova</h3><div class="arch">The Storyteller</div>
+      <div class="say">"Let me show you what this means."</div>
+      <div class="lane">Visuals · branding · the story</div>
+    </div>
+    <!-- LUNA -->
+    <div class="card ra" id="c5" style="--c:var(--green)">
+      <svg viewBox="0 0 100 100" aria-label="Luna"><rect width="100" height="100" rx="12" fill="#0c1a14"/>
+        <circle cx="50" cy="50" r="14" fill="none" stroke="#5fe39a" stroke-width="2"/>
+        <path d="M44 47 a2 2 0 0 0 0 .1 M56 47 a2 2 0 0 0 0 .1" stroke="#5fe39a" stroke-width="3" stroke-linecap="round"/>
+        <path d="M43 55 Q50 60 57 55" fill="none" stroke="#5fe39a" stroke-width="2" stroke-linecap="round"/>
+        <g fill="none" stroke="#5fe39a" stroke-width="1.4" opacity=".5"><path d="M50 50 m-24 0 a24 24 0 0 1 48 0"/><path d="M50 50 m-32 0 a32 32 0 0 1 64 0"/></g>
+      </svg>
+      <h3><span class="dot"></span>Luna</h3><div class="arch">The Communicator · Homefront host</div>
+      <div class="say">"In plain English: here's what it means for you."</div>
+      <div class="lane">Homeowners · distribution · community</div>
+    </div>
+    <!-- GUARDIAN -->
+    <div class="card ra" id="c6" style="--c:var(--gold)">
+      <svg viewBox="0 0 100 100" aria-label="Guardian"><rect width="100" height="100" rx="12" fill="#14171f"/>
+        <path d="M50 22 L72 30 V52 C72 66 62 74 50 78 C38 74 28 66 28 52 V30 Z" fill="none" stroke="#f5b942" stroke-width="2.2"/>
+        <path d="M40 50 L47 58 L62 40" fill="none" stroke="#f5b942" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h3><span class="dot"></span>Guardian</h3><div class="arch">The Fact-Checker</div>
+      <div class="say">"Not until it's verified."</div>
+      <div class="lane">The commit gate · accuracy · trust</div>
+    </div>
+    <!-- ECHO -->
+    <div class="card ra" id="c7" style="--c:var(--rose)">
+      <svg viewBox="0 0 100 100" aria-label="Echo"><defs><radialGradient id="gE" cx="50%" cy="50%" r="55%"><stop offset="0" stop-color="#2a1418"/><stop offset="1" stop-color="#0e1424"/></radialGradient></defs>
+        <rect width="100" height="100" rx="12" fill="url(#gE)"/>
+        <g stroke="#ff8a9c" stroke-width="2.4" stroke-linecap="round"><line x1="26" y1="50" x2="26" y2="50"/><line x1="34" y1="42" x2="34" y2="58"/><line x1="42" y1="34" x2="42" y2="66"/><line x1="50" y1="40" x2="50" y2="60"/><line x1="58" y1="30" x2="58" y2="70"/><line x1="66" y1="44" x2="66" y2="56"/><line x1="74" y1="48" x2="74" y2="52"/></g>
+      </svg>
+      <h3><span class="dot"></span>Echo</h3><div class="arch">The Voice</div>
+      <div class="say">"Let me say it the way you'll remember."</div>
+      <div class="lane">Narration · reflection · the close</div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow ra">How they work together</div>
+    <h2 class="ra">A family, not a list.</h2>
+    <div class="together">
+      <div class="blk ra"><h4>Signal Desk</h4><p>Sage leads, Cipher guests on the tools, Guardian closes with the trust check.</p></div>
+      <div class="blk ra"><h4>Homefront</h4><p>Luna leads for homeowners, Atlas builds the how-to, Guardian adds the caveat.</p></div>
+      <div class="blk ra"><h4>Big launches</h4><p>Prometheus opens, Nova frames the story, Echo delivers the close you remember.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="closing" id="join">
+  <div class="wrap">
+    <h2 class="ra">Grow with the family.</h2>
+    <p class="ra">New episode every week — AI made simple, useful, and a little cinematic. Built to become the world's largest AI brand, one honest, helpful video at a time.</p>
+    <div class="ra"><a class="btn btn-primary" href="#">Subscribe free</a></div>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <div class="brand">THE AI FAMILY</div>
+  <p>Eight specialists, one mission: make AI useful, inspiring, and beautiful for everyone.</p>
+</div></footer>
+
+<div id="narr" aria-live="polite">
+  <span class="nt" id="narrText">Ready.</span>
+  <button id="narrPrev">‹</button><button id="narrToggle">Pause</button><button id="narrStop">Stop</button>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:.1});
+  document.querySelectorAll('.ra').forEach(function(el){obs.observe(el);});
+
+  // Narrated intro (Prometheus, then each character). Drop ElevenLabs renders into AUDIO[]
+  // (same length as `script`) to replace the browser voice — same pattern as the episode page.
+  var AUDIO=[];
+  var script=[
+    "We are the AI Family — eight specialists with one mission: to make AI useful, inspiring, and genuinely helpful for everyone. I'm Prometheus. Let me introduce them.",
+    "Sage, our analyst. She reads everything so you don't have to, and never trusts a single source.",
+    "Cipher, our tool-master. He shows you the exact setup, button by button.",
+    "Atlas, our builder. He turns ideas into systems that run while you sleep.",
+    "Nova, our storyteller. She makes dry technology feel like wonder.",
+    "Luna, our communicator — and your Homefront host. She explains it kindly, in plain English.",
+    "Guardian, our shield. Nothing ships until it's verified. That's how we keep your trust.",
+    "And Echo, our voice — who says it the way you'll remember. Welcome to the family."
+  ];
+  var cardIdx=[0,1,2,3,4,5,6,7];
+  var idx=0,paused=false,clip=null;
+  var synth=window.speechSynthesis,bar=document.getElementById('narr'),txt=document.getElementById('narrText'),btn=document.getElementById('narrateBtn');
+  var ttsOk=('speechSynthesis' in window)&&('SpeechSynthesisUtterance' in window);
+  function pickVoice(){var v=(synth&&synth.getVoices())||[];
+    return v.find(function(x){return /en[-_]?(US|GB)/i.test(x.lang)&&/(natural|neural|ava|aria|jenny|libby|sonia|samantha|google (us|uk))/i.test(x.name)})
+      ||v.find(function(x){return /en[-_]?(US|GB)/i.test(x.lang)})||v[0]||null;}
+  function lit(i){document.querySelectorAll('.card').forEach(function(c){c.classList.remove('lit');});var el=document.getElementById('c'+cardIdx[i]);if(el){el.classList.add('lit');el.scrollIntoView({behavior:'smooth',block:'center'});}}
+  function next(){if(!paused&&idx<script.length-1)render(idx+1);else if(idx>=script.length-1)stop();}
+  function render(i){idx=Math.max(0,Math.min(i,script.length-1));txt.textContent=script[idx];lit(idx);document.getElementById('narrToggle').textContent='Pause';
+    if(synth)synth.cancel();if(clip){clip.pause();clip=null;}
+    if(AUDIO[idx]){clip=new Audio(AUDIO[idx]);clip.onended=next;clip.play().catch(speakTTS);}else speakTTS();}
+  function speakTTS(){if(!ttsOk)return;var u=new SpeechSynthesisUtterance(script[idx]);var vc=pickVoice();if(vc)u.voice=vc;u.rate=.94;u.pitch=1.04;u.onend=next;synth.speak(u);}
+  function start(){if(!ttsOk&&!AUDIO.length){alert('Narration needs the Web Speech API (Chrome/Edge/Safari), or add audio files. The intros are on the page.');return;}bar.classList.add('show');btn.setAttribute('aria-pressed','true');btn.textContent='⏸ Narrating…';paused=false;render(0);}
+  function stop(){if(synth)synth.cancel();if(clip){clip.pause();clip=null;}paused=false;bar.classList.remove('show');btn.setAttribute('aria-pressed','false');btn.textContent='▶ Let them introduce themselves';document.querySelectorAll('.card').forEach(function(c){c.classList.remove('lit');});}
+  btn.addEventListener('click',function(){(bar.classList.contains('show'))?stop():start();});
+  document.getElementById('narrStop').addEventListener('click',stop);
+  document.getElementById('narrPrev').addEventListener('click',function(){render(Math.max(0,idx-1));});
+  document.getElementById('narrToggle').addEventListener('click',function(){if(paused){paused=false;this.textContent='Pause';render(idx);}else{paused=true;this.textContent='Resume';if(synth)synth.cancel();if(clip)clip.pause();}});
+  if(ttsOk&&synth.onvoiceschanged!==undefined)synth.onvoiceschanged=pickVoice;
+  window.addEventListener('beforeunload',function(){if(synth)synth.cancel();if(clip)clip.pause();});
+})();
+</script>
+</body>
+</html>

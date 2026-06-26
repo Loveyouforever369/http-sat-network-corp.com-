@@ -148,8 +148,7 @@
     { "id": "TOOL-204", "name": "DeepSeek V4", "category": "model", "kind": "model", "status": "documented", "source": "council partner; verified 2026-06-26", "note": "open-weight; 1M ctx; Flash = cost floor" },
     { "id": "TOOL-205", "name": "Qwen 3.6", "category": "model", "kind": "model", "status": "documented", "source": "council partner; verified 2026-06-26", "note": "open-weight; single-GPU; vision" },
     { "id": "TOOL-206", "name": "MiniMax M3", "category": "model", "kind": "model", "status": "documented", "source": "council partner; verified 2026-06-26", "note": "open-weight; 1M + multimodal" },
-    { "id": "TOOL-207", "name": "Kimi K2.6", "category": "model", "kind": "model", "status": "documented", "source": "council partner; verified 2026-06-26", "note": "agentic; long autonomous runs" },
-    { "id": "TOOL-115", "name": "Discord webhook", "category": "comms", "kind": "connector", "status": "documented", "source": "user added 2026-06-26", "note": "post via scripts/discord-post.ps1 or tools/discord-post.js; BLOCKED from this cloud sandbox (proxy 403 to discord.com) - runs on user machine / n8n; set FAMILY_DISCORD_WEBHOOK" }
+    { "id": "TOOL-207", "name": "Kimi K2.6", "category": "model", "kind": "model", "status": "documented", "source": "council partner; verified 2026-06-26", "note": "agentic; long autonomous runs" }
   ],
   "roster_meta": {
     "documented_members_here": 14,

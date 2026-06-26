@@ -11,6 +11,11 @@ generalizes, promote it to the "Standing Lessons" list at the bottom.
 
 ---
 
+## 2026-06-26 — Discord dropped (user's call)
+Removed the Discord poster + TOOL-115. The family already interacts through existing
+channels — no Discord webhook needed. The council/models help *build* content; the user's
+own channels handle interaction/distribution. (It was network-blocked from the sandbox anyway.)
+
 ## 2026-06-26 (review) — "Would the biggest company in the world release it?"
 
 Ran the genesis-grid commit gate over everything. Honest verdict:
