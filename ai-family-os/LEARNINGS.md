@@ -11,6 +11,26 @@ generalizes, promote it to the "Standing Lessons" list at the bottom.
 
 ---
 
+## 2026-06-26 (cont.) — Homefront produced; honest tooling reality
+
+**Built**
+- Pivoted the brand to **homeowners** (Homefront series, host Luna); wrote EP-0107 and a
+  turnkey `content/EP-0107-render-order.md` (render params + publish packet).
+
+**Tooling reality found this session (important — don't forget)**
+- **No social-publish connector is wired in this environment.** Searched: no Postiz / no
+  YouTube / FB / IG publish tool exists here. **I can create, but not post.** Publishing
+  happens on the user's side (Postiz) or via a **Zapier** bridge we'd build.
+- **Invideo** (`generate-video-from-script`) IS available, but the render call hit a
+  *permission-stream closure* — a transient connector drop, not a denial. Retry when stable.
+- **HeyGen** (HyperFrames) did not surface in tool search this session — treat as
+  intermittently available; don't promise an avatar render until it's confirmed reachable.
+- MCP connectors are **flapping** (connect/disconnect each turn). Don't hammer unstable
+  tools; prepare turnkey orders and fire when the channel is stable.
+
+**Promoted Standing Lesson:** *Create here; publish on your side (or via Zapier). There is
+no native social-publish connector — never imply content was posted when it was only made.*
+
 ## 2026-06-26 — Family doctrine ingested; facts re-verified on the web
 
 **Brought in / built**
