@@ -11,6 +11,35 @@ generalizes, promote it to the "Standing Lessons" list at the bottom.
 
 ---
 
+## 2026-06-26 (review) — "Would the biggest company in the world release it?"
+
+Ran the genesis-grid commit gate over everything. Honest verdict:
+
+**Release-ready (ship it):** the OS doctrine + skills + memory (`CLAUDE.md`), the
+registry/validator, the written scripts (EP-0001, EP-0107), the Homefront strategy, the
+**Character Bible**, and the EP-0107 episode page. Real, validated, self-contained.
+
+**NOT release-ready (don't claim it's done):**
+- **No video has actually rendered** — Invideo is approval-stream-blocked this session.
+- **Nothing is published** — no social connector here, and **Discord is network-blocked**
+  (proxy 403 to discord.com). Publishing runs on your infra, not this sandbox.
+- **Voices were robotic** — fixed the *path* (page now plays a real audio file when one is
+  supplied; warmer Web Speech fallback), but premium ElevenLabs audio still needs wiring.
+- **Site AI not wired** — designed, not deployed.
+
+So a big company would release the **foundation + docs + site**, and would NOT yet claim a
+"live, self-running content machine." That gap is the honest line, every time.
+
+**Added this pass:** Character Bible (8 futuristic hosts, locked look/voice/lane); the
+voice fix (real-audio path); the Discord poster (portable, ready for the webhook URL).
+
+**Lessons locked (never repeat):**
+- **Verify outbound reachability BEFORE promising a post.** Discord = 403 CONNECT here.
+- Don't hammer an approval-gated tool when the permission stream is closing — prepare a
+  turnkey order and fire when healthy.
+- "Connected in your account" ≠ "callable from this sandbox." Create here; run/post where
+  the network + approval channel allow.
+
 ## 2026-06-26 (cont.) — Homefront produced; honest tooling reality
 
 **Built**

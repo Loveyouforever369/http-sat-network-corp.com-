@@ -170,19 +170,34 @@
     "\"Paste any home quote and ask: is this fair?\"",
     "\"Want it set up for you? That's what we do.\""
   ];
-  var idx=0,paused=false;
+  // === VOICE: drop a real narration render (e.g. an ElevenLabs "Luna" clip) per line into
+  // AUDIO[] (same length as `script`) and the page plays that instead of the robotic browser
+  // voice. Empty -> graceful, warmer Web Speech fallback. This is the real fix for robotic VO. ===
+  var AUDIO=[ /* "audio/luna-01.mp3","audio/luna-02.mp3","audio/luna-03.mp3","audio/luna-04.mp3","audio/luna-05.mp3" */ ];
+  var idx=0,paused=false,clip=null;
   var synth=window.speechSynthesis,bar=document.getElementById('narr'),txt=document.getElementById('narrText'),btn=document.getElementById('narrateBtn'),screenLine=document.getElementById('screenLine');
-  var ok=('speechSynthesis' in window)&&('SpeechSynthesisUtterance' in window);
-  function voice(){var v=(synth&&synth.getVoices())||[];return v.find(function(x){return /en[-_]?US/i.test(x.lang)&&/female|samantha|zira|google us/i.test(x.name)})||v.find(function(x){return /en[-_]?US/i.test(x.lang)})||v[0]||null;}
-  function speak(i){if(!ok)return;synth.cancel();idx=Math.max(0,Math.min(i,script.length-1));var u=new SpeechSynthesisUtterance(script[idx]);var vc=voice();if(vc)u.voice=vc;u.rate=1.0;u.pitch=1.05;u.onend=function(){if(!paused&&idx<script.length-1)speak(idx+1);else if(idx>=script.length-1)stop();};txt.textContent=script[idx];if(screenLine)screenLine.textContent=lines[idx];synth.speak(u);document.getElementById('narrToggle').textContent='Pause';}
-  function start(){if(!ok){alert('Narration needs a browser with the Web Speech API (Chrome/Edge/Safari). The script is all on the page.');return;}bar.classList.add('show');btn.setAttribute('aria-pressed','true');btn.textContent='⏸ Narrating…';speak(0);}
-  function stop(){if(ok)synth.cancel();paused=false;bar.classList.remove('show');btn.setAttribute('aria-pressed','false');btn.textContent='▶ Play narration';}
+  var ttsOk=('speechSynthesis' in window)&&('SpeechSynthesisUtterance' in window);
+  function pickVoice(){var v=(synth&&synth.getVoices())||[];
+    return v.find(function(x){return /en[-_]?(US|GB)/i.test(x.lang)&&/(natural|neural|ava|aria|jenny|libby|sonia|samantha|google (us|uk))/i.test(x.name)})
+      ||v.find(function(x){return /en[-_]?(US|GB)/i.test(x.lang)&&/female|samantha|zira/i.test(x.name)})
+      ||v.find(function(x){return /en[-_]?(US|GB)/i.test(x.lang)})||v[0]||null;}
+  function next(){if(!paused&&idx<script.length-1)render(idx+1);else if(idx>=script.length-1)stop();}
+  function render(i){idx=Math.max(0,Math.min(i,script.length-1));
+    txt.textContent=script[idx];if(screenLine)screenLine.textContent=lines[idx];
+    document.getElementById('narrToggle').textContent='Pause';
+    if(synth)synth.cancel(); if(clip){clip.pause();clip=null;}
+    if(AUDIO[idx]){ clip=new Audio(AUDIO[idx]); clip.onended=next; clip.play().catch(speakTTS); }
+    else speakTTS();
+  }
+  function speakTTS(){ if(!ttsOk)return; var u=new SpeechSynthesisUtterance(script[idx]); var vc=pickVoice(); if(vc)u.voice=vc; u.rate=.94; u.pitch=1.06; u.onend=next; synth.speak(u); }
+  function start(){ if(!ttsOk&&!AUDIO.length){alert('Narration needs the Web Speech API (Chrome/Edge/Safari), or add audio files to AUDIO[]. The script is on the page.');return;} bar.classList.add('show'); btn.setAttribute('aria-pressed','true'); btn.textContent='⏸ Narrating…'; paused=false; render(0); }
+  function stop(){ if(synth)synth.cancel(); if(clip){clip.pause();clip=null;} paused=false; bar.classList.remove('show'); btn.setAttribute('aria-pressed','false'); btn.textContent='▶ Play narration'; }
   btn.addEventListener('click',function(){(bar.classList.contains('show'))?stop():start();});
   document.getElementById('narrStop').addEventListener('click',stop);
-  document.getElementById('narrPrev').addEventListener('click',function(){speak(Math.max(0,idx-1));});
-  document.getElementById('narrToggle').addEventListener('click',function(){if(!ok)return;if(paused){paused=false;this.textContent='Pause';speak(idx);}else{paused=true;this.textContent='Resume';synth.cancel();}});
-  if(ok&&synth.onvoiceschanged!==undefined)synth.onvoiceschanged=voice;
-  window.addEventListener('beforeunload',function(){if(ok)synth.cancel();});
+  document.getElementById('narrPrev').addEventListener('click',function(){render(Math.max(0,idx-1));});
+  document.getElementById('narrToggle').addEventListener('click',function(){ if(paused){paused=false;this.textContent='Pause';render(idx);} else {paused=true;this.textContent='Resume';if(synth)synth.cancel();if(clip)clip.pause();} });
+  if(ttsOk&&synth.onvoiceschanged!==undefined)synth.onvoiceschanged=pickVoice;
+  window.addEventListener('beforeunload',function(){if(synth)synth.cancel();if(clip)clip.pause();});
 })();
 </script>
 </body>
