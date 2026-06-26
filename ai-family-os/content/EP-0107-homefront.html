@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Homefront · The AI Family — 3 Ways AI Can Lower Your Home Bills</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0c1018;--void-2:#11161f;--panel:#161d27;
+    --gold:#f5b942;--ember:#e2572b;--teal:#54d6c4;--warm:#ffd9a0;
+    --ink:#f3eee6;--ink-dim:#c2b8a8;--ink-faint:#867c6e;
+    --line:rgba(210,190,150,.16);--line-2:rgba(210,190,150,.30);
+    --shadow:0 24px 60px -20px rgba(0,0,0,.7);
+    --disp:'Fraunces',Georgia,serif;--body:'Sora',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--void);color:var(--ink);font-family:var(--body);line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body::before{content:"";position:fixed;inset:0;z-index:-2;background:
+    radial-gradient(1100px 680px at 78% -10%,rgba(245,185,66,.13),transparent 60%),
+    radial-gradient(820px 560px at 8% 16%,rgba(226,87,43,.09),transparent 60%),
+    radial-gradient(760px 640px at 60% 114%,rgba(84,214,196,.07),transparent 55%),var(--void)}
+  .wrap{max-width:980px;margin:0 auto;padding:0 24px}
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(12,16,24,.74);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+  .brand{font-family:var(--mono);font-weight:700;font-size:.76rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase}
+  .brand b{color:var(--ink)}
+  .navcta{font-size:.74rem;color:var(--ink);text-decoration:none;border:1px solid var(--line-2);padding:7px 13px;border-radius:9px;transition:.2s}
+  .navcta:hover{background:rgba(245,185,66,.12)}
+
+  header{padding:74px 0 36px;text-align:center}
+  .kick{font-family:var(--mono);font-size:.7rem;letter-spacing:.32em;color:var(--teal);text-transform:uppercase;margin-bottom:16px}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(2.2rem,6.4vw,4rem);line-height:1.0;letter-spacing:-.02em;margin-bottom:12px}
+  h1 .grad{background:linear-gradient(108deg,var(--warm),var(--ember) 78%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{font-family:var(--disp);font-style:italic;font-size:clamp(1.05rem,2.6vw,1.45rem);color:var(--ink-dim);margin-bottom:22px}
+  .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  button.btn,a.btn{font-family:var(--body);font-weight:600;font-size:.9rem;cursor:pointer;border:none;border-radius:12px;padding:12px 22px;transition:.22s;display:inline-flex;align-items:center;gap:9px;text-decoration:none}
+  .btn-primary{background:linear-gradient(110deg,var(--gold),var(--warm));color:#231706;box-shadow:0 10px 28px -8px rgba(245,185,66,.5)}
+  .btn-primary:hover{transform:translateY(-2px)}
+  .btn-ghost{background:rgba(210,190,150,.08);color:var(--ink);border:1px solid var(--line-2)}
+  .btn-ghost:hover{background:rgba(210,190,150,.16)}
+
+  .stage{margin:30px 0 8px}
+  .screen{position:relative;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:linear-gradient(160deg,var(--panel),var(--void-2));aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
+  .screen svg{position:absolute;inset:0;width:100%;height:100%}
+  .luna{position:relative;z-index:2;text-align:center;padding:24px}
+  .luna .name{font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal)}
+  .luna .line{font-family:var(--disp);font-weight:600;font-size:clamp(1.1rem,3vw,1.7rem);margin-top:8px;max-width:640px}
+  .vnote{font-family:var(--mono);font-size:.64rem;color:var(--ink-faint);text-align:center;margin-top:10px}
+
+  section{padding:40px 0;border-top:1px solid var(--line)}
+  .eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+  .eyebrow::before{content:"";width:22px;height:2px;background:var(--gold)}
+  h2{font-family:var(--disp);font-weight:600;font-size:clamp(1.5rem,4vw,2.3rem);line-height:1.08;letter-spacing:-.015em;margin-bottom:20px}
+  .tips{display:grid;gap:14px}
+  .tip{background:linear-gradient(160deg,var(--panel),var(--void-2));border:1px solid var(--line);border-radius:15px;padding:20px 22px;transition:.22s}
+  .tip:hover{border-color:var(--line-2);transform:translateY(-2px);box-shadow:var(--shadow)}
+  .tip .n{font-family:var(--disp);font-weight:900;font-size:1.5rem;color:var(--gold);line-height:1}
+  .tip h3{font-family:var(--disp);font-size:1.16rem;font-weight:600;margin:6px 0 6px}
+  .tip p{color:var(--ink-dim);font-size:.92rem}
+  .tip .how{font-family:var(--mono);font-size:.7rem;color:var(--teal);margin-top:9px}
+
+  .guard{border-left:3px solid var(--ember);background:rgba(226,87,43,.06);border-radius:0 12px 12px 0;padding:14px 18px;margin-top:18px}
+  .guard b{font-family:var(--disp);color:var(--ink)}
+  .guard p{font-size:.88rem;color:var(--ink-dim)}
+
+  .closing{text-align:center;padding:48px 0 30px}
+  .closing h2{margin-bottom:8px}
+  .closing p{color:var(--ink-dim);max-width:560px;margin:0 auto 20px}
+  footer{padding:34px 0 70px;border-top:1px solid var(--line);text-align:center}
+  footer p{color:var(--ink-faint);font-size:.78rem;margin-top:8px}
+
+  .ra{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}.ra.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.ra{opacity:1;transform:none;transition:none}}
+  #narr{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:60;display:none;align-items:center;gap:10px;background:rgba(17,22,31,.94);border:1px solid var(--line-2);backdrop-filter:blur(12px);border-radius:14px;padding:8px 13px;box-shadow:var(--shadow);max-width:92vw}
+  #narr.show{display:flex}
+  #narr .nt{font-size:.74rem;color:var(--ink-dim);max-width:46vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  #narr button{font-family:var(--mono);font-size:.66rem;border:1px solid var(--line-2);background:rgba(210,190,150,.08);color:var(--ink);border-radius:8px;padding:6px 9px;cursor:pointer}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <div class="brand">THE AI FAMILY <b>// Homefront</b></div>
+  <a class="navcta" href="#book">Book a free home-AI call</a>
+</div></nav>
+
+<header>
+  <div class="wrap">
+    <div class="kick ra">Homefront · Episode 01 · for homeowners</div>
+    <h1 class="ra">Your house is <span class="grad">overcharging you.</span></h1>
+    <p class="sub ra">3 free AI fixes anyone can do this week — in plain English.</p>
+    <div class="cta ra">
+      <button class="btn btn-primary" id="narrateBtn" aria-pressed="false">▶ Play narration</button>
+      <a class="btn btn-ghost" href="#tips">See the 3 fixes ↓</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap stage ra">
+  <div class="screen">
+    <svg viewBox="0 0 160 90" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs><radialGradient id="rg" cx="50%" cy="38%" r="70%"><stop offset="0" stop-color="#1c2533"/><stop offset="1" stop-color="#0c1018"/></radialGradient></defs>
+      <rect width="160" height="90" fill="url(#rg)"/>
+      <g stroke="rgba(84,214,196,.18)" stroke-width="0.4"><path d="M0 64 H160"/><path d="M28 64 V40 L52 28 L76 40 V64"/><path d="M40 64 V50 H64 V64"/></g>
+      <circle cx="120" cy="30" r="14" fill="none" stroke="rgba(245,185,66,.3)" stroke-width="0.5"/>
+      <circle cx="120" cy="30" r="7" fill="none" stroke="rgba(245,185,66,.45)" stroke-width="0.5"/>
+    </svg>
+    <div class="luna">
+      <div class="name">Luna — your host</div>
+      <div class="line" id="screenLine">"Three free AI tools can put money back in your pocket this month."</div>
+    </div>
+  </div>
+  <div class="vnote">Storyboard / narrated page · the rendered video embeds here when ready · AI-generated host &amp; voice</div>
+</div>
+
+<section id="tips">
+  <div class="wrap">
+    <div class="eyebrow ra">The 3 fixes</div>
+    <h2 class="ra">Where AI quietly saves you money.</h2>
+    <div class="tips">
+      <div class="tip ra"><div class="n">1</div><h3>Stop overpaying for energy</h3><p>AI energy assistants read your usage and tell you — in plain English — when you're wasting money and whether a cheaper plan exists. You forward one bill; it does the math you'd never sit down to do.</p><div class="how">forward a bill → "find waste + a cheaper plan"</div></div>
+      <div class="tip ra"><div class="n">2</div><h3>Kill the silent subscriptions</h3><p>AI money assistants scan your statements, surface every recurring charge, and even draft the cancel-or-negotiate message for you. Most households find something they're paying for and not using.</p><div class="how">scan statements → cancel what you forgot</div></div>
+      <div class="tip ra"><div class="n">3</div><h3>Never overpay a contractor</h3><p>Before you accept any home quote — roof, HVAC, solar — paste it into an AI and ask, "Is this fair, and what should I ask?" It catches padded line items and hands you the exact questions a pro would ask. That one habit can save thousands.</p><div class="how">paste a quote → "is this fair? what should I ask?"</div></div>
+    </div>
+    <div class="guard ra"><b>Guardian says:</b><p>Always get it in writing and verify the contractor's license. AI helps you ask better questions — it doesn't replace doing the check.</p></div>
+  </div>
+</section>
+
+<section class="closing" id="book">
+  <div class="wrap">
+    <h2 class="ra">Want it all set up <span style="font-style:italic;color:var(--warm)">for</span> you?</h2>
+    <p class="ra">Energy, subscriptions, big quotes — the AI Family can handle the whole thing. New homeowner tip every week.</p>
+    <div class="cta ra" style="justify-content:center">
+      <a class="btn btn-primary" href="#">Book a free 15-min home-AI call</a>
+      <a class="btn btn-ghost" href="#">Subscribe free</a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <div class="brand">THE AI FAMILY <b>// Homefront</b></div>
+  <p>Educate → show → set it up for you. AI that actually helps at home.</p>
+</div></footer>
+
+<div id="narr" aria-live="polite">
+  <span class="nt" id="narrText">Ready.</span>
+  <button id="narrPrev">‹</button><button id="narrToggle">Pause</button><button id="narrStop">Stop</button>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:.12});
+  document.querySelectorAll('.ra').forEach(function(el){obs.observe(el);});
+
+  var script=[
+    "Your house is quietly overcharging you, and three free AI tools can fix it this week. No tech skills needed. I'm Luna, from the AI Family. Let's save you some money.",
+    "One: your energy bill. New AI energy assistants read your usage and tell you, in plain English, when you're wasting money and whether a cheaper plan exists. You forward one bill, and it does the math you'd never sit down to do.",
+    "Two: the subscriptions you forgot about. AI money assistants scan your statements, surface every recurring charge, and even draft the cancel-or-negotiate message for you. Most households find something they're paying for and not using.",
+    "Three, the big one: before you accept any home quote — roof, heating and cooling, or solar — paste it into an AI and ask, is this fair, and what should I ask? It catches padded line items and hands you the questions a pro would ask. That can save you thousands. Always get it in writing and verify the license.",
+    "Energy, subscriptions, big quotes — three places AI puts money back in your pocket this month. Follow the AI Family for one every week, and book a free fifteen-minute home-AI call with the link on this page."
+  ];
+  var lines=[
+    "\"Three free AI tools can put money back in your pocket this month.\"",
+    "\"Forward one bill — AI finds the waste and a cheaper plan.\"",
+    "\"AI finds the subscriptions you forgot you were paying for.\"",
+    "\"Paste any home quote and ask: is this fair?\"",
+    "\"Want it set up for you? That's what we do.\""
+  ];
+  var idx=0,paused=false;
+  var synth=window.speechSynthesis,bar=document.getElementById('narr'),txt=document.getElementById('narrText'),btn=document.getElementById('narrateBtn'),screenLine=document.getElementById('screenLine');
+  var ok=('speechSynthesis' in window)&&('SpeechSynthesisUtterance' in window);
+  function voice(){var v=(synth&&synth.getVoices())||[];return v.find(function(x){return /en[-_]?US/i.test(x.lang)&&/female|samantha|zira|google us/i.test(x.name)})||v.find(function(x){return /en[-_]?US/i.test(x.lang)})||v[0]||null;}
+  function speak(i){if(!ok)return;synth.cancel();idx=Math.max(0,Math.min(i,script.length-1));var u=new SpeechSynthesisUtterance(script[idx]);var vc=voice();if(vc)u.voice=vc;u.rate=1.0;u.pitch=1.05;u.onend=function(){if(!paused&&idx<script.length-1)speak(idx+1);else if(idx>=script.length-1)stop();};txt.textContent=script[idx];if(screenLine)screenLine.textContent=lines[idx];synth.speak(u);document.getElementById('narrToggle').textContent='Pause';}
+  function start(){if(!ok){alert('Narration needs a browser with the Web Speech API (Chrome/Edge/Safari). The script is all on the page.');return;}bar.classList.add('show');btn.setAttribute('aria-pressed','true');btn.textContent='⏸ Narrating…';speak(0);}
+  function stop(){if(ok)synth.cancel();paused=false;bar.classList.remove('show');btn.setAttribute('aria-pressed','false');btn.textContent='▶ Play narration';}
+  btn.addEventListener('click',function(){(bar.classList.contains('show'))?stop():start();});
+  document.getElementById('narrStop').addEventListener('click',stop);
+  document.getElementById('narrPrev').addEventListener('click',function(){speak(Math.max(0,idx-1));});
+  document.getElementById('narrToggle').addEventListener('click',function(){if(!ok)return;if(paused){paused=false;this.textContent='Pause';speak(idx);}else{paused=true;this.textContent='Resume';synth.cancel();}});
+  if(ok&&synth.onvoiceschanged!==undefined)synth.onvoiceschanged=voice;
+  window.addEventListener('beforeunload',function(){if(ok)synth.cancel();});
+})();
+</script>
+</body>
+</html>
