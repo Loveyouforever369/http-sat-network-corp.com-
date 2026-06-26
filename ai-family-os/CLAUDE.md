@@ -5,6 +5,13 @@
 > To carry the doctrine into **every** project: copy `skills/` into that project's
 > `.claude/skills/` (or `~/.claude/skills/`) and add a `CLAUDE.md` that points here.
 
+## Mission & audience
+**Goal:** build the biggest AI brand in the world by *educating* people on what AI can
+actually do — and doing it for them. **Primary audience: homeowners** (warm, plain-English,
+genuinely useful); secondary track: local home-service businesses. The face is the **AI
+Family** cast; the homeowner-facing series is **Homefront** (host: Luna). Every piece runs
+the pattern **educate → show → book a call.** See `docs/brand-homefront.md`.
+
 ## Standing doctrine — always active
 Two skills are the house operating system and apply to **all** work, even unnamed:
 - **`skills/genesis-grid/`** — the build loop (Explore → Study → Multi-source → Plan →

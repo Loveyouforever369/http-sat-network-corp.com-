@@ -85,7 +85,8 @@
   ],
   "campaigns": [
     { "id": "CMP-001", "name": "prometheus-is-coming", "pipelines": ["PIPE-002", "PIPE-003", "PIPE-004"] },
-    { "id": "CMP-002", "name": "weekly-signal-drop", "pipelines": ["PIPE-001", "PIPE-003"] }
+    { "id": "CMP-002", "name": "weekly-signal-drop", "pipelines": ["PIPE-001", "PIPE-003"] },
+    { "id": "CMP-003", "name": "ai-for-your-home", "pipelines": ["PIPE-003", "PIPE-004"] }
   ],
   "signals": [
     { "id": "SIG-0001", "headline": "OpenAI ships GPT-5.5 (Pro + Instant); Instant cuts hallucinated claims ~52.5%", "source": "https://www.buildfastwithai.com/blogs/ai-news-today-june-8-2026", "why_it_matters": "more reliable agent output lowers the QA burden across every Builders automation", "assigned_host": "MBR-0010", "priority": "P1", "status": "new", "linked_episode": "EP-0001" },
@@ -98,7 +99,8 @@
     { "id": "EP-0001", "title": "What actually changed in AI this week", "series": "signal-desk", "host": "MBR-0002", "core_question": "What matters this week and why?", "status": "review", "publish_targets": ["youtube", "shorts", "x"], "script": "content/EP-0001-signal-desk.md" },
     { "id": "EP-0002", "title": "Build an agent that briefs you every morning", "series": "prometheus", "host": "MBR-0003", "core_question": "How do agents turn raw signals into action?", "status": "scripted", "publish_targets": ["youtube", "shorts"] },
     { "id": "EP-0105", "title": "MCP Registry + Multi-Model Routing: USB-C for AI Tools", "series": "signal-desk", "host": "MBR-0012", "core_question": "How do you route many models through one MCP layer?", "status": "scripted", "publish_targets": ["youtube", "shorts", "x"], "source": "ai-signal-desk/content/episodes/tool05-mcp-multimodel-config.json" },
-    { "id": "EP-0106", "title": "The 5 AI tools that replace a $5,000/month agency", "series": "prometheus", "host": "MBR-0015", "core_question": "Which AI tools actually replace agency work, and where does a human still belong?", "status": "idea", "publish_targets": ["youtube", "shorts", "facebook", "instagram"], "key_fact": "SMB agency retainers run $5k-15k/mo vs ~$799-1,999/mo for AI agents; the honest end-state is hybrid (AI execution + 5-10 hrs/mo senior human for strategy/QC).", "source": "intel/web-gather-2026-06-25.md" }
+    { "id": "EP-0106", "title": "The 5 AI tools that replace a $5,000/month agency", "series": "prometheus", "host": "MBR-0015", "core_question": "Which AI tools actually replace agency work, and where does a human still belong?", "status": "idea", "publish_targets": ["youtube", "shorts", "facebook", "instagram"], "key_fact": "SMB agency retainers run $5k-15k/mo vs ~$799-1,999/mo for AI agents; the honest end-state is hybrid (AI execution + 5-10 hrs/mo senior human for strategy/QC).", "source": "intel/web-gather-2026-06-25.md" },
+    { "id": "EP-0107", "title": "3 Ways AI Can Lower Your Home Bills This Month", "series": "homefront", "host": "MBR-0006", "core_question": "Where does AI put money back in a homeowner's pocket this month?", "status": "scripted", "publish_targets": ["youtube", "shorts", "facebook", "instagram", "tiktok"], "script": "content/EP-0107-homefront.md" }
   ],
   "tools": [
     { "id": "TOOL-001", "name": "Playwright MCP", "category": "browser-automation", "kind": "mcp", "status": "install-scripted", "source": "install-mcp-servers.ps1" },
