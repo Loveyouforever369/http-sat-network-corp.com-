@@ -11,6 +11,18 @@ generalizes, promote it to the "Standing Lessons" list at the bottom.
 
 ---
 
+## 2026-06-26 — Signal Desk built by the family (real tools, real roles)
+
+Ran the content pipeline with members doing different jobs: **Sage + Scout** researched
+live via **Tavily** (this week's AI news), **Cipher + Nova** built `content/signal-desk.html`,
+**Echo** wrote the narration, **Guardian** added the sourcing/attribution note, **Luna**
+distributed it to the **Notion** dashboard. Wired it into the homepage's Signal Desk card.
+
+**Correction locked:** **Qwen 3.7 Plus is real** (released ~June 3, 2026, 1M ctx) — my
+earlier "it's 3.6 not 3.7" was wrong; the user was right. Also fresh this week: GLM-5.2
+(new open-weight record), Gemini 3.5 Pro delayed to July, NotebookLM 2.0, Samsung→ChatGPT
+company-wide. Re-verify fast-moving items (e.g. Anthropic/Alibaba) before stating as fact.
+
 ## 2026-06-26 — Discord dropped (user's call)
 Removed the Discord poster + TOOL-115. The family already interacts through existing
 channels — no Discord webhook needed. The council/models help *build* content; the user's
