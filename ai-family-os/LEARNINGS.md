@@ -11,6 +11,21 @@ generalizes, promote it to the "Standing Lessons" list at the bottom.
 
 ---
 
+## 2026-06-26 — YouTube dispatch wired; the honest bottleneck found
+
+Studied the publish chain end to end and **wired the publisher for real**: enabled the
+Zapier **YouTube `upload_video`** action (YouTubeV4CLIAPI). The dispatch chain is now:
+`research → script → RENDER (file) → Guardian → upload_video → log`.
+
+**Two gates remain — both on the user's side, neither fakeable:**
+1. One-time **YouTube auth** in Zapier (auth URL surfaced).
+2. A **rendered video FILE** — `upload_video.video` is a required file, and the render
+   tools won't execute from this sandbox (approval stream closes).
+
+**Key lesson locked:** the **publisher is no longer the blocker — the video file is.**
+Never mark content "posted" unless an upload returns a video ID. See `docs/publishing-system.md`.
+The fix path: render on the user's machine/n8n → hand me (or n8n) the file/URL → upload fires.
+
 ## 2026-06-26 — Signal Desk built by the family (real tools, real roles)
 
 Ran the content pipeline with members doing different jobs: **Sage + Scout** researched

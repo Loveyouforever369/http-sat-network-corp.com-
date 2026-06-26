@@ -151,7 +151,8 @@
     { "id": "TOOL-204", "name": "DeepSeek V4", "category": "model", "kind": "model", "status": "documented", "source": "council partner; verified 2026-06-26", "note": "open-weight; 1M ctx; Flash = cost floor" },
     { "id": "TOOL-205", "name": "Qwen 3.6", "category": "model", "kind": "model", "status": "documented", "source": "council partner; verified 2026-06-26", "note": "open-weight; single-GPU; vision" },
     { "id": "TOOL-206", "name": "MiniMax M3", "category": "model", "kind": "model", "status": "documented", "source": "council partner; verified 2026-06-26", "note": "open-weight; 1M + multimodal" },
-    { "id": "TOOL-207", "name": "Kimi K2.6", "category": "model", "kind": "model", "status": "documented", "source": "council partner; verified 2026-06-26", "note": "agentic; long autonomous runs" }
+    { "id": "TOOL-207", "name": "Kimi K2.6", "category": "model", "kind": "model", "status": "documented", "source": "council partner; verified 2026-06-26", "note": "agentic; long autonomous runs" },
+    { "id": "TOOL-116", "name": "YouTube (via Zapier)", "category": "social-publishing", "kind": "connector", "status": "active", "source": "Zapier YouTubeV4CLIAPI enabled 2026-06-26", "note": "upload_video action ENABLED. Gates: (1) one-time YouTube auth in Zapier, (2) a rendered video FILE (render blocked in sandbox). Fire via execute_zapier_write_action -> upload_video; see docs/publishing-system.md" }
   ],
   "roster_meta": {
     "documented_members_here": 14,
