@@ -1,0 +1,47 @@
+{
+  "_doc": "Council routing map (genesis-grid doctrine). Route by difficulty + sensitivity. Model names VERIFIED via live web search 2026-06-26; re-verify quarterly.",
+  "_verified": "2026-06-26",
+  "tiers": {
+    "volume": {
+      "purpose": "60-80% of traffic: bulk reading, drafts, classification, multilingual",
+      "provider": "ollama",
+      "endpoint": "{{OLLAMA_BASE_URL}}/api/chat",
+      "candidates": ["qwen3.6", "deepseek-v4-flash", "glm-5.1", "minimax-m3"],
+      "cost": "free (self-hosted) or near-free via OpenRouter"
+    },
+    "frontier": {
+      "purpose": "hard 20%: synthesis, architecture, hard bugs, final write",
+      "candidates": [
+        { "provider": "anthropic", "model": "claude-opus", "endpoint": "https://api.anthropic.com/v1/messages", "key_env": "ANTHROPIC_API_KEY" },
+        { "provider": "openai", "model": "gpt-5.5", "endpoint": "https://api.openai.com/v1/responses", "key_env": "OPENAI_API_KEY" },
+        { "provider": "google", "model": "gemini-3-pro", "endpoint": "https://generativelanguage.googleapis.com/v1beta/models", "key_env": "GOOGLE_API_KEY" },
+        { "provider": "xai", "model": "grok-4", "endpoint": "https://api.x.ai/v1/chat/completions", "key_env": "XAI_API_KEY" }
+      ],
+      "cost": "usage-based"
+    },
+    "sensitive": {
+      "purpose": "anything touching client PII or regulated data",
+      "provider": "ollama",
+      "endpoint": "{{OLLAMA_BASE_URL}}/api/chat",
+      "candidates": ["qwen3.6", "deepseek-v4"],
+      "rule": "self-hosted ONLY; never send to a public API",
+      "cost": "free (self-hosted)"
+    }
+  },
+  "task_routing": {
+    "research_bulk": "volume",
+    "classify": "volume",
+    "draft": "volume",
+    "translate": "volume",
+    "architecture": "frontier",
+    "synthesis": "frontier",
+    "hard_bug": "frontier",
+    "final_write": "frontier",
+    "client_data": "sensitive",
+    "default": "volume"
+  },
+  "council_review": {
+    "purpose": "2-3 models critique a frontier output; surface disagreement before the commit gate",
+    "reviewers": ["anthropic:claude-opus", "deepseek:deepseek-v4", "xai:grok-4", "zhipu:glm-5.1"]
+  }
+}

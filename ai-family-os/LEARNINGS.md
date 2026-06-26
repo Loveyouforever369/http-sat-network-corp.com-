@@ -11,6 +11,30 @@ generalizes, promote it to the "Standing Lessons" list at the bottom.
 
 ---
 
+## 2026-06-26 — Family doctrine ingested; facts re-verified on the web
+
+**Brought in / built**
+- Pulled the **genesis-grid** and **voice-layer** skills from the prior bundle into the
+  canonical OS (`skills/`), added **`CLAUDE.md`** so the doctrine auto-loads in any Claude
+  Code session here, and brought in the council `routing/` map + `router.js`.
+- Refreshed `free-tool-stack.md` and `routing/model-map.json` with **live-verified**
+  June-2026 data (Tavily). Registered the model **partners** (the council) + the web tools
+  (Tavily, Nimble) in the registry. Wrote `docs/avatars-and-publishing.md`.
+
+**Verified facts (so memory isn't stale)**
+- Open-weight: GLM-5.2 leads the open index; GLM-5.1 = coding flagship; DeepSeek V4
+  Pro/Flash (1M ctx, Flash = cost floor); MiniMax M3 (1M + multimodal); Kimi K2.6.
+- Video: Veo 3.1 best overall; Seedance 2.0 watermark-free; Kling 3.0; Runway free tier
+  collapsed (~2–3 clips); Sora availability-dependent; Gemini CLI retired → Antigravity.
+
+**Corrections logged (don't repeat)**
+- **Perplexity does NOT publish content** — it's research/answer (Comet browser). Publish
+  via **Postiz**; Perplexity feeds the *front* of the machine, not the end.
+- **"Vellum" is the character Grandpa Vellum, not an LLM partner.**
+- **Qwen is at 3.6, not 3.7.**
+- Avatars / council / voice are **real but need wiring or credits** — a skill file alone
+  grants no powers (genesis-grid honesty rule #1).
+
 ## 2026-06-25 — Content machine: first site + first real intel
 
 **Built**
