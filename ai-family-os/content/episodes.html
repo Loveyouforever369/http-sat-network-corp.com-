@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Episodes — The AI Family</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0a0e1a;--void-2:#0e1424;--panel:#121a2e;
+    --gold:#f5b942;--ember:#e2572b;--teal:#54d6c4;--blue:#7aa2ff;--green:#5fe39a;
+    --ink:#eaf0ff;--ink-dim:#9fb0d0;--ink-faint:#64748f;
+    --line:rgba(132,156,210,.16);--line-2:rgba(132,156,210,.30);--shadow:0 24px 60px -20px rgba(0,0,0,.7);
+    --disp:'Fraunces',Georgia,serif;--body:'Sora',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--void);color:var(--ink);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased}
+  body::before{content:"";position:fixed;inset:0;z-index:-2;background:
+    radial-gradient(900px 600px at 82% -8%,rgba(245,185,66,.10),transparent 60%),
+    radial-gradient(760px 520px at 6% 14%,rgba(95,227,154,.07),transparent 60%),var(--void)}
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px}
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(10,14,26,.72);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+  .brand{font-family:var(--mono);font-weight:700;font-size:.76rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase}
+  .navcta{font-size:.74rem;color:var(--ink);text-decoration:none;border:1px solid var(--line-2);padding:7px 13px;border-radius:9px}
+  header{padding:70px 0 20px;text-align:center}
+  .kick{font-family:var(--mono);font-size:.7rem;letter-spacing:.3em;color:var(--teal);text-transform:uppercase;margin-bottom:14px}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(2.1rem,6vw,3.6rem);line-height:1.0;letter-spacing:-.02em}
+  h1 .grad{background:linear-gradient(108deg,var(--gold),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{font-family:var(--disp);font-style:italic;color:var(--ink-dim);font-size:1.1rem;margin-top:10px}
+  section{padding:34px 0;border-top:1px solid var(--line)}
+  .series{font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--c);margin-bottom:14px;display:flex;align-items:center;gap:9px}
+  .series i{width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:0 0 10px var(--c)}
+  .ep{display:flex;align-items:center;gap:14px;background:linear-gradient(160deg,var(--panel),var(--void-2));border:1px solid var(--line);border-radius:13px;padding:15px 17px;margin-bottom:11px;text-decoration:none;color:inherit;transition:.2s}
+  .ep:hover{border-color:var(--c);transform:translateY(-2px);box-shadow:var(--shadow)}
+  .ep .id{font-family:var(--mono);font-size:.72rem;color:var(--c);flex:none;width:62px}
+  .ep .meta{flex:1}
+  .ep h3{font-family:var(--disp);font-size:1.06rem;font-weight:600;margin-bottom:2px}
+  .ep p{font-size:.82rem;color:var(--ink-dim)}
+  .badge{font-family:var(--mono);font-size:.58rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:6px;white-space:nowrap;flex:none}
+  .b-live{background:rgba(95,227,154,.14);color:var(--green);border:1px solid rgba(95,227,154,.3)}
+  .b-script{background:rgba(245,185,66,.13);color:var(--gold);border:1px solid rgba(245,185,66,.3)}
+  footer{padding:36px 0 70px;border-top:1px solid var(--line);text-align:center}
+  footer p{color:var(--ink-faint);font-size:.78rem}
+  .ra{opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}.ra.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.ra{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <div class="brand">THE AI FAMILY <b>// Episodes</b></div>
+  <a class="navcta" href="index.html">← Home</a>
+</div></nav>
+
+<header>
+  <div class="wrap">
+    <div class="kick ra">The library</div>
+    <h1 class="ra">Every <span class="grad">episode.</span></h1>
+    <p class="sub ra">Two shows. New drop every week. Pick where to start.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap" style="--c:var(--blue)">
+    <div class="series ra"><i></i>AI Signal Desk · with Sage · weekly AI news</div>
+    <a class="ep ra" href="signal-desk.html" style="--c:var(--blue)">
+      <div class="id">Wk 06·26</div>
+      <div class="meta"><h3>What Changed in AI This Week</h3><p>GLM-5.2, Gemini delay, NotebookLM 2.0, Samsung→ChatGPT — decoded for you.</p></div>
+      <span class="badge b-live">Live page</span>
+    </a>
+  </div>
+</section>
+
+<section>
+  <div class="wrap" style="--c:var(--green)">
+    <div class="series ra"><i></i>Homefront · with Luna · AI for homeowners</div>
+    <a class="ep ra" href="EP-0107-homefront.html" style="--c:var(--green)">
+      <div class="id">EP-0107</div>
+      <div class="meta"><h3>3 Ways AI Can Lower Your Home Bills This Month</h3><p>Energy, subscriptions, and contractor quotes — money back in your pocket.</p></div>
+      <span class="badge b-live">Live page</span>
+    </a>
+    <a class="ep ra" href="EP-0108-homefront.md" style="--c:var(--green)">
+      <div class="id">EP-0108</div>
+      <div class="meta"><h3>The 10-Minute AI Assistant Every Household Should Set Up</h3><p>One assistant, two connections, observe-only — the safe no-code setup.</p></div>
+      <span class="badge b-script">Script ready</span>
+    </a>
+    <a class="ep ra" href="EP-0109-homefront.md" style="--c:var(--green)">
+      <div class="id">EP-0109</div>
+      <div class="meta"><h3>Never Get Overcharged by a Contractor Again</h3><p>Paste any quote into AI; compare bids apples-to-apples; spot the red flags.</p></div>
+      <span class="badge b-script">Script ready</span>
+    </a>
+    <a class="ep ra" href="EP-0110-homefront.md" style="--c:var(--green)">
+      <div class="id">EP-0110</div>
+      <div class="meta"><h3>AI That Keeps Your Home — and Your Parents — Safe</h3><p>Catch leaks early, smarter alerts, and dignity-first care for aging parents.</p></div>
+      <span class="badge b-script">Script ready</span>
+    </a>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <div class="brand">THE AI FAMILY</div>
+  <p style="margin-top:8px">New episode every week — AI made simple, useful, and a little cinematic.</p>
+</div></footer>
+<script>
+  var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:.1});
+  document.querySelectorAll('.ra').forEach(function(el){obs.observe(el);});
+</script>
+</body>
+</html>
