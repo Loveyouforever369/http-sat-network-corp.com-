@@ -34,6 +34,7 @@
 - `docs/MASTER-PLAN.md`
 - `docs/MISTAKES-AND-LESSONS.md`
 - `docs/ORCHESTRATOR-PREFLIGHT.md`
+- `docs/PUBLISH-NOW.md`
 - `docs/agent-stack-catalog.md`
 - `docs/avatars-and-publishing.md`
 - `docs/brand-homefront.md`
