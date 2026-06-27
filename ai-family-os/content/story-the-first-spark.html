@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The First Spark — A Prometheus Origin · The AI Family</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#080a12;--void-2:#0e1424;--panel:#141b2c;
+    --gold:#f5b942;--ember:#e2572b;--teal:#54d6c4;--warm:#ffd9a0;
+    --ink:#eaf0ff;--ink-dim:#9fb0d0;--ink-faint:#5d6b86;
+    --line:rgba(132,156,210,.16);--line-2:rgba(132,156,210,.30);--shadow:0 24px 60px -20px rgba(0,0,0,.75);
+    --disp:'Fraunces',Georgia,serif;--body:'Sora',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--void);color:var(--ink);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body::before{content:"";position:fixed;inset:0;z-index:-2;background:
+    radial-gradient(1100px 700px at 70% -10%,rgba(245,185,66,.13),transparent 60%),
+    radial-gradient(700px 520px at 10% 20%,rgba(226,87,43,.08),transparent 60%),var(--void)}
+  .wrap{max-width:840px;margin:0 auto;padding:0 24px}
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(8,10,18,.74);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+  .brand{font-family:var(--mono);font-weight:700;font-size:.74rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase}
+  .navcta{font-size:.74rem;color:var(--ink);text-decoration:none;border:1px solid var(--line-2);padding:7px 13px;border-radius:9px}
+  header{padding:80px 0 26px;text-align:center}
+  .kick{font-family:var(--mono);font-size:.7rem;letter-spacing:.32em;color:var(--teal);text-transform:uppercase;margin-bottom:14px}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(2.4rem,7vw,4.4rem);line-height:.97;letter-spacing:-.02em}
+  h1 .grad{background:linear-gradient(108deg,var(--warm),var(--ember) 78%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{font-family:var(--disp);font-style:italic;color:var(--ink-dim);font-size:clamp(1.05rem,2.6vw,1.4rem);margin-top:10px}
+  .btn{font-family:var(--body);font-weight:600;font-size:.9rem;cursor:pointer;border:none;border-radius:12px;padding:12px 22px;display:inline-flex;gap:9px;text-decoration:none;transition:.22s;margin-top:18px}
+  .btn-primary{background:linear-gradient(110deg,var(--gold),var(--warm));color:#231706;box-shadow:0 10px 28px -8px rgba(245,185,66,.5)}
+  .btn-primary:hover{transform:translateY(-2px)}
+  .film{margin:26px 0}
+  .beat{display:grid;grid-template-columns:84px 1fr;gap:18px;align-items:start;padding:20px 0;border-top:1px solid var(--line);transition:.3s}
+  .beat.lit{background:linear-gradient(90deg,rgba(245,185,66,.06),transparent)}
+  .beat .scene{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;padding-top:6px}
+  .beat .frame{background:linear-gradient(160deg,var(--panel),var(--void-2));border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .beat.lit .frame{border-color:var(--line-2);box-shadow:var(--shadow)}
+  .beat .vis{font-size:.82rem;color:var(--ink-dim);margin-bottom:10px}
+  .beat .vis b{color:var(--teal);font-family:var(--mono);font-size:.62rem;letter-spacing:.08em}
+  .beat .say{font-family:var(--disp);font-size:1.2rem;font-weight:500;color:var(--ink);line-height:1.4}
+  .beat .who{font-family:var(--mono);font-size:.62rem;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
+  .closing{text-align:center;padding:46px 0 10px;border-top:1px solid var(--line);margin-top:8px}
+  .closing .moral{font-family:var(--disp);font-style:italic;font-size:1.3rem;color:var(--warm);max-width:560px;margin:0 auto 18px}
+  footer{padding:36px 0 70px;text-align:center}
+  footer p{color:var(--ink-faint);font-size:.78rem;margin-top:8px}
+  .ra{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}.ra.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.ra{opacity:1;transform:none;transition:none}}
+  #narr{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:60;display:none;align-items:center;gap:10px;background:rgba(14,20,36,.93);border:1px solid var(--line-2);backdrop-filter:blur(12px);border-radius:14px;padding:8px 13px;box-shadow:var(--shadow);max-width:92vw}
+  #narr.show{display:flex}
+  #narr .nt{font-size:.74rem;color:var(--ink-dim);max-width:46vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  #narr button{font-family:var(--mono);font-size:.66rem;border:1px solid var(--line-2);background:rgba(132,156,210,.08);color:var(--ink);border-radius:8px;padding:6px 9px;cursor:pointer}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <div class="brand">THE AI FAMILY // Stories</div>
+  <a class="navcta" href="index.html">← Home</a>
+</div></nav>
+
+<header>
+  <div class="wrap">
+    <div class="kick ra">A Prometheus origin · EP-0201</div>
+    <h1 class="ra">The First <span class="grad">Spark.</span></h1>
+    <p class="sub ra">They told you to be afraid of AI. He came to hand you the fire instead.</p>
+    <div class="ra"><button class="btn btn-primary" id="narrateBtn" aria-pressed="false">▶ Play the story</button></div>
+  </div>
+</header>
+
+<div class="wrap film">
+  <div class="beat ra" id="b0"><div class="scene">Scene 1</div>
+    <div class="frame"><div class="vis"><b>VISUAL ·</b> A tired founder, 2 AM, doomscrolling fifty headlines: "AI WILL REPLACE YOU." Blue light, slumped shoulders.</div>
+      <div class="who">Narration</div><div class="say">"Every headline said the same thing. Be afraid. Be replaced. Be left behind."</div></div></div>
+  <div class="beat ra" id="b1"><div class="scene">Scene 2</div>
+    <div class="frame"><div class="vis"><b>VISUAL ·</b> Warm gold light gathers in the dark — a figure forms in the doorway, calm, radiant, a glowing ember in his chest.</div>
+      <div class="who">Prometheus</div><div class="say">"They told you to fear the fire. I came to teach you to carry it."</div></div></div>
+  <div class="beat ra" id="b2"><div class="scene">Scene 3</div>
+    <div class="frame"><div class="vis"><b>VISUAL ·</b> He lifts a hand; the fifty panicked headlines lift off the screen and reorganize into a single, simple plan.</div>
+      <div class="who">Prometheus</div><div class="say">"AI isn't the storm coming for you. It's the tool that gets you through it."</div></div></div>
+  <div class="beat ra" id="b3"><div class="scene">Scene 4</div>
+    <div class="frame"><div class="vis"><b>VISUAL ·</b> The founder's face lifts — fear turns to focus. Behind Prometheus, seven more silhouettes step into the light.</div>
+      <div class="who">Prometheus</div><div class="say">"You don't have to learn it alone. That's what a family is for."</div></div></div>
+  <div class="beat ra" id="b4"><div class="scene">Scene 5</div>
+    <div class="frame"><div class="vis"><b>VISUAL ·</b> The room is warm now. The plan glows on the wall. The founder reaches out and takes the spark.</div>
+      <div class="who">Prometheus</div><div class="say">"Stop being afraid of what AI can do. Start being the one who directs it."</div></div></div>
+</div>
+
+<div class="closing">
+  <div class="wrap">
+    <div class="moral ra">"AI isn't the storm. It's the tool that gets you through it."</div>
+    <a class="btn btn-primary ra" href="index.html#join">Join the family</a>
+  </div>
+</div>
+
+<footer><div class="wrap">
+  <div class="brand">THE AI FAMILY</div>
+  <p>EP-0201 · The First Spark — render-ready (faceless or Prometheus avatar). Story bank: storylines.md</p>
+</div></footer>
+
+<div id="narr" aria-live="polite">
+  <span class="nt" id="narrText">Ready.</span>
+  <button id="narrPrev">‹</button><button id="narrToggle">Pause</button><button id="narrStop">Stop</button>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:.15});
+  document.querySelectorAll('.ra').forEach(function(el){obs.observe(el);});
+  var AUDIO=[];
+  var script=[
+    "Every headline said the same thing. Be afraid. Be replaced. Be left behind.",
+    "They told you to fear the fire. I came to teach you to carry it.",
+    "AI isn't the storm coming for you. It's the tool that gets you through it.",
+    "You don't have to learn it alone. That's what a family is for.",
+    "Stop being afraid of what AI can do. Start being the one who directs it."
+  ];
+  var idx=0,paused=false,clip=null;
+  var synth=window.speechSynthesis,bar=document.getElementById('narr'),txt=document.getElementById('narrText'),btn=document.getElementById('narrateBtn');
+  var ttsOk=('speechSynthesis' in window)&&('SpeechSynthesisUtterance' in window);
+  function pickVoice(){var v=(synth&&synth.getVoices())||[];return v.find(function(x){return /en[-_]?(US|GB)/i.test(x.lang)&&/(natural|neural|guy|brian|daniel|google (us|uk))/i.test(x.name)})||v.find(function(x){return /en[-_]?(US|GB)/i.test(x.lang)})||v[0]||null;}
+  function lit(i){document.querySelectorAll('.beat').forEach(function(b){b.classList.remove('lit');});var el=document.getElementById('b'+i);if(el){el.classList.add('lit');el.scrollIntoView({behavior:'smooth',block:'center'});}}
+  function next(){if(!paused&&idx<script.length-1)render(idx+1);else if(idx>=script.length-1)stop();}
+  function render(i){idx=Math.max(0,Math.min(i,script.length-1));txt.textContent=script[idx];lit(idx);document.getElementById('narrToggle').textContent='Pause';
+    if(synth)synth.cancel();if(clip){clip.pause();clip=null;}
+    if(AUDIO[idx]){clip=new Audio(AUDIO[idx]);clip.onended=next;clip.play().catch(speakTTS);}else speakTTS();}
+  function speakTTS(){if(!ttsOk)return;var u=new SpeechSynthesisUtterance(script[idx]);var vc=pickVoice();if(vc)u.voice=vc;u.rate=.9;u.pitch=.95;u.onend=next;synth.speak(u);}
+  function start(){if(!ttsOk&&!AUDIO.length){alert('Narration needs the Web Speech API (Chrome/Edge/Safari), or add audio files. The story is on the page.');return;}bar.classList.add('show');btn.setAttribute('aria-pressed','true');btn.textContent='⏸ Playing…';paused=false;render(0);}
+  function stop(){if(synth)synth.cancel();if(clip){clip.pause();clip=null;}paused=false;bar.classList.remove('show');btn.setAttribute('aria-pressed','false');btn.textContent='▶ Play the story';document.querySelectorAll('.beat').forEach(function(b){b.classList.remove('lit');});}
+  btn.addEventListener('click',function(){(bar.classList.contains('show'))?stop():start();});
+  document.getElementById('narrStop').addEventListener('click',stop);
+  document.getElementById('narrPrev').addEventListener('click',function(){render(Math.max(0,idx-1));});
+  document.getElementById('narrToggle').addEventListener('click',function(){if(paused){paused=false;this.textContent='Pause';render(idx);}else{paused=true;this.textContent='Resume';if(synth)synth.cancel();if(clip)clip.pause();}});
+  if(ttsOk&&synth.onvoiceschanged!==undefined)synth.onvoiceschanged=pickVoice;
+  window.addEventListener('beforeunload',function(){if(synth)synth.cancel();if(clip)clip.pause();});
+})();
+</script>
+</body>
+</html>
