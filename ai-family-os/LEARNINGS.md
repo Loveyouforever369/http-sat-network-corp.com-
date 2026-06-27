@@ -11,6 +11,22 @@ generalizes, promote it to the "Standing Lessons" list at the bottom.
 
 ---
 
+## 2026-06-27 — Mission Control (one hub) + the business showcase
+
+**Fixed the "too many sites" problem.** Built `content/mission-control.html` — a single hub that
+launches every external tool (Lovable/Vercel · Meta AI/Flow/Descript/ElevenLabs/IndexTTS-2 · Canva/
+Gamma/Leonardo · YouTube Studio/Postiz/Zapier/n8n · Tavily/Hugging Face/Ollama/Notion), opens every
+content page, shows live system status (6/6 health · 9/14 tools · 6 renders · 20 episodes), and lists
+the family's one-command chores. Bookmark it = the whole OS from one screen.
+
+**Business track (Atlas).** Built `content/for-business.html` (EP-0305) — narrated showcase for owners
++ entrepreneurs: the crew shown as roles you'd hire out, the busywork we automate first, and the honest
+math (agency $5k–15k/mo vs AI crew $799–1,999/mo, framed as a hybrid, not a fantasy). CTA: book a free
+strategy call. Queued as RQ-007 (voice: Atlas → ElevenLabs).
+
+**Locked process:** both pages pass Guardian-lint (disclosure present); health 6/6; for-business
+registered + queued; render-queue now 7 items; index auto-rebuilt. Music cues set per render item.
+
 ## 2026-06-27 — Studied a YouTube free-video breakdown (Meta AI + Flow + Seedance)
 
 Extracted YouTube `8Q8Km4pvdE8` ("3 Free & Unlimited AI Video Generators") via Tavily and mined

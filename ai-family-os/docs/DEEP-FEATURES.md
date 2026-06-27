@@ -3,6 +3,14 @@
 The features that turn a pile of scripts into a *system that runs itself*. Honest status
 on each: ✅ shipped, 🟡 partial, 🧪 proposed (designed, not yet built). Newest thinking on top.
 
+## ✅ Shipped (2026-06-27, round 3)
+
+- **Mission Control** — `content/mission-control.html`. One hub to launch every external tool, open
+  every page, and read system status. Solves "stop hopping between sites." (Auto-generation from
+  config is the proposed next step.)
+- **Business showcase** — `content/for-business.html` (EP-0305, Atlas): the crew as hireable roles,
+  the busywork we automate, the honest agency-vs-AI math. Queued RQ-007.
+
 ## ✅ Shipped (2026-06-27, round 2)
 
 - **Render-queue handoff** — `config/render-queue.json` + `tools/render-queue.js` (was proposed #4).

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mission Control — The AI Family OS (one screen, every tool)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0a0e1a;--void-2:#0e1424;--panel:#121a2e;
+    --gold:#f5b942;--ember:#e2572b;--teal:#54d6c4;--blue:#7aa2ff;
+    --violet:#b794f6;--rose:#ff8fab;--green:#7ee787;--amber:#ffb86b;--lime:#a6e22e;
+    --ink:#eaf0ff;--ink-dim:#9fb0d0;--ink-faint:#64748f;
+    --line:rgba(132,156,210,.16);--line-2:rgba(132,156,210,.30);--shadow:0 24px 60px -20px rgba(0,0,0,.7);
+    --disp:'Fraunces',Georgia,serif;--body:'Sora',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--void);color:var(--ink);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body::before{content:"";position:fixed;inset:0;z-index:-2;background:
+    radial-gradient(900px 600px at 82% -8%,rgba(122,162,255,.12),transparent 60%),
+    radial-gradient(760px 520px at 6% 14%,rgba(84,214,196,.08),transparent 60%),var(--void)}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(10,14,26,.72);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+  .brand{font-family:var(--mono);font-weight:700;font-size:.76rem;letter-spacing:.18em;color:var(--blue);text-transform:uppercase}
+  .brand b{color:var(--ink)}
+  .navcta{font-size:.74rem;color:var(--ink);text-decoration:none;border:1px solid var(--line-2);padding:7px 13px;border-radius:9px}
+  .navcta:hover{background:rgba(122,162,255,.12)}
+  header{padding:64px 0 18px;text-align:center}
+  .kick{font-family:var(--mono);font-size:.7rem;letter-spacing:.3em;color:var(--teal);text-transform:uppercase;margin-bottom:14px}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(2rem,5.5vw,3.4rem);line-height:1.02;letter-spacing:-.02em;margin-bottom:10px}
+  h1 .grad{background:linear-gradient(108deg,var(--blue),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{font-family:var(--disp);font-style:italic;font-size:clamp(1rem,2.4vw,1.25rem);color:var(--ink-dim);margin:0 auto;max-width:640px}
+  section{padding:30px 0;border-top:1px solid var(--line)}
+  .eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
+  h2{font-family:var(--disp);font-weight:600;font-size:clamp(1.3rem,3.2vw,1.9rem);margin-bottom:4px}
+  .note{color:var(--ink-dim);font-size:.9rem;margin-bottom:18px;max-width:680px}
+  /* status strip */
+  .status{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:6px}
+  .stat{background:rgba(122,162,255,.05);border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}
+  .stat .n{font-family:var(--disp);font-weight:900;font-size:1.6rem;color:var(--teal)}
+  .stat .l{font-size:.72rem;color:var(--ink-dim);margin-top:2px}
+  /* launcher grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:11px}
+  .tool{display:flex;flex-direction:column;gap:3px;background:linear-gradient(160deg,var(--panel),var(--void-2));border:1px solid var(--line);border-radius:12px;padding:13px 14px;text-decoration:none;color:var(--ink);transition:.18s;position:relative;overflow:hidden}
+  .tool:hover{border-color:var(--line-2);transform:translateY(-2px);background:rgba(122,162,255,.08)}
+  .tool::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c,var(--blue))}
+  .tool .nm{font-family:var(--disp);font-weight:600;font-size:.98rem}
+  .tool .ds{font-size:.72rem;color:var(--ink-faint)}
+  .tool .go{position:absolute;right:11px;top:12px;font-family:var(--mono);font-size:.7rem;color:var(--ink-faint)}
+  .group-label{font-family:var(--mono);font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--c,var(--blue));margin:18px 0 8px}
+  .chores{font-family:var(--mono);font-size:.78rem;color:var(--ink-dim);background:rgba(10,14,26,.5);border:1px solid var(--line);border-radius:12px;padding:14px 16px;line-height:1.9;overflow-x:auto}
+  .chores b{color:var(--teal)}
+  footer{padding:30px 0 70px;border-top:1px solid var(--line);text-align:center}
+  footer p{color:var(--ink-faint);font-size:.78rem;margin-top:6px}
+  @media(prefers-reduced-motion:reduce){.tool{transition:none}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <div class="brand">MISSION CONTROL <b>// AI Family OS</b></div>
+  <a class="navcta" href="index.html">← Home</a>
+</div></nav>
+
+<header>
+  <div class="wrap">
+    <div class="kick">The whole family · one screen</div>
+    <h1>One hub. <span class="grad">Every tool.</span></h1>
+    <p class="sub">Stop hopping between ten sites. Launch every tool, open every page, and see the system's status — from here.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">System status</div>
+    <h2>The OS at a glance</h2>
+    <div class="status">
+      <div class="stat"><div class="n">6/6</div><div class="l">health checks green</div></div>
+      <div class="stat"><div class="n">9/14</div><div class="l">tools usable here (Tool Lab)</div></div>
+      <div class="stat"><div class="n">6</div><div class="l">videos ready to render</div></div>
+      <div class="stat"><div class="n">20</div><div class="l">episodes scripted</div></div>
+      <div class="stat"><div class="n">~140</div><div class="l">family members</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Launch the tools</div>
+    <h2>Open any tool — without leaving the family</h2>
+    <p class="note">Direct links to every service we use. Bookmark this page and it's your single launcher. (Status of each in the Tool Lab: <code>node tools/tool-lab.js</code>.)</p>
+
+    <div class="group-label" style="--c:var(--teal)">▸ Build &amp; deploy</div>
+    <div class="grid">
+      <a class="tool" style="--c:var(--teal)" href="https://lovable.dev" target="_blank" rel="noopener"><span class="go">↗</span><span class="nm">Lovable</span><span class="ds">app/site builder</span></a>
+      <a class="tool" style="--c:var(--teal)" href="https://vercel.com/dashboard" target="_blank" rel="noopener"><span class="go">↗</span><span class="nm">Vercel</span><span class="ds">deploy</span></a>
+      <a class="tool" style="--c:var(--teal)" href="https://replit.com" target="_blank" rel="noopener"><span class="go">↗</span><span class="nm">Replit</span><span class="ds">build</span></a>
+      <a class="tool" style="--c:var(--teal)" href="https://base44.com" target="_blank" rel="noopener"><span class="go">↗</span><span class="nm">Base44</span><span class="ds">app builder</span></a>
+    </div>
+
+    <div class="group-label" style="--c:var(--ember)">▸ Video &amp; voice</div>
+    <div class="grid">
+      <a class="tool" style="--c:var(--ember)" href="https://www.meta.ai" target="_blank" rel="noopener"><span class="go">↗</span><span class="nm">Meta AI</span><span class="ds">free video drafts</span></a>
+      <a class="tool" style="--c:var(--ember)" href="https://labs.google/flow" target="_blank" rel="noopener"><span class="go">↗</span><span class="nm">Google Flow</span><span class="ds">final + characters</span></a>
+      <a class="tool" style="--c:var(--ember)" href="https://web.descript.com" target="_blank" rel="noopener"><span class="go">↗</span><span class="nm">Descript</span><span class="ds">edit/caption</span></a>
+      <a class="tool" style="--c:var(--ember)" href="https://elevenlabs.io" target="_blank" rel="noopener"><span class="go">↗</span><span class="nm">ElevenLabs</span><span class="ds">voice</span></a>
+      <a class="tool" style="--c:var(--ember)" href="https://huggingface.co/spaces/IndexTeam/IndexTTS-2-Demo" target="_blank" rel="noopener"><span class="go">↗</span><span class="nm">IndexTTS-2</span><span class="ds">emotion voice</span></a>
+    </div>
+
+    <div class="group-label" style="--c:var(--violet)">▸ Image &amp; design</div>
+    <div class="grid">
+      <a class="tool" style="--c:var(--violet)" href="https://canva.com" target="_blank" rel="noopener"><span class="go">↗</span><span class="nm">Canva</span><span class="ds">graphics</span></a>
+      <a class="tool" style="--c:var(--violet)" href="https://gamma.app" target="_blank" rel="noopener"><span class="go">↗</span><span class="nm">Gamma</span><span class="ds">decks/pages</span></a>
+      <a class="tool" style="--c:var(--violet)" href="https://leonardo.ai" target="_blank" rel="noopener"><span class="go">↗</span><span class="nm">Leonardo</span><span class="ds">characters</span></a>
+    </div>
+
+    <div class="group-label" style="--c:var(--gold)">▸ Publish &amp; automate</div>
+    <div class="grid">
+      <a class="tool" style="--c:var(--gold)" href="https://studio.youtube.com" target="_blank" rel="noopener"><span class="go">↗</span><span class="nm">YouTube Studio</span><span class="ds">long + shorts</span></a>
+      <a class="tool" style="--c:var(--gold)" href="https://postiz.com" target="_blank" rel="noopener"><span class="go">↗</span><span class="nm">Postiz</span><span class="ds">all socials</span></a>
+      <a class="tool" style="--c:var(--gold)" href="https://zapier.com/app/dashboard" target="_blank" rel="noopener"><span class="go">↗</span><span class="nm">Zapier</span><span class="ds">9k+ apps</span></a>
+      <a class="tool" style="--c:var(--gold)" href="https://n8n.io" target="_blank" rel="noopener"><span class="go">↗</span><span class="nm">n8n</span><span class="ds">automation</span></a>
+    </div>
+
+    <div class="group-label" style="--c:var(--blue)">▸ Research, models &amp; knowledge</div>
+    <div class="grid">
+      <a class="tool" style="--c:var(--blue)" href="https://app.tavily.com" target="_blank" rel="noopener"><span class="go">↗</span><span class="nm">Tavily</span><span class="ds">web research</span></a>
+      <a class="tool" style="--c:var(--blue)" href="https://huggingface.co" target="_blank" rel="noopener"><span class="go">↗</span><span class="nm">Hugging Face</span><span class="ds">models/voices</span></a>
+      <a class="tool" style="--c:var(--blue)" href="https://ollama.com" target="_blank" rel="noopener"><span class="go">↗</span><span class="nm">Ollama</span><span class="ds">free local AI</span></a>
+      <a class="tool" style="--c:var(--blue)" href="https://notion.so" target="_blank" rel="noopener"><span class="go">↗</span><span class="nm">Notion</span><span class="ds">knowledge base</span></a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Our content</div>
+    <h2>Open any page</h2>
+    <div class="grid">
+      <a class="tool" href="index.html"><span class="nm">Home</span><span class="ds">the brand</span></a>
+      <a class="tool" href="the-cast.html"><span class="nm">The Cast</span><span class="ds">meet the family</span></a>
+      <a class="tool" href="the-living-system.html"><span class="nm">Living System</span><span class="ds">how we work</span></a>
+      <a class="tool" href="the-video-forge.html"><span class="nm">Video Forge</span><span class="ds">how we make video</span></a>
+      <a class="tool" href="signal-desk.html"><span class="nm">Signal Desk</span><span class="ds">weekly AI news</span></a>
+      <a class="tool" href="EP-0107-homefront.html"><span class="nm">Homefront</span><span class="ds">for homeowners</span></a>
+      <a class="tool" href="for-business.html"><span class="nm">For Business</span><span class="ds">owners + entrepreneurs</span></a>
+      <a class="tool" href="story-the-first-spark.html"><span class="nm">The First Spark</span><span class="ds">the story</span></a>
+      <a class="tool" href="episodes.html"><span class="nm">Episodes</span><span class="ds">all content</span></a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Run the OS</div>
+    <h2>The family's chores (one command each)</h2>
+    <p class="note">Repetitive work is delegated to automated scripts — run them anytime. Full map in <code>docs/DELEGATION.md</code>.</p>
+    <div class="chores">
+      <b>node tools/health.js</b>        # full system check (run before every push)<br>
+      <b>node tools/tool-lab.js</b>      # what works / what's blocked<br>
+      <b>node tools/render-queue.js</b>  # what's ready to render + the voice for each<br>
+      <b>node tools/guardian-lint.js</b> # every page discloses the AI host/voice<br>
+      <b>node tools/index-docs.js</b>    # rebuild the OS map (docs/INDEX.md)
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <div class="brand">THE AI FAMILY</div>
+  <p>One hub, one family, one mission. Make AI useful for everyone.</p>
+  <p>Hosts &amp; narration across the site are AI-generated — we disclose it, always.</p>
+</div></footer>
+</body>
+</html>
