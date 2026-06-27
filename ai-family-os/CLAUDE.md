@@ -20,7 +20,9 @@ the pattern **educate → show → book a call.** See `docs/brand-homefront.md`.
 - `config/tool-ratings.json` (run `node tools/tool-lab.js`) — what works 🟢 / blocked 🔴. Don't re-try dead ends.
 - `docs/agent-stack-catalog.md` — external tools we're adopting (verify before install).
 
-**Run `node tools/health.js` before any push** (config + tool lab + scripts + pipeline = 5 checks).
+**Run `node tools/health.js` before any push** (config · tool lab · scripts · desk · pipeline · guardian-lint = 6 checks).
+**Delegated chores (free, no spawn):** `validate.js` · `tool-lab.js` · `guardian-lint.js` (publish gate) · `render-queue.js` · `index-docs.js` (rebuild `docs/INDEX.md`). See `docs/DELEGATION.md`.
+**Free tools to grab:** `docs/free-tools-to-get.md` · local video/voice trio: `docs/local-trio-setup.md`.
 
 **Routine — lock every lesson:** good outcome → `LEARNINGS.md`; mistake → `MISTAKES-AND-LESSONS.md` → (if behavioral) `ORCHESTRATOR-PREFLIGHT.md`; tool result → `config/tool-ratings.json`; (if teachable) a Behind-the-Build episode.
 

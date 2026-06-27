@@ -11,6 +11,29 @@ generalizes, promote it to the "Standing Lessons" list at the bottom.
 
 ---
 
+## 2026-06-27 — Guardian-as-code, the local trio, free-tool list + delegated chores
+
+**Guardian-lint caught real bugs.** Built `tools/guardian-lint.js` (narrated pages MUST disclose
+the AI host/voice) and it immediately flagged 3 pages shipped without it — index.html, the-cast.html,
+story-the-first-spark.html. Fixed all 3, wired the lint into `health.js` as a publish gate (now
+**6/6 checks**). Lesson #16 locked: habits that matter get enforced by code, not memory.
+
+**Option 2 wired (local trio):** `docs/local-trio-setup.md` — OpenCut + voicebox + OpenMontage,
+mapped onto our render-queue + voice-map + video-editor skill (install on the user's machine; they
+upgrade the Forge & Voice Lab for free). Registered as untested · install-pending in the Tool Lab,
+plus codebase-memory-mcp + Agent-Reach as adopt-next.
+
+**Free tools to grab:** `docs/free-tools-to-get.md` — honest shopping list (Leonardo/Flux/ComfyUI
+for character images, Suno + YouTube Audio Library for music, Ollama for FREE local delegation,
+Pexels/Pixabay for B-roll). Top 5: Ollama, Leonardo, Suno, YT Audio Library, Flux.
+
+**Delegated the repetitive work (spend-free).** With subagents spend-capped, the honest move:
+repetitive jobs run as **automated family chores** (scripts), not paid spawns. Added the
+Librarian's chore `tools/index-docs.js` → auto-generates `docs/INDEX.md` (the OS map). Documented
+the full chore map in `docs/DELEGATION.md` (validate/tool-lab/guardian-lint/render-queue/index/health).
+The lead keeps the heavy lifting; the house stays tidy for free. Ollama is the free local worker
+for repetitive drafting once installed.
+
 ## 2026-06-27 — Delegation, the render bridge, the editor skill + the agent stack
 
 Big build round on the OS itself + the first real delegation.

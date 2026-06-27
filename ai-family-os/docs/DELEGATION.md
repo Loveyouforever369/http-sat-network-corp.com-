@@ -14,6 +14,23 @@ synthesis, the commit gate, and anything needing full project context.
 | **Echo / Soundtrack** | voice/music options | "Shortlist voices/scores for <mood>, with access paths." |
 | **Guardian** | a review pass | "Check this for fake claims / missing sources, return a punch list." |
 
+## Delegated chores (automated + free — no spend, no spawn)
+The honest way to "delegate small repetitive work" while the spend cap is on: the repetitive jobs
+run as **scripts owned by family members**, not paid subagents. The lead does the heavy lifting
+(architecture, content, synthesis); these chores keep the house tidy for free.
+
+| Chore | Owner | Command | When |
+|---|---|---|---|
+| Validate the registry graph | Cipher | `node tools/validate.js` | after any `config/family.json` edit |
+| Tool Lab scorecard | Grandpa Vellum | `node tools/tool-lab.js` | after testing a tool |
+| Guardian honesty lint | Guardian | `node tools/guardian-lint.js` | before publishing any page |
+| Render work order | Mom Social | `node tools/render-queue.js` | when prepping a render run |
+| Rebuild the memory map | the Librarian | `node tools/index-docs.js` | after adding files |
+| Full system health | Grandpa Vellum | `node tools/health.js` | before every push |
+
+Local-model delegation (free, once installed): route repetitive *drafting* to **Ollama** on the
+user's machine (see `docs/free-tools-to-get.md`) — the volume 90% for free, frontier saved for the hard 10%.
+
 ## When to delegate (and when NOT to)
 - **Delegate** heavy, parallelizable, self-contained work (research fan-out, a bounded build) —
   it keeps the main context clean so quality doesn't decay late.

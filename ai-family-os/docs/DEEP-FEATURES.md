@@ -15,7 +15,13 @@ on each: ✅ shipped, 🟡 partial, 🧪 proposed (designed, not yet built). New
   drivable here; OpenCut/CapCut local) + a train-yourself feedback loop.
 - **Agent stack catalog** — `docs/agent-stack-catalog.md`. The 14-tool open-source stack mapped to
   our organs, with verify-before-install honesty.
-- **Health check** now also validates the pipeline configs (5/5 checks).
+- **Guardian-lint** — `tools/guardian-lint.js` (was proposed #6). Auto-enforces the AI-disclosure
+  rule on every narrated page; caught + fixed 3 real gaps (index, the-cast, story). Wired into health.
+- **Memory index** — `tools/index-docs.js` → `docs/INDEX.md` (was proposed #8). The Librarian's
+  delegated chore: a self-updating map of the whole OS.
+- **Local-trio wiring** — `docs/local-trio-setup.md` (OpenCut + voicebox + OpenMontage) + registry
+  entries; **free-tools shopping list** `docs/free-tools-to-get.md`.
+- **Health check** now runs 6 checks (config · tool lab · scripts · desk · pipeline · guardian-lint).
 
 ## ✅ Shipped (round 1)
 

@@ -47,6 +47,10 @@ try {
   else ok('pipeline', `voice-map + render-queue valid (${(rq.queue || []).length} render items)`);
 } catch (e) { bad('pipeline', e.message); }
 
+// 6) Guardian lint — narrated pages must disclose the AI host/voice
+try { execFileSync('node', [path.join(__dirname, 'guardian-lint.js')], { stdio: 'pipe' }); ok('guardian lint', 'all narrated pages disclose AI'); }
+catch (e) { bad('guardian lint', (e.stdout || e.message || '').toString().trim().split('\n').pop()); }
+
 // report
 console.log('AI Family OS — system health\n');
 checks.forEach(c => console.log(`  ${c.pass ? '🟢' : '🔴'} ${c.name.padEnd(16)} ${c.detail || ''}`));
