@@ -12,6 +12,15 @@ genuinely useful); secondary track: local home-service businesses. The face is t
 Family** cast; the homeowner-facing series is **Homefront** (host: Luna). Every piece runs
 the pattern **educate → show → book a call.** See `docs/brand-homefront.md`.
 
+## Read at session start (the leader's desk)
+- `docs/MASTER-PLAN.md` — roadmap, assets to ingest, next 3 actions.
+- `docs/MISTAKES-AND-LESSONS.md` — every mistake + the locked rule.
+- `docs/ORCHESTRATOR-PREFLIGHT.md` — the pre-action checklist (tool tiers · verify-before-promise · act-vs-ask). Run it before acting.
+
+**Routine — lock every lesson:** new lesson → append to `MISTAKES-AND-LESSONS.md` → (if it changes behavior) `ORCHESTRATOR-PREFLIGHT.md` → (if teachable) a Behind-the-Build episode.
+
+**Posting:** the Discord webhook is **active on the user's machine** — post our bank with `node scripts/discord-post.js` (reads `content/discord-queue.md`); set `FAMILY_DISCORD_WEBHOOK`. Discord is network-blocked from this cloud sandbox, so the **local runner / n8n** fires it. Roster ≈ **140 members** (`FAMILY-ROSTER.md` pending import).
+
 ## Standing doctrine — always active
 Two skills are the house operating system and apply to **all** work, even unnamed:
 - **`skills/genesis-grid/`** — the build loop (Explore → Study → Multi-source → Plan →
@@ -41,7 +50,7 @@ can be called. Verified June 2026:
 | **Grok** | Creative, contrarian alternatives | xAI API |
 | **GLM-5.1 / 5.2** | Structured output, long-horizon coding | Zhipu, MIT, open-weight; 5.2 leads the open index |
 | **DeepSeek V4** (Pro/Flash) | Cheap reasoning, 1M context | MIT; Flash is the cost floor |
-| **Qwen 3.6** | Local single-GPU, vision, tool-calling | Apache; **note: it's 3.6, not 3.7** |
+| **Qwen 3.7 Plus** | Local single-GPU, vision, tool-calling | Apache; 1M ctx, released ~Jun 3 2026 (verified via Tavily) |
 | **MiniMax M3** | Cheap 1M-context + multimodal | open weights |
 | **Kimi K2.6** | Agentic, long autonomous runs | Moonshot |
 

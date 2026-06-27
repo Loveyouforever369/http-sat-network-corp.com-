@@ -11,6 +11,36 @@ generalizes, promote it to the "Standing Lessons" list at the bottom.
 
 ---
 
+## 2026-06-26 — Leader's system: plan + retrospective + pre-flight + content
+
+Built the **leader's desk** — the durable system that makes the family get sharper
+every week instead of repeating itself:
+- `docs/MASTER-PLAN.md` — phased roadmap, the C:\Users\billw assets to ingest, crew map,
+  definition of done, next 3 actions.
+- `docs/MISTAKES-AND-LESSONS.md` — a 10-row retrospective (mistake · root cause · locked
+  rule) mined from this whole build, plus the meta-lesson *honesty compounds*.
+- `docs/ORCHESTRATOR-PREFLIGHT.md` — the **thought accelerator**: tool tiers
+  (🟢 file-based reliable · 🟡 verify-first · 🔴 blocked here), pre-promise + pre-commit
+  checks, the act-vs-ask rule, and speed moves (subagents, templates, parallel calls).
+- `CLAUDE.md` now opens with **"Read at session start (the leader's desk)"** so every
+  session loads the plan, the lessons, and the pre-flight before acting — and a
+  **lesson-locking routine**: new lesson → append to MISTAKES-AND-LESSONS → (if it changes
+  behavior) PREFLIGHT → (if teachable) a Behind-the-Build episode.
+
+**Content from the learnings:** wrote `content/EP-0301-behind-the-build.md` — *"5 Mistakes
+We Made (and the Fixes)"* (host Cipher + Guardian), registered as **EP-0301** in
+`config/family.json`. The retrospective is now a teachable episode, exactly as instructed.
+
+**Discord reinstated (honestly):** the webhook is **active on the user's machine**, so I
+re-added the poster — `scripts/discord-post.js` reads `content/discord-queue.md` (a bank of
+~11 on-brand, honest posts) and fires each to `FAMILY_DISCORD_WEBHOOK`. Discord is
+**network-blocked from this cloud sandbox** (403 to discord.com), so the poster runs on the
+**local machine / n8n**, not here. Roster ≈ **140 members** (`FAMILY-ROSTER.md` import pending).
+
+**Lesson locked:** a project that *remembers its mistakes in committed files* beats one that
+re-learns them every session. The plan/retrospective/pre-flight trio is the real moat —
+the content is the output, the system is the product.
+
 ## 2026-06-26 — YouTube dispatch wired; the honest bottleneck found
 
 Studied the publish chain end to end and **wired the publisher for real**: enabled the
