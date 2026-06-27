@@ -16,19 +16,28 @@ the pattern **educate → show → book a call.** See `docs/brand-homefront.md`.
 - `docs/MASTER-PLAN.md` — roadmap, assets to ingest, next 3 actions.
 - `docs/MISTAKES-AND-LESSONS.md` — every mistake + the locked rule.
 - `docs/ORCHESTRATOR-PREFLIGHT.md` — the pre-action checklist (tool tiers · verify-before-promise · act-vs-ask). Run it before acting.
+- `docs/DELEGATION.md` — how to split work to crew subagents + the **good habits** (always-on).
+- `config/tool-ratings.json` (run `node tools/tool-lab.js`) — what works 🟢 / blocked 🔴. Don't re-try dead ends.
+- `docs/agent-stack-catalog.md` — external tools we're adopting (verify before install).
 
-**Routine — lock every lesson:** new lesson → append to `MISTAKES-AND-LESSONS.md` → (if it changes behavior) `ORCHESTRATOR-PREFLIGHT.md` → (if teachable) a Behind-the-Build episode.
+**Run `node tools/health.js` before any push** (config + tool lab + scripts + pipeline = 5 checks).
+
+**Routine — lock every lesson:** good outcome → `LEARNINGS.md`; mistake → `MISTAKES-AND-LESSONS.md` → (if behavioral) `ORCHESTRATOR-PREFLIGHT.md`; tool result → `config/tool-ratings.json`; (if teachable) a Behind-the-Build episode.
+
+**Delegation:** delegate heavy/parallel research + bounded builds to crew **subagents** (`docs/DELEGATION.md`); keep synthesis + the commit gate on the main thread. **Subagents cost spend and are monthly-capped** — if they return empty, the cap is hit: stop spawning, fall back to inline Tavily, tell the user to raise the limit.
 
 **Posting:** the Discord webhook is **active on the user's machine** — post our bank with `node scripts/discord-post.js` (reads `content/discord-queue.md`); set `FAMILY_DISCORD_WEBHOOK`. Discord is network-blocked from this cloud sandbox, so the **local runner / n8n** fires it. Roster ≈ **140 members** (`FAMILY-ROSTER.md` pending import).
 
 ## Standing doctrine — always active
-Two skills are the house operating system and apply to **all** work, even unnamed:
+Four skills are the house operating system and apply to **all** work, even unnamed:
 - **`skills/genesis-grid/`** — the build loop (Explore → Study → Multi-source → Plan →
   Build → Quadruple-check → Commit-gate), the multi-model **council**, context
   discipline, cross-referencing, verify-before-relying tool selection, radical
   simplification, and the house design system.
 - **`skills/voice-layer/`** — voice & audio doctrine (ElevenLabs for narration;
   Retell/Vapi on n8n for live agents; engine-in-n8n, control-via-MCP).
+- **`skills/video-editor/`** — editing grammar + tool map (Descript drivable here; OpenCut/CapCut
+  local) + a train-yourself loop. Load it when cutting/captioning/scoring video.
 - **`skills/playwright-mcp/`** — driving a browser as an agent (snapshot-first).
 
 ## Two honesty rules (never break these)
@@ -77,9 +86,12 @@ main window clean so quality doesn't decay late.
 
 ## Where things live
 - `config/family.json` — the registry (members, crews, pipelines, tools, signals, episodes); validate with `node tools/validate.js` after every edit.
+- `config/tool-ratings.json` — the **Tool Lab** (tested status + ratings; `node tools/tool-lab.js`).
+- `config/voice-map.json` — per-member voices · `config/render-queue.json` — the render handoff (`node tools/render-queue.js`).
+- `tools/health.js` — one-command system check (run before every push).
 - `courses/` — the Academy (study everything; one course per tool). `skills/` — loadable skills.
-- `content/` — episode scripts. `intel/` — sourced research. `routing/` — the council map.
-- `docs/avatars-and-publishing.md` — avatar + distribution plan.
+- `content/` — episode scripts + narrated HTML pages. `intel/` — sourced research. `routing/` — the council map.
+- `docs/` — MASTER-PLAN, MISTAKES-AND-LESSONS, ORCHESTRATOR-PREFLIGHT, DEEP-FEATURES, DELEGATION, agent-stack-catalog, social-channels, avatars-and-publishing.
 - `LEARNINGS.md` — the Build Journal (decisions + lessons, newest on top).
 
 _Re-verify model names, pricing, and free tiers quarterly. Keep the Guardian gate on._

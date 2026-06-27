@@ -3,7 +3,21 @@
 The features that turn a pile of scripts into a *system that runs itself*. Honest status
 on each: ✅ shipped, 🟡 partial, 🧪 proposed (designed, not yet built). Newest thinking on top.
 
-## ✅ Shipped (this turn)
+## ✅ Shipped (2026-06-27, round 2)
+
+- **Render-queue handoff** — `config/render-queue.json` + `tools/render-queue.js` (was proposed #4).
+  The bridge over the render gate: a work order the user's machine / n8n executes (6 items queued).
+- **Per-member voice map** — `config/voice-map.json` (was proposed #5). Each character → a specific
+  Voice-Lab engine + style, wired into the render queue and health check.
+- **Delegation playbook** — `docs/DELEGATION.md`. Crew→subagent roles + the "good habits" + the
+  honest spend-limit lesson. Subagent delegation works but is monthly-capped.
+- **Video-editor skill** — `skills/video-editor/SKILL.md`. Editing grammar + tool map (Descript
+  drivable here; OpenCut/CapCut local) + a train-yourself feedback loop.
+- **Agent stack catalog** — `docs/agent-stack-catalog.md`. The 14-tool open-source stack mapped to
+  our organs, with verify-before-install honesty.
+- **Health check** now also validates the pipeline configs (5/5 checks).
+
+## ✅ Shipped (round 1)
 
 ### 1. The Tool Lab — `config/tool-ratings.json` + `tools/tool-lab.js`
 A living registry of every tool we've **actually tested**, with status (🟢 works / 🟡 partial /

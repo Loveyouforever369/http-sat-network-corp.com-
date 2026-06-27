@@ -11,6 +11,39 @@ generalizes, promote it to the "Standing Lessons" list at the bottom.
 
 ---
 
+## 2026-06-27 — Delegation, the render bridge, the editor skill + the agent stack
+
+Big build round on the OS itself + the first real delegation.
+
+**Delegated for real (and learned the limit):** launched 2 background crew subagents (Nova →
+visual tools; Sage → free AI workers). **Both returned empty — the account hit its monthly spend
+limit.** Honest lesson locked: subagent delegation works but costs spend and is monthly-capped;
+when hit, agents return nothing → stop spawning, fall back to inline Tavily, raise the limit.
+Recorded in the Tool Lab (Subagents = 🟡 partial), `docs/DELEGATION.md`, and lessons #14.
+
+**Shipped OS upgrades:**
+- `config/voice-map.json` — every character → a Voice-Lab engine + style (recognizable by ear).
+- `config/render-queue.json` + `tools/render-queue.js` — the render handoff (6 items queued);
+  the bridge over the blocked-render gate (user's machine / n8n executes the work order).
+- `tools/health.js` now validates pipeline configs too → **5/5 checks.**
+- `skills/video-editor/SKILL.md` — editing grammar + honest tool map (Descript drivable here;
+  OpenCut/CapCut local) + a train-yourself loop. ("add a video editor memory and train yourself.")
+- `docs/DELEGATION.md` — crew→subagent roles + the **good habits** (always-on).
+
+**Agent stack catalog:** `docs/agent-stack-catalog.md` — the 14-tool open-source stack from the
+user's video (codebase-memory-mcp, Agent-Reach, OpenMontage, OpenCut, voicebox, FluidVoice,
+worldmonitor, birdclaw, timesfm, penpot, system_prompts_leaks, peerd, daily_stock_analysis, +
+Zapier MCP which we already use), each **mapped to the organ it upgrades** with an honest
+verify-before-install status. Lesson #15: catalog third-party repos as *leads*, don't vendor
+unverified repos, only mark a tool "working" after a real Tool Lab test.
+
+**Content:** `content/EP-0304-academy-promo.md` — fun **group promo Shorts** advertising the free
+Train-Anyone course across all socials (full-cast cameos, host Mom Social) → queued as RQ-005.
+
+**Honest blockers this turn:** subagent delegation + deep web research are capped by the monthly
+spend limit; external repo installs belong on the user's machine (sandbox can't clone arbitrary
+repos). Said so plainly instead of faking results.
+
 ## 2026-06-27 — The Video Forge (find free tools → mimic → our version)
 
 Acted on "find the best free AI-video tools/techniques on YouTube, learn to mimic, build OUR

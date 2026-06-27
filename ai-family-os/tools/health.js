@@ -35,6 +35,18 @@ const deskMissing = desk.filter(f => !fs.existsSync(path.join(ROOT, f)));
 if (deskMissing.length) bad("leader's desk", `missing: ${deskMissing.join(', ')}`);
 else ok("leader's desk", `${desk.length} core docs present`);
 
+// 5) pipeline configs parse + render-queue voice refs resolve to the voice map
+try {
+  const vm = JSON.parse(fs.readFileSync(path.join(ROOT, 'config', 'voice-map.json'), 'utf8'));
+  const rq = JSON.parse(fs.readFileSync(path.join(ROOT, 'config', 'render-queue.json'), 'utf8'));
+  const badRefs = (rq.queue || []).filter(i => {
+    const m = (i.voice_ref || '').split(':')[1];
+    return m && !(vm.voices && vm.voices[m]);
+  }).map(i => i.id);
+  if (badRefs.length) bad('pipeline', `render-queue voice_ref not in voice-map: ${badRefs.join(', ')}`);
+  else ok('pipeline', `voice-map + render-queue valid (${(rq.queue || []).length} render items)`);
+} catch (e) { bad('pipeline', e.message); }
+
 // report
 console.log('AI Family OS — system health\n');
 checks.forEach(c => console.log(`  ${c.pass ? '🟢' : '🔴'} ${c.name.padEnd(16)} ${c.detail || ''}`));

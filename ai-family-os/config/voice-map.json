@@ -1,0 +1,21 @@
+{
+  "updated": "2026-06-27",
+  "note": "Per-member voice assignments so every character is recognizable by ear. Engines from the Voice Lab (intel/voice-tools-2026-06.md). Drafts use the free/local default; hero cuts use the final engine. rate/pitch are hints for the page AUDIO[] render + the in-page Web Speech fallback.",
+  "default_engine": "Kokoro v1.0 — free/local, for draft narration at volume",
+  "final_engine": "ElevenLabs or IndexTTS-2 (emotion control) — for hero cuts",
+  "voices": {
+    "MBR-0001": { "name": "Grandpa Vellum", "role": "orchestrator", "engine": "IndexTTS-2", "style": "warm, low, elder gravitas; unhurried", "rate": 0.90, "pitch": 0.90 },
+    "MBR-0002": { "name": "Prometheus", "role": "the spark", "engine": "ElevenLabs", "style": "bright, inspiring, cinematic", "rate": 0.98, "pitch": 1.02 },
+    "MBR-0003": { "name": "Cipher", "role": "builder", "engine": "Kokoro v1.0", "style": "crisp, precise, techy, confident", "rate": 1.00, "pitch": 1.00 },
+    "MBR-0006": { "name": "Luna", "role": "homeowner host", "engine": "Qwen3-TTS", "style": "warm, plain-English, friendly neighbor", "rate": 0.97, "pitch": 1.03 },
+    "MBR-0007": { "name": "Echo", "role": "the voice", "engine": "IndexTTS-2", "style": "expressive, emotional range — the showcase voice", "rate": 0.96, "pitch": 1.00 },
+    "MBR-0008": { "name": "Guardian", "role": "the gate", "engine": "IndexTTS-2", "style": "steady, measured, trustworthy, serious", "rate": 0.93, "pitch": 0.96 },
+    "MBR-0010": { "name": "Sage", "role": "analyst", "engine": "Kokoro v1.0", "style": "calm, analytical, clear", "rate": 0.98, "pitch": 0.99 },
+    "MBR-0011": { "name": "Uncle n8n", "role": "automation", "engine": "Kokoro v1.0", "style": "dry, practical, a little wry", "rate": 1.00, "pitch": 0.97 },
+    "MBR-0012": { "name": "Brother News", "role": "signals", "engine": "Kokoro v1.0", "style": "brisk, newsroom energy", "rate": 1.04, "pitch": 1.01 },
+    "MBR-0013": { "name": "Nova", "role": "visual director", "engine": "Qwen3-TTS", "style": "creative, vivid, energetic", "rate": 1.00, "pitch": 1.04 },
+    "MBR-0014": { "name": "Mom Social", "role": "distribution", "engine": "Qwen3-TTS", "style": "warm, upbeat, welcoming", "rate": 1.00, "pitch": 1.05 },
+    "MBR-0015": { "name": "Atlas", "role": "business host", "engine": "ElevenLabs", "style": "confident, grounded, executive", "rate": 0.97, "pitch": 0.98 },
+    "MBR-0016": { "name": "Soundtrack Director", "role": "music/score", "engine": "n/a — music, not voice", "style": "owns the score + SFX bed under every clip", "rate": null, "pitch": null }
+  }
+}
