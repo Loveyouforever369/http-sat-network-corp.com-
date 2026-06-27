@@ -11,6 +11,23 @@ generalizes, promote it to the "Standing Lessons" list at the bottom.
 
 ---
 
+## 2026-06-27 — The educational layer: how AI works, dos & don'ts, why we win
+
+Built the teaching content the brand is *for* — long-form + shorts, from our own training.
+- **EP-0307 "How AI Works"** (`content/how-ai-works.html`, host Luna) — flagship narrated page that
+  teaches AI in plain English: examples → pattern engine → best guess (verify it), the 3 things to
+  know, great-at vs careful-with, and the Role+Task+Format+Constraints prompt formula. Fun SVG pipeline.
+- **EP-0306 "AI Dos & Don'ts"** (host Guardian) — 6 rules built straight from `MISTAKES-AND-LESSONS.md`
+  + `ORCHESTRATOR-PREFLIGHT.md` (verify · protect data · human-on-the-gate · ignore hype · disclose AI
+  · confirm the result). Long cut + 3 Shorts.
+- **EP-0308 "Why Our Process Wins"** (host Grandpa Vellum) — teaches the locked 6-step workflow
+  (sense·script·make·check·remember·ship) using our stack + the video-study tools (Meta AI→Flow,
+  Seedance, our Voice Lab). Long cut + 3 Shorts. The "remember what works AND what fails" step is the spine.
+
+All 3 registered (EP-0306/0307/0308), queued RQ-008/009/010, voices mapped. how-ai-works passes
+Guardian-lint (disclosure present). Health 6/6; render queue now 10 items. Lock-what-works /
+lock-what-fails is now itself a published lesson, not just an internal doc.
+
 ## 2026-06-27 — Mission Control (one hub) + the business showcase
 
 **Fixed the "too many sites" problem.** Built `content/mission-control.html` — a single hub that
