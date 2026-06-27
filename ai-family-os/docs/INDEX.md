@@ -11,9 +11,9 @@
 - **EP-0105** — MCP Registry + Multi-Model Routing: USB-C for AI Tools _(host MBR-0012, scripted)_ → `undefined`
 - **EP-0106** — The 5 AI tools that replace a $5,000/month agency _(host MBR-0015, idea)_ → `undefined`
 - **EP-0107** — 3 Ways AI Can Lower Your Home Bills This Month _(host MBR-0006, scripted)_ → `content/EP-0107-homefront.md`
-- **EP-0108** — The 10-Minute AI Assistant Every Household Should Set Up _(host MBR-0006, scripted)_ → `content/EP-0108-homefront.md`
-- **EP-0109** — Never Get Overcharged by a Contractor Again _(host MBR-0006, scripted)_ → `content/EP-0109-homefront.md`
-- **EP-0110** — AI That Keeps Your Home and Your Parents Safe _(host MBR-0006, scripted)_ → `content/EP-0110-homefront.md`
+- **EP-0108** — The 10-Minute AI Assistant Every Household Should Set Up _(host MBR-0006, visual)_ → `content/EP-0108-homefront.md`
+- **EP-0109** — Never Get Overcharged by a Contractor Again _(host MBR-0006, visual)_ → `content/EP-0109-homefront.md`
+- **EP-0110** — AI That Keeps Your Home and Your Parents Safe _(host MBR-0006, visual)_ → `content/EP-0110-homefront.md`
 - **EP-0201** — The First Spark (Prometheus origin) _(host MBR-0002, scripted)_ → `content/storylines.md`
 - **EP-0202** — The 2 AM Bug (Cipher) _(host MBR-0003, scripted)_ → `content/storylines.md`
 - **EP-0203** — The Headline That Lied (Sage) _(host MBR-0010, scripted)_ → `content/storylines.md`
@@ -65,6 +65,9 @@
 
 ## Pages (content/*.html)
 - `content/EP-0107-homefront.html`
+- `content/EP-0108-homefront.html`
+- `content/EP-0109-homefront.html`
+- `content/EP-0110-homefront.html`
 - `content/episodes.html`
 - `content/for-business.html`
 - `content/how-ai-works.html`

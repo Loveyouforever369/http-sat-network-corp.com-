@@ -11,6 +11,17 @@ generalizes, promote it to the "Standing Lessons" list at the bottom.
 
 ---
 
+## 2026-06-27 — Homefront series shipped as pages (EP-0108/0109/0110)
+
+Turned the three homeowner scripts into full narrated pages (Luna, teal homefront style):
+- **EP-0108** — the 10-minute household assistant (one brain · calendar+email observe-only · 3 jobs).
+- **EP-0109** — never get overcharged by a contractor (paste the quote + 3 questions · compare bids ·
+  scam red flags; Atlas cameo; 78% over-budget stat attributed).
+- **EP-0110** — AI that keeps your home + parents safe (catch danger early · age in place with dignity ·
+  Matter + privacy + consent; Guardian cameo; "AI assists, never replaces 911").
+All set to status `visual`, queued RQ-011/012/013 (voice: Luna), pass Guardian-lint (disclosure +
+sources + caveats). Homefront (homeowner funnel) is now 4 live pages (0107–0110). Health 6/6.
+
 ## 2026-06-27 — The educational layer: how AI works, dos & don'ts, why we win
 
 Built the teaching content the brand is *for* — long-form + shorts, from our own training.
