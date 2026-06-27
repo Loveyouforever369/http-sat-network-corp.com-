@@ -26,6 +26,7 @@ run as **scripts owned by family members**, not paid subagents. The lead does th
 | Guardian honesty lint | Guardian | `node tools/guardian-lint.js` | before publishing any page |
 | Render work order | Mom Social | `node tools/render-queue.js` | when prepping a render run |
 | Rebuild the memory map | the Librarian | `node tools/index-docs.js` | after adding files |
+| Build render work orders | Mom Social | `node tools/build-work-orders.js` | before a render/publish run → `automation/WORK-ORDERS.md` |
 | Full system health | Grandpa Vellum | `node tools/health.js` | before every push |
 
 Local-model delegation (free, once installed): route repetitive *drafting* to **Ollama** on the

@@ -56,6 +56,7 @@
 - `skills/voice-layer/`
 
 ## Tools (tools/)
+- `tools/build-work-orders.js`
 - `tools/guardian-lint.js`
 - `tools/health.js`
 - `tools/index-docs.js`

@@ -11,6 +11,17 @@ generalizes, promote it to the "Standing Lessons" list at the bottom.
 
 ---
 
+## 2026-06-27 — Render→publish made turnkey (work orders + n8n blueprint)
+
+Closed the gap between "13 videos queued" and "rendered + posted." Built `tools/build-work-orders.js`
+— it parses each queued page's `script[]`, attaches the member's voice (engine/style/rate/pitch from
+voice-map), music cue, and targets, and writes one copy-paste sheet: `automation/WORK-ORDERS.md`
+(13 items, full narration extracted). Plus `automation/n8n-blueprint.md` — the node-by-node loop
+(trigger → read queue → voice → visuals (Meta AI→Flow) → assemble → caption+music → upload via
+Zapier/Postiz → write back the ID). Render/publish run on the user's machine / n8n (still blocked
+here) but are now turnkey, not hand-assembled. Added the chore to DELEGATION; honesty rule baked in
+(no "published" without a returned ID). Health 6/6.
+
 ## 2026-06-27 — Homefront series shipped as pages (EP-0108/0109/0110)
 
 Turned the three homeowner scripts into full narrated pages (Luna, teal homefront style):

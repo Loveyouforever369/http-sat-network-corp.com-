@@ -3,6 +3,13 @@
 The features that turn a pile of scripts into a *system that runs itself*. Honest status
 on each: ✅ shipped, 🟡 partial, 🧪 proposed (designed, not yet built). Newest thinking on top.
 
+## ✅ Shipped (2026-06-27, round 4)
+
+- **Render→publish automation** — `tools/build-work-orders.js` extracts each queued video's exact
+  narration + voice + targets into `automation/WORK-ORDERS.md` (13 copy-paste sheets), and
+  `automation/n8n-blueprint.md` is the node-by-node workflow to render + publish the whole queue on
+  the user's machine. Turns "blocked render" into a turnkey, one-run pipeline.
+
 ## ✅ Shipped (2026-06-27, round 3)
 
 - **Mission Control** — `content/mission-control.html`. One hub to launch every external tool, open
