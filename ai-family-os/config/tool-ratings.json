@@ -1,0 +1,27 @@
+{
+  "updated": "2026-06-27",
+  "note": "The Tool Lab registry — every tool the family has actually tested, with an honest status and a rating for OUR use case. 'blocked' entries are the memory that stops us re-trying dead ends (the 'record what doesn't work' rule). Validate with: node tools/tool-lab.js",
+  "legend": {
+    "status": {
+      "works": "verified working from this environment",
+      "partial": "works but needs a one-time setup / user step before it fully fires",
+      "blocked": "cannot run from this cloud sandbox (permission stream closes, network policy, or integration scope) — do NOT keep retrying; run on the user's machine / n8n",
+      "untested": "registered but not yet exercised"
+    },
+    "rating": "0-5 stars, for the AI Family use-case (not a universal score)"
+  },
+  "tools": [
+    { "name": "Tavily search/research", "server": "Tavily", "category": "web-research", "status": "works", "rating": 5, "tested": "2026-06-27", "by": "MBR-0010", "note": "Fast, current, sourced. Our default for anything time-sensitive (prices, model versions, news).", "lesson": "Favor for cross-checking facts before stating them." },
+    { "name": "Hugging Face Hub + Spaces search", "server": "Hugging_Face", "category": "model-discovery", "status": "works", "rating": 5, "tested": "2026-06-27", "by": "MBR-0007", "note": "whoami + hub_repo_search + space_search all returned live data (authed as kingtut369). Found the voice shortlist.", "lesson": "Tag filters can over-constrain and return empty — search by query first, then filter." },
+    { "name": "Notion (create-database / pages / update-page)", "server": "Notion", "category": "knowledge-base", "status": "works", "rating": 4, "tested": "2026-06-25", "by": "MBR-0006", "note": "Built the family dashboard + Quick Reference. Reliable.", "lesson": "create-pages MAKES new pages, it does not edit — use update-page to edit, or you get duplicates." },
+    { "name": "Lovable create_project", "server": "Lovable", "category": "site-builder", "status": "works", "rating": 4, "tested": "2026-06-25", "by": "MBR-0004", "note": "Spun up a project for the brand site. Good for full-stack React/Tailwind apps.", "lesson": "Include framework/rendering preferences in the initial message — no stack selector." },
+    { "name": "Zapier enable/execute actions", "server": "Zapier", "category": "automation", "status": "works", "rating": 4, "tested": "2026-06-26", "by": "MBR-0011", "note": "Enabled + executed actions. The bridge to 9,000+ apps.", "lesson": "Always list_enabled first; discover then enable if missing." },
+    { "name": "Zapier YouTube upload_video", "server": "Zapier", "category": "publishing", "status": "partial", "rating": 4, "tested": "2026-06-26", "by": "MBR-0011", "note": "Action enabled (YouTubeV4CLIAPI). Publisher is wired.", "lesson": "Needs a one-time YouTube auth in Zapier AND a rendered video FILE — both on the user's side. Don't mark 'posted' without a returned video ID." },
+    { "name": "Web Speech API narration", "server": "browser", "category": "voice", "status": "works", "rating": 4, "tested": "2026-06-25", "by": "MBR-0007", "note": "Powers the in-page narration on every house-style page; AUDIO[] hook swaps in ElevenLabs/IndexTTS-2 clips.", "lesson": "Free + zero-dep for drafts; swap real clips in for the final cut to kill the robotic sound." },
+    { "name": "Wolfram Alpha", "server": "Wolfram", "category": "compute", "status": "blocked", "rating": 1, "tested": "2026-06-27", "by": "MBR-0003", "note": "Failed: 'permission stream closed before response received' — same approval-gate failure as the render tools.", "lesson": "Approval-gated MCP tools that need an interactive grant close their stream in this sandbox. Don't retry; note it and move on." },
+    { "name": "Invideo generate-video-from-script", "server": "Invideo", "category": "video-render", "status": "blocked", "rating": 1, "tested": "2026-06-25", "by": "MBR-0004", "note": "Permission stream closed mid-call, twice.", "lesson": "Render runs on the user's machine / n8n. Stage the render order; fire where the tool is healthy." },
+    { "name": "HeyGen avatar video", "server": "HeyGen", "category": "video-render", "status": "blocked", "rating": 1, "tested": "2026-06-25", "by": "MBR-0004", "note": "Same approval-stream-closed failure as Invideo.", "lesson": "Avatar render is a local/n8n job, not a sandbox job." },
+    { "name": "GitHub create_repository", "server": "github", "category": "scm", "status": "blocked", "rating": 1, "tested": "2026-06-24", "by": "MBR-0003", "note": "403 'Resource not accessible by integration' — MCP scope is the single allowed repo only.", "lesson": "Don't try to create new repos; stage new projects as a self-contained folder in the allowed repo." },
+    { "name": "Discord webhook (from sandbox)", "server": "network", "category": "publishing", "status": "blocked", "rating": 1, "tested": "2026-06-26", "by": "MBR-0014", "note": "Network policy: 403 to discord.com from this cloud sandbox.", "lesson": "Webhook is active on the user's machine — run scripts/discord-post.js locally / via n8n with FAMILY_DISCORD_WEBHOOK." }
+  ]
+}

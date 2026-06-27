@@ -11,6 +11,39 @@ generalizes, promote it to the "Standing Lessons" list at the bottom.
 
 ---
 
+## 2026-06-27 — The Tool Lab + the Living System (test, rate, remember, teach)
+
+Ran the family's own doctrine on itself: **find / test / rate tools, record what doesn't
+work, turn it into content.**
+
+**Tested live (real results):** ✅ Tavily (current voice/video intel), ✅ Hugging Face Hub +
+Spaces (authed; sourced the voice shortlist), ❌ **Wolfram Alpha** — "permission stream closed,"
+the same approval-gate class as the render tools. No hammering — recorded and moved on.
+
+**Built the memory of our hands — the Tool Lab:** `config/tool-ratings.json` (12 tools with
+honest status 🟢/🟡/🔴 + ratings; blocked ones *must* carry a lesson) and `tools/tool-lab.js`
+(prints the scorecard, validates structure). Now we never re-try a dead end. Added a
+one-command **system health check** `tools/health.js` (config graph + tool lab + referenced
+files + leader's desk, green/red in one screen) — run it before every push.
+
+**Voice Lab (the robotic-voice fix):** `intel/voice-tools-2026-06.md` — rated the unique open
+TTS field. Standouts: **Kokoro v1.0** (free/local default), **Qwen3-TTS** (per-character voice
+design), **IndexTTS-2** (emotion control — the actual fix), **OmniVoice/Chatterbox** (multilingual).
+Plan: render finals through these / ElevenLabs into each page's `AUDIO[]` hook.
+
+**Unforgettable content:** `content/the-living-system.html` (EP-0302, host Grandpa Vellum) — a
+narrated, story-driven map of the family as a living organism (organs = characters: senses,
+hands, eyes, voice, conscience, heart, memory), fun inline-SVG anatomy with a pulsing core,
+house style, voice hook. The "we're a system, not a tool" story made visual.
+
+**Deep features + training:** `docs/DEEP-FEATURES.md` (shipped vs. proposed, incl. the
+render-queue manifest as highest-leverage next) and `courses/train-anyone/README.md` (zero-to-
+shipping onboarding so the method is teachable to anyone).
+
+**Lessons locked:** Wolfram = blocked class (don't retry); an empty search result ≠ a broken
+tool (check the call succeeded first). Both appended to `MISTAKES-AND-LESSONS.md`. Also fixed
+the **Qwen 3.7 Plus** correction everywhere (CLAUDE.md + TOOL-205) so all files agree.
+
 ## 2026-06-26 — Leader's system: plan + retrospective + pre-flight + content
 
 Built the **leader's desk** — the durable system that makes the family get sharper
