@@ -18,6 +18,7 @@ each new lesson gets appended and promoted into `CLAUDE.md` / the pre-flight che
 | 10 | Built assuming **tools stay connected**; they flap | treated MCP as stable | Prefer reliable file-based deliverables; treat MCP creative/publish as best-effort; always have a fallback. |
 | 11 | **Wolfram Alpha** failed: "permission stream closed before response received" | approval-gated MCP tool needs an interactive grant the sandbox can't give | The approval-stream-closed failure isn't just render tools — it's a *class*. Recorded in the Tool Lab as 🔴 blocked; don't retry, run on the user's machine. |
 | 12 | HF model search with a **tag filter returned empty** (looked like a failure) | the `text-to-speech` filter over-constrained the query | An empty result ≠ a broken tool. Search by query first, narrow with filters only after; check the call *succeeded* before assuming the tool failed. |
+| 13 | Went to **add external repos** to help the project — the `list_repos`/`add_repo` tools aren't connected this session | assumed a capability was present without checking | Check the tool is actually loaded before promising it. Repo-adding is a web-app/account action here; surface it to the user instead of faking it. |
 
 ## The meta-lesson
 **Honesty compounds.** Every time I said plainly "this is blocked / I can't from here," it

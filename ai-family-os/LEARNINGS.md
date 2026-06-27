@@ -11,6 +11,37 @@ generalizes, promote it to the "Standing Lessons" list at the bottom.
 
 ---
 
+## 2026-06-27 — The Video Forge (find free tools → mimic → our version)
+
+Acted on "find the best free AI-video tools/techniques on YouTube, learn to mimic, build OUR
+version." Ran a live Tavily sweep of 2026 tutorials + roundups and **tested a video tool live**.
+
+**Tested live:** ✅ **Descript MCP** (list_projects, authed) — reachable from the sandbox, unlike
+the blocked render tools. That makes Descript our in-sandbox **edit/caption/publish** step. Added
+to the Tool Lab 🟢.
+
+**Notes (intel/video-tools-2026-06.md):** the free 2026 generator field — **Wan** (open-source,
+free if self-hosted), **Kling 3.0** (physics/cinematic, 66 free/day), **Seedance** (character
+consistency), **Hailuo**, **Veo/Google Flow**, **OpenArt**, **Luma/Pika**. The universal technique
+is one loop: find what works → scene-by-scene script (3s hook) → lock characters → stills →
+image-to-video → expressive voice → caption/music → publish. Differentiator = story + consistent
+characters, **not** the tool.
+
+**Our version (content):** `content/the-video-forge.html` (EP-0303, host Nova) — a narrated,
+futuristic "8-station forge" page that *teaches* the pipeline (find→script→cast→stills→motion→
+voice→cut→ship), each station owned by a character, free tool named, house style, voice hook.
+Plus `content/EP-0303-make-ai-video-free.md` — the long cut **and 3 Shorts** (the long+short
+content the user asked for), and `docs/social-channels.md` — the YouTube/FB/TikTok playbook with
+the one-long→many-shorts repurposing pipeline.
+
+**Locked rule of the niche:** *"AI video isn't dead — low-effort slop is."* Our honesty +
+recurring detailed characters + consistent look is the built-in edge. Made it the spine of both.
+
+**Honest limits found:** the `claude-code-remote` repo tools (list_repos/add_repo) aren't
+connected this session — can't add external repos from here; it's a web-app/account action
+(lesson #13). The heavy generators + Discord still run on the user's machine / n8n; only Descript
+among video tools is verified reachable here.
+
 ## 2026-06-27 — The Tool Lab + the Living System (test, rate, remember, teach)
 
 Ran the family's own doctrine on itself: **find / test / rate tools, record what doesn't
