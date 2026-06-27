@@ -13,6 +13,8 @@ research-based picks, not our own A/B renders (that's the next step).
 
 | Tool | Free tier (verify) | Superpower | Our pick for |
 |---|---|---|---|
+| **Meta AI** | Free + "unlimited" (daily-capped), watermark-free | Rough drafts at zero cost | Draft every shot free → finalize on Flow (see `free-video-meta-flow-seedance.md`) |
+| **Google Flow** | Small daily limit (refreshes) | Audio + **consistent characters w/ saved voice** | The strong final render after a Meta AI draft |
 | **Wan 2.2 / 2.7** | Open-source — **unlimited local**, free API on Hugging Face | You own it, no credits | Self-hosted volume; the honest "free forever" base |
 | **Kling AI 3.0** | 66 daily credits (reset), 720p | Physics-aware cinematic realism | Hero cinematic shots |
 | **Seedance 2.0** (ByteDance) | 5–10 daily credits | **Character consistency** across scenes | Recurring family characters |

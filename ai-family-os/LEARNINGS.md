@@ -11,6 +11,24 @@ generalizes, promote it to the "Standing Lessons" list at the bottom.
 
 ---
 
+## 2026-06-27 — Studied a YouTube free-video breakdown (Meta AI + Flow + Seedance)
+
+Extracted YouTube `8Q8Km4pvdE8` ("3 Free & Unlimited AI Video Generators") via Tavily and mined
+the good parts → `intel/free-video-meta-flow-seedance.md`. Takeaways adopted:
+- **Meta AI** = free + (daily-capped) "unlimited", watermark-free → our zero-cost **draft** engine.
+- **Google Flow** = audio + consistent characters with a **saved voice per character** → the strong
+  **final** render. Workflow: draft on Meta AI → finalize on Flow. Daily limits refresh (free drip).
+- **Seedance 2.0** via Higgsfield / free on **BytePlus** for character shots.
+Added Meta AI + Flow to the free-generator table in `intel/video-tools-2026-06.md`.
+
+**What we do better (locked):** systematic character consistency via `voice-map.json` + a reference
+per member (identical cast across the *whole series*, not one clip); our Voice Lab for emotion;
+n8n automates the daily free drip from `render-queue.json`; the Guardian disclosure layer the video
+skips; one-long→many-shorts repurposing; our cinematic house look so free videos don't look free.
+
+**What to watch (caveat):** "unlimited/free" = daily-capped + region-gated and changes fast — re-verify;
+not yet A/B tested by us (next: same 2 lines through Meta AI vs Flow vs our Voice Lab, pick by ear).
+
 ## 2026-06-27 — Guardian-as-code, the local trio, free-tool list + delegated chores
 
 **Guardian-lint caught real bugs.** Built `tools/guardian-lint.js` (narrated pages MUST disclose

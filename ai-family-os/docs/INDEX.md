@@ -70,6 +70,7 @@
 - `content/the-video-forge.html`
 
 ## Intel (intel/)
+- `intel/free-video-meta-flow-seedance.md`
 - `intel/video-tools-2026-06.md`
 - `intel/voice-tools-2026-06.md`
 - `intel/web-gather-2026-06-25.md`
