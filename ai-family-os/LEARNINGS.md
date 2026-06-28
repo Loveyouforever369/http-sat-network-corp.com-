@@ -11,6 +11,15 @@ generalizes, promote it to the "Standing Lessons" list at the bottom.
 
 ---
 
+## 2026-06-27 — The Story Vault (8 character shorts in one cinematic page)
+
+Built `content/stories.html` (EP-0200, narrated by Echo) — the eight character shorts from
+`storylines.md` (Prometheus·Cipher·Sage·Atlas·Nova·Luna·Guardian·Echo) as one cinematic gallery,
+each card in the character's color with its logline, key line, and takeaway. Chose ONE gallery over
+seven separate pages on purpose — avoids piling up unrendered files while still showcasing every arc.
+Queued the whole set as RQ-014 (shorts-pack from storylines.md, per-character voices). Passes
+Guardian-lint; health 6/6; render queue now 14 items; EP-0200 registered.
+
 ## 2026-06-27 — Render→publish made turnkey (work orders + n8n blueprint)
 
 Closed the gap between "13 videos queued" and "rendered + posted." Built `tools/build-work-orders.js`

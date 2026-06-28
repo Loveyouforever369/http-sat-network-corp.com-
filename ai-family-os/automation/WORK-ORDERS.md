@@ -1,6 +1,6 @@
 # WORK ORDERS — render these, then publish (auto-generated)
 
-> `node tools/build-work-orders.js` · 2026-06-27 · 13 items ready.
+> `node tools/build-work-orders.js` · 2026-06-28 · 14 items ready.
 > Render on your machine / n8n (Meta AI -> Google Flow, or the local trio). Voice per member below.
 > Steps each: 1) voice the narration  2) build visuals to the beats  3) caption + music  4) upload  5) record the ID.
 
@@ -163,4 +163,13 @@
   3. Second, help parents age in place with dignity. AI can watch for the patterns that matter — a fall, or a morning routine that just doesn't happen — and check in or alert family, without cameras in private spaces. Safety that respects dignity.
   4. Third, set it up right. Look for the Matter label so your devices work together, and put privacy first — local processing where you can. As Guardian says: get consent from anyone monitored. AI assists care; it never replaces a person, a doctor, or 911.
   5. Convenience is nice. But knowing your home and your family are safe — that's what this is really for. Follow for the room-by-room setup, and book a free call if you'd like help.
+- [ ] voiced  [ ] visuals  [ ] captioned+music  [ ] uploaded  [ ] ID recorded
+
+## RQ-014 — EP-0200 (shorts-pack)
+- **Source:** `content/storylines.md`
+- **Voice:** Echo → **IndexTTS-2** — _expressive, emotional range — the showcase voice_ (rate 0.96, pitch 1)
+- **Music:** cinematic, one mood per story
+- **Targets:** shorts, tiktok, reels → **youtube, tiktok, instagram, facebook**
+- **Narration:**
+  1. (talking-points — use the long cut + Shorts in content/storylines.md)
 - [ ] voiced  [ ] visuals  [ ] captioned+music  [ ] uploaded  [ ] ID recorded
