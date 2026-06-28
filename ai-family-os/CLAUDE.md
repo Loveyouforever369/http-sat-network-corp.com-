@@ -24,7 +24,7 @@ the pattern **educate → show → book a call.** See `docs/brand-homefront.md`.
 **Run `node tools/health.js` before any push** (config · tool lab · scripts · desk · pipeline · guardian-lint = 6 checks).
 **Delegated chores (free, no spawn):** `validate.js` · `tool-lab.js` · `guardian-lint.js` (publish gate) · `render-queue.js` · `index-docs.js` (rebuild `docs/INDEX.md`). See `docs/DELEGATION.md`.
 **Free tools to grab:** `docs/free-tools-to-get.md` · local video/voice trio: `docs/local-trio-setup.md`.
-**Mission Control** = `content/mission-control.html` — one hub to launch every tool + page + see status (no site-hopping). **Publish:** `docs/PUBLISH-NOW.md`.
+**Mission Control** = `content/mission-control.html` — one hub to launch every tool + page + see status (no site-hopping). **Publish:** `docs/PUBLISH-NOW.md`. **Go live:** `docs/LAUNCH-DAY.md` (the full sequence) · `docs/open-generative-ai-setup.md` (own the free render engine) · `content/launch-posts.md` (the post bank).
 **Render→publish:** `node tools/build-work-orders.js` → `automation/WORK-ORDERS.md` (narration+voice per video); `automation/n8n-blueprint.md` + `automation/n8n-templates.md` (10 workflows) automate the run on the user's machine.
 **Character consistency:** `config/character-bible.json` — same appearance + color + voice every render. **One brand, one canon** (see `docs/perplexity-absorb.md`): map any parallel work onto `config/family.json`.
 

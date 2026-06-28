@@ -37,6 +37,7 @@
 - `docs/DEEP-FEATURES.md`
 - `docs/DELEGATION.md`
 - `docs/INDEX.md`
+- `docs/LAUNCH-DAY.md`
 - `docs/MASTER-PLAN.md`
 - `docs/MISTAKES-AND-LESSONS.md`
 - `docs/ORCHESTRATOR-PREFLIGHT.md`
@@ -49,6 +50,7 @@
 - `docs/content-drop-machine.md`
 - `docs/free-tools-to-get.md`
 - `docs/local-trio-setup.md`
+- `docs/open-generative-ai-setup.md`
 - `docs/perplexity-absorb.md`
 - `docs/publishing-system.md`
 - `docs/social-channels.md`

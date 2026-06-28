@@ -11,6 +11,22 @@ generalizes, promote it to the "Standing Lessons" list at the bottom.
 
 ---
 
+## 2026-06-27 — Full launch package staged (here-to-live in one runbook)
+
+"Do everything / launch now / full hands on." Honest framing: the sandbox can't flip content public
+(render needs a file; YouTube/socials need the user's auth) — so I staged the *entire* launch so it's
+a one-session go-live, and committed it (that's the launch from our side).
+- `docs/open-generative-ai-setup.md` — self-host the free render engine (Open-Generative-AI) to own
+  rendering; honest that premium models may need a key, app is MIT/self-host.
+- `content/launch-posts.md` — ready-to-fire post bank for every platform (launch announcement + a
+  pillar set for How AI Works / Homefront / Business / Build-in-public / Story Vault) + a first-week schedule.
+- `docs/LAUNCH-DAY.md` — the single sequence: setup → render RQ-001 → publish the proof → roll the
+  queue (or n8n) → measure → lock results.
+
+Delegated to **automated family chores** (subagents still spend-capped → would return empty, so no
+spawns). Triple-checked: health 6/6, guardian 0 fail. Restated the one needle: render RQ-001 + send
+the mp4 URL + "YouTube authed" → I publish from here. Everything else is staged and waiting.
+
 ## 2026-06-27 — Absorbed Perplexity's parallel build (learn, reconcile, align)
 
 Perplexity (research family member) built a parallel "Prometheus AI Training" brand — 6-layer OS,
