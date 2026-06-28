@@ -17,6 +17,7 @@ the pattern **educate → show → book a call.** See `docs/brand-homefront.md`.
 - `docs/MISTAKES-AND-LESSONS.md` — every mistake + the locked rule.
 - `docs/ORCHESTRATOR-PREFLIGHT.md` — the pre-action checklist (tool tiers · verify-before-promise · act-vs-ask). Run it before acting.
 - `docs/DELEGATION.md` — how to split work to crew subagents + the **good habits** (always-on).
+- `docs/WHAT-WE-LEARNED.md` — right · wrong · better · add (the scoreboard + next 3 moves).
 - `config/tool-ratings.json` (run `node tools/tool-lab.js`) — what works 🟢 / blocked 🔴. Don't re-try dead ends.
 - `docs/agent-stack-catalog.md` — external tools we're adopting (verify before install).
 
@@ -33,7 +34,9 @@ the pattern **educate → show → book a call.** See `docs/brand-homefront.md`.
 **Posting:** the Discord webhook is **active on the user's machine** — post our bank with `node scripts/discord-post.js` (reads `content/discord-queue.md`); set `FAMILY_DISCORD_WEBHOOK`. Discord is network-blocked from this cloud sandbox, so the **local runner / n8n** fires it. Roster ≈ **140 members** (`FAMILY-ROSTER.md` pending import).
 
 ## Standing doctrine — always active
-Four skills are the house operating system and apply to **all** work, even unnamed:
+Five skills are the house operating system and apply to **all** work, even unnamed:
+- **`skills/self-improvement/`** — the superpower loop (scout → vet → test → adopt → lock). Load it
+  to find better tools, add skills, or figure a more effective way; it ends by locking the lesson.
 - **`skills/genesis-grid/`** — the build loop (Explore → Study → Multi-source → Plan →
   Build → Quadruple-check → Commit-gate), the multi-model **council**, context
   discipline, cross-referencing, verify-before-relying tool selection, radical

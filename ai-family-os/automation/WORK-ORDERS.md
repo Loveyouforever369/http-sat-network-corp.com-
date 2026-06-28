@@ -1,6 +1,6 @@
 # WORK ORDERS — render these, then publish (auto-generated)
 
-> `node tools/build-work-orders.js` · 2026-06-28 · 14 items ready.
+> `node tools/build-work-orders.js` · 2026-06-28 · 15 items ready.
 > Render on your machine / n8n (Meta AI -> Google Flow, or the local trio). Voice per member below.
 > Steps each: 1) voice the narration  2) build visuals to the beats  3) caption + music  4) upload  5) record the ID.
 
@@ -172,4 +172,13 @@
 - **Targets:** shorts, tiktok, reels → **youtube, tiktok, instagram, facebook**
 - **Narration:**
   1. (talking-points — use the long cut + Shorts in content/storylines.md)
+- [ ] voiced  [ ] visuals  [ ] captioned+music  [ ] uploaded  [ ] ID recorded
+
+## RQ-015 — EP-0309 (talking-points)
+- **Source:** `content/EP-0309-business-outreach.md`
+- **Voice:** Atlas → **ElevenLabs** — _confident, grounded, executive_ (rate 0.97, pitch 0.98)
+- **Music:** grounded, building, executive
+- **Targets:** youtube-long, shorts, reels → **youtube, linkedin, facebook, instagram**
+- **Narration:**
+  1. (talking-points — use the long cut + Shorts in content/EP-0309-business-outreach.md)
 - [ ] voiced  [ ] visuals  [ ] captioned+music  [ ] uploaded  [ ] ID recorded

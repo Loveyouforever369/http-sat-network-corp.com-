@@ -11,6 +11,29 @@ generalizes, promote it to the "Standing Lessons" list at the bottom.
 
 ---
 
+## 2026-06-27 — GitHub scout, the self-improvement superpower + business outreach
+
+Acted on "search GitHub, find powerful tools, make yourself better, add skills, post to business owners."
+
+**Real GitHub scout (verified via the github API today):** `intel/github-scout-2026-06.md` —
+standouts: **Open-Generative-AI** (21k★, MIT — self-hosted studio, 200+ video/image models = the
+Forge engine we OWN), **Duix-Avatar** (14k★, offline digital humans), **Toonflow** (11k★, scripts→
+animated shorts), **ha-mcp** (3.7k★, live Homefront demos), **system-prompts repo** (141k★, sharpen
+our prompts), awesome-mcp-servers (90k★, the directory). Added the top 4 to the Tool Lab (untested/
+adopt-next, GitHub-verified). These are verified (API), unlike the video-sourced catalog.
+
+**New skill — the superpower:** `skills/self-improvement/` — the repeatable loop scout → vet → test →
+adopt → **lock**. Codifies "figuring better, more effective ways" as memory, not vibes. Now 5 standing skills.
+
+**Consolidated memory:** `docs/WHAT-WE-LEARNED.md` — right · wrong · better · add, with the next 3
+moves. The single-page scoreboard, added to the leader's desk.
+
+**Business outreach:** `content/EP-0309-business-outreach.md` (Atlas) — deeper pitch (problem → what
+we deploy → honest math → guardrails) + 3 Shorts + **honest cold email / DM / follow-up templates**
+(value-first, opt-out friendly, no guarantees). Queued RQ-015.
+
+Triple-checked (health 6/6 · guardian 0 fail · tool-lab sane); INDEX + WORK-ORDERS regenerated.
+
 ## 2026-06-27 — The Story Vault (8 character shorts in one cinematic page)
 
 Built `content/stories.html` (EP-0200, narrated by Echo) — the eight character shorts from
