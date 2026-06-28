@@ -25,7 +25,8 @@ the pattern **educate → show → book a call.** See `docs/brand-homefront.md`.
 **Delegated chores (free, no spawn):** `validate.js` · `tool-lab.js` · `guardian-lint.js` (publish gate) · `render-queue.js` · `index-docs.js` (rebuild `docs/INDEX.md`). See `docs/DELEGATION.md`.
 **Free tools to grab:** `docs/free-tools-to-get.md` · local video/voice trio: `docs/local-trio-setup.md`.
 **Mission Control** = `content/mission-control.html` — one hub to launch every tool + page + see status (no site-hopping). **Publish:** `docs/PUBLISH-NOW.md`.
-**Render→publish:** `node tools/build-work-orders.js` → `automation/WORK-ORDERS.md` (narration+voice per video); `automation/n8n-blueprint.md` automates the run on the user's machine.
+**Render→publish:** `node tools/build-work-orders.js` → `automation/WORK-ORDERS.md` (narration+voice per video); `automation/n8n-blueprint.md` + `automation/n8n-templates.md` (10 workflows) automate the run on the user's machine.
+**Character consistency:** `config/character-bible.json` — same appearance + color + voice every render. **One brand, one canon** (see `docs/perplexity-absorb.md`): map any parallel work onto `config/family.json`.
 
 **Routine — lock every lesson:** good outcome → `LEARNINGS.md`; mistake → `MISTAKES-AND-LESSONS.md` → (if behavioral) `ORCHESTRATOR-PREFLIGHT.md`; tool result → `config/tool-ratings.json`; (if teachable) a Behind-the-Build episode.
 

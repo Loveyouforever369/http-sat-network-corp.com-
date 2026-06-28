@@ -49,6 +49,7 @@
 - `docs/content-drop-machine.md`
 - `docs/free-tools-to-get.md`
 - `docs/local-trio-setup.md`
+- `docs/perplexity-absorb.md`
 - `docs/publishing-system.md`
 - `docs/social-channels.md`
 

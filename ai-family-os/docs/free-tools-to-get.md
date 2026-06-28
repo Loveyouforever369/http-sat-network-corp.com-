@@ -34,6 +34,18 @@ relying** (they change monthly). Once we actually use one, it gets a real entry 
 - Native platform analytics (YouTube Studio, Meta, TikTok) — free; feed numbers back to Atlas/Sage.
 - **Plausible/Umami (self-host)** — privacy-friendly site analytics for the brand site, free.
 
+## 🧩 Absorbed from Perplexity's research (verify free tiers)
+| Tool | Why | Free access |
+|---|---|---|
+| **NotebookLM** | Private AI trained on YOUR docs/SOPs/scripts — answers from your own knowledge | Free (Google) |
+| **Gamma** | Notes/transcript → full deck or webpage in seconds | Free tier |
+| **Fathom** | AI meeting recorder — transcribes, summarizes, action items (feeds n8n template #4) | Free-forever tier |
+| **Granola** | Human-feeling AI meeting notes, runs in background → Notion | Free starter |
+| **Phygital+** | Browser AI canvas chaining 30+ models (image/video/text) — node workflow like n8n for creative | Free tier + credits |
+| **Gemini Flash** | Google's fastest model — real-time research/ideation | Free via Gemini app (verify version) |
+
+> Note: tool claims here came via Perplexity — **verify each before relying** (our correction-needs-a-source rule).
+
 ## How to "go get" them (the honest process)
 1. I can't sign up for accounts or install local apps from this sandbox (no creds, no arbitrary
    installs). **You create the account / install**, or wire the API key into n8n.

@@ -11,6 +11,26 @@ generalizes, promote it to the "Standing Lessons" list at the bottom.
 
 ---
 
+## 2026-06-27 — Absorbed Perplexity's parallel build (learn, reconcile, align)
+
+Perplexity (research family member) built a parallel "Prometheus AI Training" brand — 6-layer OS,
+agent lineup, 10 n8n templates, Canva assets (banners/carousels/character art), season calendar.
+Reviewed it honestly and absorbed the gold into our canon (`docs/perplexity-absorb.md`).
+
+**Adopted:** the 6-layer framing; Operator/Teacher dual mode; the **10 n8n templates** (re-cast to our
+family → `automation/n8n-templates.md`); the visual-prompt framework; the 1→many distribution; and new
+free tools (Fathom, Granola, Phygital+, NotebookLM, Gemini Flash → `free-tools-to-get.md`).
+
+**Lessons locked (#18, #19):** (1) it spun a **second brand** + a conflicting character lineup
+(made Cipher a *researcher* — ours is the builder; invented Forge/Watcher = our Cipher/Guardian).
+**One brand, one canon** — mapped them back in `config/character-bible.json`. (2) It built every asset
+but **shipped nothing** ("live in 30s of recording") — *assets built ≠ published*; the real bottleneck
+is render/auth, as we've said.
+
+**Character consistency locked:** `config/character-bible.json` — appearance + color + voice per member
+(the look from the Prometheus art the user liked), so the cast is identical every render. Reconciled
+Perplexity's 5 → our richer cast. Triple-checked: health 6/6, guardian 0 fail, tool-lab valid.
+
 ## 2026-06-27 — GitHub scout, the self-improvement superpower + business outreach
 
 Acted on "search GitHub, find powerful tools, make yourself better, add skills, post to business owners."
