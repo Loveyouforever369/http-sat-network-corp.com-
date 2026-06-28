@@ -48,6 +48,7 @@
 - `docs/brand-homefront.md`
 - `docs/character-bible.md`
 - `docs/content-drop-machine.md`
+- `docs/find-business-owners.md`
 - `docs/free-tools-to-get.md`
 - `docs/local-trio-setup.md`
 - `docs/open-generative-ai-setup.md`
@@ -91,6 +92,7 @@
 ## Intel (intel/)
 - `intel/free-video-meta-flow-seedance.md`
 - `intel/github-scout-2026-06.md`
+- `intel/video-learnings-2026-06.md`
 - `intel/video-tools-2026-06.md`
 - `intel/voice-tools-2026-06.md`
 - `intel/web-gather-2026-06-25.md`

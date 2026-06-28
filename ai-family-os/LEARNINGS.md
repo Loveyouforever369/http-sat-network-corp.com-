@@ -11,6 +11,31 @@ generalizes, promote it to the "Standing Lessons" list at the bottom.
 
 ---
 
+## 2026-06-27 — Gathered + transcribed creator videos; built the YT + FB pages + lead playbook
+
+"Gather videos like that, transcribe, learn, build the YouTube + Facebook pages, find owners in need."
+
+**Transcribed (real, Tavily):** Tao Prompts (186k) "3 Tools for Any AI Video" → the
+**design-sheet → storyboard → animate** pipeline with a **reference-image grid** for character
+consistency (Claude writes/locks the design sheet → GPT Image 2 design sheet + storyboard → Seedance
+animates; "no subtitles/no music" on raw gens). Plus the **5-Layer Prompt Framework**
+(Hook→Script→Voice→Visuals→Retention) + a retention punch-list, format-specific workflows, the
+"one tool per job" stack, and creators to follow (Tao Prompts, AI Video School, Curious Refuge).
+→ `intel/video-learnings-2026-06.md`. Big insight: our `character-bible.json` descriptors ARE design
+sheets — lock the sheet, storyboard, then animate = identical cast every episode.
+
+**Built out the pages (paste-ready):** `content/youtube-channel-kit.md` (name, About, trailer script,
+sections/playlists, first-5 uploads from the queue, VidIQ SEO template, cadence) and
+`content/facebook-page-kit.md` (about, first posts, pinned, groups strategy, Book-Now CTA, lead capture).
+
+**Find owners in need:** `docs/find-business-owners.md` — ICP, the "in need" signals (slow replies,
+hiring admin, manual booking, asking about AI), where to find them (FB groups, LinkedIn, Reddit, Maps,
+inbound), ethical sourcing (Apollo/Clay only with authorization; value-first; no spam), and the
+find→value→qualify(n8n #8)→book flow.
+
+Honest: I can't create the actual accounts or send outreach (yours) — but every field, post, and the
+flow are written and staged. Triple-checked: health 6/6, guardian 0 fail.
+
 ## 2026-06-27 — Full launch package staged (here-to-live in one runbook)
 
 "Do everything / launch now / full hands on." Honest framing: the sandbox can't flip content public
