@@ -11,6 +11,35 @@ generalizes, promote it to the "Standing Lessons" list at the bottom.
 
 ---
 
+## 2026-06-28 — BREAKTHROUGH: produced a real video from the sandbox (Descript) + the upload gate
+
+The render bottleneck cracked — partially. **Descript actually creates full videos from here.**
+`prompt_project_agent` built a 7-scene "How AI Works" video (cinematic B-roll, bold burned-in
+captions, ambient music, branded end card, ~63 AI credits); `publish_project` returned a public
+**share URL** (share.descript.com/view/Z7KKqrEyYY6) + a direct **mp4 download_url**. First real
+video the family has produced end-to-end from the sandbox.
+
+**Honest caveats (locked in the Tool Lab):** (1) **TTS voice synthesis is disabled** in the MCP
+session — the script stages as placeholder; assign a voice in the Descript editor (one click) to
+generate Luna's narration. The published draft has visuals + captions + music but no spoken voice
+yet. (2) the publish download_url is signed and **expires ~24h**. (3) `wait_for_job` caps ~60s; poll.
+
+**The last gate is real and named:** I fired the actual Zapier `youtube_upload_video` with the mp4 +
+title + description — it returned **"Authentication required for YouTube"** with a connect URL. So the
+full chain is proven (Descript mp4 → Zapier upload action) and blocked only on the **one-time YouTube
+auth** the user must click. After that, upload fires from here.
+
+**Sequence that works (locked):** prompt_project_agent → poll → publish_project → mp4 URL →
+(assign voice in editor for final) → Zapier upload_video (needs YouTube auth). This is the render+publish
+path that actually runs from the sandbox. Kept commanding the family tools from here, per the user.
+
+**Then both gates closed (honest):** the epic-refine + vertical-Short + deeper-narration pass **failed:
+"Insufficient AI credits"** — Descript ran dry after ~100 credits / 2 jobs (lesson #20: stop, don't
+hammer; user adds credits at web.descript.com/checkout). And the upload needs the **one-time YouTube
+auth**. So render (Descript credits) + publish (YouTube auth) both now sit on the user's accounts.
+Wrote the **deep, meaningful narration** (long + Short) as a script — `content/EP-0307-how-ai-works-narration.md`
+— render-ready the moment credits return (Descript voice) or via ElevenLabs import.
+
 ## 2026-06-27 — Gathered + transcribed creator videos; built the YT + FB pages + lead playbook
 
 "Gather videos like that, transcribe, learn, build the YouTube + Facebook pages, find owners in need."
