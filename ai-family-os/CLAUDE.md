@@ -27,6 +27,7 @@ the pattern **educate → show → book a call.** See `docs/brand-homefront.md`.
 **Mission Control** = `content/mission-control.html` — one hub to launch every tool + page + see status (no site-hopping). **Publish:** `docs/PUBLISH-NOW.md`. **Go live:** `docs/LAUNCH-DAY.md` (the full sequence) · `docs/open-generative-ai-setup.md` (own the free render engine) · `content/launch-posts.md` (the post bank).
 **Render→publish:** `node tools/build-work-orders.js` → `automation/WORK-ORDERS.md` (narration+voice per video); `automation/n8n-blueprint.md` + `automation/n8n-templates.md` (10 workflows) automate the run on the user's machine.
 **Character consistency:** `config/character-bible.json` — same appearance + color + voice every render. **One brand, one canon** (see `docs/perplexity-absorb.md`): map any parallel work onto `config/family.json`.
+**TWO rosters (never collide):** the **cast** = who we ARE (`config/character-bible.json`, the sidekicks); the **customer personas** = who we SERVE (`config/customer-personas.json` — Sarah/Mike/Sam/Chris/Pat/Steve, the heroes). Growth plan: `docs/growth-story-strategy.md`. Flagship intro film: `content/EP-0310-the-sidekick-effect-movie.md` (ship 3–4 min hero first; feature = chapters after).
 
 **Routine — lock every lesson:** good outcome → `LEARNINGS.md`; mistake → `MISTAKES-AND-LESSONS.md` → (if behavioral) `ORCHESTRATOR-PREFLIGHT.md`; tool result → `config/tool-ratings.json`; (if teachable) a Behind-the-Build episode.
 

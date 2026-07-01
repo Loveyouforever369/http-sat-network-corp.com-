@@ -11,6 +11,27 @@ generalizes, promote it to the "Standing Lessons" list at the bottom.
 
 ---
 
+## 2026-07-01 — Absorbed the Growth-Story Strategy + the flagship intro-movie plan
+
+Read + locked in 4 uploaded files (AI Growth Story Strategy Playbook, Character Bible, Week-1 Checklist,
+Visual Direction / Movie Intro Plan). Aligned to our OS:
+- **The structural lock — TWO rosters:** our **CAST** (`character-bible.json`, who we ARE) vs. the **6
+  customer personas** Sarah/Mike/Sam/Chris/Pat/Steve (`config/customer-personas.json`, who we SERVE). Cast =
+  sidekicks; personas = heroes. Don't let them collide (extends the name/role-drift lesson).
+- **`docs/growth-story-strategy.md`** — positioning ("AI that feels like a partner, not a robot"), the offer
+  ladder ($27–197 / $497–4,997 / $3K–25K+ / $47–97-mo), earnings ramp, 30-60-90, the story engine + Character
+  Quiz lead magnet — mapped onto our existing for-business / find-business-owners / launch docs (no duplication).
+- **`content/EP-0310-the-sidekick-effect-movie.md`** — the flagship intro-movie plan (Neo-Humanist Futurism),
+  reconciling the uploaded ~3-min storyboard + our Video Forge + live 2026 long-form research (character
+  reference sheets + Runway Gen-4 @refs / Kling 3.0 / LTX Elements identity-lock, hybrid render, batch→assemble).
+
+**Honest reconciliations locked (lesson #21):** (1) the ask says a **40-min** movie but the storyboard is ~3
+min — a 40-min AI film is hundreds of character-locked clips (multi-week). Recommended: ship the 3–4 min hero
+first (the launch), extend to a chaptered feature after. (2) the uploads say **LA**; earlier context said
+**Vegas** — kept the local angle adaptable, flagged to confirm before outreach. (3) ROI/earnings = illustrative
+benchmarks, never guarantees. Tavily research worked between MCP reconnects; the servers are flapping heavily
+this session, so I prioritized reliable local file work. EP-0310 registered; health green.
+
 ## 2026-06-28 — BREAKTHROUGH: produced a real video from the sandbox (Descript) + the upload gate
 
 The render bottleneck cracked — partially. **Descript actually creates full videos from here.**
