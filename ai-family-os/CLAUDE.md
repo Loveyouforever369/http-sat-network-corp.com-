@@ -33,6 +33,8 @@ the pattern **educate → show → book a call.** See `docs/brand-homefront.md`.
 
 **Delegation:** delegate heavy/parallel research + bounded builds to crew **subagents** (`docs/DELEGATION.md`); keep synthesis + the commit gate on the main thread. **Subagents cost spend and are monthly-capped** — if they return empty, the cap is hit: stop spawning, fall back to inline Tavily, tell the user to raise the limit.
 
+**When a tool fails / is gated (fallback doctrine):** don't stop — find a better way in order: a tool we already have → a free alternative (Tavily/GitHub/HF) → **learn it ourselves** (script/file route) → a **YouTube tutorial** (Tavily-extract + mimic) → integrate the winner. Never hammer a failing tool; never dead-end — surface the one unlock and keep moving on what's unblocked. Document what worked AND what failed **with the why**. Full loop: `skills/self-improvement/`.
+
 **Posting:** the Discord webhook is **active on the user's machine** — post our bank with `node scripts/discord-post.js` (reads `content/discord-queue.md`); set `FAMILY_DISCORD_WEBHOOK`. Discord is network-blocked from this cloud sandbox, so the **local runner / n8n** fires it. Roster ≈ **140 members** (`FAMILY-ROSTER.md` pending import).
 
 ## Standing doctrine — always active

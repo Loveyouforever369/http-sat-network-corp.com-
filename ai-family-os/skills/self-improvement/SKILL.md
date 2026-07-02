@@ -36,6 +36,22 @@ description: >
 - [ ] Free or within budget? Where does it run (here vs. user machine)?
 - [ ] After testing: recorded in the Tool Lab with an honest status?
 
+## Fallback doctrine — a tool fails or can't do it → find a better way (never just stop)
+The moment a tool errors, is gated, out of credits, or can't do the job:
+1. **Name the failure + root cause** — the exact error and *why* → `config/tool-ratings.json` (🔴 + lesson). Don't hammer it (locked lessons #3, #11, #20 — pivot, don't repeat).
+2. **Find a better path, fast (in this order):**
+   - a tool we already have that does it (check the Tool Lab first),
+   - a **free alternative** — research via Tavily / GitHub / Hugging Face (`docs/free-tools-to-get.md`, `docs/agent-stack-catalog.md`),
+   - **learn to do it ourselves** — a script or the file-based route (how Descript became our render engine, how the HTML pages replaced flaky renderers),
+   - **find a YouTube tutorial** — Tavily-extract the transcript and mimic/perfect the workflow (`skills/` + `intel/video-learnings-*`).
+3. **Integrate the winner** into our environment — wire it, add a chore, update a skill, register it in the Tool Lab.
+4. **Never dead-end** — if every path is gated on the user (auth/credits), surface the ONE exact unlock and keep moving on what's unblocked.
+
+## Document right AND wrong — with the WHY
+Every outcome is recorded *with its cause* — the "why" is the point; results without causes don't compound:
+- **Worked** → `LEARNINGS.md` + Tool Lab 🟢, and *why* it worked (so we repeat the cause, not just the result).
+- **Failed** → `MISTAKES-AND-LESSONS.md` + Tool Lab 🔴, the root cause + the rule (so we never repeat it).
+
 ## Cadence
 - **Weekly:** one scout pass (GitHub + HF + a Tavily sweep) → update an `intel/` note.
 - **Per adoption:** Tool Lab entry + a line in `LEARNINGS.md`.
