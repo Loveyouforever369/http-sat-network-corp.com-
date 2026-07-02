@@ -14,7 +14,10 @@ description: >
 
 ## The honest tool map (what we can actually drive)
 - 🟢 **Descript** (MCP, verified reachable here) — text-based editing, auto-captions, transcript
-  export, filler-word removal, publish. **Our in-sandbox edit step.** (See `config/tool-ratings.json`.)
+  export, filler-word removal, publish. **Our in-sandbox edit step — but AI-credit-gated** (see Tool Lab).
+- ⭐ **CapCut desktop / Clipchamp** — the **free local replacement** (researched 2026-07): unlimited
+  1080p watermark-free, auto-captions, TTS, transcription. CapCut = primary; Clipchamp = zero-install
+  (built into Windows). Use for all local renders (`intel/descript-alternatives-2026-07.md`).
 - 🟡 **OpenCut** (open-source CapCut alt, MCP/headless) & **CapCut** — final polish on the user's
   machine; no watermark/subscription. Catalogued in `docs/agent-stack-catalog.md` (verify before install).
 - 🔴 Heavy render/generation (Kling/Wan/Veo/HeyGen) — on the user's machine / n8n, not here.

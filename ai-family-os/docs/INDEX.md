@@ -92,6 +92,7 @@
 - `content/the-video-forge.html`
 
 ## Intel (intel/)
+- `intel/descript-alternatives-2026-07.md`
 - `intel/free-video-meta-flow-seedance.md`
 - `intel/github-scout-2026-06.md`
 - `intel/video-learnings-2026-06.md`

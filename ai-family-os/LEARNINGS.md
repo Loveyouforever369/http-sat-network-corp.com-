@@ -11,6 +11,25 @@ generalizes, promote it to the "Standing Lessons" list at the bottom.
 
 ---
 
+## 2026-07-01 — Fallback doctrine fired for real: Descript replaced free; quiz + 101 built
+
+**The doctrine in action (why it worked):** Descript credit-out → instead of stopping, ran the loop:
+researched live (Tavily) → found the free replacement → **CapCut desktop** (unlimited 1080p
+watermark-free + auto-captions + transcription + TTS — *better than Descript's free tier*, which is
+1hr/720p/watermarked) with **Clipchamp** as the zero-install Windows fallback → integrated into the
+video-editor skill + Tool Lab + WORK-ORDERS. Honest split locked: local renders = CapCut/Clipchamp
+(free); in-sandbox MCP render = still Descript-only (needs credits) — no free MCP-drivable video tool
+exists in this session. → `intel/descript-alternatives-2026-07.md`.
+
+**Built the funnel's front door:** `content/character-quiz.md` — the 12-question "Which AI Sidekick
+Do You Need?" quiz with scoring (A–F → the 6 personas) + a tailored result page per persona (3 quick
+wins + story + CTA to the offer ladder), wired to n8n #8 qualification.
+
+**Built the first product category:** `content/101-ai-wins-marketing.md` — 15 Marketing & Content
+wins, each with tool (free-first), training steps, a prompt seed, and its persona. Doubles as 15
+shorts (free content) + the $27–47 Vol. 1 product + bootcamp material. Movie package (EP-0310 SCRIPT)
+shipped in the prior commit — option 2 (Runway/Kling render) is fully copy-paste ready on the user's side.
+
 ## 2026-07-01 — Absorbed the Growth-Story Strategy + the flagship intro-movie plan
 
 Read + locked in 4 uploaded files (AI Growth Story Strategy Playbook, Character Bible, Week-1 Checklist,
