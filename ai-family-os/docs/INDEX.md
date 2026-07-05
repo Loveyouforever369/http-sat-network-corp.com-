@@ -84,6 +84,7 @@
 - `content/for-business.html`
 - `content/how-ai-works.html`
 - `content/index.html`
+- `content/launch-site.html`
 - `content/mission-control.html`
 - `content/signal-desk.html`
 - `content/stories.html`
