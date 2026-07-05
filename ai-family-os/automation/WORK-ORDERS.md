@@ -1,6 +1,6 @@
 # WORK ORDERS — render these, then publish (auto-generated)
 
-> `node tools/build-work-orders.js` · 2026-06-28 · 15 items ready.
+> `node tools/build-work-orders.js` · 2026-07-05 · 16 items ready.
 > Render on your machine / n8n (Meta AI -> Google Flow, or the local trio). Voice per member below.
 > Steps each: 1) voice the narration  2) build visuals to the beats  3) caption + music  4) upload  5) record the ID.
 
@@ -181,4 +181,20 @@
 - **Targets:** youtube-long, shorts, reels → **youtube, linkedin, facebook, instagram**
 - **Narration:**
   1. (talking-points — use the long cut + Shorts in content/EP-0309-business-outreach.md)
+- [ ] voiced  [ ] visuals  [ ] captioned+music  [ ] uploaded  [ ] ID recorded
+
+## RQ-016 — EP-0311 (narrated-page)
+- **Source:** `content/the-future.html`
+- **Voice:** Prometheus → **ElevenLabs** — _bright, inspiring, cinematic_ (rate 0.98, pitch 1.02)
+- **Music:** minimal -> hopeful swell -> warm resolve (torch motif)
+- **Targets:** youtube-long, shorts, reels → **youtube, linkedin, facebook, instagram, tiktok**
+- **Narration:**
+  1. They told you the fire was dangerous. But the fire was never the danger. Standing still while the whole world warmed its hands — that was the danger. I'm Prometheus. Let me show you the fork in the road.
+  2. Two owners. Same street. Same year. Same tools available to both. One decides to wait — for the hype to pass, for things to settle, for someday. One decides to adapt — not with a leap, but with one honest step, and a family beside them.
+  3. Here's what the road actually looks like. Months one to three: one workflow, proven. We take the single stream of busywork that eats your week and hand it to a sidekick — and you approve everything, because trust is earned.
+  4. Months four to twelve: the crew comes online. Follow-ups, scheduling, research, content in your own voice. Your evenings come back first. Then your weekends. You start working on the business instead of drowning in it.
+  5. Year two is where it compounds. Every lesson gets written down and never repeated. New tools arrive and your system absorbs them in days. The street starts asking how you do it.
+  6. And year three? You're not the admin, the marketer, and the support desk anymore. You're the owner. The visionary the business needed all along. Sarah leaves at four. Mike opens his second location. Pat sells judgment, not hours.
+  7. Now — honesty, because that's our whole brand: this is a vision, not a guarantee. Your road will be your own. What we can promise is the process: educate, show, then set it up with you. A human on every gate. Every mistake we ever made, written down so you don't repeat it.
+  8. The fork is today. You don't have to leap — you have to take one step, with a family that's already walked it. Take the torch. Let's find out who you become. — The AI Family.
 - [ ] voiced  [ ] visuals  [ ] captioned+music  [ ] uploaded  [ ] ID recorded

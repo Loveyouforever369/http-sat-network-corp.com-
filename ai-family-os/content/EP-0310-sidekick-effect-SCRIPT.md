@@ -117,6 +117,22 @@ or Seedance 2.0 (15s) / LTX-2.3 (4K+audio). 3. VO → **ElevenLabs**. 4. Music �
 **Social cutdowns:** 9:16 verticals of shots 8, 11, 15, 24 (each 'aha'); a 30s pain-montage (shots 1–7) teaser;
 quote/stat cards from Act 3. One film → every platform.
 
+---
+
+## CHAPTER 2 — "THE ONES WHO ADAPTED" (the future arc · ~2:00 · shots 31–38)
+The sequel beat and the feature's closing chapter. Narration = the `script[]` in `content/the-future.html`
+(Prometheus voice, 8 beats). Time-jump grade: same warm palette, slightly cleaner light — three years on.
+31. The fork visual — "an owner at a literal fork: a gold path rising into warm light, a grey path flat into fog, cinematic, symbolic, high-end."
+32. @Sarah 2029 — "waitlist on screen, calm studio, she closes the laptop at 4pm and walks into golden light with her daughter, radiant."
+33. @Mike 2029 — "ribbon-cutting at a second cafe, his original team beside him, warm evening light, genuine joy."
+34. @Sam 2029 — "airport lounge, out-of-office on, dashboard green in a glance, first real vacation, relieved smile."
+35. @Chris 2029 — "gallery-style studio wall of award work, fewer/bigger projects, focused and fulfilled."
+36. @Pat 2029 — "advisory meeting, no paperwork in sight, client shaking hands, trust in the room."
+37. @Steve 2029 — "term sheet signed on traction, small team celebration in the loft, hopeful energy."
+38. Group + torch — "all six in warm light; a torch passes from Prometheus's silhouette to the viewer's POV. Title: THE FUTURE BELONGS TO THE ONES WHO ADAPT. CTA + disclosure."
+**On-screen (label):** *"A vision, honestly labeled — composite characters, illustrative outcomes."*
+
 ## GUARDIAN CHECK
 - [ ] Results labeled **illustrative** until real client numbers exist. Characters = composites (disclosed).
 - [ ] AI hosts/voices disclosed on-screen + in description. Anti-hype tone. Local angle set to the user's real market.
+- [ ] Chapter 2 futures carry the "vision, honestly labeled" card on-screen.

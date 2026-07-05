@@ -11,6 +11,25 @@ generalizes, promote it to the "Standing Lessons" list at the bottom.
 
 ---
 
+## 2026-07-01 — "The Future" story + deeper characters + movie Chapter 2 + site update
+
+Went deeper on the business-development story layer, in one coherent build:
+- **`content/the-future.html` (EP-0311, host Prometheus + Atlas)** — cinematic narrated page telling
+  what the future holds for owners who adapt with us: the animated **fork visual** (gold adapt-path vs
+  grey wait-path), the **year-by-year staircase** (first win → system → compounding → the owner again),
+  and **all six personas three years later** with their 2029 fates + signature lines. Deep 8-beat
+  Prometheus narration ("the fire was never the danger"). Guardian-compliant: futures carry a
+  **"vision, honestly labeled"** card — composites + illustrative, never guarantees.
+- **Deeper characters:** added `future_states_2029` to every persona in `customer-personas.json`
+  (fate + signature line each) — the arcs now have a past (bible), present (quiz/stories), and future.
+- **Movie continued:** EP-0310 SCRIPT extended with **Chapter 2 — "The Ones Who Adapted"** (shots
+  31–38, the time-jump fates, the torch-pass closing image); narration = the-future.html script[].
+  Queued as RQ-016 (voice: Prometheus).
+- **Website updated:** the-future.html wired into the homepage Explore hub + Mission Control. 16 pages.
+
+Why this works (documented per doctrine): story-first business development — the future-state arc gives
+sales, the quiz result pages, the movie, and the site one shared emotional spine instead of scattered claims.
+
 ## 2026-07-01 — Fallback doctrine fired for real: Descript replaced free; quiz + 101 built
 
 **The doctrine in action (why it worked):** Descript credit-out → instead of stopping, ran the loop:
