@@ -61,3 +61,15 @@ Keep the handle identical everywhere if available: **@TheAIFamily** (fallback **
 
 _Owner: Mom Social. Re-verify channel availability + free tiers before relying. Honesty rule:
 never mark a post "published" without a returned post/video ID._
+
+## OWNER'S CHANNEL MAP (confirmed 2026-07-06)
+- **YouTube:** @yolopars (channel UC6LyXMLFzR6Tmj4xxP_eSTQ) — OPEN, blank slate; apply youtube-channel-kit (rename "The AI Family").
+- **Facebook:** "Michael Parks" (personal) — create the "The AI Family" PAGE from it per facebook-page-kit.
+- **TikTok:** account under Michael Parks (exact @handle TBC — get it before scheduling; link given was tiktok.com homepage).
+- Posting rails: Postiz (connect these 3) + Zapier YouTube (auth pending). Never mark posted without an ID.
+
+## NOTE (2026-07-06): Higgsfield reconnected as AUTH-REQUIRED
+The .mcp.json server hot-loaded once (9 portraits rendered ✓ registered ✓) but now shows
+auth-gated on reconnect. If generate calls fail next session: authorize the Higgsfield connector
+(claude.ai -> Settings -> Connectors) — user's higgsfield.ai login makes OAuth instant. Renders + job
+IDs are safe in config/generated-assets.md regardless.
